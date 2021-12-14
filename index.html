@@ -1,0 +1,111 @@
+
+<!-- FBGC ACE Golf League Program-->
+<html> 
+<head>
+    
+</head>
+ <body>
+    <p align="center"> 
+    <!--This draws the Canvas on the webpage -->
+      <canvas id="mycanvas"></canvas> 
+    </p>
+ </body>
+ 
+ <!-- Run all the JavaScript stuff -->
+ <!-- Include the processing.js library -->
+ <!-- See https://khanacademy.zendesk.com/hc/en-us/articles/202260404-What-parts-of-ProcessingJS-does-Khan-Academy-support- for differences -->
+ <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script>
+
+ <script>
+ 
+
+
+    var ACE = function(processingInstance) {
+     with (processingInstance) {
+        var canvasSize = 600;
+        size(canvasSize,2/3*canvasSize); 
+        frameRate(30);
+        
+        // ProgramCodeGoesHere
+
+
+        // Courses: 0=South 1=North 2=West
+        // Par Element: 0-8=South 9-17=North 18-27=West
+        // Par Element Values: Courses*9 + Hole Number - 1
+        const Par = [5,4,3,5,4,4,3,4,4,4,5,3,4,4,4,4,3,4,4,5,4,4,5,3,4,5,3];
+
+
+
+        // Up To Four Players With Their Total Course Handicap
+        var Players = 0;
+        const PlayerName = [];
+        const PlayerCourseHandicap = [];
+
+        // 
+        const PlayerHoleStrokes = [];
+        const PlayerHoleScore = [];
+
+
+        var enterPlayers = function() {
+            
+            
+        };
+
+        var enterStrokes = function(Hole) {
+            
+            
+        };
+
+        var showScores = function() {
+            
+            
+        };        
+
+
+        var showSummary = function() {
+            
+            
+        };
+
+        // Screen Value:
+        // 1 = Setup Round with up to 4 Players and Select Front & Back Courses
+        // 2 = Add Scores for up to 4 Players for 18 Holes
+        // 3 = Display Scorecard for up to 4 Players with Team Points per Hole
+        // 4 = Display Results Strokes by Player & Team (Front / Back / Total)
+        var Screen = 1
+        draw = function() {
+            if (Screen = 1) {
+
+
+            }
+            
+            if (Screen = 2) {
+
+
+            }
+            
+            if (Screen = 3) {
+
+
+            }
+            
+            if (Screen = 4) {
+
+
+            }
+            
+           text("Here draw",100,100) 
+           
+
+        };
+    }
+    };
+    // Get the canvas that Processing-js will use
+    var canvas = document.getElementById("mycanvas"); 
+    // Pass the function sketchProc (defined in myCode.js) to Processing's constructor.
+    var processingInstance = new Processing(canvas, ACE); 
+ 
+
+ </script>
+
+</html>
