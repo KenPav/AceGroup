@@ -23,10 +23,17 @@
     var ACE = function(processingInstance) {
      with (processingInstance) {
         var canvasSize = 600;
-        size(canvasSize,2/3*canvasSize); 
+        size(canvasSize,canvasSize); 
         frameRate(30);
         
         // ProgramCodeGoesHere
+
+
+        var clkclr = color(240, 166, 158);
+        var blk = color(0, 0, 0);
+        var BoxColor = color(0,0,0);
+        var BackColor = color(255,255,255);
+
 
 
         // Courses: 0=South 1=North 2=West
@@ -72,8 +79,13 @@
         // 2 = Add Scores for up to 4 Players for 18 Holes
         // 3 = Display Scorecard for up to 4 Players with Team Points per Hole
         // 4 = Display Results Strokes by Player & Team (Front / Back / Total)
+
+        stroke(250,100,35);
+        strokeWeight(2);
+
         var Screen = 1
         draw = function() {
+//            background(255,255,255);
             if (Screen = 1) {
 
 
@@ -93,10 +105,12 @@
 
 
             }
-            
-           text("Here draw",100,100) 
-           
-
+            fill(clkclr)
+            text("100,550",100,550);
+            rect(100,550,100,40);
+            rect(200,550,100,40);
+            rect(300,550,100,40);           
+            rect(400,550,100,40);
         };
     }
     };
