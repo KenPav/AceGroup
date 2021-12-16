@@ -23,7 +23,8 @@
     var ACE = function(processingInstance) {
      with (processingInstance) {
         var canvasSize = 1300;
-        size(0.615*canvasSize,canvasSize); 
+        //800 x 1300
+        size(0.62*canvasSize,canvasSize); 
         frameRate(30);
       
         // ProgramCodeGoesHere
@@ -108,22 +109,20 @@
             fill(BackColor);
             
 
-            rect(20,575,75,20);
-            rect(95,575,75,20);
-            rect(170,575,75,20);           
-            rect(245,575,75,20);
+            rect(0,1200,200,100);
+            rect(200,1200,200,100);
+            rect(400,1200,200,100);           
+            rect(600,1200,200,100);
 
-            textSize(15);
+            textSize(50);
             textAlign(CENTER);
             fill(blk);
-            text("Setup",57,590);
-            text("Scores",132,590);
-            text("ScoreCard",207,590);
-            text("Results",282,590);
+            text("Setup",100,1265);
+            text("Scores",300,1265);
+            text("Score",500,1245);
+            text("Card",500,1285);
+            text("Results",700,1265);
 
-            text("1 2 3 4 5 6 7 8 9 Frt 1 2 3 4 5 6 7 8 9 Bck Tot Pts",250,500);
-            textSize(30);
-            text("800 x 1300",350,300);
         };
     }
     };
