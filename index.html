@@ -3,6 +3,10 @@
 <html> 
 <head>
     
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+
 </head>
  <body>
     <p align="center"> 
@@ -46,7 +50,7 @@
 
         // Up To Four Players With Their Total Course Handicap
         var Players = 0;
-        const PlayerName = [];
+        const PlayerName = ["","","",""];
         const PlayerCourseHandicap = [];
 
         // 
@@ -84,11 +88,35 @@
         stroke(blk);
         strokeWeight(2);
 
-        var Screen = 1
+        var Screen = 1;
+        var NumberOfPlayers = 0;
+        var NoP="0";
+        var PN=" "
         draw = function() {
 //            background(255,255,255);
-            if (Screen = 1) {
 
+
+// Round SETUP Section
+
+            while (Screen = 1) {
+               fill(blk);
+               textSize(50);
+               text("Screen = "+Screen,50,300);
+               while (NumberOfPlayers<1 || NumberOfPlayers>4) {
+                  NoP=NumberOfPlayers.toString();
+                  NoP=prompt("Number of Players (1-4): "+NoP,NoP);
+                  NumberOfPlayers=Number(NoP);
+                  text("Number of Players 1-4: "+NumberOfPlayers,100,400);
+               }
+ 
+               text("Screen = "+Screen,50,100);              
+               for (var i = 0; i < NumberOfPlayers; i++) {
+                  text(Screen+NumberOfPlayers+PN,100,250);
+                  PlayerName[i]=prompt("Player #"+(i+1).toString()+" Name: "+PlayerName[i],PlayerName[i]+Screen.toString());
+                  text("Player #"+(i+1).toString()+" Name is "+PlayerName[i],100,500);
+               }
+
+               Screen = 0;
 
             }
             
@@ -106,7 +134,18 @@
 
 
             }
-            fill(BackColor);
+
+
+
+
+
+
+
+
+
+
+
+            fill(clkclr);
             
 
             rect(0,1200,200,100);
