@@ -23,7 +23,7 @@
     var ACE = function(processingInstance) {
      with (processingInstance) {
         var canvasSize = 600;
-        size(canvasSize,canvasSize); 
+        size(0.57*canvasSize,canvasSize); 
         frameRate(30);
         
         // ProgramCodeGoesHere
@@ -80,7 +80,7 @@
         // 3 = Display Scorecard for up to 4 Players with Team Points per Hole
         // 4 = Display Results Strokes by Player & Team (Front / Back / Total)
 
-        stroke(250,100,35);
+        stroke(blk);
         strokeWeight(2);
 
         var Screen = 1
@@ -105,12 +105,21 @@
 
 
             }
-            fill(clkclr)
-            text("100,550",100,550);
-            rect(100,550,100,40);
-            rect(200,550,100,40);
-            rect(300,550,100,40);           
-            rect(400,550,100,40);
+            fill(BackColor);
+            
+
+            rect(20,575,75,20);
+            rect(95,575,75,20);
+            rect(170,575,75,20);           
+            rect(245,575,75,20);
+
+            textSize(15);
+            textAlign(CENTER);
+            fill(blk);
+            text("Setup",57,590);
+            text("Scores",132,590);
+            text("ScoreCard",207,590);
+            text("Results",282,590);
         };
     }
     };
