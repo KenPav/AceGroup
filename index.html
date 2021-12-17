@@ -55,7 +55,7 @@
         var Eagle = 6;
 
         var WaitHere = 1;
-
+        var WhereTo = "Setup Front"
          var Front = 0;
          var Back = 0;
 
@@ -76,13 +76,14 @@
         const PlayerHoleScore = [];
 
 
-        var enterSetup = function() {
+        var enterSetup = function(WhereTo) {
                
                textSize(50);
                textAlign(CENTER);
 
 //               WaitHere = 1;
-//               while (WaitHere=1) {
+//               while (WaitHere===1) {
+//               if(WhereTo="Setup Front") {
                   fill(blk);
                   text("Select Front 9 Course",400,80);
                   fill(BoxColor);
@@ -93,11 +94,24 @@
                   text("South",200,150);
                   text("North",400,150);
                   text("West",600,150);
+//                  return;
+//               }
+//               if(WhereTo="Setup Back") {
+                  fill(blk);
+                  text("Select Back 9 Course",400,280);
+                  fill(BoxColor);
+                  rect(100,300,200,70);
+                  rect(300,300,200,70);
+                  rect(500,300,200,70);
+                  fill(blk);
+                  text("South",200,350);
+                  text("North",400,350);
+                  text("West",600,350);
+//                  return;
+//               }
 
-                  
-/*               }
 
-               do {
+/*               do {
                   NoP=NumberOfPlayers.toString();
                   NoP=prompt("Number of Players (1-4): "+NoP,NoP);
                   NumberOfPlayers=Number(NoP);
@@ -149,6 +163,7 @@
 
             if (AceScreen = 1) {
                enterSetup();
+               
             }
             
 /*            if (AceScreen = 2) {
