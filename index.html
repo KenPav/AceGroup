@@ -68,6 +68,7 @@
          const PlayerHoleScore = [];
 
          var ScreenSelect = function() {
+
             fill(BoxColor);
             
             rect(0,1200,200,100);
@@ -158,21 +159,24 @@
                   return;  
                }
 
+               if (CourseSet!=0) {
+                  if (NumberOfPlayers===0) {
+                     do {
+                        NoP=NumberOfPlayers.toString();
+                        NoP=prompt("Number of Players (1-4): "+NoP,NoP);
+                        NumberOfPlayers=Number(NoP);
+                     }
+                     while (NumberOfPlayers<1 || NumberOfPlayers>4); 
 
-               if (NumberOfPlayers===0) {
-                  do {
-                     NoP=NumberOfPlayers.toString();
-                     NoP=prompt("Number of Players (1-4): "+NoP,NoP);
-                     NumberOfPlayers=Number(NoP);
+                     for (var i = 0; i < NumberOfPlayers; i++) {
+                        PlayerName[i]=prompt("Player #"+(i+1).toString()+" Name: "+PlayerName[i],PlayerName[i]+AceScreen.toString());
+                        PlayerCourseHandicap[i]=prompt(PlayerName[i]+"'s Course Handicap: "+PlayerCourseHandicap[i]+"  (i = "+i+")",PlayerCourseHandicap[i]);
+                     }
                   }
-                  while (NumberOfPlayers<1 || NumberOfPlayers>4); 
-
-                  for (var i = 0; i < NumberOfPlayers; i++) {
-                     PlayerName[i]=prompt("Player #"+(i+1).toString()+" Name: "+PlayerName[i],PlayerName[i]+AceScreen.toString());
-                     PlayerCourseHandicap[i]=prompt(PlayerName[i]+"'s Course Handicap: "+PlayerCourseHandicap[i]+"  (i = "+i+")",PlayerCourseHandicap[i]);
-                  }
-                  
-               }           
+                  return;
+               }
+                 
+           
 
 //               AceScreen = 0;
             
@@ -197,21 +201,19 @@
 */
 
          mouseClicked = function() {
-
+            background(BackColor);
             for (i=0; i<3; i++) {
                if(mouseX>=100+200*i && mouseX<=300+200*i && mouseY>=70 && mouseY<=140) {
                   Front=i;
-                  background(BackColor);
                }
                if(mouseX>=100+200*i && mouseX<=300+200*i && mouseY>=200 && mouseY<=270) {
                   Back=i;
-                  background(BackColor);
                }
                if(mouseX>=300 && mouseX<=500 && mouseY>=300 && mouseY<=370) {
                   if(Front>=0 && Front<=2 && Back>=0 && Back<=2 && Front!=Back) {
                      CourseSet=1;
                      background(BackColor);
-                     text("Number of Players",400,400);
+//                     text("Players' Names and Course Handicaps",400,400);
                   }
                   else {
                      textSize(35);
@@ -220,6 +222,7 @@
                   }
                }
             }
+
             draw();            
          }
 
@@ -230,20 +233,27 @@
         // 3 = Display Scorecard for up to 4 Players with Team Points per Hole
         // 4 = Display Results Strokes by Player & Team (Front / Back / Total)
 
+
+//       ROUND SETUP INITIAL VARIABLES
          var CourseSet = 0;
          var Front = 3;
          var Back = 3;
-
          var AceScreen = 1;
          var NumberOfPlayers = 0;
          var NoP="0";
-         var PN=" "
-         var PCH=" "
 
+//       SCORE INPUT INITIAL VARIABLES
+
+
+//       SCORECARD INITIAL VARIABLES
+
+
+//       RESULTS INITIAL VARIABLES
+
+         
          draw = function() {
 
 // Round SETUP Section
-         
             ScreenSelect();
 
             if (AceScreen = 1) {
