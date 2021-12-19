@@ -34,120 +34,193 @@
         // ProgramCodeGoesHere
 
 
-        var clkclr = color(150,150,150);
-        var blk = color(0, 0, 0);
-        var BoxColor = color(65,200,240);
-        var BackColor = color(180,200,240);
-        stroke(blk);
-        strokeWeight(2);
+         var clkclr = color(150,150,150);
+         var blk = color(0, 0, 0);
+         var BoxColor = color(65,200,240);
+         var SelectBoxColor = color(0,255,200);
+         var BackColor = color(180,200,240);
+         stroke(blk);
+         strokeWeight(2);
 
-        background(BackColor)
+         background(BackColor);
 
-        var AceScreen = 1;
-        var NumberOfPlayers = 0;
-        var NoP="0";
-        var PN=" "
-        var PCH=" "
 
-        var Bogie = 1;
-        var Par = 2;
-        var Birdie = 4;
-        var Eagle = 6;
+         var Bogie = 1;
+         var Par = 2;
+         var Birdie = 4;
+         var Eagle = 6;
 
-        var WaitHere = 1;
-        var WhereTo = "Setup Front"
-         var Front = 0;
-         var Back = 0;
 
         // Courses: 0=South 1=North 2=West
         // Par Element: 0-8=South 9-17=North 18-27=West
         // Par Element Values: Courses*9 + Hole Number - 1
-        const HolePar = [5,4,3,5,4,4,3,4,4,4,5,3,4,4,4,4,3,4,4,5,4,4,5,3,4,5,3];
+         const HolePar = [5,4,3,5,4,4,3,4,4,4,5,3,4,4,4,4,3,4,4,5,4,4,5,3,4,5,3];
 
 
 
         // Up To Four Players With Their Total Course Handicap
         
-        const PlayerName = ["","","",""];
-        const PlayerCourseHandicap = [0,0,0,0];
+         const PlayerName = ["","","",""];
+         const PlayerCourseHandicap = [0,0,0,0];
 
         // 
-        const PlayerHoleStrokes = [];
-        const PlayerHoleScore = [];
+         const PlayerHoleStrokes = [];
+         const PlayerHoleScore = [];
+
+         var ScreenSelect = function() {
+            fill(BoxColor);
+            
+            rect(0,1200,200,100);
+            rect(200,1200,200,100);
+            rect(400,1200,200,100);           
+            rect(600,1200,200,100);
+
+            textSize(50);
+            textAlign(CENTER);
+            fill(blk);
+
+            text("Setup",100,1265);
+            text("Scores",300,1265);
+            text("Score",500,1245);
+            text("Card",500,1285);
+            text("Results",700,1265);
+         }
 
 
-        var enterSetup = function(WhereTo) {
+
+         Counter=0;
+         var enterSetup = function() {
                
                textSize(50);
                textAlign(CENTER);
+               if(CourseSet===0) {
 
-//               WaitHere = 1;
-//               while (WaitHere===1) {
-//               if(WhereTo="Setup Front") {
+//             SELECT FRONT COURSE
                   fill(blk);
-                  text("Select Front 9 Course",400,80);
+                  text("Select Front 9 Course",400,60);
+                  if (Front===0) {
+                     fill(SelectBoxColor);
+                  } else { 
+                     fill(BoxColor);
+                  }
+                  rect(100,70,200,70);
+                  fill(blk);
+                  text("South",200,125);
+                  if (Front===1) {
+                     fill(SelectBoxColor);
+                  } else { 
+                     fill(BoxColor);
+                  }                  
+                  rect(300,70,200,70);
+                  fill(blk);
+                  text("North",400,125);
+                  if (Front===2) {
+                     fill(SelectBoxColor);
+                  } else { 
+                     fill(BoxColor);
+                  }                  
+                  rect(500,70,200,70);
+                  fill(blk);
+                  text("West",600,125);
+
+
+//             SELECT BACK COURSE    
+                  fill(blk);
+                  text("Select Back 9 Course",400,190);
+                  if (Back===0) {
+                     fill(SelectBoxColor);
+                  } else { 
+                     fill(BoxColor);
+                  }                  
+                  rect(100,200,200,70);
+                  fill(blk);
+                  text("South",200,255);
+                  if (Back===1) {
+                     fill(SelectBoxColor);
+                  } else { 
+                     fill(BoxColor);
+                  }                                    
+                  rect(300,200,200,70);
+                  fill(blk);
+                  text("North",400,255);
+                  if (Back===2) {
+                     fill(SelectBoxColor);
+                  } else { 
+                     fill(BoxColor);
+                  }                                    
+                  rect(500,200,200,70);
+                  fill(blk);
+                  text("West",600,255);
                   fill(BoxColor);
-                  rect(100,100,200,70);
-                  rect(300,100,200,70);
-                  rect(500,100,200,70);
-                  fill(blk);
-                  text("South",200,150);
-                  text("North",400,150);
-                  text("West",600,150);
-//                  return;
-//               }
-//               if(WhereTo="Setup Back") {
-                  fill(blk);
-                  text("Select Back 9 Course",400,280);
-                  fill(BoxColor);
-                  rect(100,300,200,70);
                   rect(300,300,200,70);
-                  rect(500,300,200,70);
                   fill(blk);
-                  text("South",200,350);
-                  text("North",400,350);
-                  text("West",600,350);
-//                  return;
-//               }
-
-
-/*               do {
-                  NoP=NumberOfPlayers.toString();
-                  NoP=prompt("Number of Players (1-4): "+NoP,NoP);
-                  NumberOfPlayers=Number(NoP);
+                  text("Continue",400,355);
+                  return;  
                }
-               while (NumberOfPlayers<1 || NumberOfPlayers>4); 
 
-               for (var i = 0; i < NumberOfPlayers; i++) {
-                  PlayerName[i]=prompt("Player #"+(i+1).toString()+" Name: "+PlayerName[i],PlayerName[i]+AceScreen.toString());
-                  PlayerCourseHandicap[i]=prompt(PlayerName[i]+"'s Course Handicap: "+PlayerCourseHandicap[i]+"  (i = "+i+")",PlayerCourseHandicap[i]);
-               }
-                           
 
-               AceScreen = 0;
-*/            
+               if (NumberOfPlayers===0) {
+                  do {
+                     NoP=NumberOfPlayers.toString();
+                     NoP=prompt("Number of Players (1-4): "+NoP,NoP);
+                     NumberOfPlayers=Number(NoP);
+                  }
+                  while (NumberOfPlayers<1 || NumberOfPlayers>4); 
+
+                  for (var i = 0; i < NumberOfPlayers; i++) {
+                     PlayerName[i]=prompt("Player #"+(i+1).toString()+" Name: "+PlayerName[i],PlayerName[i]+AceScreen.toString());
+                     PlayerCourseHandicap[i]=prompt(PlayerName[i]+"'s Course Handicap: "+PlayerCourseHandicap[i]+"  (i = "+i+")",PlayerCourseHandicap[i]);
+                  }
+                  
+               }           
+
+//               AceScreen = 0;
             
-        };
+            
+         };
 /*
-        var enterStrokes = function(Hole) {
+         var enterStrokes = function(Hole) {
             
             
-        };
+         };
 
-        var showScores = function() {
+         var showScores = function() {
             
             
-        };        
+         };        
 
 
-        var showSummary = function() {
+         var showSummary = function() {
             
             
-        };
+         };
 */
 
          mouseClicked = function() {
-            background(clkclr);
+
+            for (i=0; i<3; i++) {
+               if(mouseX>=100+200*i && mouseX<=300+200*i && mouseY>=70 && mouseY<=140) {
+                  Front=i;
+                  background(BackColor);
+               }
+               if(mouseX>=100+200*i && mouseX<=300+200*i && mouseY>=200 && mouseY<=270) {
+                  Back=i;
+                  background(BackColor);
+               }
+               if(mouseX>=300 && mouseX<=500 && mouseY>=300 && mouseY<=370) {
+                  if(Front>=0 && Front<=2 && Back>=0 && Back<=2 && Front!=Back) {
+                     CourseSet=1;
+                     background(BackColor);
+                     text("Number of Players",400,400);
+                  }
+                  else {
+                     textSize(35);
+                     fill(255,0,0);
+                     text("Select Different Front and Back Courses!",400,450);
+                  }
+               }
+            }
+            draw();            
          }
 
 
@@ -157,12 +230,26 @@
         // 3 = Display Scorecard for up to 4 Players with Team Points per Hole
         // 4 = Display Results Strokes by Player & Team (Front / Back / Total)
 
-        draw = function() {
+         var CourseSet = 0;
+         var Front = 3;
+         var Back = 3;
+
+         var AceScreen = 1;
+         var NumberOfPlayers = 0;
+         var NoP="0";
+         var PN=" "
+         var PCH=" "
+
+         draw = function() {
 
 // Round SETUP Section
+         
+            ScreenSelect();
 
             if (AceScreen = 1) {
+               
                enterSetup();
+
                
             }
             
@@ -190,23 +277,6 @@
 
 
 
-
-            fill(BoxColor);
-            
-            rect(0,1200,200,100);
-            rect(200,1200,200,100);
-            rect(400,1200,200,100);           
-            rect(600,1200,200,100);
-
-            textSize(50);
-            textAlign(CENTER);
-            fill(blk);
-
-            text("Setup",100,1265);
-            text("Scores",300,1265);
-            text("Score",500,1245);
-            text("Card",500,1285);
-            text("Results",700,1265);
 
         };
     }
