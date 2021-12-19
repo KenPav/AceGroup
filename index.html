@@ -26,9 +26,9 @@
 
     var ACE = function(processingInstance) {
      with (processingInstance) {
-        var canvasSize = 1300;
-        //800 x 1300
-        size(0.61538461539*canvasSize,canvasSize); 
+
+        size(800,1200);
+        
         frameRate(30);
       
         // ProgramCodeGoesHere
@@ -71,25 +71,20 @@
 
             fill(BoxColor);
             
-            rect(0,1100,200,100);
-            rect(200,1100,200,100);
-            rect(400,1100,200,100);           
-            rect(600,1100,200,100);
-
-            rect(0,1200,200,100);
-            rect(200,1200,200,100);
-            rect(400,1200,200,100);           
-            rect(600,1200,200,100);
+            rect(0,1050,200,100);
+            rect(200,1050,200,100);
+            rect(400,1050,200,100);           
+            rect(600,1050,200,100);
 
             textSize(50);
             textAlign(CENTER);
             fill(blk);
 
-            text("Setup",100,1265);
-            text("Scores",300,1265);
-            text("Score",500,1245);
-            text("Card",500,1285);
-            text("Results",700,1265);
+            text("Setup",100,1115);
+            text("Scores",300,1115);
+            text("Score",500,1095);
+            text("Card",500,1135);
+            text("Results",700,1115);
          }
 
 
