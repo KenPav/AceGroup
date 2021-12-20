@@ -69,7 +69,11 @@
          const PFP = [0,0,0,0];
          const PBP = [0,0,0,0];
         // 
-         const PlayerHoleStrokes = [];
+        // Up To 4 Players(0-3), 18 Hole Strokes Entry per Player
+        // Index = Player#*18 + Hole Number - 1
+         const PlayerHoleStrokes = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+        //
          const PlayerHoleScore = [];
 
          var ScreenSelect = function() {
@@ -92,7 +96,7 @@
             text("Results",700,1115);
          }
 
-
+//       AceScreen = 1
 
          Counter=0;
          var enterSetup = function() {
@@ -230,19 +234,49 @@
                   text("Continue",400,855);
                }
                  
-           
-
-//               AceScreen = 0;
-            
-            
          };
-/*
+
+//               AceScreen = 2;
+            
+            
+
          var enterStrokes = function(Hole) {
+            textSize(50);
+            textAlign(CENTER);
+            fill(blk);
+            text("Hole #"+HoleNum,400,65)
+            if(HoleNum<=9) {
+               text("Front 9: "+Courses[Front]+" #"+HoleNum+" / Par "+HolePar[(Front*9)+HoleNum-1],400,125);
+            }
+            else {
+               text("Back 9: "+Courses[Back]+" #"+HoleNum+" / Par "+HolePar[(Back*9)+HoleNum-10],400,125);
+            }
+            text("Select Hole Score for Each Player",400,185);
+            for (var i = 0; i < NumberOfPlayers; i++) {
+               fill(BoxColor);
+               rect(0,200+i*80,220,80);
+               fill(blk);
+               text(PlayerName[i],110,265+i*80);
+               for (var j = 0; j < 8; j++) {
+                  fill(BoxColor);
+                  rect(220+j*70,200+i*80,70,80)
+                  fill(blk);
+                  text(j+1,255+j*70,265+i*80);
+               }
+
+            }
+            fill(BoxColor);
+            rect(50,550,200,80);
+            rect(550,550,200,80);
+            fill(blk);
+            text("Previous",150,600);
+            text("Next",650,600);
+
             
             
          };
 
-         var showScores = function() {
+/*         var showScores = function() {
             
             
          };        
@@ -258,6 +292,7 @@
             background(BackColor);            
             if(AceScreen===1) {
                for (i=0; i<3; i++) {
+//                  SELECT FRONT AND BACK COURSES
                   if(mouseX>=100+200*i && mouseX<=300+200*i && mouseY>=70 && mouseY<=140) {
                      Front=i;
                   }
@@ -268,7 +303,7 @@
                      if(Front>=0 && Front<=2 && Back>=0 && Back<=2 && Front!=Back) {
                         CourseSet=1;
                         background(BackColor);
-   //                     text("Players' Names and Course Handicaps",400,400);
+
                      }
                      else {
                         textSize(35);
@@ -302,7 +337,7 @@
          var NoP="0";
 
 //       SCORE INPUT INITIAL VARIABLES
-
+         var HoleNum = 1;
 
 //       SCORECARD INITIAL VARIABLES
 
@@ -322,21 +357,22 @@
                
             }
             
-/*            if (AceScreen = 2) {
+            if (AceScreen===2) {
+
+               enterStrokes ();
+
+            }
+            
+            if (AceScreen===3) {
 
 
             }
             
-            if (AceScreen = 3) {
+            if (AceScreen===4) {
 
 
             }
-            
-            if (AceScreen = 4) {
 
-
-            }
-*/
 
 
 
