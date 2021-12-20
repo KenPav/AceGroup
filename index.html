@@ -275,15 +275,27 @@
             rect(50,550,200,80);
             rect(550,550,200,80);
             fill(blk);
-            text("Previous",150,600);
-            text("Next",650,600);
+            text("Previous",150,615);
+            text("Next",650,615);
 
             
             
          };
 
-/*         var showScores = function() {
-            
+         var showScoreCard = function() {
+            background(BackColor);
+            fill(BoxColor);
+            rect(0,50,170,50);
+            rect(170,50,170+9*30,50);
+            rect(170+10*30,50,170+9*30,50);
+            rect(170+20*30,50,170+21*30,50);
+            for (var j=0; j<5; j++) {
+               for (var i=0; i<22; i++) {
+                  //Front 9, Front Total, Back 9, Back Total, Round Total
+                  rect(0,100+j*50,170,50);
+                  rect(170+i*30,100+j*50,30,50);
+               }
+            }           
             
          };        
 
@@ -292,10 +304,23 @@
             
             
          };
-*/
+
 
          mouseClicked = function() {
-            background(BackColor);            
+            background(BackColor);
+            if(mouseX>=0 && mouseX<=200 && mouseY>=1050 && mouseY<=1150) {
+               CourseSet=0;
+               AceScreen=1;
+            }
+            if(mouseX>=200 && mouseX<=400 && mouseY>=1050 && mouseY<=1150) {
+               AceScreen=2;
+            }            
+            if(mouseX>=400 && mouseX<=600 && mouseY>=1050 && mouseY<=1150) {
+               AceScreen=3;
+            }            
+            if(mouseX>=600 && mouseX<=800 && mouseY>=1050 && mouseY<=1150) {
+               AceScreen=4;
+            }                        
             if(AceScreen===1) {
                for (i=0; i<3; i++) {
 //                  SELECT FRONT AND BACK COURSES
@@ -333,14 +358,21 @@
                   }
                }
                if(mouseX>=50 && mouseX<=250 && mouseY>=550 && mouseY<=630) { 
-
+                  if(HoleNum>1) {
+                     HoleNum=HoleNum-1;
+                  } 
+                  else {
+                     if(HoleNum<18) {
+                        HoleNum=HoleNum-1;
+                     }
+                  }
                }
                if(mouseX>=550 && mouseX<=750 && mouseY>=550 && mouseY<=630) {
                   if(HoleNum<18) {
                      HoleNum=HoleNum+1;
                   } 
                   else {
-                     if(HoleNum>2) {
+                     if(HoleNum>1) {
                         HoleNum=HoleNum-1;
                      }
                   }
@@ -348,7 +380,7 @@
 
             }
             draw();            
-         }
+         };
 
 
         // AceScreen Value:
@@ -395,7 +427,7 @@
             
             if (AceScreen===3) {
 
-
+               showScoreCard();
             }
             
             if (AceScreen===4) {
