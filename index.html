@@ -283,20 +283,36 @@
          };
 
          var showScoreCard = function() {
-            background(BackColor);
+            textSize(35);
+            textAlign(CENTER);
             fill(BoxColor);
             rect(0,50,170,50);
             rect(170,50,170+9*30,50);
             rect(170+10*30,50,170+9*30,50);
             rect(170+20*30,50,170+21*30,50);
+            fill(blk);
+            text("Players",85,90);
+            text("Front 9: "+Courses[Front],320,90);
+            text("Back 9: "+Courses[Back],620,90);
+            text("T",785,90);
+            
             for (var j=0; j<5; j++) {
                for (var i=0; i<22; i++) {
                   //Front 9, Front Total, Back 9, Back Total, Round Total
+                  fill(BoxColor);
                   rect(0,100+j*50,170,50);
                   rect(170+i*30,100+j*50,30,50);
                }
             }           
             
+            for (var j=0; j<6; j++) {
+               for (var i=0; i<22; i++) {
+                  //Front 9, Front Total, Back 9, Back Total, Round Total
+                  fill(BoxColor);
+                  rect(0,400+j*50,170,50);
+                  rect(170+i*30,400+j*50,30,50);
+               }
+            }                       
          };        
 
 
