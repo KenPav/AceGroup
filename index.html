@@ -70,9 +70,10 @@
          const PBP = [0,0,0,0];
         // 
         // Up To 4 Players(0-3), 18 Hole Strokes Entry per Player
+        // PlayerScore is up to 4 players plus team total
         // Index = Player#*18 + Hole Number - 1
          const PlayerHoleStrokes = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-         const PlayerHoleScore = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+         const PlayerHoleScore = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
          var ScreenSelect = function() {
 
@@ -341,8 +342,17 @@
                }
             }
                        
-            
-/*            for (var j=0; j<6; j++) {
+/*            fill(BoxColor);
+            rect(0,400,170,50);
+            rect(170,400,170+9*30,50);
+            rect(170+10*30,400,170+9*30,50);
+            rect(170+20*30,400,170+21*30,50);
+            fill(blk);
+            text("Players",85,440);
+            text("Front 9: "+Courses[Front],320,440);
+            text("Back 9: "+Courses[Back],620,440);
+            text("T",785,90);            
+*/            for (var j=0; j<6; j++) {
                for (var i=0; i<22; i++) {
                   //Front 9, Front Total, Back 9, Back Total, Round Total
                   fill(BoxColor);
@@ -350,9 +360,45 @@
                   rect(170+i*30,400+j*50,30,50);
                }
             }                       
-*/         };        
+            fill(blk);
+            for (var j=0; j<6; j++) {
+               for (var i=0; i<22; i++) {
 
-
+                  if(j===0 && i===1) {
+                     text("Points",85,440);
+                     for (var k=1; k<10; k++) {
+                        text(k,185+(k-1)*30,440);
+                     }
+                     for (var k=10; k<19; k++) {
+                        text(k-9,485+(k-10)*30,440);
+                     }
+                  }
+                  if ((j===0 && (i===9 || i>18))) {
+                     if (i===9) {
+                        text("F",185+i*30,440+j*50);
+                     }
+                     if (i===19) {
+                        text("B",185+i*30,440+j*50);
+                     }
+                     if (i===20) {
+                        text("T",185+i*30,440+j*50);
+                     }
+                  }
+                  if(j>0 && j<=NumberOfPlayers) {
+                     text(PlayerName[j-1],85,440+50*j);
+                  }
+                  if(i<9 && j>0) {
+                     if(j<=NumberOfPlayers)
+                        text(PlayerHoleStrokes[(j-1)*18+i],185+i*30,440+j*50);
+                     }
+                  if(i>10 && i<20 && j>0) {
+                     if(j<=NumberOfPlayers) {
+                        text(PlayerHoleStrokes[(j-1)*18+i-2],185+(i-1)*30,440+j*50);
+                     }
+                  }
+               }
+            }
+         };
          var showSummary = function() {
             
             
