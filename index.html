@@ -50,7 +50,7 @@
          var Par = 2;
          var Birdie = 4;
          var Eagle = 6;
-
+         const Points = [0,8,6,4,2,1,0,0,0,0]
 
         // Courses: 0=South 1=North 2=West
         // Par Element: 0-8=South 9-17=North 18-27=West
@@ -72,9 +72,7 @@
         // Up To 4 Players(0-3), 18 Hole Strokes Entry per Player
         // Index = Player#*18 + Hole Number - 1
          const PlayerHoleStrokes = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-
-        //
-         const PlayerHoleScore = [];
+         const PlayerHoleScore = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
          var ScreenSelect = function() {
 
@@ -283,7 +281,7 @@
          };
 
          var showScoreCard = function() {
-            textSize(35);
+            textSize(30);
             textAlign(CENTER);
             fill(BoxColor);
             rect(0,50,170,50);
@@ -295,17 +293,56 @@
             text("Front 9: "+Courses[Front],320,90);
             text("Back 9: "+Courses[Back],620,90);
             text("T",785,90);
-            
             for (var j=0; j<5; j++) {
                for (var i=0; i<22; i++) {
                   //Front 9, Front Total, Back 9, Back Total, Round Total
                   fill(BoxColor);
                   rect(0,100+j*50,170,50);
                   rect(170+i*30,100+j*50,30,50);
+                  fill(blk);
                }
-            }           
+            }
+
+            for (var j=0; j<5; j++) {
+               for (var i=0; i<22; i++) {
+
+                  if(j===0 && i===1) {
+                     text("Scores",85,140);
+                     for (var k=1; k<10; k++) {
+                        text(k,185+(k-1)*30,140);
+                     }
+                     for (var k=10; k<19; k++) {
+                        text(k-9,485+(k-10)*30,140);
+                     }
+                  }
+                  if ((j===0 && (i===9 || i>18))) {
+                     if (i===9) {
+                        text("F",185+i*30,140+j*50);
+                     }
+                     if (i===19) {
+                        text("B",185+i*30,140+j*50);
+                     }
+                     if (i===20) {
+                        text("T",185+i*30,140+j*50);
+                     }
+                  }
+                  if(j>0 && j<=NumberOfPlayers) {
+                     text(PlayerName[j-1],85,140+50*j);
+                  }
+                  if(i<9 && j>0) {
+                     if(j<=NumberOfPlayers)
+                        text(PlayerHoleStrokes[(j-1)*18+i],185+i*30,140+j*50);
+                     }
+                  if(i>10 && i<20 && j>0) {
+                     if(j<=NumberOfPlayers) {
+                        text(PlayerHoleStrokes[(j-1)*18+i-2],185+(i-1)*30,140+j*50);
+                     }
+                  }
+               }
+            }
+                       
             
-            for (var j=0; j<6; j++) {
+/*            for (var j=0; j<6; j++) {
                for (var i=0; i<22; i++) {
                   //Front 9, Front Total, Back 9, Back Total, Round Total
                   fill(BoxColor);
@@ -313,7 +350,7 @@
                   rect(170+i*30,400+j*50,30,50);
                }
             }                       
-         };        
+*/         };        
 
 
          var showSummary = function() {
@@ -369,28 +406,24 @@
                for (var i = 0; i < NumberOfPlayers; i++) {
                   for (var j = 0; j < 8; j++) {
                      if(mouseX>=220+70*j && mouseX<=290+70*j && mouseY>=200+i*80 && mouseY<=280+i*80) {
-                        PlayerHoleStrokes[i*18+HoleNum-1]=j+1;   
+                        PlayerHoleStrokes[i*18+HoleNum-1]=j+1;
+                        if(HoleNum<10) {
+                           PlayerHoleScore[i*18+HoleNum-1]=Points[j+1-HolePar[Front*9+HoleNum-1]+4];
+                        }
+                        else {
+                           PlayerHoleScore[i*18+HoleNum-1]=Points[j+1-HolePar[Back*9+HoleNum-1-9]+4];
+                        }
                      }
                   }
                }
                if(mouseX>=50 && mouseX<=250 && mouseY>=550 && mouseY<=630) { 
                   if(HoleNum>1) {
-                     HoleNum=HoleNum-1;
-                  } 
-                  else {
-                     if(HoleNum<18) {
                         HoleNum=HoleNum-1;
-                     }
                   }
                }
                if(mouseX>=550 && mouseX<=750 && mouseY>=550 && mouseY<=630) {
                   if(HoleNum<18) {
                      HoleNum=HoleNum+1;
-                  } 
-                  else {
-                     if(HoleNum>1) {
-                        HoleNum=HoleNum-1;
-                     }
                   }
                } 
 
