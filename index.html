@@ -46,11 +46,12 @@
          background(BackColor);
 
 
-         var Bogie = 1;
-         var Par = 2;
-         var Birdie = 4;
-         var Eagle = 6;
-         const Points = [0,8,6,4,2,1,0,0,0,0]
+         // Strokes-Par+4 = Point Value in Array
+         const PointValue = [10,8,6,4,2,1,0,0,0,0];
+         //TotalStrokes Array F,B,T 4 Players and Round Par
+         const TotalStrokes = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+         //TotalPoints Array F,B,T Points, 4 Players plus Team Total
+         const TotalPoints = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
         // Courses: 0=South 1=North 2=West
         // Par Element: 0-8=South 9-17=North 18-27=West
@@ -270,45 +271,92 @@
                }
 
             }
+
             fill(BoxColor);
             rect(50,550,200,80);
             rect(550,550,200,80);
+            rect(275,550,250,80);
             fill(blk);
             text("Previous",150,615);
             text("Next",650,615);
+            text("Points: "+PlayerHoleScore[4*18+HoleNum-1],400,615);
+
 
             
             
          };
 
          var showScoreCard = function() {
-            textSize(30);
+            for (var i=0; i<15; i++) {
+               TotalPoints[i] = 0;
+               TotalStrokes[i] = 0;
+            }
+            for (var i=0; i<4; i++) {
+               for (var j=1; j<19; j++) {
+                  if (j<10) {
+                     TotalStrokes[i*3] = TotalStrokes[i*3] + PlayerHoleStrokes[i*18+j-1];
+                     TotalPoints[i*3] = TotalPoints[i*3] + PlayerHoleScore[i*18+j-1];
+                  }
+                  else {
+                     TotalStrokes[i*3+1] = TotalStrokes[i*3+1] + PlayerHoleStrokes[i*18+j-1];
+                     TotalPoints[i*3+1] = TotalPoints[i*3+1] + PlayerHoleScore[i*18+j-1];
+                  }
+               }
+               TotalStrokes[i*3+2] = TotalStrokes[i*3] + TotalStrokes[i*3+1];
+               TotalPoints[i*3+2] = TotalPoints[i*3] + TotalPoints[i*3+1];
+            }
+
+            for (var i=0; i<4; i++) {
+               TotalPoints[12] = TotalPoints[12] + TotalPoints[i*3];
+               TotalPoints[13] = TotalPoints[13] + TotalPoints[i*3+1];
+               TotalPoints[14] = TotalPoints[14] + TotalPoints[i*3+2];
+            }
+            for (var i=0; i<9; i++) {
+               TotalStrokes[12] = TotalStrokes[12] + HolePar[i];
+               TotalStrokes[13] = TotalStrokes[13] + HolePar[i+9];
+            }
+            TotalStrokes[14] = TotalStrokes[12] + TotalStrokes[13];
+
+
+            textSize(25);
             textAlign(CENTER);
             fill(BoxColor);
-            rect(0,50,170,50);
-            rect(170,50,170+9*30,50);
-            rect(170+10*30,50,170+9*30,50);
-            rect(170+20*30,50,170+21*30,50);
+            rect(0,0,170,50);
+            rect(170,0,170+9*30,50);
+            rect(170+10*30,0,170+9*30,50);
+            rect(170+20*30,0,170+21*30,50);
             fill(blk);
-            text("Players",85,90);
-            text("Front 9: "+Courses[Front],320,90);
-            text("Back 9: "+Courses[Back],620,90);
-            text("T",785,90);
-            for (var j=0; j<5; j++) {
+            text("Players",85,40);
+            text("Front 9: "+Courses[Front],320,40);
+            text("Back 9: "+Courses[Back],620,40);
+            text("T",785,40);
+            for (var j=0; j<6; j++) {
                for (var i=0; i<22; i++) {
                   //Front 9, Front Total, Back 9, Back Total, Round Total
                   fill(BoxColor);
-                  rect(0,100+j*50,170,50);
-                  rect(170+i*30,100+j*50,30,50);
+                  rect(0,50+j*50,170,50);
+                  rect(170+i*30,50+j*50,30,50);
                   fill(blk);
                }
             }
+            text("Par",85,90);
+            for (var i=1; i<19; i++) {
+               if (i<10) {
+                  text(HolePar[Front*9+i-1],185+(i-1)*30,90);
+               }
+               else {
+                  text(HolePar[Back*9+i-10],185+i*30,90);  
+               }
+            }
+            text(TotalStrokes[12],455,90);
+            text(TotalStrokes[13],755,90);
+            text(TotalStrokes[14],785,90);
 
             for (var j=0; j<5; j++) {
                for (var i=0; i<22; i++) {
 
                   if(j===0 && i===1) {
-                     text("Scores",85,140);
+                     text("Hole #",85,140);
                      for (var k=1; k<10; k++) {
                         text(k,185+(k-1)*30,140);
                      }
@@ -333,26 +381,23 @@
                   if(i<9 && j>0) {
                      if(j<=NumberOfPlayers)
                         text(PlayerHoleStrokes[(j-1)*18+i],185+i*30,140+j*50);
+                        if (i===8) {
+                           text(TotalStrokes[(j-1)*3],185+(i+1)*30,140+j*50);
+                        }
                      }
                   if(i>10 && i<20 && j>0) {
                      if(j<=NumberOfPlayers) {
                         text(PlayerHoleStrokes[(j-1)*18+i-2],185+(i-1)*30,140+j*50);
+                        if (i===19) {
+                           text(TotalStrokes[(j-1)*3+1],185+(i+0)*30,140+j*50);
+                           text(TotalStrokes[(j-1)*3+2],185+(i+1)*30,140+j*50);
+                        }
                      }
                   }
                }
             }
                        
-/*            fill(BoxColor);
-            rect(0,400,170,50);
-            rect(170,400,170+9*30,50);
-            rect(170+10*30,400,170+9*30,50);
-            rect(170+20*30,400,170+21*30,50);
-            fill(blk);
-            text("Players",85,440);
-            text("Front 9: "+Courses[Front],320,440);
-            text("Back 9: "+Courses[Back],620,440);
-            text("T",785,90);            
-*/            for (var j=0; j<6; j++) {
+            for (var j=0; j<6; j++) {
                for (var i=0; i<22; i++) {
                   //Front 9, Front Total, Back 9, Back Total, Round Total
                   fill(BoxColor);
@@ -361,7 +406,7 @@
                }
             }                       
             fill(blk);
-            for (var j=0; j<6; j++) {
+            for (var j=0; j<7; j++) {
                for (var i=0; i<22; i++) {
 
                   if(j===0 && i===1) {
@@ -387,13 +432,34 @@
                   if(j>0 && j<=NumberOfPlayers) {
                      text(PlayerName[j-1],85,440+50*j);
                   }
-                  if(i<9 && j>0) {
-                     if(j<=NumberOfPlayers)
-                        text(PlayerHoleStrokes[(j-1)*18+i],185+i*30,440+j*50);
+                  if(i<9 && j>0 && j<=NumberOfPlayers) {    
+                        text(PlayerHoleScore[(j-1)*18+i],185+i*30,440+j*50);
+                        if (i===8) {
+                           text(TotalPoints[(j-1)*3],185+(i+1)*30,440+j*50);
+                        }
+                  }
+
+                  if(i>10 && i<20 && j>0 && j<=NumberOfPlayers) {
+                        text(PlayerHoleScore[(j-1)*18+i-2],185+(i-1)*30,440+j*50);
+                        if (i===19) {
+                           text(TotalPoints[(j-1)*3+1],185+(i+0)*30,440+j*50);
+                           text(TotalPoints[(j-1)*3+2],185+(i+1)*30,440+j*50);
+                        }
+                  }
+                  if(j===5) {
+                     text("TeamTotal",85,440+50*j);
+                     if(i<9 && j>0) {
+                        text(PlayerHoleScore[(j-1)*18+i],185+i*30,440+j*50);
+                        if (i===8) {
+                           text(TotalPoints[(j-1)*3],185+(i+1)*30,440+j*50);
+                        }
                      }
-                  if(i>10 && i<20 && j>0) {
-                     if(j<=NumberOfPlayers) {
-                        text(PlayerHoleStrokes[(j-1)*18+i-2],185+(i-1)*30,440+j*50);
+                     if(i>10 && i<20 && j>0) {
+                        text(PlayerHoleScore[(j-1)*18+i-2],185+(i-1)*30,440+j*50);
+                        if (i===19) {
+                           text(TotalPoints[(j-1)*3+1],185+(i+0)*30,440+j*50);
+                           text(TotalPoints[(j-1)*3+2],185+(i+1)*30,440+j*50);
+                        }
                      }
                   }
                }
@@ -454,10 +520,10 @@
                      if(mouseX>=220+70*j && mouseX<=290+70*j && mouseY>=200+i*80 && mouseY<=280+i*80) {
                         PlayerHoleStrokes[i*18+HoleNum-1]=j+1;
                         if(HoleNum<10) {
-                           PlayerHoleScore[i*18+HoleNum-1]=Points[j+1-HolePar[Front*9+HoleNum-1]+4];
+                           PlayerHoleScore[i*18+HoleNum-1]=PointValue[j+1-HolePar[Front*9+HoleNum-1]+4];
                         }
                         else {
-                           PlayerHoleScore[i*18+HoleNum-1]=Points[j+1-HolePar[Back*9+HoleNum-1-9]+4];
+                           PlayerHoleScore[i*18+HoleNum-1]=PointValue[j+1-HolePar[Back*9+HoleNum-1-9]+4];
                         }
                      }
                   }
@@ -472,7 +538,7 @@
                      HoleNum=HoleNum+1;
                   }
                } 
-
+                  PlayerHoleScore[4*18+HoleNum-1]=PlayerHoleScore[0*18+HoleNum-1]+PlayerHoleScore[1*18+HoleNum-1]+PlayerHoleScore[2*18+HoleNum-1]+PlayerHoleScore[3*18+HoleNum-1];
             }
             draw();            
          };
