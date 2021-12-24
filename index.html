@@ -27,7 +27,7 @@
     var ACE = function(processingInstance) {
      with (processingInstance) {
 
-        size(800,1200);
+        size(1200,1200);
         
         frameRate(30);
       
@@ -58,17 +58,15 @@
         // Par Element Values: Courses*9 + Hole Number - 1
          const HolePar = [5,4,3,5,4,4,3,4,4,4,5,3,4,4,4,4,3,4,4,5,4,4,5,3,4,5,3];
          const Courses = ["South","North","West"];
+         const SummaryLabel = ["","","Total Round"];
 
 
 
         // Up To Four Players With Their Total Course Handicap
-        // PFP=Players Required Front Points
-        // PBP=Players Required Back Points
-        
-         const PlayerName = ["","","",""];
+        // 
+         const PlayerName = ["","","","","Team"];
          const PlayerCourseHandicap = [0,0,0,0];
-         const PFP = [0,0,0,0];
-         const PBP = [0,0,0,0];
+         const ReqPts = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
         // 
         // Up To 4 Players(0-3), 18 Hole Strokes Entry per Player
         // PlayerScore is up to 4 players plus team total
@@ -165,37 +163,46 @@
                   rect(300,300,200,70);
                   fill(blk);
                   text("Continue",400,355);
-                  return;  
+//                  return;  
                }
 
                if (CourseSet===1) {
-                  if (NumberOfPlayers===0) {
+                  for (var i=0; i<15; i++) {
+                     ReqPts[i] = 0;
+                  }
+                  if (NumberOfPlayers===0 || Restart===0) {
                      do {
                         NoP=NumberOfPlayers.toString();
                         NoP=prompt("Number of Players (1-4): "+NoP,NoP);
                         NumberOfPlayers=Number(NoP);
+                        Restart = 1;
                      }
                      while (!(NumberOfPlayers===1 || NumberOfPlayers===2 || NumberOfPlayers===3 || NumberOfPlayers===4 )); 
 
                      for (var i = 0; i < NumberOfPlayers; i++) {
                         PlayerName[i]=prompt("Player #"+(i+1).toString()+" Name: "+PlayerName[i],PlayerName[i].toString());
-                        PlayerCourseHandicap[i]=prompt(PlayerName[i]+"'s Course Handicap: "+PlayerCourseHandicap[i]+"  (i = "+i+")",PlayerCourseHandicap[i]);
+                        PlayerCourseHandicap[i]=prompt(PlayerName[i]+"'s Course Handicap: "+PlayerCourseHandicap[i],PlayerCourseHandicap[i]);
                         temp=floor((36-PlayerCourseHandicap[i])/2);
                         temp2=36-(temp*2);
                         if (temp2==PlayerCourseHandicap[i]) {
-                           PFP[i]=temp;
-                           PBP[i]=temp;
+                           ReqPts[i*3]=temp;
+                           ReqPts[i*3+1]=temp;
                         }
                         else {
                            if (Front>Back) {
-                              PFP[i]=temp;
-                              PBP[i]=temp+1;
+                              ReqPts[i*3]=temp;
+                              ReqPts[i*3+1]=temp+1;
                            }
                            else {
-                              PFP[i]=temp+1;
-                              PBP[i]=temp;
+                              ReqPts[i*3]=temp+1;
+                              ReqPts[i*3+1]=temp;
                            }
                         }
+                           ReqPts[i*3+2] = ReqPts[i*3] + ReqPts[i*3+1];
+                           ReqPts[12] = ReqPts[12] + ReqPts[i*3];
+                           ReqPts[13] = ReqPts[13] + ReqPts[i*3+1];
+                           ReqPts[14] = ReqPts[14] + ReqPts[i*3+2];
+                        
                      }
                   }
                   CourseSet=2;
@@ -225,8 +232,8 @@
                      fill(blk);
                      text(PlayerName[i],100,555+i*70);
                      text(PlayerCourseHandicap[i],300,555+i*70);
-                     text(PFP[i],500,555+i*70);
-                     text(PBP[i],700,555+i*70);
+                     text(ReqPts[i*3],500,555+i*70);
+                     text(ReqPts[i*3+1],700,555+i*70);
                   }
                   fill(BoxColor);
                   rect(300,800,200,70);
@@ -286,7 +293,7 @@
             
          };
 
-         var showScoreCard = function() {
+         var DoCalculations = function() {
             for (var i=0; i<15; i++) {
                TotalPoints[i] = 0;
                TotalStrokes[i] = 0;
@@ -316,8 +323,9 @@
                TotalStrokes[13] = TotalStrokes[13] + HolePar[i+9];
             }
             TotalStrokes[14] = TotalStrokes[12] + TotalStrokes[13];
-
-
+         }
+         var showScoreCard = function() {
+            DoCalculations();
             textSize(25);
             textAlign(CENTER);
             fill(BoxColor);
@@ -466,8 +474,74 @@
             }
          };
          var showSummary = function() {
-            
-            
+            DoCalculations();
+            SummaryLabel[0] = Courses[Front];
+            SummaryLabel[1] = Courses[Back];
+            textSize(30);
+            textAlign(CENTER);
+            fill(BoxColor);
+            rect(0,100,170,150);
+            fill(blk);
+            text("Players",85,240);
+            for (var i=0; i<3; i++) {
+               fill(BoxColor);
+               rect(170+i*200,100,200,50)
+               rect(170+i*200,150,50,100);
+               rect(220+i*200,150,150,50);
+               rect(220+i*200,200,50,50);
+               rect(270+i*200,200,50,50);
+               rect(320+i*200,200,50,50);
+               fill(blk);
+               text(SummaryLabel[i],270+i*200,140);
+               text("Points",295+i*200,190);
+               textSize(25);
+               text("Stk",195+200*i,240);
+               text("Scr",245+i*200,240);
+               text("Rqd",295+i*200,240);
+               text("Net",345+i*200,240);
+               textSize(35);
+               
+            }
+            for (var j=0; j<5; j++) {
+               fill(BoxColor);
+               rect(0,250+j*50,170,50);
+               fill(blk);
+               text(PlayerName[j],85,290+j*50); 
+               for (var i=0; i<3; i++) {
+                  fill(BoxColor);
+                  rect(170+i*200,250+j*50,50,50);
+                  rect(220+i*200,250+j*50,50,50);
+                  rect(270+i*200,250+j*50,50,50);
+                  rect(320+i*200,250+j*50,50,50);
+                  fill(blk);
+                  if (j!=4) {
+                     text(TotalStrokes[i+j*3],195+i*200,290+j*50);
+                  }
+                  text(TotalPoints[i+j*3],245+i*200,290+j*50);
+                  text(ReqPts[i+j*3],295+i*200,290+j*50);
+                  text(TotalPoints[i+j*3]-ReqPts[i+j*3],345+i*200,290+j*50);
+               }
+            }
+
+
+/*
+            rect(170+10*30,0,170+9*30,50);
+            rect(170+20*30,0,170+21*30,50);
+            fill(blk);
+            text("Players",85,40);
+            text("Front 9: "+Courses[Front],320,40);
+            text("Back 9: "+Courses[Back],620,40);
+            text("T",785,40);
+            for (var j=0; j<6; j++) {
+               for (var i=0; i<22; i++) {
+                  //Front 9, Front Total, Back 9, Back Total, Round Total
+                  fill(BoxColor);
+                  rect(0,50+j*50,170,50);
+                  rect(170+i*30,50+j*50,30,50);
+                  fill(blk);
+               }
+            }            
+*/            
          };
 
 
@@ -498,6 +572,7 @@
                   if(mouseX>=300 && mouseX<=500 && mouseY>=300 && mouseY<=370) {
                      if(Front>=0 && Front<=2 && Back>=0 && Back<=2 && Front!=Back) {
                         CourseSet=1;
+                        Restart = 0;
                         background(BackColor);
 
                      }
@@ -558,6 +633,7 @@
          var AceScreen = 1;
          var NumberOfPlayers = 0;
          var NoP="0";
+         var Restart = 0;
 
 //       SCORE INPUT INITIAL VARIABLES
          var HoleNum = 1;
@@ -592,6 +668,8 @@
             }
             
             if (AceScreen===4) {
+
+               showSummary();
 
 
             }
