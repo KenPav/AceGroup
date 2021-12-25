@@ -334,42 +334,42 @@
             TotalStrokes[14] = TotalStrokes[12] + TotalStrokes[13];
          }
          var showScoreCard = function() {
-            size(1200,1200);
+            size(1250,1200);
             ScreenSelect();
             DoCalculations();
-            textSize(25);
+            textSize(35);
             textAlign(CENTER);
             fill(BoxColor);
             rect(0,0,170,50);
-            rect(170,0,10*30,50);
-            rect(170+10*30,0,10*30,50);
-            rect(170+20*30,0,30,50);
+            rect(170,0,10*50,50);
+            rect(170+10*50,0,10*50,50);
+            rect(170+20*50,0,50,50);
             fill(blk);
             text("Players",85,40);
-            text("Front 9: "+Courses[Front],320,40);
-            text("Back 9: "+Courses[Back],620,40);
+            text("Front 9: "+Courses[Front],420,40);
+            text("Back 9: "+Courses[Back],920,40);
             text("T",785,40);
             for (var j=0; j<6; j++) {
                for (var i=0; i<21; i++) {
                   //Front 9, Front Total, Back 9, Back Total, Round Total
                   fill(BoxColor);
                   rect(0,50+j*50,170,50);
-                  rect(170+i*30,50+j*50,30,50);
+                  rect(170+i*50,50+j*50,50,50);
                   fill(blk);
                }
             }
             text("Par",85,90);
             for (var i=1; i<19; i++) {
                if (i<10) {
-                  text(HolePar[Front*9+i-1],185+(i-1)*30,90);
+                  text(HolePar[Front*9+i-1],195+(i-1)*50,90);
                }
                else {
-                  text(HolePar[Back*9+i-10],185+i*30,90);  
+                  text(HolePar[Back*9+i-10],195+i*50,90);  
                }
             }
-            text(TotalStrokes[12],455,90);
-            text(TotalStrokes[13],755,90);
-            text(TotalStrokes[14],785,90);
+            text(TotalStrokes[12],645,90);
+            text(TotalStrokes[13],1145,90);
+            text(TotalStrokes[14],1195,90);
 
             for (var j=0; j<5; j++) {
                for (var i=0; i<21; i++) {
@@ -377,21 +377,21 @@
                   if(j===0 && i===1) {
                      text("Hole #",85,140);
                      for (var k=1; k<10; k++) {
-                        text(k,185+(k-1)*30,140);
+                        text(k,195+(k-1)*50,140);
                      }
                      for (var k=10; k<19; k++) {
-                        text(k-9,485+(k-10)*30,140);
+                        text(k-9,695+(k-10)*50,140);
                      }
                   }
                   if ((j===0 && (i===9 || i>18))) {
                      if (i===9) {
-                        text("F",185+i*30,140+j*50);
+                        text("F",195+i*50,140+j*50);
                      }
                      if (i===19) {
-                        text("B",185+i*30,140+j*50);
+                        text("B",195+i*50,140+j*50);
                      }
                      if (i===20) {
-                        text("T",185+i*30,140+j*50);
+                        text("T",195+i*50,140+j*50);
                      }
                   }
                   if(j>0 && j<=NumberOfPlayers) {
@@ -399,17 +399,17 @@
                   }
                   if(i<9 && j>0) {
                      if(j<=NumberOfPlayers)
-                        text(PlayerHoleStrokes[(j-1)*18+i],185+i*30,140+j*50);
+                        text(PlayerHoleStrokes[(j-1)*18+i],195+i*50,140+j*50);
                         if (i===8) {
-                           text(TotalStrokes[(j-1)*3],185+(i+1)*30,140+j*50);
+                           text(TotalStrokes[(j-1)*3],195+(i+1)*50,140+j*50);
                         }
                      }
                   if(i>10 && i<20 && j>0) {
                      if(j<=NumberOfPlayers) {
-                        text(PlayerHoleStrokes[(j-1)*18+i-2],185+(i-1)*30,140+j*50);
+                        text(PlayerHoleStrokes[(j-1)*18+i-2],195+(i-1)*50,140+j*50);
                         if (i===19) {
-                           text(TotalStrokes[(j-1)*3+1],185+(i+0)*30,140+j*50);
-                           text(TotalStrokes[(j-1)*3+2],185+(i+1)*30,140+j*50);
+                           text(TotalStrokes[(j-1)*3+1],195+(i+0)*50,140+j*50);
+                           text(TotalStrokes[(j-1)*3+2],195+(i+1)*50,140+j*50);
                         }
                      }
                   }
@@ -421,7 +421,7 @@
                   //Front 9, Front Total, Back 9, Back Total, Round Total
                   fill(BoxColor);
                   rect(0,400+j*50,170,50);
-                  rect(170+i*30,400+j*50,30,50);
+                  rect(170+i*50,400+j*50,50,50);
                }
             }                       
             fill(blk);
@@ -429,55 +429,55 @@
                for (var i=0; i<21; i++) {
 
                   if(j===0 && i===1) {
-                     text("Points",85,440);
+                     text("Points",95,440);
                      for (var k=1; k<10; k++) {
-                        text(k,185+(k-1)*30,440);
+                        text(k,195+(k-1)*50,440);
                      }
                      for (var k=10; k<19; k++) {
-                        text(k-9,485+(k-10)*30,440);
+                        text(k-9,695+(k-10)*50,440);
                      }
                   }
                   if ((j===0 && (i===9 || i>18))) {
                      if (i===9) {
-                        text("F",185+i*30,440+j*50);
+                        text("F",195+i*50,440+j*50);
                      }
                      if (i===19) {
-                        text("B",185+i*30,440+j*50);
+                        text("B",195+i*50,440+j*50);
                      }
                      if (i===20) {
-                        text("T",185+i*30,440+j*50);
+                        text("T",195+i*50,440+j*50);
                      }
                   }
                   if(j>0 && j<=NumberOfPlayers) {
                      text(PlayerName[j-1],85,440+50*j);
                   }
                   if(i<9 && j>0 && j<=NumberOfPlayers) {    
-                        text(PlayerHoleScore[(j-1)*18+i],185+i*30,440+j*50);
+                        text(PlayerHoleScore[(j-1)*18+i],195+i*50,440+j*50);
                         if (i===8) {
-                           text(TotalPoints[(j-1)*3],185+(i+1)*30,440+j*50);
+                           text(TotalPoints[(j-1)*3],195+(i+1)*50,440+j*50);
                         }
                   }
 
                   if(i>10 && i<20 && j>0 && j<=NumberOfPlayers) {
-                        text(PlayerHoleScore[(j-1)*18+i-2],185+(i-1)*30,440+j*50);
+                        text(PlayerHoleScore[(j-1)*18+i-2],195+(i-1)*50,440+j*50);
                         if (i===19) {
-                           text(TotalPoints[(j-1)*3+1],185+(i+0)*30,440+j*50);
-                           text(TotalPoints[(j-1)*3+2],185+(i+1)*30,440+j*50);
+                           text(TotalPoints[(j-1)*3+1],195+(i+0)*50,440+j*50);
+                           text(TotalPoints[(j-1)*3+2],195+(i+1)*50,440+j*50);
                         }
                   }
                   if(j===5) {
                      text("TeamTotal",85,440+50*j);
                      if(i<9 && j>0) {
-                        text(PlayerHoleScore[(j-1)*18+i],185+i*30,440+j*50);
+                        text(PlayerHoleScore[(j-1)*18+i],195+i*50,440+j*50);
                         if (i===8) {
-                           text(TotalPoints[(j-1)*3],185+(i+1)*30,440+j*50);
+                           text(TotalPoints[(j-1)*3],195+(i+1)*50,440+j*50);
                         }
                      }
                      if(i>10 && i<20 && j>0) {
-                        text(PlayerHoleScore[(j-1)*18+i-2],185+(i-1)*30,440+j*50);
+                        text(PlayerHoleScore[(j-1)*18+i-2],195+(i-1)*50,440+j*50);
                         if (i===19) {
-                           text(TotalPoints[(j-1)*3+1],185+(i+0)*30,440+j*50);
-                           text(TotalPoints[(j-1)*3+2],185+(i+1)*30,440+j*50);
+                           text(TotalPoints[(j-1)*3+1],195+(i+0)*50,440+j*50);
+                           text(TotalPoints[(j-1)*3+2],195+(i+1)*50,440+j*50);
                         }
                      }
                   }
