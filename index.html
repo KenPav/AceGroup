@@ -189,6 +189,7 @@
                      for (var i = 0; i < NumberOfPlayers; i++) {
                         PlayerName[i]=prompt("Player #"+(i+1).toString()+" Name: "+PlayerName[i],PlayerName[i].toString());
                         PlayerCourseHandicap[i]=prompt(PlayerName[i]+"'s Course Handicap: "+PlayerCourseHandicap[i],PlayerCourseHandicap[i]);
+                        PlayerCourseHandicap[i]=PlayerCourseHandicap[i]-0;
                         temp=floor((36-PlayerCourseHandicap[i])/2);
                         temp2=36-(temp*2);
                         if (temp2==PlayerCourseHandicap[i]) {
