@@ -520,7 +520,9 @@
                fill(BoxColor);
                rect(0,250+j*50,170,50);
                fill(blk);
-               text(PlayerName[j],85,290+j*50); 
+               if (j<NumberOfPlayers || j===4) {
+                  text(PlayerName[j],85,290+j*50); 
+               }
                for (var i=0; i<3; i++) {
                   fill(BoxColor);
                   rect(170+i*280,250+j*50,70,50);
@@ -528,12 +530,14 @@
                   rect(310+i*280,250+j*50,70,50);
                   rect(380+i*280,250+j*50,70,50);
                   fill(blk);
-                  if (j!=4) {
+                  if (j!=4 && j<NumberOfPlayers) {
                      text(TotalStrokes[i+j*3],205+i*280,290+j*50);
                   }
-                  text(TotalPoints[i+j*3],275+i*280,290+j*50);
-                  text(ReqPts[i+j*3],345+i*280,290+j*50);
-                  text(TotalPoints[i+j*3]-ReqPts[i+j*3],415+i*280,290+j*50);
+                  if (j<NumberOfPlayers || j===4) {
+                     text(TotalPoints[i+j*3],275+i*280,290+j*50);
+                     text(ReqPts[i+j*3],345+i*280,290+j*50);
+                     text(TotalPoints[i+j*3]-ReqPts[i+j*3],415+i*280,290+j*50);
+                  }
                }
             }
 
