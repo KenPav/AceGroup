@@ -35,7 +35,6 @@
 
          var temp = 0;
          var temp2 = 0;
-         var clkclr = color(150,150,150);
          var FirstColor = color(0, 0, 0);
          var SecondColor = color(135,10,10);
          var ThirdColor = color(70,50,168);
@@ -47,6 +46,7 @@
          var SameCourse = 1;
 
          background(BackColor);
+         var monthNames = ["January ","February ","March ","April ","May ","June ","July ","August ","September ","October ","November ","December "];
 
 
          // Strokes-Par+4 = Point Value in Array
@@ -77,6 +77,8 @@
          const PlayerHoleStrokes = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
          const PlayerHoleScore = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
+
+
          var ScreenSelect = function() {
 
             fill(BoxColor);
@@ -95,168 +97,208 @@
             text("Score",500,1095);
             text("Card",500,1135);
             text("Results",700,1115);
+
+
          }
+
+//       AceScreen = 0
+
+         var localData = function() {
+            size(800,1200);
+            background(BackColor);
+            fill(BoxColor);
+            rect(50,200,325,100);
+            rect(425,200,325,100);
+            fill(FirstColor);
+            textSize(45);
+            textAlign(CENTER);
+            if(window.localStorage.getItem('PD')===null) {
+               AceScreen=1;
+               draw();
+            }
+            var pData=JSON.parse(window.localStorage.getItem('PD'));
+            pData = new Date(pData);
+            text("Continue With",212,240);
+            text("Previous Setup",212,285);
+            text("Clear",588,240);
+            text("Previous Setup",588,285);
+            text("Previous Round Data Stored at:",400,90);
+            text(monthNames[pData.getMonth()]+pData.getDate()+", "+pData.getFullYear()+" @ "+pData.getHours()+":"+pData.getMinutes()+":"+pData.getSeconds(),400,150);
+
+         }
+
+
+
 
 //       AceScreen = 1
 
-         Counter=0;
          var enterSetup = function() {
-               size(800,1200);
-               background(BackColor);
-               ScreenSelect();
-               if (SameCourse===0) {
-                  textSize(35);
-                  fill(255,0,0);
-                  text("Select Different Front and Back Courses!",400,450);
-               }
-               textSize(50);
-               textAlign(CENTER);
-               if(CourseSet===0) {
+            size(800,1200);
+            background(BackColor);
+            ScreenSelect();
+            if (SameCourse===0) {
+               textSize(35);
+               fill(255,0,0);
+               text("Select Different Front and Back Courses!",400,450);
+            }
+            textSize(50);
+            textAlign(CENTER);
+            if(CourseSet===0) {
 
 //             SELECT FRONT COURSE
-                  fill(FirstColor);
-                  text("Select Front 9 Course",400,60);
-                  if (Front===0) {
-                     fill(SelectBoxColor);
-                  } else { 
-                     fill(BoxColor);
-                  }
-                  rect(100,70,200,70);
-                  fill(FirstColor);
-                  text("South",200,125);
-                  if (Front===1) {
-                     fill(SelectBoxColor);
-                  } else { 
-                     fill(BoxColor);
-                  }                  
-                  rect(300,70,200,70);
-                  fill(FirstColor);
-                  text("North",400,125);
-                  if (Front===2) {
-                     fill(SelectBoxColor);
-                  } else { 
-                     fill(BoxColor);
-                  }                  
-                  rect(500,70,200,70);
-                  fill(FirstColor);
-                  text("West",600,125);
+               fill(FirstColor);
+               text("Select Front 9 Course ",400,60);
+               if (Front===0) {
+                  fill(SelectBoxColor);
+               } else { 
+                  fill(BoxColor);
+               }
+               rect(100,70,200,70);
+               fill(FirstColor);
+               text("South",200,125);
+               if (Front===1) {
+                  fill(SelectBoxColor);
+               } else { 
+                  fill(BoxColor);
+               }                  
+               rect(300,70,200,70);
+               fill(FirstColor);
+               text("North",400,125);
+               if (Front===2) {
+                  fill(SelectBoxColor);
+               } else { 
+                  fill(BoxColor);
+               }                  
+               rect(500,70,200,70);
+               fill(FirstColor);
+               text("West",600,125);
 
 
 //             SELECT BACK COURSE    
-                  fill(FirstColor);
-                  text("Select Back 9 Course",400,190);
-                  if (Back===0) {
-                     fill(SelectBoxColor);
-                  } else { 
-                     fill(BoxColor);
-                  }                  
-                  rect(100,200,200,70);
-                  fill(FirstColor);
-                  text("South",200,255);
-                  if (Back===1) {
-                     fill(SelectBoxColor);
-                  } else { 
-                     fill(BoxColor);
-                  }                                    
-                  rect(300,200,200,70);
-                  fill(FirstColor);
-                  text("North",400,255);
-                  if (Back===2) {
-                     fill(SelectBoxColor);
-                  } else { 
-                     fill(BoxColor);
-                  }                                    
-                  rect(500,200,200,70);
-                  fill(FirstColor);
-                  text("West",600,255);
+               fill(FirstColor);
+               text("Select Back 9 Course ",400,190);
+               if (Back===0) {
+                  fill(SelectBoxColor);
+               } else { 
                   fill(BoxColor);
-                  rect(300,300,200,70);
-                  fill(FirstColor);
-                  text("Continue",400,355);
-               }
-
-               if (CourseSet===1) {
-                  for (var i=0; i<15; i++) {
-                     ReqPts[i] = 0;
-                  }
-                  if (NumberOfPlayers===0 || Restart===0) {
-                     do {
-                        NoP=NumberOfPlayers.toString();
-                        NoP=prompt("Number of Players (1-4): "+NoP,NoP);
-                        NumberOfPlayers=Number(NoP);
-                        Restart = 1;
-                     }
-                     while (!(NumberOfPlayers===1 || NumberOfPlayers===2 || NumberOfPlayers===3 || NumberOfPlayers===4 )); 
-
-                     for (var i = 0; i < NumberOfPlayers; i++) {
-                        PlayerName[i]=prompt("Player #"+(i+1).toString()+" Name: "+PlayerName[i],PlayerName[i].toString());
-                        PlayerCourseHandicap[i]=prompt(PlayerName[i]+"'s Course Handicap: "+PlayerCourseHandicap[i],PlayerCourseHandicap[i]);
-                        PlayerCourseHandicap[i]=PlayerCourseHandicap[i]-0;
-                        temp=floor((36-PlayerCourseHandicap[i])/2);
-                        temp2=36-(temp*2);
-                        if (temp2==PlayerCourseHandicap[i]) {
-                           ReqPts[i*3]=temp;
-                           ReqPts[i*3+1]=temp;
-                        }
-                        else {
-                           if (Front>Back) {
-                              ReqPts[i*3]=temp;
-                              ReqPts[i*3+1]=temp+1;
-                           }
-                           else {
-                              ReqPts[i*3]=temp+1;
-                              ReqPts[i*3+1]=temp;
-                           }
-                        }
-                           ReqPts[i*3+2] = ReqPts[i*3] + ReqPts[i*3+1];
-                           ReqPts[12] = ReqPts[12] + ReqPts[i*3];
-                           ReqPts[13] = ReqPts[13] + ReqPts[i*3+1];
-                           ReqPts[14] = ReqPts[14] + ReqPts[i*3+2];
-                        
-                     }
-                  }
-                  CourseSet=2;
-                  return;
-               }
-
-               if (CourseSet===2) {
+               }                  
+               rect(100,200,200,70);
+               fill(FirstColor);
+               text("South",200,255);
+               if (Back===1) {
+                  fill(SelectBoxColor);
+               } else { 
                   fill(BoxColor);
-                  rect(0,400,200,100);
-                  rect(200,400,200,100);
-                  rect(400,400,200,100);
-                  rect(600,400,200,100);
-                  fill(FirstColor);
-                  text("Player",100,470);
-                  text("Course",300,450);
-                  text(Courses[Front],500,450);
-                  text(Courses[Back],700,450);
-                  text("Hcp",300,490);
-                  text("Points",500,490);
-                  text("Points",700,490);
+               }                                    
+               rect(300,200,200,70);
+               fill(FirstColor);
+               text("North",400,255);
+               if (Back===2) {
+                  fill(SelectBoxColor);
+               } else { 
+                  fill(BoxColor);
+               }                                    
+               rect(500,200,200,70);
+               fill(FirstColor);
+               text("West",600,255);
+               fill(BoxColor);
+               rect(300,300,200,70);
+               fill(FirstColor);
+               text("Continue",400,355);
+            }
+
+            if (CourseSet===1) {
+               for (var i=0; i<15; i++) {
+                  ReqPts[i] = 0;
+               }
+               if (NumberOfPlayers===0 || Restart===0) {
+                  do {
+                     NoP=NumberOfPlayers.toString();
+                     NoP=prompt("Number of Players (1-4): "+NoP,NoP);
+                     NumberOfPlayers=Number(NoP);
+                     Restart = 1;
+                  }
+                  while (!(NumberOfPlayers===1 || NumberOfPlayers===2 || NumberOfPlayers===3 || NumberOfPlayers===4 )); 
+
                   for (var i = 0; i < NumberOfPlayers; i++) {
-                     fill(BoxColor);
-                     rect(0,500+i*70,200,70);
-                     rect(200,500+i*70,200,70);
-                     rect(400,500+i*70,200,70);
-                     rect(600,500+i*70,200,70);
-                     if(i===0 || i===2) {
-                        fill(SecondColor);
+                     PlayerName[i]=prompt("Player #"+(i+1).toString()+" Name: "+PlayerName[i],PlayerName[i].toString());
+                     PlayerCourseHandicap[i]=prompt(PlayerName[i]+"'s Course Handicap: "+PlayerCourseHandicap[i],PlayerCourseHandicap[i]);
+                     PlayerCourseHandicap[i]=PlayerCourseHandicap[i]-0;
+                     temp=floor((36-PlayerCourseHandicap[i])/2);
+                     temp2=36-(temp*2);
+                     if (temp2==PlayerCourseHandicap[i]) {
+                        ReqPts[i*3]=temp;
+                        ReqPts[i*3+1]=temp;
                      }
                      else {
-                        fill(FirstColor);
+                        if (Front>Back) {
+                           ReqPts[i*3]=temp;
+                           ReqPts[i*3+1]=temp+1;
+                        }
+                        else {
+                           ReqPts[i*3]=temp+1;
+                           ReqPts[i*3+1]=temp;
+                        }
                      }
-                     text(PlayerName[i],100,555+i*70);
-                     text(PlayerCourseHandicap[i],300,555+i*70);
-                     text(ReqPts[i*3],500,555+i*70);
-                     text(ReqPts[i*3+1],700,555+i*70);
+                        ReqPts[i*3+2] = ReqPts[i*3] + ReqPts[i*3+1];
+                        ReqPts[12] = ReqPts[12] + ReqPts[i*3];
+                        ReqPts[13] = ReqPts[13] + ReqPts[i*3+1];
+                        ReqPts[14] = ReqPts[14] + ReqPts[i*3+2];
+                     
                   }
-                  fill(BoxColor);
-                  rect(300,800,200,70);
-                  fill(FirstColor);
-                  text("Continue",400,855);
                }
-                 
-         };
+               CourseSet=2;
+               return;
+            }
+
+            if (CourseSet===2) {
+               fill(BoxColor);
+               rect(0,400,200,100);
+               rect(200,400,200,100);
+               rect(400,400,200,100);
+               rect(600,400,200,100);
+               fill(FirstColor);
+               text("Player",100,470);
+               text("Course",300,450);
+               text(Courses[Front],500,450);
+               text(Courses[Back],700,450);
+               text("Hcp",300,490);
+               text("Points",500,490);
+               text("Points",700,490);
+               for (var i = 0; i < NumberOfPlayers; i++) {
+                  fill(BoxColor);
+                  rect(0,500+i*70,200,70);
+                  rect(200,500+i*70,200,70);
+                  rect(400,500+i*70,200,70);
+                  rect(600,500+i*70,200,70);
+                  if(i===0 || i===2) {
+                     fill(SecondColor);
+                  }
+                  else {
+                     fill(FirstColor);
+                  }
+                  text(PlayerName[i],100,555+i*70);
+                  text(PlayerCourseHandicap[i],300,555+i*70);
+                  text(ReqPts[i*3],500,555+i*70);
+                  text(ReqPts[i*3+1],700,555+i*70);
+               }
+               fill(BoxColor);
+               rect(300,800,200,70);
+               fill(FirstColor);
+               text("Continue",400,855);
+            }
+            window.localStorage.setItem('PD',JSON.stringify(new Date())); 
+            window.localStorage.setItem('PHS',JSON.stringify(PlayerHoleStrokes));
+            window.localStorage.setItem('pName',JSON.stringify(PlayerName));
+            window.localStorage.setItem('RqPt',JSON.stringify(ReqPts));
+            window.localStorage.setItem('PCH',JSON.stringify(PlayerCourseHandicap));
+            window.localStorage.setItem('NumP',JSON.stringify(NumberOfPlayers));
+            window.localStorage.setItem('F',JSON.stringify(Front));
+            window.localStorage.setItem('B',JSON.stringify(Back));
+            window.localStorage.setItem('HN',JSON.stringify(HoleNum));
+
+         };      
+         
 
 //               AceScreen = 2;
             
@@ -314,7 +356,8 @@
             text("Previous",150,615);
             text("Next",650,615);
             text("Points: "+PlayerHoleScore[4*18+HoleNum-1],400,615);
-
+            window.localStorage.setItem('PHS',JSON.stringify(PlayerHoleStrokes));
+            window.localStorage.setItem('HN',JSON.stringify(HoleNum));
 
             
             
@@ -350,7 +393,7 @@
                TotalStrokes[13] = TotalStrokes[13] + HolePar[i+9];
             }
             TotalStrokes[14] = TotalStrokes[12] + TotalStrokes[13];
-         }
+         };
          var showScoreCard = function() {
             size(1250,1200);
             ScreenSelect();
@@ -610,6 +653,40 @@
             if(mouseX>=600 && mouseX<=800 && mouseY>=1050 && mouseY<=1150) {
                AceScreen=4;
             }                        
+
+            if(AceScreen===0) {
+               if(mouseX>=50 && mouseX<=375 && mouseY>=200 && mouseY<=300) {
+                  var F1=JSON.parse(window.localStorage.getItem('F'));
+                  Front = Number(F1);
+                  var B1=JSON.parse(window.localStorage.getItem('B'));
+                  Back = Number(B1);
+                  var HN1=JSON.parse(window.localStorage.getItem('HN'));
+                  HoleNum = Number(HN1);
+                  var NoP=JSON.parse(window.localStorage.getItem('NumP'));
+                  NumberOfPlayers=Number(NoP);
+                  var PN1=JSON.parse(window.localStorage.getItem('pName'));
+                  var PCH1=JSON.parse(window.localStorage.getItem('PCH'));
+                  var RqPt1=JSON.parse(window.localStorage.getItem('RqPt'));
+                  var PHS1 =JSON.parse(window.localStorage.getItem('PHS'));
+                  for (i=0; i<72; i++) {
+                     PlayerHoleStrokes[i]=Number(PHS1[i]);
+                     if(i<4) {
+                        PlayerCourseHandicap[i]=Number(PCH1[i]);
+                     }
+                     if(i<5) {
+                        PlayerName[i]=PN1[i];
+                     }
+                     if(i<15) {
+                        ReqPts[i]=Number(RqPt1[i]);
+                     }
+                  }
+               }
+               if(mouseX>=425 && mouseX<=750 && mouseY>=200 && mouseY<=300) {
+                  window.localStorage.clear();
+               }
+               AceScreen=1;
+               return;
+            }
             if(AceScreen===1) {
                for (i=0; i<3; i++) {
 //                  SELECT FRONT AND BACK COURSES
@@ -633,9 +710,9 @@
                if(mouseX>=300 && mouseX<=500 && mouseY>=800 && mouseY<=870) {
                   AceScreen=2;
                   background(BackColor);
+                  return;
                }
             }
-
             if(AceScreen===2) {
                for (var i = 0; i < NumberOfPlayers; i++) {
                   for (var j = 0; j < 8; j++) {
@@ -660,9 +737,9 @@
                      HoleNum=HoleNum+1;
                   }
                } 
-                  PlayerHoleScore[4*18+HoleNum-1]=PlayerHoleScore[0*18+HoleNum-1]+PlayerHoleScore[1*18+HoleNum-1]+PlayerHoleScore[2*18+HoleNum-1]+PlayerHoleScore[3*18+HoleNum-1];
-            }
-            draw();            
+               PlayerHoleScore[4*18+HoleNum-1]=PlayerHoleScore[0*18+HoleNum-1]+PlayerHoleScore[1*18+HoleNum-1]+PlayerHoleScore[2*18+HoleNum-1]+PlayerHoleScore[3*18+HoleNum-1];
+            draw();
+            }            
          };
 
 
@@ -677,7 +754,7 @@
          var CourseSet = 0;
          var Front = 3;
          var Back = 3;
-         var AceScreen = 1;
+         var AceScreen = 0;
          var NumberOfPlayers = 0;
          var NoP="0";
          var Restart = 0;
@@ -695,12 +772,14 @@
 
 // Round SETUP Section
 
+            if (AceScreen===0) {
+
+               localData();            
+            }
 
             if (AceScreen===1) {
                
-               enterSetup();
-
-               
+               enterSetup();  
             }
             
             if (AceScreen===2) {
