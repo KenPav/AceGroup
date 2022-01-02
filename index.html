@@ -205,6 +205,10 @@
                rect(300,300,200,70);
                fill(FirstColor);
                text("Continue",400,355);
+               fill(BoxColor);
+               rect(300,500,200,70);
+               fill(FirstColor);
+               text("Restart",400,555);
             }
 
             if (CourseSet===1) {
@@ -683,6 +687,8 @@
                }
                if(mouseX>=425 && mouseX<=750 && mouseY>=200 && mouseY<=300) {
                   window.localStorage.clear();
+
+
                }
                AceScreen=1;
                return;
@@ -697,20 +703,45 @@
                   if(mouseX>=100+200*i && mouseX<=300+200*i && mouseY>=200 && mouseY<=270) {
                      Back=i;
                   }
-                  if(mouseX>=300 && mouseX<=500 && mouseY>=300 && mouseY<=370) {
-                     if(Front>=0 && Front<=2 && Back>=0 && Back<=2 && Front!=Back) {
-                        CourseSet=1;
-                        Restart = 0;
-                     }
-                     else {
-                        SameCourse=0;
-                     }
+
+               }
+               if(mouseX>=300 && mouseX<=500 && mouseY>=300 && mouseY<=370) {
+                  if(Front>=0 && Front<=2 && Back>=0 && Back<=2 && Front!=Back) {
+                     CourseSet=1;
+                     Restart = 0;
+                  }
+                  else {
+                     SameCourse=0;
                   }
                }
-               if(mouseX>=300 && mouseX<=500 && mouseY>=800 && mouseY<=870) {
-                  AceScreen=2;
-                  background(BackColor);
-                  return;
+               if(mouseX>=300 && mouseX<=500 && mouseY>=500 && mouseY<=570) {
+                  window.localStorage.clear();
+                  Front=3;
+                  Back=3;
+                  NumberOfPlayers=0;
+                  HoleNum=1;
+                  for(i=0; i<72; i++) {
+                     PlayerHoleStrokes[i]=0;
+                     if(i<4) {
+                        PlayerName[i]="";
+                        if(i===4) {
+                           PlayerName[i]="Team";
+                        }
+                     }
+                     if(i<3) {
+                        PlayerCourseHandicap[i]=0;
+                     }
+                     if(i<15) {
+                        ReqPts[i]=0;
+                     }
+                  }
+
+               }
+               if(CourseSet===2) {
+                  if(mouseX>=300 && mouseX<=500 && mouseY>=800 && mouseY<=870) {
+                     AceScreen=2
+                     return;
+                  }
                }
             }
             if(AceScreen===2) {
