@@ -20,6 +20,8 @@
  <!-- See https://khanacademy.zendesk.com/hc/en-us/articles/202260404-What-parts-of-ProcessingJS-does-Khan-Academy-support- for differences -->
  <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script>
 
+
+    
  <script>
  
 
@@ -44,6 +46,9 @@
          stroke(FirstColor);
          strokeWeight(2);
          var SameCourse = 1;
+         var PlayerCount=0;
+         var NameCount=0;
+         var HCPCount=0;
 
          background(BackColor);
          var monthNames = ["January ","February ","March ","April ","May ","June ","July ","August ","September ","October ","November ","December "];
@@ -76,7 +81,6 @@
         // Index = Player#*18 + Hole Number - 1
          const PlayerHoleStrokes = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
          const PlayerHoleScore = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-
 
 
          var ScreenSelect = function() {
@@ -124,10 +128,7 @@
             text("Previous Setup",588,285);
             text("Previous Round Data Stored at:",400,90);
             text(monthNames[pData.getMonth()]+pData.getDate()+", "+pData.getFullYear()+" @ "+pData.getHours()+":"+pData.getMinutes()+":"+pData.getSeconds(),400,150);
-
          }
-
-
 
 
 //       AceScreen = 1
@@ -215,47 +216,85 @@
                for (var i=0; i<15; i++) {
                   ReqPts[i] = 0;
                }
-               if (NumberOfPlayers===0 || Restart===0) {
-                  do {
-                     NoP=NumberOfPlayers.toString();
-                     NoP=prompt("Number of Players (1-4): "+NoP,NoP);
-                     NumberOfPlayers=Number(NoP);
-                     Restart = 1;
-                  }
-                  while (!(NumberOfPlayers===1 || NumberOfPlayers===2 || NumberOfPlayers===3 || NumberOfPlayers===4 )); 
-
-                  for (var i = 0; i < NumberOfPlayers; i++) {
-                     PlayerName[i]=prompt("Player #"+(i+1).toString()+" Name: "+PlayerName[i],PlayerName[i].toString());
-                     PlayerCourseHandicap[i]=prompt(PlayerName[i]+"'s Course Handicap: "+PlayerCourseHandicap[i],PlayerCourseHandicap[i]);
-                     PlayerCourseHandicap[i]=PlayerCourseHandicap[i]-0;
-                     temp=floor((36-PlayerCourseHandicap[i])/2);
-                     temp2=36-(temp*2);
-                     if (temp2==PlayerCourseHandicap[i]) {
-                        ReqPts[i*3]=temp;
-                        ReqPts[i*3+1]=temp;
+//               if (NumberOfPlayers===0 || Restart===0) {
+//                  do {
+                     background(BackColor);
+                     text("Number of Players",400,100);
+                     textSize(50);
+                     j=NumberOfPlayers;
+                     for(i=0; i<4; i++) {
+                        fill(BoxColor);
+                        if(i===j-1) {
+                           fill(SelectBoxColor);
+                        }
+                        rect(200+i*100,200,100,100);
+                        fill(FirstColor);
+                        text(i+1,250+i*100,270);
                      }
-                     else {
-                        if (Front>Back) {
-                           ReqPts[i*3]=temp;
-                           ReqPts[i*3+1]=temp+1;
+                     return;
+            }
+            if(CourseSet===2) {
+                  if (PlayerCount < NumberOfPlayers) {
+                     if(NameCount===PlayerCount) {
+                        PlayerName[PlayerCount]=prompt("Player #"+(PlayerCount+1).toString()+" Name: "+PlayerName[PlayerCount],PlayerName[PlayerCount].toString());
+                        NameCount=NameCount+1;
+
+                     }
+                     if(HCPCount===PlayerCount) {
+
+                        text("Player #"+PlayerCount+1,", "+PlayerName[PlayerCount]+", Course Handicap",400,100);
+                        for (i=0; i<10; i++) {
+                           for (j=0; j<4; j++) {
+                              fill(BoxColor);
+                              if(PlayerCourseHandicap[HCPCount]===(i+j*10)) {
+                                 fill(SelectBoxColor);
+                              }
+                              rect(0+i*80,200+j*80,80,80);
+                              fill(FirstColor);
+                              text(0+i+j*10,40+i*80,265+j*80);
+                           }
+                        }
+                     }
+/*                     if(HCPCount===PlayerCount) {
+                        PlayerCourseHandicap[PlayerCount]=PlayerCourseHandicap[PlayerCount]-0;
+                        temp=floor((36-PlayerCourseHandicap[PlayerCount])/2);
+                        temp2=36-(temp*2);
+                        if (temp2===PlayerCourseHandicap[PlayerCount]) {
+                           ReqPts[PlayerCount*3]=temp;
+                           ReqPts[PlayerCount*3+1]=temp;
                         }
                         else {
-                           ReqPts[i*3]=temp+1;
-                           ReqPts[i*3+1]=temp;
+                           if (Front>Back) {
+                              ReqPts[PlayerCount*3]=temp;
+                              ReqPts[PlayerCount*3+1]=temp+1;
+                           }
+                           else {
+                              ReqPts[PlayerCount*3]=temp+1;
+                              ReqPts[PlayerCount*3+1]=temp;
+                           }
                         }
-                     }
-                        ReqPts[i*3+2] = ReqPts[i*3] + ReqPts[i*3+1];
-                        ReqPts[12] = ReqPts[12] + ReqPts[i*3];
-                        ReqPts[13] = ReqPts[13] + ReqPts[i*3+1];
-                        ReqPts[14] = ReqPts[14] + ReqPts[i*3+2];
-                     
-                  }
-               }
-               CourseSet=2;
-               return;
-            }
+                           ReqPts[PlayerCount*3+2] = ReqPts[PlayerCount*3] + ReqPts[PlayerCount*3+1];
+                           ReqPts[12] = ReqPts[12] + ReqPts[PlayerCount*3];
+                           ReqPts[13] = ReqPts[13] + ReqPts[PlayerCount*3+1];
+                           ReqPts[14] = ReqPts[14] + ReqPts[PlayerCount*3+2];
 
-            if (CourseSet===2) {
+
+                     }
+*/
+                  }
+                  else {
+                     CourseSet=3;
+                  
+                  }
+                  return;
+            }
+//               }
+
+//               CourseSet=3;
+//               return;
+//            }
+
+            if (CourseSet===3) {
                fill(BoxColor);
                rect(0,400,200,100);
                rect(200,400,200,100);
@@ -290,17 +329,17 @@
                rect(300,800,200,70);
                fill(FirstColor);
                text("Continue",400,855);
+            
+               window.localStorage.setItem('PD',JSON.stringify(new Date())); 
+               window.localStorage.setItem('PHS',JSON.stringify(PlayerHoleStrokes));
+               window.localStorage.setItem('pName',JSON.stringify(PlayerName));
+               window.localStorage.setItem('RqPt',JSON.stringify(ReqPts));
+               window.localStorage.setItem('PCH',JSON.stringify(PlayerCourseHandicap));
+               window.localStorage.setItem('NumP',JSON.stringify(NumberOfPlayers));
+               window.localStorage.setItem('F',JSON.stringify(Front));
+               window.localStorage.setItem('B',JSON.stringify(Back));
+               window.localStorage.setItem('HN',JSON.stringify(HoleNum));
             }
-            window.localStorage.setItem('PD',JSON.stringify(new Date())); 
-            window.localStorage.setItem('PHS',JSON.stringify(PlayerHoleStrokes));
-            window.localStorage.setItem('pName',JSON.stringify(PlayerName));
-            window.localStorage.setItem('RqPt',JSON.stringify(ReqPts));
-            window.localStorage.setItem('PCH',JSON.stringify(PlayerCourseHandicap));
-            window.localStorage.setItem('NumP',JSON.stringify(NumberOfPlayers));
-            window.localStorage.setItem('F',JSON.stringify(Front));
-            window.localStorage.setItem('B',JSON.stringify(Back));
-            window.localStorage.setItem('HN',JSON.stringify(HoleNum));
-
          };      
          
 
@@ -693,7 +732,7 @@
                AceScreen=1;
                return;
             }
-            if(AceScreen===1) {
+            if(AceScreen===1 && CourseSet===0) {
                for (i=0; i<3; i++) {
 //                  SELECT FRONT AND BACK COURSES
                   SameCourse=1;
@@ -737,12 +776,65 @@
                   }
 
                }
-               if(CourseSet===2) {
+               return;
+            }
+            if(AceScreen===1 && CourseSet===1) {
+               for (i=0; i<4; i++) {
+                  if(mouseX>=200+i*100 && mouseX<=300+i*100 && mouseY>=200 && mouseY<=300) {
+                     background(BackColor);
+                     NumberOfPlayers=i+1;
+                     CourseSet=2;
+                     PlayerCount=0;
+                     NameCount=0;
+                     HCPCount=0;
+                     return;
+                  }
+               }
+            }
+
+            if(AceScreen===1 && CourseSet===2) {
+
+               for (i=0; i<10; i++) {
+                  for (j=0; j<4; j++) {
+                     if(mouseX>=0+80*i && mouseX<=80+80*i && mouseY>=200+j*80 && mouseY<=280+j*80) {
+                        PlayerCourseHandicap[PlayerCount]=i+j*10;
+
+//                        PlayerCourseHandicap[PlayerCount]=PlayerCourseHandicap[PlayerCount]-0;
+                        temp=floor((36-PlayerCourseHandicap[PlayerCount])/2);
+                        temp2=36-(temp*2);
+                        if (temp2===PlayerCourseHandicap[PlayerCount]) {
+                           ReqPts[PlayerCount*3]=temp;
+                           ReqPts[PlayerCount*3+1]=temp;
+                        }
+                        else {
+                           if (Front>Back) {
+                              ReqPts[PlayerCount*3]=temp;
+                              ReqPts[PlayerCount*3+1]=temp+1;
+                           }
+                           else {
+                              ReqPts[PlayerCount*3]=temp+1;
+                              ReqPts[PlayerCount*3+1]=temp;
+                           }
+                        }
+                           ReqPts[PlayerCount*3+2] = ReqPts[PlayerCount*3] + ReqPts[PlayerCount*3+1];
+                           ReqPts[12] = ReqPts[12] + ReqPts[PlayerCount*3];
+                           ReqPts[13] = ReqPts[13] + ReqPts[PlayerCount*3+1];
+                           ReqPts[14] = ReqPts[14] + ReqPts[PlayerCount*3+2];
+
+                        PlayerCount=PlayerCount+1;
+                        HCPCount=HCPCount+1
+                        return;
+                     }
+                  }
+               }
+            }
+
+            if(AceScreen===1 && CourseSet===3) {
                   if(mouseX>=300 && mouseX<=500 && mouseY>=800 && mouseY<=870) {
                      AceScreen=2
                      return;
                   }
-               }
+               
             }
             if(AceScreen===2) {
                for (var i = 0; i < NumberOfPlayers; i++) {
