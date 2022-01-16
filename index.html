@@ -296,17 +296,6 @@
                rect(300,800,200,70);
                fill(FirstColor);
                text("Continue",400,855);
-            
-/*               window.localStorage.setItem('PD',JSON.stringify(new Date())); 
-               window.localStorage.setItem('PHS',JSON.stringify(PlayerHoleStrokes));
-               window.localStorage.setItem('pName',JSON.stringify(PlayerName));
-               window.localStorage.setItem('RqPt',JSON.stringify(ReqPts));
-               window.localStorage.setItem('PCH',JSON.stringify(PlayerCourseHandicap));
-               window.localStorage.setItem('NumP',JSON.stringify(NumberOfPlayers));
-               window.localStorage.setItem('F',JSON.stringify(Front));
-               window.localStorage.setItem('B',JSON.stringify(Back));
-               window.localStorage.setItem('HN',JSON.stringify(HoleNum));
-*/
             }
          };      
          
@@ -366,12 +355,7 @@
             fill(FirstColor);
             text("Previous",150,615);
             text("Next",650,615);
-            text("Points: "+PlayerHoleScore[4*18+HoleNum-1],400,615);
-/*            window.localStorage.setItem('PHS',JSON.stringify(PlayerHoleStrokes));
-            window.localStorage.setItem('HN',JSON.stringify(HoleNum));
-*/
-            
-            
+            text("Points: "+PlayerHoleScore[4*18+HoleNum-1],400,615);            
          };
 
          var DoCalculations = function() {
@@ -643,9 +627,6 @@
                   }
                }
             }
-
-
-         
          };
 
 
