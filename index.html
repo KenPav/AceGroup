@@ -54,8 +54,9 @@
          var monthNames = ["January ","February ","March ","April ","May ","June ","July ","August ","September ","October ","November ","December "];
 
 
-         // Strokes-Par+4 = Point Value in Array
+         // Strokes-Par+4 = Point Value in PlayerHoleScore and TotalPoints Arrays
          const PointValue = [10,8,6,4,2,1,0,0,0,0];
+
          //TotalStrokes Array F,B,T 4 Players and Round Par
          const TotalStrokes = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
          //TotalPoints Array F,B,T Points, 4 Players plus Team Total
@@ -216,83 +217,49 @@
                for (var i=0; i<15; i++) {
                   ReqPts[i] = 0;
                }
-//               if (NumberOfPlayers===0 || Restart===0) {
-//                  do {
-                     background(BackColor);
-                     text("Number of Players",400,100);
-                     textSize(50);
-                     j=NumberOfPlayers;
-                     for(i=0; i<4; i++) {
-                        fill(BoxColor);
-                        if(i===j-1) {
-                           fill(SelectBoxColor);
-                        }
-                        rect(200+i*100,200,100,100);
-                        fill(FirstColor);
-                        text(i+1,250+i*100,270);
-                     }
-                     return;
+               background(BackColor);
+               text("Number of Players",400,100);
+               textSize(50);
+               j=NumberOfPlayers;
+               for(i=0; i<4; i++) {
+                  fill(BoxColor);
+                  if(i===j-1) {
+                     fill(SelectBoxColor);
+                  }
+                  rect(200+i*100,200,100,100);
+                  fill(FirstColor);
+                  text(i+1,250+i*100,270);
+               }
+               return;
             }
             if(CourseSet===2) {
-                  if (PlayerCount < NumberOfPlayers) {
-                     if(NameCount===PlayerCount) {
-                        PlayerName[PlayerCount]=prompt("Player #"+(PlayerCount+1).toString()+" Name: "+PlayerName[PlayerCount],PlayerName[PlayerCount].toString());
-                        NameCount=NameCount+1;
+               if (PlayerCount < NumberOfPlayers) {
+                  if(NameCount===PlayerCount) {
+                     PlayerName[PlayerCount]=prompt("Player #"+(PlayerCount+1).toString()+" Name: "+PlayerName[PlayerCount],PlayerName[PlayerCount].toString());
+                     NameCount=NameCount+1;
 
-                     }
-                     if(HCPCount===PlayerCount) {
-
-                        text("Player #"+PlayerCount+1,", "+PlayerName[PlayerCount]+", Course Handicap",400,100);
-                        for (i=0; i<10; i++) {
-                           for (j=0; j<4; j++) {
-                              fill(BoxColor);
-                              if(PlayerCourseHandicap[HCPCount]===(i+j*10)) {
-                                 fill(SelectBoxColor);
-                              }
-                              rect(0+i*80,200+j*80,80,80);
-                              fill(FirstColor);
-                              text(0+i+j*10,40+i*80,265+j*80);
-                           }
-                        }
-                     }
-/*                     if(HCPCount===PlayerCount) {
-                        PlayerCourseHandicap[PlayerCount]=PlayerCourseHandicap[PlayerCount]-0;
-                        temp=floor((36-PlayerCourseHandicap[PlayerCount])/2);
-                        temp2=36-(temp*2);
-                        if (temp2===PlayerCourseHandicap[PlayerCount]) {
-                           ReqPts[PlayerCount*3]=temp;
-                           ReqPts[PlayerCount*3+1]=temp;
-                        }
-                        else {
-                           if (Front>Back) {
-                              ReqPts[PlayerCount*3]=temp;
-                              ReqPts[PlayerCount*3+1]=temp+1;
-                           }
-                           else {
-                              ReqPts[PlayerCount*3]=temp+1;
-                              ReqPts[PlayerCount*3+1]=temp;
-                           }
-                        }
-                           ReqPts[PlayerCount*3+2] = ReqPts[PlayerCount*3] + ReqPts[PlayerCount*3+1];
-                           ReqPts[12] = ReqPts[12] + ReqPts[PlayerCount*3];
-                           ReqPts[13] = ReqPts[13] + ReqPts[PlayerCount*3+1];
-                           ReqPts[14] = ReqPts[14] + ReqPts[PlayerCount*3+2];
-
-
-                     }
-*/
                   }
-                  else {
-                     CourseSet=3;
-                  
+                  if(HCPCount===PlayerCount) {
+
+                     text("Player #"+PlayerCount+1,", "+PlayerName[PlayerCount]+", Course Handicap",400,100);
+                     for (i=0; i<10; i++) {
+                        for (j=0; j<4; j++) {
+                           fill(BoxColor);
+                           if(PlayerCourseHandicap[HCPCount]===(i+j*10)) {
+                              fill(SelectBoxColor);
+                           }
+                           rect(0+i*80,200+j*80,80,80);
+                           fill(FirstColor);
+                           text(0+i+j*10,40+i*80,265+j*80);
+                        }
+                     }
                   }
-                  return;
+               }
+               else {
+                  CourseSet=3;
+               }
+               return;
             }
-//               }
-
-//               CourseSet=3;
-//               return;
-//            }
 
             if (CourseSet===3) {
                fill(BoxColor);
@@ -330,7 +297,7 @@
                fill(FirstColor);
                text("Continue",400,855);
             
-               window.localStorage.setItem('PD',JSON.stringify(new Date())); 
+/*               window.localStorage.setItem('PD',JSON.stringify(new Date())); 
                window.localStorage.setItem('PHS',JSON.stringify(PlayerHoleStrokes));
                window.localStorage.setItem('pName',JSON.stringify(PlayerName));
                window.localStorage.setItem('RqPt',JSON.stringify(ReqPts));
@@ -339,6 +306,7 @@
                window.localStorage.setItem('F',JSON.stringify(Front));
                window.localStorage.setItem('B',JSON.stringify(Back));
                window.localStorage.setItem('HN',JSON.stringify(HoleNum));
+*/
             }
          };      
          
@@ -399,9 +367,9 @@
             text("Previous",150,615);
             text("Next",650,615);
             text("Points: "+PlayerHoleScore[4*18+HoleNum-1],400,615);
-            window.localStorage.setItem('PHS',JSON.stringify(PlayerHoleStrokes));
+/*            window.localStorage.setItem('PHS',JSON.stringify(PlayerHoleStrokes));
             window.localStorage.setItem('HN',JSON.stringify(HoleNum));
-
+*/
             
             
          };
@@ -832,6 +800,15 @@
             if(AceScreen===1 && CourseSet===3) {
                   if(mouseX>=300 && mouseX<=500 && mouseY>=800 && mouseY<=870) {
                      AceScreen=2
+                     window.localStorage.setItem('PD',JSON.stringify(new Date())); 
+                     window.localStorage.setItem('PHS',JSON.stringify(PlayerHoleStrokes));
+                     window.localStorage.setItem('pName',JSON.stringify(PlayerName));
+                     window.localStorage.setItem('RqPt',JSON.stringify(ReqPts));
+                     window.localStorage.setItem('PCH',JSON.stringify(PlayerCourseHandicap));
+                     window.localStorage.setItem('NumP',JSON.stringify(NumberOfPlayers));
+                     window.localStorage.setItem('F',JSON.stringify(Front));
+                     window.localStorage.setItem('B',JSON.stringify(Back));
+                     window.localStorage.setItem('HN',JSON.stringify(HoleNum));                     
                      return;
                   }
                
@@ -861,6 +838,8 @@
                   }
                } 
                PlayerHoleScore[4*18+HoleNum-1]=PlayerHoleScore[0*18+HoleNum-1]+PlayerHoleScore[1*18+HoleNum-1]+PlayerHoleScore[2*18+HoleNum-1]+PlayerHoleScore[3*18+HoleNum-1];
+               window.localStorage.setItem('PHS',JSON.stringify(PlayerHoleStrokes));
+               window.localStorage.setItem('HN',JSON.stringify(HoleNum));               
             draw();
             }            
          };
