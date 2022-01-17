@@ -643,20 +643,24 @@
 
          mouseClicked = function() {
             background(BackColor);
+            // Choose Setup Page
             if(mouseX>=0 && mouseX<=200 && mouseY>=1050 && mouseY<=1150) {
                CourseSet=0;
                AceScreen=1;
             }
+            // Choose Strokes Page
             if(mouseX>=200 && mouseX<=400 && mouseY>=1050 && mouseY<=1150) {
                AceScreen=2;
-            }            
+            }
+            // Choose Score Card Page          
             if(mouseX>=400 && mouseX<=600 && mouseY>=1050 && mouseY<=1150) {
                AceScreen=3;
-            }            
+            } 
+            // Choose Result Page           
             if(mouseX>=600 && mouseX<=800 && mouseY>=1050 && mouseY<=1150) {
                AceScreen=4;
             }                        
-
+            // Recall Previous Data
             if(AceScreen===0) {
                if(mouseX>=50 && mouseX<=375 && mouseY>=200 && mouseY<=300) {
                   var F1=JSON.parse(window.localStorage.getItem('F'));
@@ -702,6 +706,7 @@
                      }
                   }                  
                }
+               // Clear Previous Data
                if(mouseX>=425 && mouseX<=750 && mouseY>=200 && mouseY<=300) {
                   window.localStorage.clear();
                }
@@ -710,7 +715,7 @@
             }
             if(AceScreen===1 && CourseSet===0) {
                for (i=0; i<3; i++) {
-//                  SELECT FRONT AND BACK COURSES
+                  // Select FRONT & BACK Courses
                   SameCourse=1;
                   if(mouseX>=100+200*i && mouseX<=300+200*i && mouseY>=70 && mouseY<=140) {
                      Front=i;
@@ -720,6 +725,7 @@
                   }
 
                }
+               // Continue to Player Data
                if(mouseX>=300 && mouseX<=500 && mouseY>=300 && mouseY<=370) {
                   if(Front>=0 && Front<=2 && Back>=0 && Back<=2 && Front!=Back) {
                      CourseSet=1;
@@ -730,6 +736,7 @@
                      SameCourse=0;
                   }
                }
+               // Calculate Player & Team Hole Scores
                if(NumberOfPlayers>0) {
                   for (var i=0; i<90; i++) {
                      PlayerHoleScore[i]=0;
@@ -747,7 +754,8 @@
                         }
                      }
                   }
-               }               
+               }
+               // Restart - New Game               
                if(mouseX>=300 && mouseX<=500 && mouseY>=500 && mouseY<=570) {
                   window.localStorage.clear();
                   Front=3;
@@ -769,7 +777,9 @@
                         ReqPts[i]=0;
                      }
                   }
-
+                  for (var i=0; i<90; i++) {
+                     PlayerHoleScore[i]=0;
+                  }                  
                }
                return;
             }
@@ -833,6 +843,7 @@
                   }
                
             }
+            // Enter Hole Strokes and Calculate Player Hole Scores
             if(AceScreen===2) {
                for (var i = 0; i < NumberOfPlayers; i++) {
                   for (var j = 0; j < 8; j++) {
@@ -847,16 +858,19 @@
                      }
                   }
                }
+               // Back up to Previous Hole
                if(mouseX>=50 && mouseX<=250 && mouseY>=550 && mouseY<=630) { 
                   if(HoleNum>1) {
                         HoleNum=HoleNum-1;
                   }
                }
+               // Proceed to Next Hole
                if(mouseX>=550 && mouseX<=750 && mouseY>=550 && mouseY<=630) {
                   if(HoleNum<18) {
                      HoleNum=HoleNum+1;
                   }
-               } 
+               }
+               //Calculate Team Hole Score and Save Data 
                PlayerHoleScore[4*18+HoleNum-1]=PlayerHoleScore[0*18+HoleNum-1]+PlayerHoleScore[1*18+HoleNum-1]+PlayerHoleScore[2*18+HoleNum-1]+PlayerHoleScore[3*18+HoleNum-1];
                window.localStorage.setItem('PHS',JSON.stringify(PlayerHoleStrokes));
                window.localStorage.setItem('HN',JSON.stringify(HoleNum));               
