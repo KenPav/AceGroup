@@ -629,6 +629,17 @@
             }
          };
 
+         storeIt = function() {
+            window.localStorage.setItem('PD',JSON.stringify(new Date())); 
+            window.localStorage.setItem('PHS',JSON.stringify(PlayerHoleStrokes));
+            window.localStorage.setItem('pName',JSON.stringify(PlayerName));
+            window.localStorage.setItem('RqPt',JSON.stringify(ReqPts));
+            window.localStorage.setItem('PCH',JSON.stringify(PlayerCourseHandicap));
+            window.localStorage.setItem('NumP',JSON.stringify(NumberOfPlayers));
+            window.localStorage.setItem('F',JSON.stringify(Front));
+            window.localStorage.setItem('B',JSON.stringify(Back));
+            window.localStorage.setItem('HN',JSON.stringify(HoleNum));                     
+         }
 
          mouseClicked = function() {
             background(BackColor);
@@ -672,11 +683,27 @@
                         ReqPts[i]=Number(RqPt1[i]);
                      }
                   }
+                  if(NumberOfPlayers>0) {
+                     for (var i=0; i<90; i++) {
+                        PlayerHoleScore[i]=0;
+                     }
+                     for (var i = 0; i < NumberOfPlayers; i++) {
+                        for (var j = 0; j < HoleNum; j++) {
+                           if(PlayerHoleStrokes[i*18+j]>0) {
+                              if(j<9) {
+                                 PlayerHoleScore[i*18+j]=PointValue[PlayerHoleStrokes[i*18+j]-HolePar[Front*9+j]+4];
+                              }
+                              else {
+                                 PlayerHoleScore[i*18+j]=PointValue[PlayerHoleStrokes[i*18+j]-HolePar[Back*9+j-9]+4];   
+                              }      
+                              PlayerHoleScore[4*18+j]=PlayerHoleScore[4*18+j]+PlayerHoleScore[i*18+j];
+                           }
+                        }
+                     }
+                  }                  
                }
                if(mouseX>=425 && mouseX<=750 && mouseY>=200 && mouseY<=300) {
                   window.localStorage.clear();
-
-
                }
                AceScreen=1;
                return;
@@ -697,11 +724,30 @@
                   if(Front>=0 && Front<=2 && Back>=0 && Back<=2 && Front!=Back) {
                      CourseSet=1;
                      Restart = 0;
+                     storeIt();
                   }
                   else {
                      SameCourse=0;
                   }
                }
+               if(NumberOfPlayers>0) {
+                  for (var i=0; i<90; i++) {
+                     PlayerHoleScore[i]=0;
+                  }
+                  for (var i = 0; i < NumberOfPlayers; i++) {
+                     for (var j = 0; j < HoleNum; j++) {
+                        if(PlayerHoleStrokes[i*18+j]>0) {
+                           if(j<9) {
+                              PlayerHoleScore[i*18+j]=PointValue[PlayerHoleStrokes[i*18+j]-HolePar[Front*9+j]+4];
+                           }
+                           else {
+                              PlayerHoleScore[i*18+j]=PointValue[PlayerHoleStrokes[i*18+j]-HolePar[Back*9+j-9]+4];   
+                           }      
+                           PlayerHoleScore[4*18+j]=PlayerHoleScore[4*18+j]+PlayerHoleScore[i*18+j];
+                        }
+                     }
+                  }
+               }               
                if(mouseX>=300 && mouseX<=500 && mouseY>=500 && mouseY<=570) {
                   window.localStorage.clear();
                   Front=3;
@@ -736,6 +782,7 @@
                      PlayerCount=0;
                      NameCount=0;
                      HCPCount=0;
+                     storeIt();
                      return;
                   }
                }
@@ -748,7 +795,6 @@
                      if(mouseX>=0+80*i && mouseX<=80+80*i && mouseY>=200+j*80 && mouseY<=280+j*80) {
                         PlayerCourseHandicap[PlayerCount]=i+j*10;
 
-//                        PlayerCourseHandicap[PlayerCount]=PlayerCourseHandicap[PlayerCount]-0;
                         temp=floor((36-PlayerCourseHandicap[PlayerCount])/2);
                         temp2=36-(temp*2);
                         if (temp2===PlayerCourseHandicap[PlayerCount]) {
@@ -772,6 +818,7 @@
 
                         PlayerCount=PlayerCount+1;
                         HCPCount=HCPCount+1
+                        storeIt();
                         return;
                      }
                   }
@@ -781,15 +828,7 @@
             if(AceScreen===1 && CourseSet===3) {
                   if(mouseX>=300 && mouseX<=500 && mouseY>=800 && mouseY<=870) {
                      AceScreen=2
-                     window.localStorage.setItem('PD',JSON.stringify(new Date())); 
-                     window.localStorage.setItem('PHS',JSON.stringify(PlayerHoleStrokes));
-                     window.localStorage.setItem('pName',JSON.stringify(PlayerName));
-                     window.localStorage.setItem('RqPt',JSON.stringify(ReqPts));
-                     window.localStorage.setItem('PCH',JSON.stringify(PlayerCourseHandicap));
-                     window.localStorage.setItem('NumP',JSON.stringify(NumberOfPlayers));
-                     window.localStorage.setItem('F',JSON.stringify(Front));
-                     window.localStorage.setItem('B',JSON.stringify(Back));
-                     window.localStorage.setItem('HN',JSON.stringify(HoleNum));                     
+                     storeIt();
                      return;
                   }
                
