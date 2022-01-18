@@ -384,8 +384,8 @@
                TotalPoints[14] = TotalPoints[14] + TotalPoints[i*3+2];
             }
             for (var i=0; i<9; i++) {
-               TotalStrokes[12] = TotalStrokes[12] + HolePar[i];
-               TotalStrokes[13] = TotalStrokes[13] + HolePar[i+9];
+               TotalStrokes[12] = TotalStrokes[12] + HolePar[Front*9+i];
+               TotalStrokes[13] = TotalStrokes[13] + HolePar[Back*9+i];
             }
             TotalStrokes[14] = TotalStrokes[12] + TotalStrokes[13];
          };
