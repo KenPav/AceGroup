@@ -49,6 +49,13 @@
          var PlayerCount=0;
          var NameCount=0;
          var HCPCount=0;
+         var Lat = 0;
+         var Long = 0;
+         var holeLat = 0;
+         var holeLong = 0;
+         var dist = 0;
+         var closestHole = 0;
+         var startLocation = 0;
 
          background(BackColor);
          var monthNames = ["January ","February ","March ","April ","May ","June ","July ","August ","September ","October ","November ","December "];
@@ -66,6 +73,9 @@
         // Par Element: 0-8=South 9-17=North 18-27=West
         // Par Element Values: Courses*9 + Hole Number - 1
          const HolePar = [5,4,3,5,4,4,3,4,4,4,5,3,4,4,4,4,3,4,4,5,4,4,5,3,4,5,3];
+         const GreenLat = [30.605144,30.603092,30.603347,30.600486,30.603128,30.604642,30.603678,30.606247,30.608694,30.614197,30.618353,30.619828,30.617903,30.615414,30.611964,30.614975,30.613922,30.611017,30.609553,30.614617,30.617722,30.619017,30.619511,30.618533,30.615408,30.610558,30.610444];
+         const GreenLong = [81.447889,81.451856,81.453456,81.457497,81.456908,81.451933,81.449903,81.451114,81.447147,81.446714,81.446531,81.445592,81.449178,81.447847,81.447231,81.448253,81.448739,81.447247,81.450764,81.450200,81.450969,81.453633,81.448706,81.449975,81.449328,81.449228,81.447033];
+         const GreenDistance = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
          const Courses = ["South","North","West"];
          const SummaryLabel = ["","","Total Round"];
 
@@ -110,6 +120,16 @@
 //       Starting Screen
 
          var localData = function() {
+
+
+//          Begin Tracking Location
+            
+            if(startLocation===0) {
+               trackLocation();
+               setInterval(trackLocation,30000);
+               startLocation=1;
+            }            
+
             size(800,1200);
             background(BackColor);
             fill(BoxColor);
@@ -131,6 +151,25 @@
             text("Previous Round Data Stored at:",400,90);
             text(monthNames[pData.getMonth()]+pData.getDate()+", "+pData.getFullYear()+" @ "+pData.getHours()+":"+pData.getMinutes()+":"+pData.getSeconds(),400,150);
          }
+
+        var trackLocation = function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(myPosition,displayError,{enableHighAccuracy: true});
+            } else { 
+                console.log("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function myPosition(position) {
+            myLat = position.coords.latitude;
+            myLong = position.coords.longitude;           
+            console.log("Made it to myLat, myLong: ",myLat.toFixed(3),myLong.toFixed(3));
+        }
+
+        function displayError(){
+            
+        }
+
 
 
 //       AceScreen = 1
@@ -320,7 +359,11 @@
             ScreenSelect();
             textSize(50);
             textAlign(CENTER);
-            fill(FirstColor);
+            if(HoleNum===closestHole) {
+               fill(SecondColor);
+            } else{
+               fill(FirstColor);
+            }
             text("Hole #"+HoleNum,400,65)
             if(HoleNum<=9) {
                text("Front 9: "+Courses[Front]+" #"+HoleNum+" / Par "+HolePar[(Front*9)+HoleNum-1],400,125);
@@ -328,6 +371,7 @@
             else {
                text("Back 9: "+Courses[Back]+" #"+(HoleNum-9)+" / Par "+HolePar[(Back*9)+HoleNum-10],400,125);
             }
+            fill(FirstColor);
             text("Select Hole Score for Each Player",400,185);
             for (var i = 0; i < NumberOfPlayers; i++) {
                fill(BoxColor);
@@ -366,6 +410,9 @@
             fill(FirstColor);
             text("Previous",150,615);
             text("Next",650,615);
+            if(HoleNum===closestHole) {
+               fill(SecondColor);
+            }
             text("Points: "+PlayerHoleScore[4*18+HoleNum-1],400,615);            
          };
 
@@ -662,6 +709,57 @@
             window.localStorage.setItem('HN',JSON.stringify(HoleNum));                     
          }
 
+         GreenDist = function() {
+            for(i=0; i<18; i++) {
+               if(i<9) {
+                  Lat = GreenLat[Front*9+i];
+                  Long = GreenLong[Front*9+i];
+               }
+               else {
+                  Lat = GreenLat[Back*9+i-9];
+                  Long = GreenLong[Back*9+i-9];
+               }
+               distance();
+               GreenDistance[i]=dist;
+               console.log("Dist and Hole#",GreenDistance[i].toFixed(0),i);
+            }
+            dist = 1000000000;
+            for(i=0; i<18; i++) {
+               if(GreenDistance[i]<dist) {
+                  closestHole=i+1;
+                  dist=GreenDistance[i];
+               }
+            }
+            console.log("Closest Hole: ",closestHole);
+         }
+
+//      Green distance calculations
+
+        function distance() {
+            console.log("Made it to distance",Lat.toFixed(3),Long.toFixed(3),myLat.toFixed(3),myLong.toFixed(3));
+            if ((Lat === myLat) && (Long === myLong)) {
+                dist=0
+                return dist;
+            }
+            else {
+                var radlat1 = Math.PI * Lat/180;
+                var radlat2 = Math.PI * myLat/180;
+                var theta = Long-myLong;
+                var radtheta = Math.PI * theta/180;
+                dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+                if (dist > 1) {
+                    dist = 1;
+                }
+                dist = Math.acos(dist);
+                dist = dist * 180/Math.PI;
+                dist = dist * 60 * 1.1515 * 5280 / 3;
+                return dist;
+                console.log("Lat,Long,myLat,myLong,dist=",Lat.toFixed(3),Long.toFixed(3),myLat.toFixed(3),myLong.toFixed(3),dist);
+            }
+        }
+
+
+
 //       User Mouse Click Processing Section 
 
          mouseClicked = function() {
@@ -673,6 +771,7 @@
             }
             // Choose Strokes Page
             if(mouseX>=200 && mouseX<=400 && mouseY>=1050 && mouseY<=1150) {
+               GreenDist();
                AceScreen=2;
             }
             // Choose Score Card Page          
@@ -862,6 +961,7 @@
                   if(mouseX>=300 && mouseX<=500 && mouseY>=800 && mouseY<=870) {
                      AceScreen=2
                      storeIt();
+                     GreenDist();
                      return;
                   }
                
@@ -893,6 +993,7 @@
                      HoleNum=HoleNum+1;
                   }
                }
+               GreenDist();
                //Calculate Team Hole Score and Save Data 
                PlayerHoleScore[4*18+HoleNum-1]=PlayerHoleScore[0*18+HoleNum-1]+PlayerHoleScore[1*18+HoleNum-1]+PlayerHoleScore[2*18+HoleNum-1]+PlayerHoleScore[3*18+HoleNum-1];
                window.localStorage.setItem('PHS',JSON.stringify(PlayerHoleStrokes));
