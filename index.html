@@ -107,6 +107,7 @@
          }
 
 //       AceScreen = 0
+//       Starting Screen
 
          var localData = function() {
             size(800,1200);
@@ -133,6 +134,10 @@
 
 
 //       AceScreen = 1
+//       Select Courses (CourseSet=0)
+//       Select Number of Players (CourseSet=1)
+//       Enter Player Names and Course Handicaps (CourseSet=2)
+//       Display Player Names and Course Handicaps (CourseSet=3)
 
          var enterSetup = function() {
             size(800,1200);
@@ -213,6 +218,8 @@
                text("Restart",400,555);
             }
 
+//       Select Number of Players (CourseSet=1)
+
             if (CourseSet===1) {
                for (var i=0; i<15; i++) {
                   ReqPts[i] = 0;
@@ -232,6 +239,9 @@
                }
                return;
             }
+
+//       Enter Player Names and Course Handicaps (CourseSet=2)
+
             if(CourseSet===2) {
                if (PlayerCount < NumberOfPlayers) {
                   if(NameCount===PlayerCount) {
@@ -260,6 +270,8 @@
                }
                return;
             }
+
+//       Display Player Names and Course Handicaps (CourseSet=3)
 
             if (CourseSet===3) {
                fill(BoxColor);
@@ -300,9 +312,8 @@
          };      
          
 
-//               AceScreen = 2;
-            
-            
+//       AceScreen = 2;
+//       Enter Player Scores for each Hole, Display Team Points      
 
          var enterStrokes = function(Hole) {
             size(800,1200);
@@ -358,6 +369,8 @@
             text("Points: "+PlayerHoleScore[4*18+HoleNum-1],400,615);            
          };
 
+//       Prepare Player and Team Hole Scores and Points      
+
          var DoCalculations = function() {
             for (var i=0; i<15; i++) {
                TotalPoints[i] = 0;
@@ -389,6 +402,9 @@
             }
             TotalStrokes[14] = TotalStrokes[12] + TotalStrokes[13];
          };
+
+//       Display Score Card      
+
          var showScoreCard = function() {
             size(1250,1200);
             ScreenSelect();
@@ -556,6 +572,9 @@
                }
             }
          };
+
+//       Display Front, Back & Total Player & Team Results      
+
          var showSummary = function() {
             size(1200,1200);
             ScreenSelect();
@@ -629,6 +648,8 @@
             }
          };
 
+//       Store Current Data for Recovery if App is Restarted
+
          storeIt = function() {
             window.localStorage.setItem('PD',JSON.stringify(new Date())); 
             window.localStorage.setItem('PHS',JSON.stringify(PlayerHoleStrokes));
@@ -640,6 +661,8 @@
             window.localStorage.setItem('B',JSON.stringify(Back));
             window.localStorage.setItem('HN',JSON.stringify(HoleNum));                     
          }
+
+//       User Mouse Click Processing Section 
 
          mouseClicked = function() {
             background(BackColor);
