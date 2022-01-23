@@ -410,8 +410,13 @@
             fill(FirstColor);
             text("Previous",150,615);
             text("Next",650,615);
+            console.log(HoleNum,closestHole);
             if(HoleNum===closestHole) {
                fill(SecondColor);
+               text("This hole is the nearest hole",400,715);
+            } 
+            else {
+               text("Hole #: "+closestHole+" is the nearest hole",400,715);               
             }
             text("Points: "+PlayerHoleScore[4*18+HoleNum-1],400,615);            
          };
