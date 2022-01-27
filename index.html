@@ -29,12 +29,7 @@
     var ACE = function(processingInstance) {
      with (processingInstance) {
 
-
-         var ySize=max(1,screen.height/screen.width);
-         console.log("ySize= ",ySize,screen.height,screen.width)
-
-//        size(800,1200);
-        size(800,800*ySize);
+        size(800,1200);
         
         frameRate(30);
       
@@ -135,8 +130,7 @@
                startLocation=1;
             }            
 
-//            size(800,1200);
-            size(800,800*ySize);
+            size(800,1200);
             background(BackColor);
             fill(BoxColor);
             rect(50,200,325,100);
@@ -185,9 +179,7 @@
 //       Display Player Names and Course Handicaps (CourseSet=3)
 
          var enterSetup = function() {
-//            size(800,1200);
-            size(800,800*ySize);
-         console.log("ySize= ",ySize,screen.height,screen.width)
+            size(800,1200);
             background(BackColor);
             ScreenSelect();
             if (SameCourse===0) {
@@ -363,8 +355,7 @@
 //       Enter Player Scores for each Hole, Display Team Points      
 
          var enterStrokes = function(Hole) {
-//            size(800,1200);
-            size(800,800*ySize);
+            size(800,1200);
             ScreenSelect();
             textSize(50);
             textAlign(CENTER);
@@ -467,8 +458,7 @@
 //       Display Score Card      
 
          var showScoreCard = function() {
-//            size(1250,1200);
-            size(1250,1250*ySize);
+            size(1250,1200);
             ScreenSelect();
             DoCalculations();
             textSize(35);
@@ -638,8 +628,7 @@
 //       Display Front, Back & Total Player & Team Results      
 
          var showSummary = function() {
-//            size(1200,1200);
-            size(1200,1200*ySize);
+            size(1200,1200);
             ScreenSelect();
             DoCalculations();
             SummaryLabel[0] = Courses[Front];
