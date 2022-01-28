@@ -407,6 +407,7 @@
             rect(50,550,200,80);
             rect(550,550,200,80);
             rect(275,550,250,80);
+            rect(50,650,700,80);
             fill(FirstColor);
             text("Previous",150,615);
             text("Next",650,615);
@@ -416,7 +417,7 @@
                text("This hole is the nearest hole",400,715);
             } 
             else {
-               text("Hole #: "+closestHole+" is the nearest hole",400,715);               
+               text("Jump to Nearest Hole (#"+closestHole+")",400,715);               
             }
             text("Points: "+PlayerHoleScore[4*18+HoleNum-1],400,615);            
          };
@@ -714,6 +715,31 @@
             window.localStorage.setItem('HN',JSON.stringify(HoleNum));                     
          }
 
+//       Calculate Player & Team Hole Scores
+
+         calcScores = function() {
+            if(NumberOfPlayers>0) {
+               for (var i=0; i<90; i++) {
+                  PlayerHoleScore[i]=0;
+               }
+               for (var i = 0; i < NumberOfPlayers; i++) {
+                  for (var j = 0; j < 18; j++) {
+                     if(PlayerHoleStrokes[i*18+j]>0) {
+                        if(j<9) {
+                           PlayerHoleScore[i*18+j]=PointValue[PlayerHoleStrokes[i*18+j]-HolePar[Front*9+j]+4];
+                        }
+                        else {
+                           PlayerHoleScore[i*18+j]=PointValue[PlayerHoleStrokes[i*18+j]-HolePar[Back*9+j-9]+4];   
+                        }      
+                        PlayerHoleScore[4*18+j]=PlayerHoleScore[4*18+j]+PlayerHoleScore[i*18+j];
+                     }
+                  }
+               }
+            }
+         }
+
+//       Calculate Closest Hole Information
+
          GreenDist = function() {
             for(i=0; i<18; i++) {
                if(i<9) {
@@ -815,24 +841,7 @@
                         ReqPts[i]=Number(RqPt1[i]);
                      }
                   }
-                  if(NumberOfPlayers>0) {
-                     for (var i=0; i<90; i++) {
-                        PlayerHoleScore[i]=0;
-                     }
-                     for (var i = 0; i < NumberOfPlayers; i++) {
-                        for (var j = 0; j < HoleNum; j++) {
-                           if(PlayerHoleStrokes[i*18+j]>0) {
-                              if(j<9) {
-                                 PlayerHoleScore[i*18+j]=PointValue[PlayerHoleStrokes[i*18+j]-HolePar[Front*9+j]+4];
-                              }
-                              else {
-                                 PlayerHoleScore[i*18+j]=PointValue[PlayerHoleStrokes[i*18+j]-HolePar[Back*9+j-9]+4];   
-                              }      
-                              PlayerHoleScore[4*18+j]=PlayerHoleScore[4*18+j]+PlayerHoleScore[i*18+j];
-                           }
-                        }
-                     }
-                  }                  
+                  calcScores();                  
                }
                // Clear Previous Data
                if(mouseX>=425 && mouseX<=750 && mouseY>=200 && mouseY<=300) {
@@ -864,26 +873,12 @@
                      SameCourse=0;
                   }
                }
-               // Calculate Player & Team Hole Scores
-               if(NumberOfPlayers>0) {
-                  for (var i=0; i<90; i++) {
-                     PlayerHoleScore[i]=0;
-                  }
-                  for (var i = 0; i < NumberOfPlayers; i++) {
-                     for (var j = 0; j < HoleNum; j++) {
-                        if(PlayerHoleStrokes[i*18+j]>0) {
-                           if(j<9) {
-                              PlayerHoleScore[i*18+j]=PointValue[PlayerHoleStrokes[i*18+j]-HolePar[Front*9+j]+4];
-                           }
-                           else {
-                              PlayerHoleScore[i*18+j]=PointValue[PlayerHoleStrokes[i*18+j]-HolePar[Back*9+j-9]+4];   
-                           }      
-                           PlayerHoleScore[4*18+j]=PlayerHoleScore[4*18+j]+PlayerHoleScore[i*18+j];
-                        }
-                     }
-                  }
-               }
-               // Restart - New Game               
+
+               calcScores();
+
+
+//             Restart - New Game               
+
                if(mouseX>=300 && mouseX<=500 && mouseY>=500 && mouseY<=570) {
                   window.localStorage.clear();
                   Front=3;
@@ -978,21 +973,21 @@
                   for (var j = 0; j < 8; j++) {
                      if(mouseX>=220+70*j && mouseX<=290+70*j && mouseY>=200+i*80 && mouseY<=280+i*80) {
                         PlayerHoleStrokes[i*18+HoleNum-1]=j+1;
-                        if(HoleNum<10) {
-                           PlayerHoleScore[i*18+HoleNum-1]=PointValue[j+1-HolePar[Front*9+HoleNum-1]+4];
-                        }
-                        else {
-                           PlayerHoleScore[i*18+HoleNum-1]=PointValue[j+1-HolePar[Back*9+HoleNum-1-9]+4];
-                        }
                      }
                   }
                }
+               //Calculate Team Hole Score and Save Data 
+               calcScores();
+               window.localStorage.setItem('PHS',JSON.stringify(PlayerHoleStrokes));
+               window.localStorage.setItem('HN',JSON.stringify(HoleNum));               
+
                // Back up to Previous Hole
                if(mouseX>=50 && mouseX<=250 && mouseY>=550 && mouseY<=630) { 
                   if(HoleNum>1) {
                         HoleNum=HoleNum-1;
                   }
                }
+
                // Proceed to Next Hole
                if(mouseX>=550 && mouseX<=750 && mouseY>=550 && mouseY<=630) {
                   if(HoleNum<18) {
@@ -1000,11 +995,10 @@
                   }
                }
                GreenDist();
-               //Calculate Team Hole Score and Save Data 
-               PlayerHoleScore[4*18+HoleNum-1]=PlayerHoleScore[0*18+HoleNum-1]+PlayerHoleScore[1*18+HoleNum-1]+PlayerHoleScore[2*18+HoleNum-1]+PlayerHoleScore[3*18+HoleNum-1];
-               window.localStorage.setItem('PHS',JSON.stringify(PlayerHoleStrokes));
-               window.localStorage.setItem('HN',JSON.stringify(HoleNum));               
-            draw();
+               if(mouseX>=50 && mouseX<=700 && mouseY>=650 && mouseY<=730) {
+                  HoleNum=closestHole;
+               }                
+               draw();
             }            
          };
 
