@@ -422,40 +422,6 @@
             text("Points: "+PlayerHoleScore[4*18+HoleNum-1],400,615);            
          };
 
-//       Prepare Player and Team Hole Scores and Points      
-
-         var DoCalculations = function() {
-            for (var i=0; i<15; i++) {
-               TotalPoints[i] = 0;
-               TotalStrokes[i] = 0;
-            }
-            for (var i=0; i<4; i++) {
-               for (var j=1; j<19; j++) {
-                  if (j<10) {
-                     TotalStrokes[i*3] = TotalStrokes[i*3] + PlayerHoleStrokes[i*18+j-1];
-                     TotalPoints[i*3] = TotalPoints[i*3] + PlayerHoleScore[i*18+j-1];
-                  }
-                  else {
-                     TotalStrokes[i*3+1] = TotalStrokes[i*3+1] + PlayerHoleStrokes[i*18+j-1];
-                     TotalPoints[i*3+1] = TotalPoints[i*3+1] + PlayerHoleScore[i*18+j-1];
-                  }
-               }
-               TotalStrokes[i*3+2] = TotalStrokes[i*3] + TotalStrokes[i*3+1];
-               TotalPoints[i*3+2] = TotalPoints[i*3] + TotalPoints[i*3+1];
-            }
-
-            for (var i=0; i<4; i++) {
-               TotalPoints[12] = TotalPoints[12] + TotalPoints[i*3];
-               TotalPoints[13] = TotalPoints[13] + TotalPoints[i*3+1];
-               TotalPoints[14] = TotalPoints[14] + TotalPoints[i*3+2];
-            }
-            for (var i=0; i<9; i++) {
-               TotalStrokes[12] = TotalStrokes[12] + HolePar[Front*9+i];
-               TotalStrokes[13] = TotalStrokes[13] + HolePar[Back*9+i];
-            }
-            TotalStrokes[14] = TotalStrokes[12] + TotalStrokes[13];
-         };
-
 //       Display Score Card      
 
          var showScoreCard = function() {
@@ -790,7 +756,39 @@
             }
         }
 
+//       Prepare Player and Team Hole Scores and Points      
 
+         var DoCalculations = function() {
+            for (var i=0; i<15; i++) {
+               TotalPoints[i] = 0;
+               TotalStrokes[i] = 0;
+            }
+            for (var i=0; i<4; i++) {
+               for (var j=1; j<19; j++) {
+                  if (j<10) {
+                     TotalStrokes[i*3] = TotalStrokes[i*3] + PlayerHoleStrokes[i*18+j-1];
+                     TotalPoints[i*3] = TotalPoints[i*3] + PlayerHoleScore[i*18+j-1];
+                  }
+                  else {
+                     TotalStrokes[i*3+1] = TotalStrokes[i*3+1] + PlayerHoleStrokes[i*18+j-1];
+                     TotalPoints[i*3+1] = TotalPoints[i*3+1] + PlayerHoleScore[i*18+j-1];
+                  }
+               }
+               TotalStrokes[i*3+2] = TotalStrokes[i*3] + TotalStrokes[i*3+1];
+               TotalPoints[i*3+2] = TotalPoints[i*3] + TotalPoints[i*3+1];
+            }
+
+            for (var i=0; i<4; i++) {
+               TotalPoints[12] = TotalPoints[12] + TotalPoints[i*3];
+               TotalPoints[13] = TotalPoints[13] + TotalPoints[i*3+1];
+               TotalPoints[14] = TotalPoints[14] + TotalPoints[i*3+2];
+            }
+            for (var i=0; i<9; i++) {
+               TotalStrokes[12] = TotalStrokes[12] + HolePar[Front*9+i];
+               TotalStrokes[13] = TotalStrokes[13] + HolePar[Back*9+i];
+            }
+            TotalStrokes[14] = TotalStrokes[12] + TotalStrokes[13];
+         };
 
 //       User Mouse Click Processing Section 
 
