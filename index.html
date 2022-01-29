@@ -683,14 +683,14 @@
          var showSummary = function() {
             xAdj=0.85;
             yAdj=1;
-            xOrig=1200;
-            yOrig=1050;
+            xOrig=1050;
+            yOrig=1200;
             if(isVert===0 & myWidth<xOrig) {
                xAdj=myWidth/xOrig;
             }
             size(xOrig*xAdj,yOrig);
 
-//            size(1200,1050);
+//            size(1200,1200);
             ScreenSelect();
             DoCalculations();
             SummaryLabel[0] = Courses[Front];
