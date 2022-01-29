@@ -102,6 +102,7 @@
          const PlayerHoleScore = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
 
+
          function doOnOrientationChange() {
              switch(window.orientation) {
                case 90:
@@ -139,30 +140,29 @@
 
 
 
-
          var ScreenSelect = function() {
 
             fill(BoxColor);
             
-            rect(0*xAdj,1050*yAdj,200*xAdj,100*yAdj);
-            rect(200*xAdj,1050*yAdj,200*xAdj,100*yAdj);
-            rect(400*xAdj,1050*yAdj,200*xAdj,100*yAdj);           
-            rect(600*xAdj,1050*yAdj,200*xAdj,100*yAdj);
+            rect(0,1050,200,100);
+            rect(200,1050,200,100);
+            rect(400,1050,200,100);           
+            rect(600,1050,200,100);
 
 
 
-            textSize(50*xAdj);
+            textSize(50);
             textAlign(CENTER);
             fill(FirstColor);
 
             text("isVert, myWidth, myHeight: ",400,850);
             text(isVert+",  "+myWidth+",  "+myHeight,400,910);
 
-            text("Setup",100*xAdj,1115);
-            text("Scores",300*xAdj,1115);
-            text("Score",500*xAdj,1095);
-            text("Card",500*xAdj,1135);
-            text("Results",700*xAdj,1115);
+            text("Setup",100,1115);
+            text("Scores",300,1115);
+            text("Score",500,1095);
+            text("Card",500,1135);
+            text("Results",700,1115);
 
 
          }
@@ -193,7 +193,7 @@
             if(myWidth<xOrig) {
                xAdj=myWidth/xOrig;
             }
-            size(xOrig*xAdj,yOrig*yAdj);
+            size(xOrig*xAdj,yOrig);
             background(BackColor);
             fill(BoxColor);
             rect(50,200,325,100);
@@ -248,7 +248,7 @@
             if(myWidth<xOrig) {
                xAdj=myWidth/xOrig;
             }
-            size(xOrig*xAdj,yOrig*yAdj);
+            size(xOrig*xAdj,yOrig);
             background(BackColor);
             ScreenSelect();
             if (SameCourse===0) {
@@ -431,7 +431,7 @@
             if(myWidth<xOrig) {
                xAdj=myWidth/xOrig;
             }
-            size(xOrig*xAdj,yOrig*yAdj);
+            size(xOrig*xAdj,yOrig);
             ScreenSelect();
             textSize(50*xAdj);
             textAlign(CENTER);
@@ -508,7 +508,7 @@
             if(isVert===0 & myWidth<xOrig) {
                xAdj=myWidth/xOrig;
             }
-            size(xOrig*xAdj,yOrig*yAdj);
+            size(xOrig*xAdj,yOrig);
 
 
 //            size(1250,1200);
@@ -525,7 +525,7 @@
             text("Players",85*xAdj,40);
             text("Front 9: "+Courses[Front],420*xAdj,40);
             text("Back 9: "+Courses[Back],920*xAdj,40);
-            text("T",785*xAdj,40);
+            text("T",1195*xAdj,40);
             for (var j=0; j<6; j++) {
                for (var i=0; i<21; i++) {
                   //Front 9, Front Total, Back 9, Back Total, Round Total
@@ -535,7 +535,7 @@
                   fill(FirstColor);
                }
             }
-            text("Par",85,90);
+            text("Par",85*xAdj,90);
             for (var i=1; i<19; i++) {
                if (i<10) {
                   text(HolePar[Front*9+i-1],195*xAdj+(i-1)*50*xAdj,90);
