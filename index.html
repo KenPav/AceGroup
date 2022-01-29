@@ -155,8 +155,8 @@
             textAlign(CENTER);
             fill(FirstColor);
 
-            text("isVert, myWidth, myHeight: ",400,850);
-            text(isVert+",  "+myWidth+",  "+myHeight,400,910);
+//            text("isVert, myWidth, myHeight: ",400,850);
+//            text(isVert+",  "+myWidth+",  "+myHeight,400,910);
 
             text("Setup",100,1115);
             text("Scores",300,1115);
@@ -681,39 +681,48 @@
 //       Display Front, Back & Total Player & Team Results      
 
          var showSummary = function() {
-            size(1200,1200);
+            xAdj=1;
+            yAdj=1;
+            xOrig=1200;
+            yOrig=1200;
+            if(isVert===0 & myWidth<xOrig) {
+               xAdj=myWidth/xOrig;
+            }
+            size(xOrig*xAdj,yOrig);
+
+//            size(1200,1200);
             ScreenSelect();
             DoCalculations();
             SummaryLabel[0] = Courses[Front];
             SummaryLabel[1] = Courses[Back];
-            textSize(35);
+            textSize(35*xAdj);
             textAlign(CENTER);
             fill(BoxColor);
-            rect(0,100,170,150);
+            rect(0*xAdj,100,170*xAdj,150);
             fill(FirstColor);
-            text("Players",85,240);
+            text("Players",85*xAdj,240);
             for (var i=0; i<3; i++) {
                fill(BoxColor);
-               rect(170+i*280,100,280,50)
-               rect(170+i*280,150,70,100);
-               rect(240+i*280,150,210,50);
-               rect(240+i*280,200,70,50);
-               rect(310+i*280,200,70,50);
-               rect(380+i*280,200,70,50);
+               rect(170*xAdj+i*280*xAdj,100,280*xAdj,50)
+               rect(170*xAdj+i*280*xAdj,150,70*xAdj,100);
+               rect(240*xAdj+i*280*xAdj,150,210*xAdj,50);
+               rect(240*xAdj+i*280*xAdj,200,70*xAdj,50);
+               rect(310*xAdj+i*280*xAdj,200,70*xAdj,50);
+               rect(380*xAdj+i*280*xAdj,200,70*xAdj,50);
                fill(FirstColor);
-               text(SummaryLabel[i],310+i*280,140);
-               text("Points",345+i*280,190);
-               textSize(35);
-               text("Stk",205+280*i,240);
-               text("Scr",275+i*280,240);
-               text("Rqd",345+i*280,240);
-               text("Net",415+i*280,240);
-               textSize(35);
+               text(SummaryLabel[i],310*xAdj+i*280*xAdj,140);
+               text("Points",345*xAdj+i*280*xAdj,190);
+               textSize(35*xAdj);
+               text("Stk",205*xAdj+280*i*xAdj,240);
+               text("Scr",275*xAdj+i*280*xAdj,240);
+               text("Rqd",345*xAdj+i*280*xAdj,240);
+               text("Net",415*xAdj+i*280*xAdj,240);
+               textSize(35*xAdj);
                
             }
             for (var j=0; j<5; j++) {
                fill(BoxColor);
-               rect(0,250+j*50,170,50);
+               rect(0*xAdj,250+j*50,170*xAdj,50);
                if(j===0 || j===2) {
                   fill(SecondColor);
                }
@@ -724,14 +733,14 @@
                   fill(ThirdColor);
                }
                if (j<NumberOfPlayers || j===4) {
-                  text(PlayerName[j],85,290+j*50); 
+                  text(PlayerName[j],85*xAdj,290+j*50); 
                }
                for (var i=0; i<3; i++) {
                   fill(BoxColor);
-                  rect(170+i*280,250+j*50,70,50);
-                  rect(240+i*280,250+j*50,70,50);
-                  rect(310+i*280,250+j*50,70,50);
-                  rect(380+i*280,250+j*50,70,50);
+                  rect(170*xAdj+i*280*xAdj,250+j*50,70*xAdj,50);
+                  rect(240*xAdj+i*280*xAdj,250+j*50,70*xAdj,50);
+                  rect(310*xAdj+i*280*xAdj,250+j*50,70*xAdj,50);
+                  rect(380*xAdj+i*280*xAdj,250+j*50,70*xAdj,50);
                   if(j===0 || j===2) {
                      fill(SecondColor);
                   }
@@ -742,12 +751,12 @@
                      fill(ThirdColor);
                   }
                      if (j!=4 && j<NumberOfPlayers) {
-                        text(TotalStrokes[i+j*3],205+i*280,290+j*50);
+                        text(TotalStrokes[i+j*3],205*xAdj+i*280*xAdj,290+j*50);
                   }
                   if (j<NumberOfPlayers || j===4) {
-                     text(TotalPoints[i+j*3],275+i*280,290+j*50);
-                     text(ReqPts[i+j*3],345+i*280,290+j*50);
-                     text(TotalPoints[i+j*3]-ReqPts[i+j*3],415+i*280,290+j*50);
+                     text(TotalPoints[i+j*3],275*xAdj+i*280*xAdj,290+j*50);
+                     text(ReqPts[i+j*3],345*xAdj+i*280*xAdj,290+j*50);
+                     text(TotalPoints[i+j*3]-ReqPts[i+j*3],415*xAdj+i*280*xAdj,290+j*50);
                   }
                }
             }
