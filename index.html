@@ -184,7 +184,14 @@
                startLocation=1;
             }            
 
-            size(800,1200);
+            xAdj=1;
+            yAdj=1;
+            xOrig=800;
+            yorig=1200;
+            if(myWidth<xOrig) {
+               xAdj=myWidth/xOrig;
+            }
+            size(xOrig*xAdj,yOrig*yAdj);
             background(BackColor);
             fill(BoxColor);
             rect(50,200,325,100);
@@ -235,11 +242,11 @@
             xAdj=1;
             yAdj=1;
             xOrig=800;
-            y0rig=1200;
+            yorig=1200;
             if(myWidth<xOrig) {
                xAdj=myWidth/xOrig;
             }
-            size(800*xAdj,1200);
+            size(xOrig*xAdj,yOrig*yAdj);
             background(BackColor);
             ScreenSelect();
             if (SameCourse===0) {
@@ -418,11 +425,11 @@
             xAdj=1;
             yAdj=1;
             xOrig=800;
-            y0rig=1200;
+            yOrig=1200;
             if(myWidth<xOrig) {
                xAdj=myWidth/xOrig;
             }
-            size(800*xAdj,1200);
+            size(xOrig*xAdj,yOrig*yAdj);
             ScreenSelect();
             textSize(50*xAdj);
             textAlign(CENTER);
@@ -431,7 +438,7 @@
             } else{
                fill(FirstColor);
             }
-            text("Hole #"+HoleNum,400,65)
+            text("Hole #"+HoleNum,400*xAdj,65)
             if(HoleNum<=9) {
                text("Front 9: "+Courses[Front]+" #"+HoleNum+" / Par "+HolePar[(Front*9)+HoleNum-1],400*xAdj,125);
             }
