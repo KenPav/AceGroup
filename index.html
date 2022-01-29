@@ -196,10 +196,10 @@
             size(xOrig*xAdj,yOrig);
             background(BackColor);
             fill(BoxColor);
-            rect(50,200,325,100);
-            rect(425,200,325,100);
+            rect(50*xAdj,200,325*xAdj,100);
+            rect(425*xAdj,200,325*xAdj,100);
             fill(FirstColor);
-            textSize(45);
+            textSize(45*xAdj);
             textAlign(CENTER);
             if(window.localStorage.getItem('PD')===null) {
                AceScreen=1;
@@ -207,12 +207,12 @@
             }
             var pData=JSON.parse(window.localStorage.getItem('PD'));
             pData = new Date(pData);
-            text("Continue With",212,240);
-            text("Previous Setup",212,285);
-            text("Clear",588,240);
-            text("Previous Setup",588,285);
-            text("Previous Round Data Stored at:",400,90);
-            text(monthNames[pData.getMonth()]+pData.getDate()+", "+pData.getFullYear()+" @ "+pData.getHours()+":"+pData.getMinutes()+":"+pData.getSeconds(),400,150);
+            text("Continue With",212*xAdj,240);
+            text("Previous Setup",212*xAdj,285);
+            text("Clear",588*xAdj,240);
+            text("Previous Setup",588*xAdj,285);
+            text("Previous Round Data Stored at:",400*xAdj,90);
+            text(monthNames[pData.getMonth()]+pData.getDate()+", "+pData.getFullYear()+" @ "+pData.getHours()+":"+pData.getMinutes()+":"+pData.getSeconds(),400*xAdj,150);
          }
 
         var trackLocation = function() {
