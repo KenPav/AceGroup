@@ -109,24 +109,28 @@
                   isVert=0;
                   myWidth=window.innerWidth;
                   myHeight=window.innerHeight;
+                  console.log(isVert,myWidth,myHeight);
                  break;
                case -90:
          //        alert('landscape');
                   isVert=0;
                   myWidth=window.innerWidth;
                   myHeight=window.innerHeight;                 
+                  console.log(isVert,myWidth,myHeight);
                   break;
                case 0:
          //        alert('portrait');
                   isVert=1;
                   myWidth=window.innerWidth;
                   myHeight=window.innerHeight;                 
+                  console.log(isVert,myWidth,myHeight);
                   break;
                case 180:
          //        alert('portrait');
                   isVert=1;
                   myWidth=window.innerWidth;
-                  myHeight=window.innerHeight;                 
+                  myHeight=window.innerHeight;
+                  console.log(isVert,myWidth,myHeight);                 
                   break;
                default:
                  break;
@@ -148,9 +152,14 @@
             rect(400*xAdj,1050*yAdj,200*xAdj,100*yAdj);           
             rect(600*xAdj,1050*yAdj,200*xAdj,100*yAdj);
 
-            textSize(50);
+
+
+            textSize(50*xAdj);
             textAlign(CENTER);
             fill(FirstColor);
+
+            text("isVert, myWidth, myHeight: ",400,850);
+            text(isVert+",  "+myWidth+",  "+myHeight,400,910);
 
             text("Setup",100*xAdj,1115);
             text("Scores",300*xAdj,1115);
