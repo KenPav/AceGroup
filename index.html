@@ -526,15 +526,15 @@
             text("Front 9: "+Courses[Front],420*xAdj,40);
             text("Back 9: "+Courses[Back],920*xAdj,40);
             text("T",1195*xAdj,40);
+            fill(BoxColor);
             for (var j=0; j<6; j++) {
+               rect(0*xAdj,50+j*50,170*xAdj,50);
                for (var i=0; i<21; i++) {
                   //Front 9, Front Total, Back 9, Back Total, Round Total
-                  fill(BoxColor);
-                  rect(0*xAdj,50+j*50,170*xAdj,50);
                   rect(170*xAdj+i*50*xAdj,50+j*50,50*xAdj,50);
-                  fill(FirstColor);
                }
             }
+            fill(FirstColor);
             text("Par",85*xAdj,90);
             for (var i=1; i<19; i++) {
                if (i<10) {
@@ -601,11 +601,11 @@
                }
             }
                        
+            fill(BoxColor);
             for (var j=0; j<6; j++) {
+               rect(0*xAdj,400+j*50,170*xAdj,50);
                for (var i=0; i<21; i++) {
                   //Front 9, Front Total, Back 9, Back Total, Round Total
-                  fill(BoxColor);
-                  rect(0*xAdj,400+j*50,170*xAdj,50);
                   rect(170*xAdj+i*50*xAdj,400+j*50,50*xAdj,50);
                }
             }                       
@@ -630,7 +630,7 @@
                         text("B",195*xAdj+i*50*xAdj,440+j*50);
                      }
                      if (i===20) {
-                        text("T",195*xAdj+i*50,440*xAdj+j*50);
+                        text("T",195*xAdj+i*50*xAdj,440+j*50);
                      }
                   }
                   if((j-1)===0 || (j-1)===2) {
