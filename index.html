@@ -58,8 +58,8 @@
          var startLocation = 0;
 
          var isVert=1;
-         var myWidth=screen.width;
-         var myHeight=screen.height;
+         var myWidth=window.innerWidth;
+         var myHeight=window.innerHeight;
          var xAdj=1;
          var yAdj=1;
          var xOrig=800;
@@ -107,26 +107,26 @@
                case 90:
          //        alert('landscape');
                   isVert=0;
-                  myWidth=screen.width;
-                  myHeight=screen.height;
+                  myWidth=window.innerWidth;
+                  myHeight=window.innerHeight;
                  break;
                case -90:
          //        alert('landscape');
                   isVert=0;
-                  myWidth=screen.width;
-                  myHeight=screen.height;                 
+                  myWidth=window.innerWidth;
+                  myHeight=window.innerHeight;                 
                   break;
                case 0:
          //        alert('portrait');
                   isVert=1;
-                  myWidth=screen.width;
-                  myHeight=screen.height;                 
+                  myWidth=window.innerWidth;
+                  myHeight=window.innerHeight;                 
                   break;
                case 180:
          //        alert('portrait');
                   isVert=1;
-                  myWidth=screen.width;
-                  myHeight=screen.height;                 
+                  myWidth=window.innerWidth;
+                  myHeight=window.innerHeight;                 
                   break;
                default:
                  break;
