@@ -163,7 +163,6 @@
         function myPosition(position) {
             myLat = position.coords.latitude;
             myLong = position.coords.longitude;           
-            console.log("Made it to myLat, myLong: ",myLat.toFixed(3),myLong.toFixed(3));
         }
 
         function displayError(){
@@ -411,7 +410,6 @@
             fill(FirstColor);
             text("Previous",150,615);
             text("Next",650,615);
-            console.log(HoleNum,closestHole);
             if(HoleNum===closestHole) {
                fill(SecondColor);
                text("This hole is the nearest hole",400,715);
@@ -718,11 +716,9 @@
                }
                distance();
                GreenDistance[i]=dist;
-               console.log("Dist and Hole#",GreenDistance[i].toFixed(0),i);
             }
             dist = 1000000000;
             for(i=0; i<18; i++) {
-               console.log(GreenDistance[i].toFixed(0),i+1);
                if(GreenDistance[i]<dist) {
                   closestHole=i+1;
                   dist=GreenDistance[i];
@@ -734,7 +730,6 @@
 //      Green distance calculations
 
         function distance() {
-            console.log("Made it to distance",Lat.toFixed(3),Long.toFixed(3),myLat.toFixed(3),myLong.toFixed(3));
             if ((Lat === myLat) && (Long === myLong)) {
                 dist=0
                 return dist;
@@ -751,7 +746,6 @@
                 dist = Math.acos(dist);
                 dist = dist * 180/Math.PI;
                 dist = dist * 60 * 1.1515 * 5280 / 3;
-                console.log("Lat,Long,myLat,myLong,dist=",Lat.toFixed(3),Long.toFixed(3),myLat.toFixed(3),myLong.toFixed(3),dist);
                 return dist;
             }
         }
