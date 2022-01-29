@@ -243,11 +243,11 @@
             background(BackColor);
             ScreenSelect();
             if (SameCourse===0) {
-               textSize(35);
+               textSize(35*xAdj);
                fill(255,0,0);
                text("Select Different Front and Back Courses!",400*xAdj,450);
             }
-            textSize(50);
+            textSize(50*xAdj);
             textAlign(CENTER);
             if(CourseSet===0) {
 
@@ -325,7 +325,7 @@
                }
                background(BackColor);
                text("Number of Players",400*xAdj,100);
-               textSize(50);
+               textSize(50*xAdj);
                j=NumberOfPlayers;
                for(i=0; i<4; i++) {
                   fill(BoxColor);
@@ -424,7 +424,7 @@
             }
             size(800*xAdj,1200);
             ScreenSelect();
-            textSize(50);
+            textSize(50*xAdj);
             textAlign(CENTER);
             if(HoleNum===closestHole) {
                fill(SecondColor);
@@ -857,26 +857,26 @@
          mouseClicked = function() {
             background(BackColor);
             // Choose Setup Page
-            if(mouseX>=0 && mouseX<=200 && mouseY>=1050 && mouseY<=1150) {
+            if(mouseX>=0*xAdj && mouseX<=200*xAdj && mouseY>=1050 && mouseY<=1150) {
                CourseSet=0;
                AceScreen=1;
             }
             // Choose Strokes Page
-            if(mouseX>=200 && mouseX<=400 && mouseY>=1050 && mouseY<=1150) {
+            if(mouseX>=200*xAdj && mouseX<=400*xAdj && mouseY>=1050 && mouseY<=1150) {
                GreenDist();
                AceScreen=2;
             }
             // Choose Score Card Page          
-            if(mouseX>=400 && mouseX<=600 && mouseY>=1050 && mouseY<=1150) {
+            if(mouseX>=400*xAdj && mouseX<=600*xAdj && mouseY>=1050 && mouseY<=1150) {
                AceScreen=3;
             } 
             // Choose Result Page           
-            if(mouseX>=600 && mouseX<=800 && mouseY>=1050 && mouseY<=1150) {
+            if(mouseX>=600*xAdj && mouseX<=800*xAdj && mouseY>=1050 && mouseY<=1150) {
                AceScreen=4;
             }                        
             // Recall Previous Data
             if(AceScreen===0) {
-               if(mouseX>=50 && mouseX<=375 && mouseY>=200 && mouseY<=300) {
+               if(mouseX>=50*xAdj && mouseX<=375*xAdj && mouseY>=200 && mouseY<=300) {
                   var F1=JSON.parse(window.localStorage.getItem('F'));
                   Front = Number(F1);
                   var B1=JSON.parse(window.localStorage.getItem('B'));
@@ -904,7 +904,7 @@
                   calcScores();                  
                }
                // Clear Previous Data
-               if(mouseX>=425 && mouseX<=750 && mouseY>=200 && mouseY<=300) {
+               if(mouseX>=425*xAdj && mouseX<=750*xAdj && mouseY>=200 && mouseY<=300) {
                   window.localStorage.clear();
                }
                AceScreen=1;
@@ -914,16 +914,16 @@
                for (i=0; i<3; i++) {
                   // Select FRONT & BACK Courses
                   SameCourse=1;
-                  if(mouseX>=100+200*i && mouseX<=300+200*i && mouseY>=70 && mouseY<=140) {
+                  if(mouseX>=100*xAdj+200*i*xAdj && mouseX<=300*xAdj+200*i*xAdj && mouseY>=70 && mouseY<=140) {
                      Front=i;
                   }
-                  if(mouseX>=100+200*i && mouseX<=300+200*i && mouseY>=200 && mouseY<=270) {
+                  if(mouseX>=100*xAdj+200*i*xAdj && mouseX<=300*xAdj+200*i*xAdj && mouseY>=200 && mouseY<=270) {
                      Back=i;
                   }
 
                }
                // Continue to Player Data
-               if(mouseX>=300 && mouseX<=500 && mouseY>=300 && mouseY<=370) {
+               if(mouseX>=300*xAdj && mouseX<=500*xAdj && mouseY>=300 && mouseY<=370) {
                   if(Front>=0 && Front<=2 && Back>=0 && Back<=2 && Front!=Back) {
                      CourseSet=1;
                      Restart = 0;
@@ -939,7 +939,7 @@
 
 //             Restart - New Game               
 
-               if(mouseX>=300 && mouseX<=500 && mouseY>=500 && mouseY<=570) {
+               if(mouseX>=300*xAdj && mouseX<=500*xAdj && mouseY>=500 && mouseY<=570) {
                   window.localStorage.clear();
                   Front=3;
                   Back=3;
@@ -968,7 +968,7 @@
             }
             if(AceScreen===1 && CourseSet===1) {
                for (i=0; i<4; i++) {
-                  if(mouseX>=200+i*100 && mouseX<=300+i*100 && mouseY>=200 && mouseY<=300) {
+                  if(mouseX>=200*xAdj+i*100*xAdj && mouseX<=300*xAdj+i*100*xAdj && mouseY>=200 && mouseY<=300) {
                      background(BackColor);
                      NumberOfPlayers=i+1;
                      CourseSet=2;
@@ -985,7 +985,7 @@
 
                for (i=0; i<10; i++) {
                   for (j=0; j<4; j++) {
-                     if(mouseX>=0+80*i && mouseX<=80+80*i && mouseY>=200+j*80 && mouseY<=280+j*80) {
+                     if(mouseX>=0*xAdj+80*i*xAdj && mouseX<=80*xAdj+80*i*xAdj && mouseY>=200+j*80 && mouseY<=280+j*80) {
                         PlayerCourseHandicap[PlayerCount]=i+j*10;
 
                         temp=floor((36-PlayerCourseHandicap[PlayerCount])/2);
@@ -1019,7 +1019,7 @@
             }
 
             if(AceScreen===1 && CourseSet===3) {
-                  if(mouseX>=300 && mouseX<=500 && mouseY>=800 && mouseY<=870) {
+                  if(mouseX>=300*xAdj && mouseX<=500*xAdj && mouseY>=800 && mouseY<=870) {
                      AceScreen=2
                      storeIt();
                      GreenDist();
@@ -1031,7 +1031,7 @@
             if(AceScreen===2) {
                for (var i = 0; i < NumberOfPlayers; i++) {
                   for (var j = 0; j < 8; j++) {
-                     if(mouseX>=220+70*j && mouseX<=290+70*j && mouseY>=200+i*80 && mouseY<=280+i*80) {
+                     if(mouseX>=220*xAdj+70*j*xAdj && mouseX<=290*xAdj+70*j*xAdj && mouseY>=200+i*80 && mouseY<=280+i*80) {
                         PlayerHoleStrokes[i*18+HoleNum-1]=j+1;
                      }
                   }
@@ -1042,20 +1042,20 @@
                window.localStorage.setItem('HN',JSON.stringify(HoleNum));               
 
                // Back up to Previous Hole
-               if(mouseX>=50 && mouseX<=250 && mouseY>=550 && mouseY<=630) { 
+               if(mouseX>=50*xAdj && mouseX<=250*xAdj && mouseY>=550 && mouseY<=630) { 
                   if(HoleNum>1) {
                         HoleNum=HoleNum-1;
                   }
                }
 
                // Proceed to Next Hole
-               if(mouseX>=550 && mouseX<=750 && mouseY>=550 && mouseY<=630) {
+               if(mouseX>=550*xAdj && mouseX<=750*xAdj && mouseY>=550 && mouseY<=630) {
                   if(HoleNum<18) {
                      HoleNum=HoleNum+1;
                   }
                }
                GreenDist();
-               if(mouseX>=50 && mouseX<=700 && mouseY>=650 && mouseY<=730) {
+               if(mouseX>=50*xAdj && mouseX<=700*xAdj && mouseY>=650 && mouseY<=730) {
                   HoleNum=closestHole;
                }                
                draw();
