@@ -505,7 +505,8 @@
             else {
                text("Jump to Nearest Hole (#"+closestHole+")",400*xAdj,715);               
             }
-            text("Points: "+PlayerHoleScore[4*18+HoleNum-1],400*xAdj,615);            
+            text("Points: "+PlayerHoleScore[4*18+HoleNum-1],400*xAdj,615);
+            text(GreenDistance[HoleNum-1].toFixed(0)+" yards to hole.",400*xAdj,815);            
          };
 
 //       Display Score Card      
