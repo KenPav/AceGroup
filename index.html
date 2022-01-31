@@ -193,7 +193,7 @@
             
             if(startLocation===0) {
                trackLocation();
-               setInterval(trackLocation,15000);
+               setInterval(trackLocation,5000);
                startLocation=1;
             }            
 
@@ -435,6 +435,7 @@
 //       Enter Player Scores for each Hole, Display Team Points      
 
          var enterStrokes = function(Hole) {
+            GreenDist();
             xAdj=1;
             yAdj=1;
             xOrig=800;
@@ -904,7 +905,6 @@
             }
             // Choose Strokes Page
             if(mouseX>=200*xAdj && mouseX<=400*xAdj && mouseY>=1050 && mouseY<=1150) {
-               GreenDist();
                AceScreen=2;
             }
             // Choose Score Card Page          
@@ -1063,7 +1063,6 @@
                   if(mouseX>=300*xAdj && mouseX<=500*xAdj && mouseY>=800 && mouseY<=870) {
                      AceScreen=2
                      storeIt();
-                     GreenDist();
                      return;
                   }
                
@@ -1095,7 +1094,6 @@
                      HoleNum=HoleNum+1;
                   }
                }
-               GreenDist();
                if(mouseX>=50*xAdj && mouseX<=700*xAdj && mouseY>=650 && mouseY<=730) {
                   HoleNum=closestHole;
                }                
