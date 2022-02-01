@@ -117,8 +117,9 @@
                case 90:
          //        alert('landscape');
                   isVert=0;
-                  myWidth=lWidth;
-                  myHeight=lHeight;
+                  myWidth=window.screen.availWidth;
+                  myHeight=window.screen.availHeight;
+                  window.resizeTo(resizeLW,resizeLH);
                   xZoom=1;
                   yZoom=1;
                   console.log(isVert,myWidth,myHeight);
@@ -126,8 +127,9 @@
                case -90:
          //        alert('landscape');
                   isVert=0;
-                  myWidth=lWidth;
-                  myHeight=lHeight;                 
+                  myWidth=window.screen.availWidth;
+                  myHeight=window.screen.availHeight;
+                  window.resizeTo(resizeLW,resizeLH);
                   xZoom=1;
                   yZoom=1;
                   console.log(isVert,myWidth,myHeight);
@@ -135,8 +137,9 @@
                case 0:
          //        alert('portrait');
                   isVert=1;
-                  myWidth=pWidth;
-                  myHeight=pHeight;                 
+                  myWidth=window.screen.availWidth;
+                  myHeight=window.screen.availHeight;
+                  window.resizeTo(resizePW,resizePH);
                   xZoom=1;
                   yZoom=1;
                   console.log(isVert,myWidth,myHeight);
@@ -144,8 +147,9 @@
                case 180:
          //        alert('portrait');
                   isVert=1;
-                  myWidth=pWidth;
-                  myHeight=pHeight;
+                  myWidth=window.screen.availWidth;
+                  myHeight=window.screen.availHeight;
+                  window.resizeTo(resizePW,resizePH);
                   xZoom=1;
                   yZoom=1;
                   console.log(isVert,myWidth,myHeight);                 
@@ -202,10 +206,14 @@
             if(myWidth<myHeight) {
                pWidth=myWidth;
                pHeight=myHeight;
+               var resizePW=window.outerWidth
+               var resizePH=window.outerHeight
             }
             else {
                lWidth=myWidth;
                lHeight=myHeight;               
+               var resizeLW=window.outerWidth
+               var resizeLH=window.outerHeight
             }
             textSize(45*xAdj);
             textAlign(CENTER);
@@ -293,6 +301,8 @@
 //       Display Player Names and Course Handicaps (CourseSet=3)
 
          var enterSetup = function() {
+
+            console.log(window.screen.availWidth,window.screen.availHeight,window.innerWidth,window.innerHeight);
 
 //          Begin Tracking Location
             
