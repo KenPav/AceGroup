@@ -207,18 +207,19 @@
             if(myWidth<myHeight) {
                pWidth=myWidth;
                pHeight=myHeight;
+            console.log("if pWidth,lWidth:",pWidth,lWidth);
 //               var resizePW=window.outerWidth
 //               var resizePH=window.outerHeight
             }
             else {
                lWidth=myWidth;
                lHeight=myHeight;               
+            console.log("else pWidth,lWidth:",pWidth,lWidth);
 //               var resizeLW=window.outerWidth
 //               var resizeLH=window.outerHeight
             }
             textSize(45*xAdj);
             textAlign(CENTER);
-            console.log("pWidth,lWidth:",pWidth,lWidth);
 
             if(pWidth===0) {
                fill(BoxColor);
