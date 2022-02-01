@@ -114,6 +114,7 @@
 
          function doOnOrientationChange() {
              switch(window.orientation) {
+               console.log("availWidth, availHeight:",window.screen.availWidth,window.screen.availHeight);
                case 90:
          //        alert('landscape');
                   isVert=0;
@@ -207,14 +208,14 @@
             if(myWidth<myHeight) {
                pWidth=myWidth;
                pHeight=myHeight;
-            console.log("if pWidth,lWidth:",pWidth,lWidth);
+//            console.log("if pWidth,lWidth:",pWidth,lWidth);
 //               var resizePW=window.outerWidth
 //               var resizePH=window.outerHeight
             }
             else {
                lWidth=myWidth;
                lHeight=myHeight;               
-            console.log("else pWidth,lWidth:",pWidth,lWidth);
+//            console.log("else pWidth,lWidth:",pWidth,lWidth);
 //               var resizeLW=window.outerWidth
 //               var resizeLH=window.outerHeight
             }
