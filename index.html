@@ -58,10 +58,10 @@
          var startLocation = 0;
 
          var isVert=1;
-         var myWidth=window.innerWidth;
-         var myHeight=window.innerHeight;
-         var zoomWidth=window.innerWidth;
-         var zoomHeight=window.innerHeight;
+         var myWidth=window.screen.availWidth;
+         var myHeight=window.screen.availHeight;
+         var zoomWidth=window.screen.availWidth;
+         var zoomHeight=window.screen.availHeight;;
          var xAdj=1;
          var yAdj=1;
          var xZoom=1;
@@ -193,8 +193,6 @@
 
             xAdj=1;
             yAdj=1;
-            myWidth=window.innerWidth;
-            myHeight=window.innerHeight;
             xOrig=800;
             yOrig=1200;
             if(myWidth<xOrig) {
@@ -206,14 +204,14 @@
             if(myWidth<myHeight) {
                pWidth=myWidth;
                pHeight=myHeight;
-               var resizePW=window.outerWidth
-               var resizePH=window.outerHeight
+//               var resizePW=window.outerWidth
+//               var resizePH=window.outerHeight
             }
             else {
                lWidth=myWidth;
                lHeight=myHeight;               
-               var resizeLW=window.outerWidth
-               var resizeLH=window.outerHeight
+//               var resizeLW=window.outerWidth
+//               var resizeLH=window.outerHeight
             }
             textSize(45*xAdj);
             textAlign(CENTER);
@@ -246,8 +244,6 @@
 
             xAdj=1;
             yAdj=1;
-            myWidth=window.innerWidth;
-            myHeight=window.innerHeight;
             xOrig=800;
             yOrig=1200;
             if(myWidth<xOrig) {
