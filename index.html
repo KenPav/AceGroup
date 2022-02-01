@@ -58,8 +58,8 @@
          var startLocation = 0;
 
          var isVert=1;
-         var myWidth=window.screen.availWidth;
-         var myHeight=window.screen.availHeight;
+         var myWidth=window.innerWidth;
+         var myHeight=window.innerHeight;
          var zoomWidth=window.screen.availWidth;
          var zoomHeight=window.screen.availHeight;;
          var xAdj=1;
@@ -118,8 +118,8 @@
                case 90:
          //        alert('landscape');
                   isVert=0;
-                  myWidth=window.screen.availHeight;
-                  myHeight=window.screen.availWidth;
+                  myWidth=window.innerWidth;
+                  myHeight=window.innerHeight;
 //                  window.resizeTo(resizeLW,resizeLH);
                   xZoom=1;
                   yZoom=1;
@@ -128,8 +128,8 @@
                case -90:
          //        alert('landscape');
                   isVert=0;
-                  myWidth=window.screen.availHeight;
-                  myHeight=window.screen.availWidth;
+                  myWidth=window.innerWidth;
+                  myHeight=window.innerHeight;
 //                  window.resizeTo(resizeLW,resizeLH);
                   xZoom=1;
                   yZoom=1;
@@ -138,8 +138,8 @@
                case 0:
          //        alert('portrait');
                   isVert=1;
-                  myWidth=window.screen.availWidth;
-                  myHeight=window.screen.availHeight;
+                  myWidth=window.innerWidth;
+                  myHeight=window.innerHeight;
 //                  window.resizeTo(resizePW,resizePH);
                   xZoom=1;
                   yZoom=1;
@@ -148,8 +148,8 @@
                case 180:
          //        alert('portrait');
                   isVert=1;
-                  myWidth=window.screen.availWidth;
-                  myHeight=window.screen.availHeight;
+                  myWidth=window.innerWidth;
+                  myHeight=window.innerHeight;
 //                  window.resizeTo(resizePW,resizePH);
                   xZoom=1;
                   yZoom=1;
