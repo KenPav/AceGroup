@@ -170,20 +170,20 @@
          var ScreenSelect = function() {
             fill(BoxColor);
 
-            rect(0*xAdj,1050,200*xAdj,100);
-            rect(200*xAdj,1050,200*xAdj,100);
-            rect(400*xAdj,1050,200*xAdj,100);           
-            rect(600*xAdj,1050,200*xAdj,100);
+            rect(0*xAdj,1050*yAdj,200*xAdj,100*yAdj);
+            rect(200*xAdj,1050*yAdj,200*xAdj,100*yAdj);
+            rect(400*xAdj,1050*yAdj,200*xAdj,100*yAdj);           
+            rect(600*xAdj,1050*yAdj,200*xAdj,100*yAdj);
 
             textSize(50*xAdj);
             textAlign(CENTER);
             fill(FirstColor);
 
-            text("Setup",100*xAdj,1115);
-            text("Scores",300*xAdj,1115);
-            text("Score",500*xAdj,1095);
-            text("Card",500*xAdj,1135);
-            text("Results",700*xAdj,1115);
+            text("Setup",100*xAdj,1115*yAdj);
+            text("Scores",300*xAdj,1115*yAdj);
+            text("Score",500*xAdj,1095*yAdj);
+            text("Card",500*xAdj,1135*yAdj);
+            text("Results",700*xAdj,1115*yAdj);
 
 
          }
@@ -203,7 +203,7 @@
                xAdj=(myWidth/xOrig)*xZoom;
                yAdj=1;
             }
-            size(xOrig*xAdj,yOrig);
+            size(xOrig*xAdj,yOrig*yAdj);
             background(BackColor);
 
             if(myWidth<myHeight) {
