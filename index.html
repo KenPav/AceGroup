@@ -302,7 +302,7 @@
 
          var enterSetup = function() {
 
-            console.log(window.screen.availWidth,window.screen.availHeight,window.innerWidth,window.innerHeight);
+            console.log(window.screen.availWidth,window.screen.availHeight,window.innerWidth,window.innerHeight,window.outerWidth,window.outerHeight);
 
 //          Begin Tracking Location
             
@@ -330,7 +330,9 @@
             }
             size(xOrig*xAdj,yOrig);
             background(BackColor);
+            console.log("pre-ScreenSelect");
             ScreenSelect();
+            console.log("post-ScreenSelect");
             if (SameCourse===0) {
                textSize(35*xAdj);
                fill(255,0,0);
