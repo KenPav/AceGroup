@@ -191,6 +191,12 @@
 
          function setScreenViews() {
 
+            window.addEventListener('orientationchange', doOnOrientationChange);
+            // Initial execution if needed
+//            doOnOrientationChange();
+
+
+
             xAdj=1;
             yAdj=1;
             xOrig=800;
@@ -215,6 +221,7 @@
             }
             textSize(45*xAdj);
             textAlign(CENTER);
+            console.log("pWidth,lWidth:",pWidth,lWidth);
 
             if(pWidth===0) {
                fill(BoxColor);
@@ -305,10 +312,6 @@
             if(startLocation===0) {
                console.log("at Start Tracking & Orientation Change");
                console.log("myWidth & myHeight",myWidth,myHeight)
-               window.addEventListener('orientationchange', doOnOrientationChange);
-               // Initial execution if needed
-               doOnOrientationChange();
-
 //               window.addEventListener('resize', doOnZoomChange);
 
                trackLocation();
