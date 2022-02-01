@@ -191,9 +191,6 @@
 
          function setScreenViews() {
 
-            window.addEventListener('orientationchange', doOnOrientationChange);
-            // Initial execution if needed
-//            doOnOrientationChange();
 
 
 
@@ -248,6 +245,9 @@
 //       Starting Screen
 
          function localData() {
+            window.addEventListener('orientationchange', doOnOrientationChange);
+            // Initial execution if needed
+//            doOnOrientationChange();
 
             xAdj=1;
             yAdj=1;
