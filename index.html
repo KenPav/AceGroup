@@ -113,8 +113,8 @@
 
 
          function doOnOrientationChange() {
+               console.log("availWidth, availHeight: ",window.screen.availWidth,window.screen.availHeight);
              switch(window.orientation) {
-               console.log("availWidth, availHeight:",window.screen.availWidth,window.screen.availHeight);
                case 90:
          //        alert('landscape');
                   isVert=0;
