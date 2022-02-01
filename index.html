@@ -68,6 +68,11 @@
          var yZoom=1;
          var xOrig=800;
          var yOrig=1200;
+         var pWidth=0;
+         var pHeight=0;
+         var lWidth=0;
+         var lHeight=0;
+
 
          background(BackColor);
          var monthNames = ["January ","February ","March ","April ","May ","June ","July ","August ","September ","October ","November ","December "];
@@ -112,29 +117,37 @@
                case 90:
          //        alert('landscape');
                   isVert=0;
-                  myWidth=window.innerWidth;
-                  myHeight=window.innerHeight;
+                  myWidth=lWidth;
+                  myHeight=lHeight;
+                  xZoom=1;
+                  yZoom=1;
                   console.log(isVert,myWidth,myHeight);
                  break;
                case -90:
          //        alert('landscape');
                   isVert=0;
-                  myWidth=window.innerWidth;
-                  myHeight=window.innerHeight;                 
+                  myWidth=lWidth;
+                  myHeight=lHeight;                 
+                  xZoom=1;
+                  yZoom=1;
                   console.log(isVert,myWidth,myHeight);
                   break;
                case 0:
          //        alert('portrait');
                   isVert=1;
-                  myWidth=window.innerWidth;
-                  myHeight=window.innerHeight;                 
+                  myWidth=pWidth;
+                  myHeight=pHeight;                 
+                  xZoom=1;
+                  yZoom=1;
                   console.log(isVert,myWidth,myHeight);
                   break;
                case 180:
          //        alert('portrait');
                   isVert=1;
-                  myWidth=window.innerWidth;
-                  myHeight=window.innerHeight;
+                  myWidth=pWidth;
+                  myHeight=pHeight;
+                  xZoom=1;
+                  yZoom=1;
                   console.log(isVert,myWidth,myHeight);                 
                   break;
                default:
@@ -147,26 +160,19 @@
             zoomHeight=window.innerHeight;
             xZoom=xOrig/zoomWidth;
             yZoom=yOrig/zoomHeight;
-
          }
 
          var ScreenSelect = function() {
-
             fill(BoxColor);
-            
+
             rect(0*xAdj,1050,200*xAdj,100);
             rect(200*xAdj,1050,200*xAdj,100);
             rect(400*xAdj,1050,200*xAdj,100);           
             rect(600*xAdj,1050,200*xAdj,100);
 
-
-
             textSize(50*xAdj);
             textAlign(CENTER);
             fill(FirstColor);
-
-//            text("isVert, myWidth, myHeight: ",400,850);
-//            text(isVert+",  "+myWidth+",  "+myHeight,400,910);
 
             text("Setup",100*xAdj,1115);
             text("Scores",300*xAdj,1115);
@@ -176,29 +182,64 @@
 
 
          }
+//       AceScreen = -1
+//       Set Landscape and Portrait Screen Dimensions
+
+         function setScreenViews() {
+
+            xAdj=1;
+            yAdj=1;
+            myWidth=window.innerWidth;
+            myHeight=window.innerHeight;
+            xOrig=800;
+            yOrig=1200;
+            if(myWidth<xOrig) {
+               xAdj=(myWidth/xOrig)*xZoom;
+            }
+            size(xOrig*xAdj,yOrig);
+            background(BackColor);
+
+            if(myWidth<myHeight) {
+               pWidth=myWidth;
+               pHeight=myHeight;
+            }
+            else {
+               lWidth=myWidth;
+               lHeight=myHeight;               
+            }
+            textSize(45*xAdj);
+            textAlign(CENTER);
+
+            if(pWidth===0) {
+               fill(BoxColor);
+               rect(200*xAdj,400,400*xAdj,100);
+               fill(FirstColor);
+               text("Rotate Screen to",400*xAdj,240);
+               text("Portrait View",400*xAdj,285);
+            }
+
+            if(lWidth===0) {
+               fill(BoxColor);
+               rect(200*xAdj,400,400*xAdj,100);
+               fill(FirstColor);
+               text("Rotate Screen to",400*xAdj,240);
+               text("Landscape View",400*xAdj,285);
+            }
+            if(pWidth>0 && lWidth>0) {
+               AceScreen=1;
+            }
+         }
+
 
 //       AceScreen = 0
 //       Starting Screen
 
-         var localData = function() {
-
-            window.addEventListener('orientationchange', doOnOrientationChange);
-            // Initial execution if needed
-            doOnOrientationChange();
-            window.addEventListener('resize', doOnZoomChange);
-
-
-
-//          Begin Tracking Location
-            
-            if(startLocation===0) {
-               trackLocation();
-               setInterval(trackLocation,5000);
-               startLocation=1;
-            }            
+         function localData() {
 
             xAdj=1;
             yAdj=1;
+            myWidth=window.innerWidth;
+            myHeight=window.innerHeight;
             xOrig=800;
             yOrig=1200;
             if(myWidth<xOrig) {
@@ -213,7 +254,7 @@
             textSize(45*xAdj);
             textAlign(CENTER);
             if(window.localStorage.getItem('PD')===null) {
-               AceScreen=1;
+               AceScreen=-1;
                draw();
             }
             var pData=JSON.parse(window.localStorage.getItem('PD'));
@@ -226,22 +267,22 @@
             text(monthNames[pData.getMonth()]+pData.getDate()+", "+pData.getFullYear()+" @ "+pData.getHours()+":"+pData.getMinutes()+":"+pData.getSeconds(),400*xAdj,150);
          }
 
-        var trackLocation = function() {
+         function trackLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(myPosition,displayError,{enableHighAccuracy: true});
             } else { 
                 console.log("Geolocation is not supported by this browser.");
             }
-        }
+         }
 
-        function myPosition(position) {
+         function myPosition(position) {
             myLat = position.coords.latitude;
             myLong = position.coords.longitude;           
-        }
+         }
 
-        function displayError(){
+         function displayError(){
             
-        }
+         }
 
 
 
@@ -252,6 +293,24 @@
 //       Display Player Names and Course Handicaps (CourseSet=3)
 
          var enterSetup = function() {
+
+//          Begin Tracking Location
+            
+            if(startLocation===0) {
+               console.log("at Start Tracking & Orientation Change");
+               console.log("myWidth & myHeight",myWidth,myHeight)
+               window.addEventListener('orientationchange', doOnOrientationChange);
+               // Initial execution if needed
+               doOnOrientationChange();
+
+               window.addEventListener('resize', doOnZoomChange);
+
+               trackLocation();
+               setInterval(trackLocation,5000);
+               startLocation=1;
+            }            
+
+
             xAdj=1;
             yAdj=1;
             xOrig=800;
@@ -390,7 +449,7 @@
                return;
             }
 
-//       Display Player Names and Course Handicaps (CourseSet=3)
+//       Display Player Names, Course Handicaps & Required Points (CourseSet=3)
 
             if (CourseSet===3) {
                fill(BoxColor);
@@ -435,6 +494,9 @@
 //       Enter Player Scores for each Hole, Display Team Points      
 
          var enterStrokes = function(Hole) {
+            console.log("at enter strokes");
+            console.log("myWidth & myHeight",myWidth,myHeight)
+
             GreenDist();
             xAdj=1;
             yAdj=1;
@@ -786,7 +848,11 @@
             window.localStorage.setItem('NumP',JSON.stringify(NumberOfPlayers));
             window.localStorage.setItem('F',JSON.stringify(Front));
             window.localStorage.setItem('B',JSON.stringify(Back));
-            window.localStorage.setItem('HN',JSON.stringify(HoleNum));                     
+            window.localStorage.setItem('HN',JSON.stringify(HoleNum)); 
+            window.localStorage.setItem('xP',JSON.stringify(pWidth));                     
+            window.localStorage.setItem('yP',JSON.stringify(pHeight));
+            window.localStorage.setItem('xL',JSON.stringify(lWidth));                     
+            window.localStorage.setItem('yL',JSON.stringify(lHeight));
          }
 
 //       Calculate Player & Team Hole Scores
@@ -815,6 +881,9 @@
 //       Calculate Closest Hole Information
 
          GreenDist = function() {
+            console.log("at GreenDist");
+            console.log("myWidth & myHeight",myWidth,myHeight)
+
             for(i=0; i<18; i++) {
                if(i<9) {
                   Lat = GreenLat[Front*9+i];
@@ -898,26 +967,24 @@
 
          mouseClicked = function() {
             background(BackColor);
-            // Choose Setup Page
-            if(mouseX>=0*xAdj && mouseX<=200*xAdj && mouseY>=1050 && mouseY<=1150) {
-               CourseSet=0;
-               AceScreen=1;
+
+            if(AceScreen===-1) {
+               if(mouseX>=200*xAdj && mouseX<=600*xAdj && mouseY>=400 && mouseY<=500) { 
+                  AceScreen=1;
+               }              
             }
-            // Choose Strokes Page
-            if(mouseX>=200*xAdj && mouseX<=400*xAdj && mouseY>=1050 && mouseY<=1150) {
-               AceScreen=2;
-            }
-            // Choose Score Card Page          
-            if(mouseX>=400*xAdj && mouseX<=600*xAdj && mouseY>=1050 && mouseY<=1150) {
-               AceScreen=3;
-            } 
-            // Choose Result Page           
-            if(mouseX>=600*xAdj && mouseX<=800*xAdj && mouseY>=1050 && mouseY<=1150) {
-               AceScreen=4;
-            }                        
+
             // Recall Previous Data
             if(AceScreen===0) {
                if(mouseX>=50*xAdj && mouseX<=375*xAdj && mouseY>=200 && mouseY<=300) {
+                  var pW=JSON.parse(window.localStorage.getItem('xP'));
+                  pWidth = Number(pW);
+                  var pH=JSON.parse(window.localStorage.getItem('yP'));
+                  pHeight = Number(pH);
+                  var lW=JSON.parse(window.localStorage.getItem('xL'));
+                  lWidth = Number(lW);
+                  var lH=JSON.parse(window.localStorage.getItem('yL'));
+                  lHeight = Number(lH);
                   var F1=JSON.parse(window.localStorage.getItem('F'));
                   Front = Number(F1);
                   var B1=JSON.parse(window.localStorage.getItem('B'));
@@ -943,12 +1010,15 @@
                      }
                   }
                   calcScores();                  
+                  AceScreen=1;
+                  draw()
                }
                // Clear Previous Data
                if(mouseX>=425*xAdj && mouseX<=750*xAdj && mouseY>=200 && mouseY<=300) {
                   window.localStorage.clear();
+                  AceScreen=-1;
+                  draw()
                }
-               AceScreen=1;
                return;
             }
             if(AceScreen===1 && CourseSet===0) {
@@ -1099,6 +1169,25 @@
                }                
                draw();
             }            
+
+            // Choose Setup Page
+            if(mouseX>=0*xAdj && mouseX<=200*xAdj && mouseY>=1050 && mouseY<=1150) {
+               CourseSet=0;
+               AceScreen=1;
+            }
+            // Choose Strokes Page
+            if(mouseX>=200*xAdj && mouseX<=400*xAdj && mouseY>=1050 && mouseY<=1150) {
+               AceScreen=2;
+            }
+            // Choose Score Card Page          
+            if(mouseX>=400*xAdj && mouseX<=600*xAdj && mouseY>=1050 && mouseY<=1150) {
+               AceScreen=3;
+            } 
+            // Choose Result Page           
+            if(mouseX>=600*xAdj && mouseX<=800*xAdj && mouseY>=1050 && mouseY<=1150) {
+               AceScreen=4;
+            }                        
+
          };
 
 
@@ -1130,6 +1219,11 @@
          draw = function() {
 
 // Round SETUP Section
+
+            if (AceScreen===-1) {
+
+               setScreenViews();            
+            }
 
             if (AceScreen===0) {
 
