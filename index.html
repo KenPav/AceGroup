@@ -68,11 +68,6 @@
          var yZoom=1;
          var xOrig=800;
          var yOrig=1000;
-/*         var pWidth=0;
-         var pHeight=0;
-         var lWidth=0;
-         var lHeight=0;
-*/
 
          background(BackColor);
          var monthNames = ["January ","February ","March ","April ","May ","June ","July ","August ","September ","October ","November ","December "];
@@ -120,7 +115,6 @@
                   isVert=0;
                   myWidth=window.innerWidth;
                   myHeight=window.innerHeight;
-//                  window.resizeTo(resizeLW,resizeLH);
                   xZoom=1;
                   yZoom=1;
                   console.log("case=90, myWidth, myHeight: ",myWidth,myHeight);
@@ -130,7 +124,6 @@
                   isVert=0;
                   myWidth=window.innerWidth;
                   myHeight=window.innerHeight;
-//                  window.resizeTo(resizeLW,resizeLH);
                   xZoom=1;
                   yZoom=1;
                   console.log("case=-90, myWidth, myHeight: ",myWidth,myHeight);
@@ -140,7 +133,6 @@
                   isVert=1;
                   myWidth=window.innerWidth;
                   myHeight=window.innerHeight;
-//                  window.resizeTo(resizePW,resizePH);
                   xZoom=1;
                   yZoom=1;
                   console.log("case=0, myWidth, myHeight: ",myWidth,myHeight);
@@ -150,7 +142,6 @@
                   isVert=1;
                   myWidth=window.innerWidth;
                   myHeight=window.innerHeight;
-//                  window.resizeTo(resizePW,resizePH);
                   xZoom=1;
                   yZoom=1;
                   console.log("case=180, myWidth, myHeight: ",myWidth,myHeight);
@@ -160,13 +151,13 @@
              }
          }
 
-         function doOnZoomChange() {
+/*         function doOnZoomChange() {
             zoomWidth=window.innerWidth;
             zoomHeight=window.innerHeight;
             xZoom=xOrig/zoomWidth;
             yZoom=yOrig/zoomHeight;
          }
-
+*/
          var ScreenSelect = function() {
             fill(BoxColor);
 
@@ -187,58 +178,6 @@
          }
 
 
-//       AceScreen = -1
-//       Set Landscape and Portrait Screen Dimensions
-
-/*         function setScreenViews() {
-            xAdj=1;
-            yAdj=1;
-            xOrig=800;
-            yOrig=1200;
-            if(myWidth<xOrig) {
-               xAdj=(myWidth/xOrig)*xZoom;
-               yAdj=1;
-            }
-            size(xOrig*xAdj,yOrig*yAdj);
-            background(BackColor);
-
-            if(myWidth<myHeight) {
-               pWidth=myWidth;
-               pHeight=myHeight;
-            console.log("if pWidth,lWidth:",pWidth,lWidth);
-//               var resizePW=window.outerWidth
-//               var resizePH=window.outerHeight
-            }
-            else {
-               lWidth=myWidth;
-               lHeight=myHeight;               
-            console.log("else pWidth,lWidth:",pWidth,lWidth);
-//               var resizeLW=window.outerWidth
-//               var resizeLH=window.outerHeight
-            }
-            textSize(45*xAdj);
-            textAlign(CENTER);
-
-            if(pWidth===0) {
-               fill(BoxColor);
-               rect(200*xAdj,400*yAdj,400*xAdj,100*yAdj);
-               fill(FirstColor);
-               text("Rotate Screen to",400*xAdj,240*yAdj);
-               text("Portrait View",400*xAdj,285*yAdj);
-            }
-
-            if(lWidth===0) {
-               fill(BoxColor);
-               rect(200*xAdj,400*yAdj,400*xAdj,100*yAdj);
-               fill(FirstColor);
-               text("Rotate Screen to",400*xAdj,240*yAdj);
-               text("Landscape View",400*xAdj,285*yAdj);
-            }
-            if(pWidth>0 && lWidth>0) {
-               AceScreen=1;
-            }
-         }
-*/
 
 //       AceScreen = 0
 //       Starting Screen
@@ -858,11 +797,6 @@
             window.localStorage.setItem('F',JSON.stringify(Front));
             window.localStorage.setItem('B',JSON.stringify(Back));
             window.localStorage.setItem('HN',JSON.stringify(HoleNum)); 
-/*            window.localStorage.setItem('xP',JSON.stringify(pWidth));                     
-            window.localStorage.setItem('yP',JSON.stringify(pHeight));
-            window.localStorage.setItem('xL',JSON.stringify(lWidth));                     
-            window.localStorage.setItem('yL',JSON.stringify(lHeight));
-*/
          }
 
 //       Calculate Player & Team Hole Scores
@@ -1008,15 +942,6 @@
             // Recall Previous Data
             if(AceScreen===0) {
                if(mouseX>=50*xAdj && mouseX<=375*xAdj && mouseY>=200*yAdj && mouseY<=300*yAdj) {
-/*                  var pW=JSON.parse(window.localStorage.getItem('xP'));
-                  pWidth = Number(pW);
-                  var pH=JSON.parse(window.localStorage.getItem('yP'));
-                  pHeight = Number(pH);
-                  var lW=JSON.parse(window.localStorage.getItem('xL'));
-                  lWidth = Number(lW);
-                  var lH=JSON.parse(window.localStorage.getItem('yL'));
-                  lHeight = Number(lH);
-*/
                   var F1=JSON.parse(window.localStorage.getItem('F'));
                   Front = Number(F1);
                   var B1=JSON.parse(window.localStorage.getItem('B'));
