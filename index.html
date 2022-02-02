@@ -67,12 +67,12 @@
          var xZoom=1;
          var yZoom=1;
          var xOrig=800;
-         var yOrig=1200;
-         var pWidth=0;
+         var yOrig=1000;
+/*         var pWidth=0;
          var pHeight=0;
          var lWidth=0;
          var lHeight=0;
-
+*/
 
          background(BackColor);
          var monthNames = ["January ","February ","March ","April ","May ","June ","July ","August ","September ","October ","November ","December "];
@@ -170,31 +170,27 @@
          var ScreenSelect = function() {
             fill(BoxColor);
 
-            rect(0*xAdj,1050*yAdj,200*xAdj,100*yAdj);
-            rect(200*xAdj,1050*yAdj,200*xAdj,100*yAdj);
-            rect(400*xAdj,1050*yAdj,200*xAdj,100*yAdj);           
-            rect(600*xAdj,1050*yAdj,200*xAdj,100*yAdj);
+            rect(0*xAdj,850*yAdj,200*xAdj,100*yAdj);
+            rect(200*xAdj,850*yAdj,200*xAdj,100*yAdj);
+            rect(400*xAdj,850*yAdj,200*xAdj,100*yAdj);           
+            rect(600*xAdj,850*yAdj,200*xAdj,100*yAdj);
 
             textSize(50*xAdj);
             textAlign(CENTER);
             fill(FirstColor);
 
-            text("Setup",100*xAdj,1115*yAdj);
-            text("Scores",300*xAdj,1115*yAdj);
-            text("Score",500*xAdj,1095*yAdj);
-            text("Card",500*xAdj,1135*yAdj);
-            text("Results",700*xAdj,1115*yAdj);
-
-
+            text("Setup",100*xAdj,915*yAdj);
+            text("Scores",300*xAdj,915*yAdj);
+            text("Score",500*xAdj,895*yAdj);
+            text("Card",500*xAdj,935*yAdj);
+            text("Results",700*xAdj,915*yAdj);
          }
+
+
 //       AceScreen = -1
 //       Set Landscape and Portrait Screen Dimensions
 
-         function setScreenViews() {
-
-
-
-
+/*         function setScreenViews() {
             xAdj=1;
             yAdj=1;
             xOrig=800;
@@ -242,7 +238,7 @@
                AceScreen=1;
             }
          }
-
+*/
 
 //       AceScreen = 0
 //       Starting Screen
@@ -255,7 +251,7 @@
             xAdj=1;
             yAdj=1;
             xOrig=800;
-            yOrig=1200;
+            yOrig=1000;
             if(myWidth<xOrig) {
                xAdj=(myWidth/xOrig)*xZoom;
                yAdj=1;
@@ -269,7 +265,7 @@
             textSize(45*xAdj);
             textAlign(CENTER);
             if(window.localStorage.getItem('PD')===null) {
-               AceScreen=-1;
+               AceScreen=1;
                draw();
             }
             var pData=JSON.parse(window.localStorage.getItem('PD'));
@@ -314,10 +310,6 @@
 //          Begin Tracking Location
             
             if(startLocation===0) {
-               console.log("at Start Tracking & Orientation Change");
-               console.log("myWidth & myHeight",myWidth,myHeight)
-//               window.addEventListener('resize', doOnZoomChange);
-
                trackLocation();
                setInterval(trackLocation,5000);
                startLocation=1;
@@ -327,16 +319,14 @@
             xAdj=1;
             yAdj=1;
             xOrig=800;
-            yOrig=1200;
+            yOrig=1000;
             if(myWidth<xOrig) {
                xAdj=(myWidth/xOrig)*xZoom;
                yAdj=1;
             }
             size(xOrig*xAdj,yOrig*yAdj);
             background(BackColor);
-            console.log("pre-ScreenSelect");
             ScreenSelect();
-            console.log("post-ScreenSelect");
             if (SameCourse===0) {
                textSize(35*xAdj);
                fill(255,0,0);
@@ -469,39 +459,39 @@
 
             if (CourseSet===3) {
                fill(BoxColor);
-               rect(0*xAdj,400*yAdj,200*xAdj,100*yAdj);
-               rect(200*xAdj,400*yAdj,200*xAdj,100*yAdj);
-               rect(400*xAdj,400*yAdj,200*xAdj,100*yAdj);
-               rect(600*xAdj,400*yAdj,200*xAdj,100*yAdj);
+               rect(0*xAdj,200*yAdj,200*xAdj,100*yAdj);
+               rect(200*xAdj,200*yAdj,200*xAdj,100*yAdj);
+               rect(400*xAdj,200*yAdj,200*xAdj,100*yAdj);
+               rect(600*xAdj,200*yAdj,200*xAdj,100*yAdj);
                fill(FirstColor);
-               text("Player",100*xAdj,470*yAdj);
-               text("Course",300*xAdj,450*yAdj);
-               text(Courses[Front],500*xAdj,450*yAdj);
-               text(Courses[Back],700*xAdj,450*yAdj);
-               text("Hcp",300*xAdj,490*yAdj);
-               text("Points",500*xAdj,490*yAdj);
-               text("Points",700*xAdj,490*yAdj);
+               text("Player",100*xAdj,270*yAdj);
+               text("Course",300*xAdj,250*yAdj);
+               text(Courses[Front],500*xAdj,250*yAdj);
+               text(Courses[Back],700*xAdj,250*yAdj);
+               text("Hcp",300*xAdj,290*yAdj);
+               text("Points",500*xAdj,290*yAdj);
+               text("Points",700*xAdj,290*yAdj);
                for (var i = 0; i < NumberOfPlayers; i++) {
                   fill(BoxColor);
-                  rect(0*xAdj,500+i*70,200*xAdj,70);
-                  rect(200*xAdj,500*yAdj+i*70*yAdj,200*xAdj,70*yAdj);
-                  rect(400*xAdj,500*yAdj+i*70*yAdj,200*xAdj,70*yAdj);
-                  rect(600*xAdj,500*yAdj+i*70*yAdj,200*xAdj,70*yAdj);
+                  rect(0*xAdj,300*yAdj+i*70*yAdj,200*xAdj,70);
+                  rect(200*xAdj,300*yAdj+i*70*yAdj,200*xAdj,70*yAdj);
+                  rect(400*xAdj,300*yAdj+i*70*yAdj,200*xAdj,70*yAdj);
+                  rect(600*xAdj,300*yAdj+i*70*yAdj,200*xAdj,70*yAdj);
                   if(i===0 || i===2) {
                      fill(SecondColor);
                   }
                   else {
                      fill(FirstColor);
                   }
-                  text(PlayerName[i],100*xAdj,555*yAdj+i*70*yAdj);
-                  text(PlayerCourseHandicap[i],300*xAdj,555*yAdj+i*70*yAdj);
-                  text(ReqPts[i*3],500*xAdj,555*yAdj+i*70*yAdj);
-                  text(ReqPts[i*3+1],700*xAdj,555*yAdj+i*70*yAdj);
+                  text(PlayerName[i],100*xAdj,355*yAdj+i*70*yAdj);
+                  text(PlayerCourseHandicap[i],300*xAdj,355*yAdj+i*70*yAdj);
+                  text(ReqPts[i*3],500*xAdj,355*yAdj+i*70*yAdj);
+                  text(ReqPts[i*3+1],700*xAdj,355*yAdj+i*70*yAdj);
                }
                fill(BoxColor);
-               rect(300*xAdj,800*yAdj,200,70*yAdj);
+               rect(300*xAdj,600*yAdj,200*xAdj,70*yAdj);
                fill(FirstColor);
-               text("Continue",400*xAdj,855*yAdj);
+               text("Continue",400*xAdj,655*yAdj);
             }
          };      
          
@@ -517,7 +507,7 @@
             xAdj=1;
             yAdj=1;
             xOrig=800;
-            yOrig=1200;
+            yOrig=1000;
             if(myWidth<xOrig) {
                xAdj=(myWidth/xOrig)*xZoom;
                yAdj=1;
@@ -586,7 +576,7 @@
                text("Jump to Nearest Hole (#"+closestHole+")",400*xAdj,715*yAdj);               
             }
             text("Points: "+PlayerHoleScore[4*18+HoleNum-1],400*xAdj,615*yAdj);
-            text(GreenDistance[HoleNum-1].toFixed(0)+" yards to hole.",400*xAdj,815*yAdj);            
+            text(GreenDistance[HoleNum-1].toFixed(0)+" yards to hole.",400*xAdj,800*yAdj);            
          };
 
 //       Display Score Card      
@@ -596,7 +586,7 @@
             xAdj=0.85;
             yAdj=1;
             xOrig=1250;
-            yOrig=1200;
+            yOrig=1000;
             if(isVert===0 & myWidth<xOrig) {
                xAdj=(myWidth/xOrig)*xZoom;
                yAdj=1;
@@ -777,7 +767,7 @@
             xAdj=0.85;
             yAdj=1;
             xOrig=1050;
-            yOrig=1200;
+            yOrig=1000;
             if(isVert===0 & myWidth<xOrig) {
                xAdj=(myWidth/xOrig)*xZoom;
                yAdj=1;
@@ -868,10 +858,11 @@
             window.localStorage.setItem('F',JSON.stringify(Front));
             window.localStorage.setItem('B',JSON.stringify(Back));
             window.localStorage.setItem('HN',JSON.stringify(HoleNum)); 
-            window.localStorage.setItem('xP',JSON.stringify(pWidth));                     
+/*            window.localStorage.setItem('xP',JSON.stringify(pWidth));                     
             window.localStorage.setItem('yP',JSON.stringify(pHeight));
             window.localStorage.setItem('xL',JSON.stringify(lWidth));                     
             window.localStorage.setItem('yL',JSON.stringify(lHeight));
+*/
          }
 
 //       Calculate Player & Team Hole Scores
@@ -987,16 +978,37 @@
          mouseClicked = function() {
             background(BackColor);
 
-            if(AceScreen===-1) {
+            // Choose Setup Page
+            if(mouseX>=0*xAdj && mouseX<=200*xAdj && mouseY>=850*yAdj && mouseY<=950*yAdj) {
+               CourseSet=0;
+               AceScreen=1;
+            }
+            // Choose Strokes Page
+            if(mouseX>=200*xAdj && mouseX<=400*xAdj && mouseY>=850*yAdj && mouseY<=950*yAdj) {
+               AceScreen=2;
+            }
+            // Choose Score Card Page          
+            if(mouseX>=400*xAdj && mouseX<=600*xAdj && mouseY>=850*yAdj && mouseY<=950*yAdj) {
+               AceScreen=3;
+            } 
+            // Choose Result Page           
+            if(mouseX>=600*xAdj && mouseX<=800*xAdj && mouseY>=850*yAdj && mouseY<=950*yAdj) {
+               AceScreen=4;
+            }                        
+
+
+/*            if(AceScreen===-1) {
                if(mouseX>=200*xAdj && mouseX<=600*xAdj && mouseY>=400*yAdj && mouseY<=500*yAdj) { 
                   AceScreen=1;
                }              
+
             }
+*/
 
             // Recall Previous Data
             if(AceScreen===0) {
                if(mouseX>=50*xAdj && mouseX<=375*xAdj && mouseY>=200*yAdj && mouseY<=300*yAdj) {
-                  var pW=JSON.parse(window.localStorage.getItem('xP'));
+/*                  var pW=JSON.parse(window.localStorage.getItem('xP'));
                   pWidth = Number(pW);
                   var pH=JSON.parse(window.localStorage.getItem('yP'));
                   pHeight = Number(pH);
@@ -1004,6 +1016,7 @@
                   lWidth = Number(lW);
                   var lH=JSON.parse(window.localStorage.getItem('yL'));
                   lHeight = Number(lH);
+*/
                   var F1=JSON.parse(window.localStorage.getItem('F'));
                   Front = Number(F1);
                   var B1=JSON.parse(window.localStorage.getItem('B'));
@@ -1035,7 +1048,7 @@
                // Clear Previous Data
                if(mouseX>=425*xAdj && mouseX<=750*xAdj && mouseY>=200*yAdj && mouseY<=300*yAdj) {
                   window.localStorage.clear();
-                  AceScreen=-1;
+                  AceScreen=1;
                   draw()
                }
                return;
@@ -1149,7 +1162,7 @@
             }
 
             if(AceScreen===1 && CourseSet===3) {
-                  if(mouseX>=300*xAdj && mouseX<=500*xAdj && mouseY>=800*yAdj && mouseY<=870*yAdj) {
+                  if(mouseX>=300*xAdj && mouseX<=500*xAdj && mouseY>=600*yAdj && mouseY<=670*yAdj) {
                      AceScreen=2
                      storeIt();
                      return;
@@ -1189,23 +1202,6 @@
                draw();
             }            
 
-            // Choose Setup Page
-            if(mouseX>=0*xAdj && mouseX<=200*xAdj && mouseY>=1050*yAdj && mouseY<=1150*yAdj) {
-               CourseSet=0;
-               AceScreen=1;
-            }
-            // Choose Strokes Page
-            if(mouseX>=200*xAdj && mouseX<=400*xAdj && mouseY>=1050*yAdj && mouseY<=1150*yAdj) {
-               AceScreen=2;
-            }
-            // Choose Score Card Page          
-            if(mouseX>=400*xAdj && mouseX<=600*xAdj && mouseY>=1050*yAdj && mouseY<=1150*yAdj) {
-               AceScreen=3;
-            } 
-            // Choose Result Page           
-            if(mouseX>=600*xAdj && mouseX<=800*xAdj && mouseY>=1050*yAdj && mouseY<=1150*yAdj) {
-               AceScreen=4;
-            }                        
 
          };
 
@@ -1239,11 +1235,11 @@
 
 // Round SETUP Section
 
-            if (AceScreen===-1) {
+/*            if (AceScreen===-1) {
 
                setScreenViews();            
             }
-
+*/
             if (AceScreen===0) {
 
                localData();            
