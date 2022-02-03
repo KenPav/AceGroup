@@ -439,10 +439,10 @@
 //       Enter Player Scores for each Hole, Display Team Points      
 
          var enterStrokes = function(Hole) {
+            text("AT enterStrokes",100,50);
             console.log("at enter strokes");
-            console.log("myWidth & myHeight",myWidth,myHeight)
 
-            GreenDist();
+//            GreenDist();
             xAdj=1;
             yAdj=1;
             xOrig=800;
@@ -826,7 +826,6 @@
 
          GreenDist = function() {
             console.log("at GreenDist");
-            console.log("myWidth & myHeight",myWidth,myHeight)
 
             for(i=0; i<18; i++) {
                if(i<9) {
@@ -929,15 +928,6 @@
             if(mouseX>=600*xAdj && mouseX<=800*xAdj && mouseY>=850*yAdj && mouseY<=950*yAdj) {
                AceScreen=4;
             }                        
-
-
-/*            if(AceScreen===-1) {
-               if(mouseX>=200*xAdj && mouseX<=600*xAdj && mouseY>=400*yAdj && mouseY<=500*yAdj) { 
-                  AceScreen=1;
-               }              
-
-            }
-*/
 
             // Recall Previous Data
             if(AceScreen===0) {
