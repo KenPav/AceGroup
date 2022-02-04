@@ -35,7 +35,7 @@
       
         // ProgramCodeGoesHere
 
-         var vers = "04Feb22/1700";
+         var vers = "04Feb22/15:42";
          var temp = 0;
          var temp2 = 0;
          var FirstColor = color(0, 0, 0);
@@ -61,8 +61,6 @@
          var isVert=1;
          var myWidth=window.innerWidth;
          var myHeight=window.innerHeight;
-         var zoomWidth=window.screen.availWidth;
-         var zoomHeight=window.screen.availHeight;;
          var xAdj=1;
          var yAdj=1;
          var xZoom=1;
@@ -114,8 +112,10 @@
                case 90:
          //        alert('landscape');
                   isVert=0;
-                  myWidth=window.innerWidth;
-                  myHeight=window.innerHeight;
+                  myWidth=yMin;
+                  myHeight=xMin;
+//                  myWidth=window.innerWidth;
+//                  myHeight=window.innerHeight;
                   xZoom=1;
                   yZoom=1;
                   console.log("case=90, myWidth, myHeight: ",myWidth,myHeight);
@@ -123,8 +123,10 @@
                case -90:
          //        alert('landscape');
                   isVert=0;
-                  myWidth=window.innerWidth;
-                  myHeight=window.innerHeight;
+                  myWidth=yMin;
+                  myHeight=xMin;
+//                  myWidth=window.innerWidth;
+//                  myHeight=window.innerHeight;
                   xZoom=1;
                   yZoom=1;
                   console.log("case=-90, myWidth, myHeight: ",myWidth,myHeight);
@@ -132,8 +134,10 @@
                case 0:
          //        alert('portrait');
                   isVert=1;
-                  myWidth=window.innerWidth;
-                  myHeight=window.innerHeight;
+                  myWidth=xMin;
+                  myHeight=yMin;
+//                  myWidth=window.innerWidth;
+//                  myHeight=window.innerHeight;
                   xZoom=1;
                   yZoom=1;
                   console.log("case=0, myWidth, myHeight: ",myWidth,myHeight);
@@ -141,8 +145,10 @@
                case 180:
          //        alert('portrait');
                   isVert=1;
-                  myWidth=window.innerWidth;
-                  myHeight=window.innerHeight;
+                  myWidth=xMin;
+                  myHeight=yMin;
+//                  myWidth=window.innerWidth;
+//                  myHeight=window.innerHeight;
                   xZoom=1;
                   yZoom=1;
                   console.log("case=180, myWidth, myHeight: ",myWidth,myHeight);
@@ -181,15 +187,13 @@
 
          function localData() {
             window.addEventListener('orientationchange', doOnOrientationChange);
-            // Initial execution if needed
-//            doOnOrientationChange();
 
             xAdj=1;
             yAdj=1;
             xOrig=800;
             yOrig=1000;
-            if(myWidth<xOrig) {
-               xAdj=(myWidth/xOrig)*xZoom;
+            if(xMin<xOrig) {
+               xAdj=(xMin/xOrig)*xZoom;
                yAdj=1;
             }
             size(xOrig*xAdj,yOrig*yAdj);
@@ -256,8 +260,8 @@
             yAdj=1;
             xOrig=800;
             yOrig=1000;
-            if(myWidth<xOrig) {
-               xAdj=(myWidth/xOrig)*xZoom;
+            if(xMin<xOrig) {
+               xAdj=(xMin/xOrig)*xZoom;
                yAdj=1;
             }
             size(xOrig*xAdj,yOrig*yAdj);
@@ -927,15 +931,6 @@
                AceScreen=4;
             }                        
 
-
-/*            if(AceScreen===-1) {
-               if(mouseX>=200*xAdj && mouseX<=600*xAdj && mouseY>=400*yAdj && mouseY<=500*yAdj) { 
-                  AceScreen=1;
-               }              
-
-            }
-*/
-
             // Recall Previous Data
             if(AceScreen===0) {
                if(mouseX>=50*xAdj && mouseX<=375*xAdj && mouseY>=200*yAdj && mouseY<=300*yAdj) {
@@ -1147,21 +1142,29 @@
 //       SCORE INPUT INITIAL VARIABLES
          var HoleNum = 1;
 
-//       SCORECARD INITIAL VARIABLES
-
-
-//       RESULTS INITIAL VARIABLES
-
+         var xMin = 0;
+         var yMin = 0;
+         var startXY = 0;
          
          draw = function() {
 
-// Round SETUP Section
+            if (startXY===0) {
 
-/*            if (AceScreen===-1) {
+               if (window.matchMedia("(orientation: portrait)").matches) {
+                  // you're in PORTRAIT mode
+                  xMin=window.innerWidth;
+                  yMin=window.innerHeight;
+               }
 
-               setScreenViews();            
+               if (window.matchMedia("(orientation: landscape)").matches) {
+                  // you're in LANDSCAPE mode
+                  yMin=window.innerWidth;
+                  xMin=window.innerHeight;
+               }
+
+               startXY=1;
             }
-*/
+
             if (AceScreen===0) {
 
                localData();            
