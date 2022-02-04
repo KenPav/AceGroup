@@ -35,7 +35,7 @@
       
         // ProgramCodeGoesHere
 
-         var vers = "04Feb22/16:09";
+         var vers = "04Feb22/16:31";
          var temp = 0;
          var temp2 = 0;
          var FirstColor = color(0, 0, 0);
@@ -112,8 +112,8 @@
                case 90:
          //        alert('landscape');
                   isVert=0;
-                  myWidth=yMin;
-                  myHeight=xMin;
+                  myWidth=Math.min(yMin,window.innerWidth);
+                  myHeight=Math.min(xMin.window.innerHeight);
 //                  myWidth=window.innerWidth;
 //                  myHeight=window.innerHeight;
                   xZoom=1;
@@ -123,8 +123,8 @@
                case -90:
          //        alert('landscape');
                   isVert=0;
-                  myWidth=yMin;
-                  myHeight=xMin;
+                  myWidth=Math.min(yMin,window.innerWidth);
+                  myHeight=Math.min(xMin.window.innerHeight);
 //                  myWidth=window.innerWidth;
 //                  myHeight=window.innerHeight;
                   xZoom=1;
@@ -134,8 +134,8 @@
                case 0:
          //        alert('portrait');
                   isVert=1;
-                  myWidth=xMin;
-                  myHeight=yMin;
+                  myWidth=Math.min(xMin,window.innerWidth);
+                  myHeight=Math.min(yMin.window.innerHeight);
 //                  myWidth=window.innerWidth;
 //                  myHeight=window.innerHeight;
                   xZoom=1;
@@ -145,8 +145,8 @@
                case 180:
          //        alert('portrait');
                   isVert=1;
-                  myWidth=xMin;
-                  myHeight=yMin;
+                  myWidth=Math.min(xMin,window.innerWidth);
+                  myHeight=Math.min(yMin.window.innerHeight);
 //                  myWidth=window.innerWidth;
 //                  myHeight=window.innerHeight;
                   xZoom=1;
@@ -195,8 +195,9 @@
             yAdj=1;
             xOrig=800;
             yOrig=1000;
-            if(xMin<xOrig) {
-               xAdj=(xMin/xOrig)*xZoom;
+            myWidth=Math.min(xMin,innerWidth);
+            if(myWidth<xOrig) {
+               xAdj=(myWidth/xOrig)*xZoom;
                yAdj=1;
             }
             size(xOrig*xAdj,yOrig*yAdj);
@@ -263,8 +264,9 @@
             yAdj=1;
             xOrig=800;
             yOrig=1000;
-            if(xMin<xOrig) {
-               xAdj=(xMin/xOrig)*xZoom;
+            myWidth=Math.min(xMin,innerWidth);
+            if(myWidth<xOrig) {
+               xAdj=(myWidth/xOrig)*xZoom;
                yAdj=1;
             }
             size(xOrig*xAdj,yOrig*yAdj);
@@ -451,8 +453,9 @@
             yAdj=1;
             xOrig=800;
             yOrig=1000;
-            if(xMin<xOrig) {
-               xAdj=(xMin/xOrig)*xZoom;
+            myWidth=Math.min(xMin,innerWidth);
+            if(myWidth<xOrig) {
+               xAdj=(myWidth/xOrig)*xZoom;
                yAdj=1;
             }
             size(xOrig*xAdj,yOrig*yAdj);
@@ -526,12 +529,12 @@
 
          var showScoreCard = function() {
 
-            xAdj=0.85;
-            yAdj=1;
             xOrig=1250;
             yOrig=1000;
-            if(isVert===0 & xMin<xOrig) {
-               xAdj=(xMin/xOrig)*xZoom;
+            xAdj=xMin/xOrig;
+            yAdj=1;
+            if(isVert===0 & myWidth<xOrig) {
+               xAdj=(xWidth/xOrig)*xZoom;
                yAdj=1;
             }
             size(xOrig*xAdj,yOrig*yAdj);
@@ -707,12 +710,12 @@
 //       Display Front, Back & Total Player & Team Results      
 
          var showSummary = function() {
-            xAdj=0.85;
-            yAdj=1;
             xOrig=1050;
             yOrig=1000;
-            if(isVert===0 & xMin<xOrig) {
-               xAdj=(xMin/xOrig)*xZoom;
+            xAdj=xMin/xOrig;
+            yAdj=1;
+            if(isVert===0 & xWidth<xOrig) {
+               xAdj=(xWidth/xOrig)*xZoom;
                yAdj=1;
             }
             size(xOrig*xAdj,yOrig*yAdj);
