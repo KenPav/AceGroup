@@ -35,7 +35,7 @@
       
         // ProgramCodeGoesHere
 
-         var vers = "04Feb22/15:42";
+         var vers = "04Feb22/15:54";
          var temp = 0;
          var temp2 = 0;
          var FirstColor = color(0, 0, 0);
@@ -448,8 +448,8 @@
             yAdj=1;
             xOrig=800;
             yOrig=1000;
-            if(myWidth<xOrig) {
-               xAdj=(myWidth/xOrig)*xZoom;
+            if(xMin<xOrig) {
+               xAdj=(xMin/xOrig)*xZoom;
                yAdj=1;
             }
             size(xOrig*xAdj,yOrig*yAdj);
@@ -527,8 +527,8 @@
             yAdj=1;
             xOrig=1250;
             yOrig=1000;
-            if(isVert===0 & myWidth<xOrig) {
-               xAdj=(myWidth/xOrig)*xZoom;
+            if(isVert===0 & xMin<xOrig) {
+               xAdj=(xMin/xOrig)*xZoom;
                yAdj=1;
             }
             size(xOrig*xAdj,yOrig*yAdj);
@@ -708,8 +708,8 @@
             yAdj=1;
             xOrig=1050;
             yOrig=1000;
-            if(isVert===0 & myWidth<xOrig) {
-               xAdj=(myWidth/xOrig)*xZoom;
+            if(isVert===0 & xMin<xOrig) {
+               xAdj=(xMin/xOrig)*xZoom;
                yAdj=1;
             }
             size(xOrig*xAdj,yOrig*yAdj);
