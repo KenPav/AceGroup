@@ -57,6 +57,18 @@
          var closestHole = 0;
          var startLocation = 0;
 
+         var isVert=1;
+         var myWidth=window.innerWidth;
+         var myHeight=window.innerHeight;
+         var zoomWidth=window.screen.availWidth;
+         var zoomHeight=window.screen.availHeight;;
+         var xAdj=1;
+         var yAdj=1;
+         var xZoom=1;
+         var yZoom=1;
+         var xOrig=800;
+         var yOrig=1000;
+
          background(BackColor);
          var monthNames = ["January ","February ","March ","April ","May ","June ","July ","August ","September ","October ","November ","December "];
 
@@ -73,8 +85,8 @@
         // Par Element: 0-8=South 9-17=North 18-27=West
         // Par Element Values: Courses*9 + Hole Number - 1
          const HolePar = [5,4,3,5,4,4,3,4,4,4,5,3,4,4,4,4,3,4,4,5,4,4,5,3,4,5,3];
-         const GreenLat = [30.605144,30.603092,30.603347,30.600486,30.603128,30.604642,30.603678,30.606247,30.608694,30.614197,30.618353,30.619828,30.617903,30.615414,30.611964,30.614975,30.613922,30.611017,30.609553,30.614617,30.617722,30.619017,30.619511,30.618533,30.615408,30.610558,30.610444];
-         const GreenLong = [-81.447889,-81.451856,-81.453456,-81.457497,-81.456908,-81.451933,-81.449903,-81.451114,-81.447147,-81.446714,-81.446531,-81.445592,-81.449178,-81.447847,-81.447231,-81.448253,-81.448739,-81.447247,-81.450764,-81.450200,-81.450969,-81.453633,-81.448706,-81.449975,-81.449328,-81.449228,-81.447033];
+         const GreenLat = [30.605128,30.603087,30.603351,30.600480,30.603116,30.604636,30.603694,30.606282,30.608712,30.614216,30.618367,30.619845,30.617919,30.615451,30.611984,30.614986,30.613946,30.611035,30.609564,30.614618,30.617760,30.619054,30.619535,30.618533,30.615434,30.610551,30.610456];
+         const GreenLong = [-81.447887,-81.451858,-81.453446,-81.457491,-81.456915,-81.451931,-81.449889,-81.451111,-81.447118,-81.446701,-81.446525,-81.445566,-81.449169,-81.447826,-81.447217,-81.448222,-81.448725,-81.447218,-81.450770,-81.450190,-81.450959,-81.453633,-81.448711,-81.449986,-81.449303,-81.449220,-81.447025];
          const GreenDistance = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
          const Courses = ["South","North","West"];
          const SummaryLabel = ["","","Total Round"];
@@ -94,49 +106,102 @@
          const PlayerHoleScore = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
 
+
+         function doOnOrientationChange() {
+               console.log("availWidth, availHeight: ",window.screen.availWidth,window.screen.availHeight);
+             switch(window.orientation) {
+               case 90:
+         //        alert('landscape');
+                  isVert=0;
+                  myWidth=window.innerWidth;
+                  myHeight=window.innerHeight;
+                  xZoom=1;
+                  yZoom=1;
+                  console.log("case=90, myWidth, myHeight: ",myWidth,myHeight);
+                 break;
+               case -90:
+         //        alert('landscape');
+                  isVert=0;
+                  myWidth=window.innerWidth;
+                  myHeight=window.innerHeight;
+                  xZoom=1;
+                  yZoom=1;
+                  console.log("case=-90, myWidth, myHeight: ",myWidth,myHeight);
+                  break;
+               case 0:
+         //        alert('portrait');
+                  isVert=1;
+                  myWidth=window.innerWidth;
+                  myHeight=window.innerHeight;
+                  xZoom=1;
+                  yZoom=1;
+                  console.log("case=0, myWidth, myHeight: ",myWidth,myHeight);
+                  break;
+               case 180:
+         //        alert('portrait');
+                  isVert=1;
+                  myWidth=window.innerWidth;
+                  myHeight=window.innerHeight;
+                  xZoom=1;
+                  yZoom=1;
+                  console.log("case=180, myWidth, myHeight: ",myWidth,myHeight);
+                  break;
+               default:
+                 break;
+             }
+         }
+
+/*         function doOnZoomChange() {
+            zoomWidth=window.innerWidth;
+            zoomHeight=window.innerHeight;
+            xZoom=xOrig/zoomWidth;
+            yZoom=yOrig/zoomHeight;
+         }
+*/
          var ScreenSelect = function() {
-
             fill(BoxColor);
-            
-            rect(0,1050,200,100);
-            rect(200,1050,200,100);
-            rect(400,1050,200,100);           
-            rect(600,1050,200,100);
 
-            textSize(50);
+            rect(0*xAdj,850*yAdj,200*xAdj,100*yAdj);
+            rect(200*xAdj,850*yAdj,200*xAdj,100*yAdj);
+            rect(400*xAdj,850*yAdj,200*xAdj,100*yAdj);           
+            rect(600*xAdj,850*yAdj,200*xAdj,100*yAdj);
+
+            textSize(50*xAdj);
             textAlign(CENTER);
             fill(FirstColor);
 
-            text("Setup",100,1115);
-            text("Scores",300,1115);
-            text("Score",500,1095);
-            text("Card",500,1135);
-            text("Results",700,1115);
-
-
+            text("Setup",100*xAdj,915*yAdj);
+            text("Scores",300*xAdj,915*yAdj);
+            text("Score",500*xAdj,895*yAdj);
+            text("Card",500*xAdj,935*yAdj);
+            text("Results",700*xAdj,915*yAdj);
          }
+
+
 
 //       AceScreen = 0
 //       Starting Screen
 
-         var localData = function() {
+         function localData() {
+            window.addEventListener('orientationchange', doOnOrientationChange);
+            // Initial execution if needed
+//            doOnOrientationChange();
 
-
-//          Begin Tracking Location
-            
-            if(startLocation===0) {
-               trackLocation();
-               setInterval(trackLocation,30000);
-               startLocation=1;
-            }            
-
-            size(800,1200);
+            xAdj=1;
+            yAdj=1;
+            xOrig=800;
+            yOrig=1000;
+            if(myWidth<xOrig) {
+               xAdj=(myWidth/xOrig)*xZoom;
+               yAdj=1;
+            }
+            size(xOrig*xAdj,yOrig*yAdj);
             background(BackColor);
             fill(BoxColor);
-            rect(50,200,325,100);
-            rect(425,200,325,100);
+            rect(50*xAdj,200*yAdj,325*xAdj,100*yAdj);
+            rect(425*xAdj,200*yAdj,325*xAdj,100*yAdj);
             fill(FirstColor);
-            textSize(45);
+            textSize(45*xAdj);
             textAlign(CENTER);
             if(window.localStorage.getItem('PD')===null) {
                AceScreen=1;
@@ -144,30 +209,30 @@
             }
             var pData=JSON.parse(window.localStorage.getItem('PD'));
             pData = new Date(pData);
-            text("Continue With",212,240);
-            text("Previous Setup",212,285);
-            text("Clear",588,240);
-            text("Previous Setup",588,285);
-            text("Previous Round Data Stored at:",400,90);
-            text(monthNames[pData.getMonth()]+pData.getDate()+", "+pData.getFullYear()+" @ "+pData.getHours()+":"+pData.getMinutes()+":"+pData.getSeconds(),400,150);
+            text("Continue With",212*xAdj,240*yAdj);
+            text("Previous Setup",212*xAdj,285*yAdj);
+            text("Clear",588*xAdj,240*yAdj);
+            text("Previous Setup",588*xAdj,285*yAdj);
+            text("Previous Round Data Stored at:",400*xAdj,90*yAdj);
+            text(monthNames[pData.getMonth()]+pData.getDate()+", "+pData.getFullYear()+" @ "+pData.getHours()+":"+pData.getMinutes()+":"+pData.getSeconds(),400*xAdj,150*yAdj);
          }
 
-        var trackLocation = function() {
+         function trackLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(myPosition,displayError,{enableHighAccuracy: true});
             } else { 
                 console.log("Geolocation is not supported by this browser.");
             }
-        }
+         }
 
-        function myPosition(position) {
+         function myPosition(position) {
             myLat = position.coords.latitude;
             myLong = position.coords.longitude;           
-        }
+         }
 
-        function displayError(){
+         function displayError(){
             
-        }
+         }
 
 
 
@@ -178,82 +243,102 @@
 //       Display Player Names and Course Handicaps (CourseSet=3)
 
          var enterSetup = function() {
-            size(800,1200);
+
+            console.log(window.screen.availWidth,window.screen.availHeight,window.screen.width,window.screen.height,window.outerWidth,window.outerHeight);
+
+//          Begin Tracking Location
+            
+            if(startLocation===0) {
+               trackLocation();
+               setInterval(trackLocation,5000);
+               startLocation=1;
+            }            
+
+
+            xAdj=1;
+            yAdj=1;
+            xOrig=800;
+            yOrig=1000;
+            if(myWidth<xOrig) {
+               xAdj=(myWidth/xOrig)*xZoom;
+               yAdj=1;
+            }
+            size(xOrig*xAdj,yOrig*yAdj);
             background(BackColor);
             ScreenSelect();
             if (SameCourse===0) {
-               textSize(35);
+               textSize(35*xAdj);
                fill(255,0,0);
-               text("Select Different Front and Back Courses!",400,450);
+               text("Select Different Front and Back Courses!",400*xAdj,450*yAdj);
             }
-            textSize(50);
+            textSize(50*xAdj);
             textAlign(CENTER);
             if(CourseSet===0) {
 
 //             SELECT FRONT COURSE
                fill(FirstColor);
-               text("Select Front 9 Course ",400,60);
+               text("Select Front 9 Course ",400*xAdj,60*yAdj);
                if (Front===0) {
                   fill(SelectBoxColor);
                } else { 
                   fill(BoxColor);
                }
-               rect(100,70,200,70);
+               rect(100*xAdj,70*yAdj,200*xAdj,70*yAdj);
                fill(FirstColor);
-               text("South",200,125);
+               text("South",200*xAdj,125*yAdj);
                if (Front===1) {
                   fill(SelectBoxColor);
                } else { 
                   fill(BoxColor);
                }                  
-               rect(300,70,200,70);
+               rect(300*xAdj,70*yAdj,200*xAdj,70*yAdj);
                fill(FirstColor);
-               text("North",400,125);
+               text("North",400*xAdj,125*yAdj);
                if (Front===2) {
                   fill(SelectBoxColor);
                } else { 
                   fill(BoxColor);
                }                  
-               rect(500,70,200,70);
+               rect(500*xAdj,70*yAdj,200*xAdj,70*yAdj);
                fill(FirstColor);
-               text("West",600,125);
+               text("West",600*xAdj,125*yAdj);
 
 
 //             SELECT BACK COURSE    
                fill(FirstColor);
-               text("Select Back 9 Course ",400,190);
+               text("Select Back 9 Course ",400*xAdj,190*yAdj);
                if (Back===0) {
                   fill(SelectBoxColor);
                } else { 
                   fill(BoxColor);
                }                  
-               rect(100,200,200,70);
+               rect(100*xAdj,200*yAdj,200*xAdj,70*yAdj);
                fill(FirstColor);
-               text("South",200,255);
+               text("South",200*xAdj,255*yAdj);
                if (Back===1) {
                   fill(SelectBoxColor);
                } else { 
                   fill(BoxColor);
                }                                    
-               rect(300,200,200,70);
+               rect(300*xAdj,200*yAdj,200*xAdj,70*yAdj);
                fill(FirstColor);
-               text("North",400,255);
+               text("North",400*xAdj,255*yAdj);
                if (Back===2) {
                   fill(SelectBoxColor);
                } else { 
                   fill(BoxColor);
                }                                    
-               rect(500,200,200,70);
+               rect(500*xAdj,200*yAdj,200*xAdj,70*yAdj);
                fill(FirstColor);
-               text("West",600,255);
+               text("West",600*xAdj,255*yAdj);
                fill(BoxColor);
-               rect(300,300,200,70);
+               rect(300*xAdj,300*yAdj,200*xAdj,70*yAdj);
                fill(FirstColor);
-               text("Continue",400,355);
+               text("Continue",400*xAdj,355*yAdj);
                fill(BoxColor);
-               rect(300,500,200,70);
+               rect(300*xAdj,500*yAdj,200*xAdj,70*yAdj);
                fill(FirstColor);
-               text("Restart",400,555);
+               text("Restart",400*xAdj,555*yAdj);
             }
 
 //       Select Number of Players (CourseSet=1)
@@ -263,17 +348,17 @@
                   ReqPts[i] = 0;
                }
                background(BackColor);
-               text("Number of Players",400,100);
-               textSize(50);
+               text("Number of Players",400*xAdj,100*yAdj);
+               textSize(50*xAdj);
                j=NumberOfPlayers;
                for(i=0; i<4; i++) {
                   fill(BoxColor);
                   if(i===j-1) {
                      fill(SelectBoxColor);
                   }
-                  rect(200+i*100,200,100,100);
+                  rect(200*xAdj+i*100*xAdj,200*yAdj,100*xAdj,100*yAdj);
                   fill(FirstColor);
-                  text(i+1,250+i*100,270);
+                  text(i+1,250*xAdj+i*100*xAdj,270*yAdj);
                }
                return;
             }
@@ -289,16 +374,16 @@
                   }
                   if(HCPCount===PlayerCount) {
 
-                     text("Player #"+PlayerCount+1,", "+PlayerName[PlayerCount]+", Course Handicap",400,100);
+                     text("Player #"+PlayerCount+1,", "+PlayerName[PlayerCount]+", Course Handicap",400*xAdj,100);
                      for (i=0; i<10; i++) {
                         for (j=0; j<4; j++) {
                            fill(BoxColor);
                            if(PlayerCourseHandicap[HCPCount]===(i+j*10)) {
                               fill(SelectBoxColor);
                            }
-                           rect(0+i*80,200+j*80,80,80);
+                           rect(0+i*80*xAdj,200*yAdj+j*80*yAdj,80*xAdj,80*yAdj);
                            fill(FirstColor);
-                           text(0+i+j*10,40+i*80,265+j*80);
+                           text(0+i+j*10,40*xAdj+i*80*xAdj,265*yAdj+j*80*yAdj);
                         }
                      }
                   }
@@ -309,43 +394,43 @@
                return;
             }
 
-//       Display Player Names and Course Handicaps (CourseSet=3)
+//       Display Player Names, Course Handicaps & Required Points (CourseSet=3)
 
             if (CourseSet===3) {
                fill(BoxColor);
-               rect(0,400,200,100);
-               rect(200,400,200,100);
-               rect(400,400,200,100);
-               rect(600,400,200,100);
+               rect(0*xAdj,200*yAdj,200*xAdj,100*yAdj);
+               rect(200*xAdj,200*yAdj,200*xAdj,100*yAdj);
+               rect(400*xAdj,200*yAdj,200*xAdj,100*yAdj);
+               rect(600*xAdj,200*yAdj,200*xAdj,100*yAdj);
                fill(FirstColor);
-               text("Player",100,470);
-               text("Course",300,450);
-               text(Courses[Front],500,450);
-               text(Courses[Back],700,450);
-               text("Hcp",300,490);
-               text("Points",500,490);
-               text("Points",700,490);
+               text("Player",100*xAdj,270*yAdj);
+               text("Course",300*xAdj,250*yAdj);
+               text(Courses[Front],500*xAdj,250*yAdj);
+               text(Courses[Back],700*xAdj,250*yAdj);
+               text("Hcp",300*xAdj,290*yAdj);
+               text("Points",500*xAdj,290*yAdj);
+               text("Points",700*xAdj,290*yAdj);
                for (var i = 0; i < NumberOfPlayers; i++) {
                   fill(BoxColor);
-                  rect(0,500+i*70,200,70);
-                  rect(200,500+i*70,200,70);
-                  rect(400,500+i*70,200,70);
-                  rect(600,500+i*70,200,70);
+                  rect(0*xAdj,300*yAdj+i*70*yAdj,200*xAdj,70);
+                  rect(200*xAdj,300*yAdj+i*70*yAdj,200*xAdj,70*yAdj);
+                  rect(400*xAdj,300*yAdj+i*70*yAdj,200*xAdj,70*yAdj);
+                  rect(600*xAdj,300*yAdj+i*70*yAdj,200*xAdj,70*yAdj);
                   if(i===0 || i===2) {
                      fill(SecondColor);
                   }
                   else {
                      fill(FirstColor);
                   }
-                  text(PlayerName[i],100,555+i*70);
-                  text(PlayerCourseHandicap[i],300,555+i*70);
-                  text(ReqPts[i*3],500,555+i*70);
-                  text(ReqPts[i*3+1],700,555+i*70);
+                  text(PlayerName[i],100*xAdj,355*yAdj+i*70*yAdj);
+                  text(PlayerCourseHandicap[i],300*xAdj,355*yAdj+i*70*yAdj);
+                  text(ReqPts[i*3],500*xAdj,355*yAdj+i*70*yAdj);
+                  text(ReqPts[i*3+1],700*xAdj,355*yAdj+i*70*yAdj);
                }
                fill(BoxColor);
-               rect(300,800,200,70);
+               rect(300*xAdj,600*yAdj,200*xAdj,70*yAdj);
                fill(FirstColor);
-               text("Continue",400,855);
+               text("Continue",400*xAdj,655*yAdj);
             }
          };      
          
@@ -354,42 +439,54 @@
 //       Enter Player Scores for each Hole, Display Team Points      
 
          var enterStrokes = function(Hole) {
-            size(800,1200);
+            console.log("at enter strokes");
+            console.log("myWidth & myHeight",myWidth,myHeight)
+
+            GreenDist();
+            xAdj=1;
+            yAdj=1;
+            xOrig=800;
+            yOrig=1000;
+            if(myWidth<xOrig) {
+               xAdj=(myWidth/xOrig)*xZoom;
+               yAdj=1;
+            }
+            size(xOrig*xAdj,yOrig*yAdj);
             ScreenSelect();
-            textSize(50);
+            textSize(50*xAdj);
             textAlign(CENTER);
             if(HoleNum===closestHole) {
                fill(SecondColor);
             } else{
                fill(FirstColor);
             }
-            text("Hole #"+HoleNum,400,65)
+            text("Hole #"+HoleNum,400*xAdj,65*yAdj)
             if(HoleNum<=9) {
-               text("Front 9: "+Courses[Front]+" #"+HoleNum+" / Par "+HolePar[(Front*9)+HoleNum-1],400,125);
+               text("Front 9: "+Courses[Front]+" #"+HoleNum+" / Par "+HolePar[(Front*9)+HoleNum-1],400*xAdj,125);
             }
             else {
-               text("Back 9: "+Courses[Back]+" #"+(HoleNum-9)+" / Par "+HolePar[(Back*9)+HoleNum-10],400,125);
+               text("Back 9: "+Courses[Back]+" #"+(HoleNum-9)+" / Par "+HolePar[(Back*9)+HoleNum-10],400*xAdj,125);
             }
             fill(FirstColor);
-            text("Select Hole Score for Each Player",400,185);
+            text("Select Hole Score for Each Player",400*xAdj,185);
             for (var i = 0; i < NumberOfPlayers; i++) {
                fill(BoxColor);
-               rect(0,200+i*80,220,80);
+               rect(0*xAdj,200*yAdj+i*80*yAdj,220*xAdj,80*yAdj);
                if(i===0 || i===2) {
                   fill(SecondColor);
                }
                else {
                   fill(FirstColor);
                }
-               text(PlayerName[i],110,265+i*80);
+               text(PlayerName[i],110*xAdj,265*yAdj+i*80*yAdj);
                for (var j = 0; j < 8; j++) {
                   if(PlayerHoleStrokes[i*18+HoleNum-1]===j+1) {
                      fill(SelectBoxColor);
-                     rect(220+j*70,200+i*80,70,80);
+                     rect(220*xAdj+j*70*xAdj,200*yAdj+i*80*yAdj,70*xAdj,80*yAdj);
                   }
                   else {
                      fill(BoxColor);
-                     rect(220+j*70,200+i*80,70,80);
+                     rect(220*xAdj+j*70*xAdj,200*yAdj+i*80*yAdj,70*xAdj,80*yAdj);
                   }
                   if(i===0 || i===2) {
                      fill(SecondColor);
@@ -397,80 +494,93 @@
                   else {
                      fill(FirstColor);
                   }
-                  text(j+1,255+j*70,265+i*80);
+                  text(j+1,255*xAdj+j*70*xAdj,265*yAdj+i*80*yAdj);
                }
 
             }
 
             fill(BoxColor);
-            rect(50,550,200,80);
-            rect(550,550,200,80);
-            rect(275,550,250,80);
-            rect(50,650,700,80);
+            rect(50*xAdj,550*yAdj,200*xAdj,80*yAdj);
+            rect(550*xAdj,550*yAdj,200*xAdj,80*yAdj);
+            rect(275*xAdj,550*yAdj,250*xAdj,80*yAdj);
+            rect(50*xAdj,650*yAdj,700*xAdj,80*yAdj);
             fill(FirstColor);
-            text("Previous",150,615);
-            text("Next",650,615);
+            text("Previous",150*xAdj,615*yAdj);
+            text("Next",650*xAdj,615*yAdj);
             if(HoleNum===closestHole) {
                fill(SecondColor);
-               text("This hole is the nearest hole",400,715);
+               text("This hole is the nearest hole",400*xAdj,715*yAdj);
             } 
             else {
-               text("Jump to Nearest Hole (#"+closestHole+")",400,715);               
+               text("Jump to Nearest Hole (#"+closestHole+")",400*xAdj,715*yAdj);               
             }
-            text("Points: "+PlayerHoleScore[4*18+HoleNum-1],400,615);            
+            text("Points: "+PlayerHoleScore[4*18+HoleNum-1],400*xAdj,615*yAdj);
+            text(GreenDistance[HoleNum-1].toFixed(0)+" yards to hole.",400*xAdj,800*yAdj);            
          };
 
 //       Display Score Card      
 
          var showScoreCard = function() {
-            size(1250,1200);
+
+            xAdj=0.85;
+            yAdj=1;
+            xOrig=1250;
+            yOrig=1000;
+            if(isVert===0 & myWidth<xOrig) {
+               xAdj=(myWidth/xOrig)*xZoom;
+               yAdj=1;
+            }
+            size(xOrig*xAdj,yOrig*yAdj);
+
+
+//            size(1250,1200);
             ScreenSelect();
             DoCalculations();
-            textSize(35);
+            textSize(35*xAdj);
             textAlign(CENTER);
             fill(BoxColor);
-            rect(0,0,170,50);
-            rect(170,0,10*50,50);
-            rect(170+10*50,0,10*50,50);
-            rect(170+20*50,0,50,50);
+            rect(0*xAdj,0*yAdj,170*xAdj,50*yAdj);
+            rect(170*xAdj,0*yAdj,10*50*xAdj,50*yAdj);
+            rect(170*xAdj+10*50*xAdj,0*yAdj,10*50*xAdj,50*yAdj);
+            rect(170*xAdj+20*50*xAdj,0*yAdj,50*xAdj,50*yAdj);
             fill(FirstColor);
-            text("Players",85,40);
-            text("Front 9: "+Courses[Front],420,40);
-            text("Back 9: "+Courses[Back],920,40);
-            text("T",1195,40);
+            text("Players",85*xAdj,40*yAdj);
+            text("Front 9: "+Courses[Front],420*xAdj,40*yAdj);
+            text("Back 9: "+Courses[Back],920*xAdj,40*yAdj);
+            text("T",1195*xAdj,40*yAdj);
+            fill(BoxColor);
             for (var j=0; j<6; j++) {
+               rect(0*xAdj,50*yAdj+j*50*yAdj,170*xAdj,50*yAdj);
                for (var i=0; i<21; i++) {
                   //Front 9, Front Total, Back 9, Back Total, Round Total
-                  fill(BoxColor);
-                  rect(0,50+j*50,170,50);
-                  rect(170+i*50,50+j*50,50,50);
-                  fill(FirstColor);
+                  rect(170*xAdj+i*50*xAdj,50*yAdj+j*50*yAdj,50*xAdj,50*yAdj);
                }
             }
-            text("Par",85,90);
+            fill(FirstColor);
+            text("Par",85*xAdj,90);
             for (var i=1; i<19; i++) {
                if (i<10) {
-                  text(HolePar[Front*9+i-1],195+(i-1)*50,90);
+                  text(HolePar[Front*9+i-1],195*xAdj+(i-1)*50*xAdj,90*yAdj);
                }
                else {
-                  text(HolePar[Back*9+i-10],195+i*50,90);  
+                  text(HolePar[Back*9+i-10],195*xAdj+i*50*xAdj,90*yAdj);  
                }
             }
-            text(TotalStrokes[12],645,90);
-            text(TotalStrokes[13],1145,90);
-            text(TotalStrokes[14],1195,90);
+            text(TotalStrokes[12],645*xAdj,90*yAdj);
+            text(TotalStrokes[13],1145*xAdj,90*yAdj);
+            text(TotalStrokes[14],1195*xAdj,90*yAdj);
 
             for (var j=0; j<5; j++) {
                for (var i=0; i<21; i++) {
 
                   if(i===0 && j===1) {
                      fill(FirstColor);
-                     text("Hole #",85,140);
+                     text("Hole #",85*xAdj,140*yAdj);
                      for (var k=1; k<10; k++) {
-                        text(k,195+(k-1)*50,140);
+                        text(k,195*xAdj+(k-1)*50*xAdj,140*yAdj);
                      }
                      for (var k=10; k<19; k++) {
-                        text(k-9,695+(k-10)*50,140);
+                        text(k-9,695*xAdj+(k-10)*50*xAdj,140*yAdj);
                      }
                   }
                   if((j-1)===0 || (j-1)===2) {
@@ -481,44 +591,44 @@
                   }
                   if ((j===0 && (i===9 || i>18))) {
                      if (i===9) {
-                        text("F",195+i*50,140+j*50);
+                        text("F",195*xAdj+i*50*xAdj,140*yAdj+j*50*yAdj);
                      }
                      if (i===19) {
-                        text("B",195+i*50,140+j*50);
+                        text("B",195*xAdj+i*50*xAdj,140*yAdj+j*50*yAdj);
                      }
                      if (i===20) {
-                        text("T",195+i*50,140+j*50);
+                        text("T",195*xAdj+i*50*xAdj,140*yAdj+j*50*yAdj);
                      }
                   }
                   if(j>0 && j<=NumberOfPlayers && i===0) {
-                     text(PlayerName[j-1],85,140+50*j);
+                     text(PlayerName[j-1],85*xAdj,140*yAdj+50*j*yAdj);
                   }
                   if(i<9 && j>0) {
                      if(j<=NumberOfPlayers) {
-                        text(PlayerHoleStrokes[(j-1)*18+i],195+i*50,140+j*50);
+                        text(PlayerHoleStrokes[(j-1)*18+i],195*xAdj+i*50*xAdj,140*yAdj+j*50*yAdj);
                         if (i===8) {
-                           text(TotalStrokes[(j-1)*3],195+(i+1)*50,140+j*50);
+                           text(TotalStrokes[(j-1)*3],195*xAdj+(i+1)*50*xAdj,140*yAdj+j*50*yAdj);
                         }
                      }
                   }
                   if(i>10 && i<20 && j>0) {
                      if(j<=NumberOfPlayers) {
-                        text(PlayerHoleStrokes[(j-1)*18+i-2],195+(i-1)*50,140+j*50);
+                        text(PlayerHoleStrokes[(j-1)*18+i-2],195*xAdj+(i-1)*50*xAdj,140*yAdj+j*50*yAdj);
                         if (i===19) {
-                           text(TotalStrokes[(j-1)*3+1],195+(i+0)*50,140+j*50);
-                           text(TotalStrokes[(j-1)*3+2],195+(i+1)*50,140+j*50);
+                           text(TotalStrokes[(j-1)*3+1],195*xAdj+(i+0)*50*xAdj,140*yAdj+j*50*yAdj);
+                           text(TotalStrokes[(j-1)*3+2],195*xAdj+(i+1)*50*xAdj,140*yAdj+j*50*yAdj);
                         }
                      }
                   }
                }
             }
                        
+            fill(BoxColor);
             for (var j=0; j<6; j++) {
+               rect(0*xAdj,400*yAdj+j*50*yAdj,170*xAdj,50*yAdj);
                for (var i=0; i<21; i++) {
                   //Front 9, Front Total, Back 9, Back Total, Round Total
-                  fill(BoxColor);
-                  rect(0,400+j*50,170,50);
-                  rect(170+i*50,400+j*50,50,50);
+                  rect(170*xAdj+i*50*xAdj,400*yAdj+j*50*yAdj,50*xAdj,50*yAdj);
                }
             }                       
             fill(FirstColor);
@@ -526,23 +636,23 @@
                for (var i=0; i<21; i++) {
                   fill(FirstColor);
                   if(j===0 && i===1) {
-                     text("Points",95,440);
+                     text("Points",95*xAdj,440*yAdj);
                      for (var k=1; k<10; k++) {
-                        text(k,195+(k-1)*50,440);
+                        text(k,195*xAdj+(k-1)*50*xAdj,440*yAdj);
                      }
                      for (var k=10; k<19; k++) {
-                        text(k-9,695+(k-10)*50,440);
+                        text(k-9,695*xAdj+(k-10)*50*xAdj,440*yAdj);
                      }
                   }
                   if ((j===0 && (i===9 || i>18))) {
                      if (i===9) {
-                        text("F",195+i*50,440+j*50);
+                        text("F",195*xAdj+i*50*xAdj,440*yAdj+j*50*yAdj);
                      }
                      if (i===19) {
-                        text("B",195+i*50,440+j*50);
+                        text("B",195*xAdj+i*50*xAdj,440*yAdj+j*50*yAdj);
                      }
                      if (i===20) {
-                        text("T",195+i*50,440+j*50);
+                        text("T",195*xAdj+i*50*xAdj,440*yAdj+j*50*yAdj);
                      }
                   }
                   if((j-1)===0 || (j-1)===2) {
@@ -552,37 +662,37 @@
                      fill(FirstColor);
                   }                  
                   if(j>0 && j<=NumberOfPlayers && i===0) {
-                     text(PlayerName[j-1],85,440+50*j);
+                     text(PlayerName[j-1],85*xAdj,440*yAdj+50*j*yAdj);
                   }
                   if(i<9 && j>0 && j<=NumberOfPlayers) {    
-                        text(PlayerHoleScore[(j-1)*18+i],195+i*50,440+j*50);
+                        text(PlayerHoleScore[(j-1)*18+i],195*xAdj+i*50*xAdj,440*yAdj+j*50*yAdj);
                         if (i===8) {
-                           text(TotalPoints[(j-1)*3],195+(i+1)*50,440+j*50);
+                           text(TotalPoints[(j-1)*3],195*xAdj+(i+1)*50*xAdj,440*yAdj+j*50*yAdj);
                         }
                   }
                   if(i>10 && i<20 && j>0 && j<=NumberOfPlayers) {
-                        text(PlayerHoleScore[(j-1)*18+i-2],195+(i-1)*50,440+j*50);
+                        text(PlayerHoleScore[(j-1)*18+i-2],195*xAdj+(i-1)*50*xAdj,440*yAdj+j*50*yAdj);
                         if (i===19) {
-                           text(TotalPoints[(j-1)*3+1],195+(i+0)*50,440+j*50);
-                           text(TotalPoints[(j-1)*3+2],195+(i+1)*50,440+j*50);
+                           text(TotalPoints[(j-1)*3+1],195*xAdj+(i+0)*50*xAdj,440*yAdj+j*50*yAdj);
+                           text(TotalPoints[(j-1)*3+2],195*xAdj+(i+1)*50*xAdj,440*yAdj+j*50*yAdj);
                         }
                   }
                   if(j===5) {
                      fill(ThirdColor);
                      if (i===0) {
-                        text("TeamTotal",85,440+50*j);
+                        text("TeamTotal",85*xAdj,440*yAdj+50*j*yAdj);
                      }
                      if(i<9 && j>0) {
-                        text(PlayerHoleScore[(j-1)*18+i],195+i*50,440+j*50);
+                        text(PlayerHoleScore[(j-1)*18+i],195*xAdj+i*50*xAdj,440*yAdj+j*50*yAdj);
                         if (i===8) {
-                           text(TotalPoints[(j-1)*3],195+(i+1)*50,440+j*50);
+                           text(TotalPoints[(j-1)*3],195*xAdj+(i+1)*50*xAdj,440*yAdj+j*50*yAdj);
                         }
                      }
                      if(i>10 && i<20 && j>0) {
-                        text(PlayerHoleScore[(j-1)*18+i-2],195+(i-1)*50,440+j*50);
+                        text(PlayerHoleScore[(j-1)*18+i-2],195*xAdj+(i-1)*50*xAdj,440*yAdj+j*50*yAdj);
                         if (i===19) {
-                           text(TotalPoints[(j-1)*3+1],195+(i+0)*50,440+j*50);
-                           text(TotalPoints[(j-1)*3+2],195+(i+1)*50,440+j*50);
+                           text(TotalPoints[(j-1)*3+1],195*xAdj+(i+0)*50*xAdj,440*yAdj+j*50*yAdj);
+                           text(TotalPoints[(j-1)*3+2],195*xAdj+(i+1)*50*xAdj,440*yAdj+j*50*yAdj);
                         }
                      }
                   }
@@ -593,39 +703,49 @@
 //       Display Front, Back & Total Player & Team Results      
 
          var showSummary = function() {
-            size(1200,1200);
+            xAdj=0.85;
+            yAdj=1;
+            xOrig=1050;
+            yOrig=1000;
+            if(isVert===0 & myWidth<xOrig) {
+               xAdj=(myWidth/xOrig)*xZoom;
+               yAdj=1;
+            }
+            size(xOrig*xAdj,yOrig*yAdj);
+
+//            size(1200,1200);
             ScreenSelect();
             DoCalculations();
             SummaryLabel[0] = Courses[Front];
             SummaryLabel[1] = Courses[Back];
-            textSize(35);
+            textSize(35*xAdj);
             textAlign(CENTER);
             fill(BoxColor);
-            rect(0,100,170,150);
+            rect(0*xAdj,100*yAdj,170*xAdj,150*yAdj);
             fill(FirstColor);
-            text("Players",85,240);
+            text("Players",85*xAdj,240*yAdj);
             for (var i=0; i<3; i++) {
                fill(BoxColor);
-               rect(170+i*280,100,280,50)
-               rect(170+i*280,150,70,100);
-               rect(240+i*280,150,210,50);
-               rect(240+i*280,200,70,50);
-               rect(310+i*280,200,70,50);
-               rect(380+i*280,200,70,50);
+               rect(170*xAdj+i*280*xAdj,100*yAdj,280*xAdj,50*yAdj)
+               rect(170*xAdj+i*280*xAdj,150*yAdj,70*xAdj,100*yAdj);
+               rect(240*xAdj+i*280*xAdj,150*yAdj,210*xAdj,50*yAdj);
+               rect(240*xAdj+i*280*xAdj,200*yAdj,70*xAdj,50*yAdj);
+               rect(310*xAdj+i*280*xAdj,200*yAdj,70*xAdj,50*yAdj);
+               rect(380*xAdj+i*280*xAdj,200*yAdj,70*xAdj,50*yAdj);
                fill(FirstColor);
-               text(SummaryLabel[i],310+i*280,140);
-               text("Points",345+i*280,190);
-               textSize(35);
-               text("Stk",205+280*i,240);
-               text("Scr",275+i*280,240);
-               text("Rqd",345+i*280,240);
-               text("Net",415+i*280,240);
-               textSize(35);
+               text(SummaryLabel[i],310*xAdj+i*280*xAdj,140*yAdj);
+               text("Points",345*xAdj+i*280*xAdj,190*yAdj);
+               textSize(35*xAdj);
+               text("Stk",205*xAdj+280*i*xAdj,240*yAdj);
+               text("Scr",275*xAdj+i*280*xAdj,240*yAdj);
+               text("Rqd",345*xAdj+i*280*xAdj,240*yAdj);
+               text("Net",415*xAdj+i*280*xAdj,240*yAdj);
+               textSize(35*xAdj);
                
             }
             for (var j=0; j<5; j++) {
                fill(BoxColor);
-               rect(0,250+j*50,170,50);
+               rect(0*xAdj,250*yAdj+j*50*yAdj,170*xAdj,50*yAdj);
                if(j===0 || j===2) {
                   fill(SecondColor);
                }
@@ -636,14 +756,14 @@
                   fill(ThirdColor);
                }
                if (j<NumberOfPlayers || j===4) {
-                  text(PlayerName[j],85,290+j*50); 
+                  text(PlayerName[j],85*xAdj,290*yAdj+j*50*yAdj); 
                }
                for (var i=0; i<3; i++) {
                   fill(BoxColor);
-                  rect(170+i*280,250+j*50,70,50);
-                  rect(240+i*280,250+j*50,70,50);
-                  rect(310+i*280,250+j*50,70,50);
-                  rect(380+i*280,250+j*50,70,50);
+                  rect(170*xAdj+i*280*xAdj,250*yAdj+j*50*yAdj,70*xAdj,50*yAdj);
+                  rect(240*xAdj+i*280*xAdj,250*yAdj+j*50*yAdj,70*xAdj,50*yAdj);
+                  rect(310*xAdj+i*280*xAdj,250*yAdj+j*50*yAdj,70*xAdj,50*yAdj);
+                  rect(380*xAdj+i*280*xAdj,250*yAdj+j*50*yAdj,70*xAdj,50*yAdj);
                   if(j===0 || j===2) {
                      fill(SecondColor);
                   }
@@ -654,12 +774,12 @@
                      fill(ThirdColor);
                   }
                      if (j!=4 && j<NumberOfPlayers) {
-                        text(TotalStrokes[i+j*3],205+i*280,290+j*50);
+                        text(TotalStrokes[i+j*3],205*xAdj+i*280*xAdj,290*yAdj+j*50*yAdj);
                   }
                   if (j<NumberOfPlayers || j===4) {
-                     text(TotalPoints[i+j*3],275+i*280,290+j*50);
-                     text(ReqPts[i+j*3],345+i*280,290+j*50);
-                     text(TotalPoints[i+j*3]-ReqPts[i+j*3],415+i*280,290+j*50);
+                     text(TotalPoints[i+j*3],275*xAdj+i*280*xAdj,290*yAdj+j*50*yAdj);
+                     text(ReqPts[i+j*3],345*xAdj+i*280*xAdj,290*yAdj+j*50*yAdj);
+                     text(TotalPoints[i+j*3]-ReqPts[i+j*3],415*xAdj+i*280*xAdj,290*yAdj+j*50*yAdj);
                   }
                }
             }
@@ -676,7 +796,7 @@
             window.localStorage.setItem('NumP',JSON.stringify(NumberOfPlayers));
             window.localStorage.setItem('F',JSON.stringify(Front));
             window.localStorage.setItem('B',JSON.stringify(Back));
-            window.localStorage.setItem('HN',JSON.stringify(HoleNum));                     
+            window.localStorage.setItem('HN',JSON.stringify(HoleNum)); 
          }
 
 //       Calculate Player & Team Hole Scores
@@ -705,6 +825,9 @@
 //       Calculate Closest Hole Information
 
          GreenDist = function() {
+            console.log("at GreenDist");
+            console.log("myWidth & myHeight",myWidth,myHeight)
+
             for(i=0; i<18; i++) {
                if(i<9) {
                   Lat = GreenLat[Front*9+i];
@@ -788,27 +911,37 @@
 
          mouseClicked = function() {
             background(BackColor);
+
             // Choose Setup Page
-            if(mouseX>=0 && mouseX<=200 && mouseY>=1050 && mouseY<=1150) {
+            if(mouseX>=0*xAdj && mouseX<=200*xAdj && mouseY>=850*yAdj && mouseY<=950*yAdj) {
                CourseSet=0;
                AceScreen=1;
             }
             // Choose Strokes Page
-            if(mouseX>=200 && mouseX<=400 && mouseY>=1050 && mouseY<=1150) {
-               GreenDist();
+            if(mouseX>=200*xAdj && mouseX<=400*xAdj && mouseY>=850*yAdj && mouseY<=950*yAdj) {
                AceScreen=2;
             }
             // Choose Score Card Page          
-            if(mouseX>=400 && mouseX<=600 && mouseY>=1050 && mouseY<=1150) {
+            if(mouseX>=400*xAdj && mouseX<=600*xAdj && mouseY>=850*yAdj && mouseY<=950*yAdj) {
                AceScreen=3;
             } 
             // Choose Result Page           
-            if(mouseX>=600 && mouseX<=800 && mouseY>=1050 && mouseY<=1150) {
+            if(mouseX>=600*xAdj && mouseX<=800*xAdj && mouseY>=850*yAdj && mouseY<=950*yAdj) {
                AceScreen=4;
             }                        
+
+
+/*            if(AceScreen===-1) {
+               if(mouseX>=200*xAdj && mouseX<=600*xAdj && mouseY>=400*yAdj && mouseY<=500*yAdj) { 
+                  AceScreen=1;
+               }              
+
+            }
+*/
+
             // Recall Previous Data
             if(AceScreen===0) {
-               if(mouseX>=50 && mouseX<=375 && mouseY>=200 && mouseY<=300) {
+               if(mouseX>=50*xAdj && mouseX<=375*xAdj && mouseY>=200*yAdj && mouseY<=300*yAdj) {
                   var F1=JSON.parse(window.localStorage.getItem('F'));
                   Front = Number(F1);
                   var B1=JSON.parse(window.localStorage.getItem('B'));
@@ -834,28 +967,31 @@
                      }
                   }
                   calcScores();                  
+                  AceScreen=1;
+                  draw()
                }
                // Clear Previous Data
-               if(mouseX>=425 && mouseX<=750 && mouseY>=200 && mouseY<=300) {
+               if(mouseX>=425*xAdj && mouseX<=750*xAdj && mouseY>=200*yAdj && mouseY<=300*yAdj) {
                   window.localStorage.clear();
+                  AceScreen=1;
+                  draw()
                }
-               AceScreen=1;
                return;
             }
             if(AceScreen===1 && CourseSet===0) {
                for (i=0; i<3; i++) {
                   // Select FRONT & BACK Courses
                   SameCourse=1;
-                  if(mouseX>=100+200*i && mouseX<=300+200*i && mouseY>=70 && mouseY<=140) {
+                  if(mouseX>=100*xAdj+200*i*xAdj && mouseX<=300*xAdj+200*i*xAdj && mouseY>=70*yAdj && mouseY<=140*yAdj) {
                      Front=i;
                   }
-                  if(mouseX>=100+200*i && mouseX<=300+200*i && mouseY>=200 && mouseY<=270) {
+                  if(mouseX>=100*xAdj+200*i*xAdj && mouseX<=300*xAdj+200*i*xAdj && mouseY>=200*yAdj && mouseY<=270*yAdj) {
                      Back=i;
                   }
 
                }
                // Continue to Player Data
-               if(mouseX>=300 && mouseX<=500 && mouseY>=300 && mouseY<=370) {
+               if(mouseX>=300*xAdj && mouseX<=500*xAdj && mouseY>=300*yAdj && mouseY<=370*yAdj) {
                   if(Front>=0 && Front<=2 && Back>=0 && Back<=2 && Front!=Back) {
                      CourseSet=1;
                      Restart = 0;
@@ -871,7 +1007,7 @@
 
 //             Restart - New Game               
 
-               if(mouseX>=300 && mouseX<=500 && mouseY>=500 && mouseY<=570) {
+               if(mouseX>=300*xAdj && mouseX<=500*xAdj && mouseY>=500*yAdj && mouseY<=570*yAdj) {
                   window.localStorage.clear();
                   Front=3;
                   Back=3;
@@ -900,7 +1036,7 @@
             }
             if(AceScreen===1 && CourseSet===1) {
                for (i=0; i<4; i++) {
-                  if(mouseX>=200+i*100 && mouseX<=300+i*100 && mouseY>=200 && mouseY<=300) {
+                  if(mouseX>=200*xAdj+i*100*xAdj && mouseX<=300*xAdj+i*100*xAdj && mouseY>=200*yAdj && mouseY<=300*yAdj) {
                      background(BackColor);
                      NumberOfPlayers=i+1;
                      CourseSet=2;
@@ -917,7 +1053,7 @@
 
                for (i=0; i<10; i++) {
                   for (j=0; j<4; j++) {
-                     if(mouseX>=0+80*i && mouseX<=80+80*i && mouseY>=200+j*80 && mouseY<=280+j*80) {
+                     if(mouseX>=0*xAdj+80*i*xAdj && mouseX<=80*xAdj+80*i*xAdj && mouseY>=200*yAdj+j*80*yAdj && mouseY<=280*yAdj+j*80*yAdj) {
                         PlayerCourseHandicap[PlayerCount]=i+j*10;
 
                         temp=floor((36-PlayerCourseHandicap[PlayerCount])/2);
@@ -951,10 +1087,9 @@
             }
 
             if(AceScreen===1 && CourseSet===3) {
-                  if(mouseX>=300 && mouseX<=500 && mouseY>=800 && mouseY<=870) {
+                  if(mouseX>=300*xAdj && mouseX<=500*xAdj && mouseY>=600*yAdj && mouseY<=670*yAdj) {
                      AceScreen=2
                      storeIt();
-                     GreenDist();
                      return;
                   }
                
@@ -963,7 +1098,7 @@
             if(AceScreen===2) {
                for (var i = 0; i < NumberOfPlayers; i++) {
                   for (var j = 0; j < 8; j++) {
-                     if(mouseX>=220+70*j && mouseX<=290+70*j && mouseY>=200+i*80 && mouseY<=280+i*80) {
+                     if(mouseX>=220*xAdj+70*j*xAdj && mouseX<=290*xAdj+70*j*xAdj && mouseY>=200*yAdj+i*80*yAdj && mouseY<=280*yAdj+i*80*yAdj) {
                         PlayerHoleStrokes[i*18+HoleNum-1]=j+1;
                      }
                   }
@@ -974,24 +1109,25 @@
                window.localStorage.setItem('HN',JSON.stringify(HoleNum));               
 
                // Back up to Previous Hole
-               if(mouseX>=50 && mouseX<=250 && mouseY>=550 && mouseY<=630) { 
+               if(mouseX>=50*xAdj && mouseX<=250*xAdj && mouseY>=550*yAdj && mouseY<=630*yAdj) { 
                   if(HoleNum>1) {
                         HoleNum=HoleNum-1;
                   }
                }
 
                // Proceed to Next Hole
-               if(mouseX>=550 && mouseX<=750 && mouseY>=550 && mouseY<=630) {
+               if(mouseX>=550*xAdj && mouseX<=750*xAdj && mouseY>=550*yAdj && mouseY<=630*yAdj) {
                   if(HoleNum<18) {
                      HoleNum=HoleNum+1;
                   }
                }
-               GreenDist();
-               if(mouseX>=50 && mouseX<=700 && mouseY>=650 && mouseY<=730) {
+               if(mouseX>=50*xAdj && mouseX<=700*xAdj && mouseY>=650*yAdj && mouseY<=730*yAdj) {
                   HoleNum=closestHole;
                }                
                draw();
             }            
+
+
          };
 
 
@@ -1024,6 +1160,11 @@
 
 // Round SETUP Section
 
+/*            if (AceScreen===-1) {
+
+               setScreenViews();            
+            }
+*/
             if (AceScreen===0) {
 
                localData();            
