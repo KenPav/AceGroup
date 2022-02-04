@@ -35,7 +35,7 @@
       
         // ProgramCodeGoesHere
 
-         var vers = "04Feb22/16:31";
+         var vers = "04Feb22/16:54";
          var temp = 0;
          var temp2 = 0;
          var FirstColor = color(0, 0, 0);
@@ -113,7 +113,7 @@
          //        alert('landscape');
                   isVert=0;
                   myWidth=Math.min(yMin,window.innerWidth);
-                  myHeight=Math.min(xMin.window.innerHeight);
+                  myHeight=Math.min(xMin,window.innerHeight);
 //                  myWidth=window.innerWidth;
 //                  myHeight=window.innerHeight;
                   xZoom=1;
@@ -124,7 +124,7 @@
          //        alert('landscape');
                   isVert=0;
                   myWidth=Math.min(yMin,window.innerWidth);
-                  myHeight=Math.min(xMin.window.innerHeight);
+                  myHeight=Math.min(xMin,window.innerHeight);
 //                  myWidth=window.innerWidth;
 //                  myHeight=window.innerHeight;
                   xZoom=1;
@@ -135,7 +135,7 @@
          //        alert('portrait');
                   isVert=1;
                   myWidth=Math.min(xMin,window.innerWidth);
-                  myHeight=Math.min(yMin.window.innerHeight);
+                  myHeight=Math.min(yMin,window.innerHeight);
 //                  myWidth=window.innerWidth;
 //                  myHeight=window.innerHeight;
                   xZoom=1;
@@ -146,7 +146,7 @@
          //        alert('portrait');
                   isVert=1;
                   myWidth=Math.min(xMin,window.innerWidth);
-                  myHeight=Math.min(yMin.window.innerHeight);
+                  myHeight=Math.min(yMin,window.innerHeight);
 //                  myWidth=window.innerWidth;
 //                  myHeight=window.innerHeight;
                   xZoom=1;
@@ -534,7 +534,7 @@
             xAdj=xMin/xOrig;
             yAdj=1;
             if(isVert===0 & myWidth<xOrig) {
-               xAdj=(xWidth/xOrig)*xZoom;
+               xAdj=(myWidth/xOrig)*xZoom;
                yAdj=1;
             }
             size(xOrig*xAdj,yOrig*yAdj);
@@ -714,8 +714,8 @@
             yOrig=1000;
             xAdj=xMin/xOrig;
             yAdj=1;
-            if(isVert===0 & xWidth<xOrig) {
-               xAdj=(xWidth/xOrig)*xZoom;
+            if(isVert===0 & myWidth<xOrig) {
+               xAdj=(myWidth/xOrig)*xZoom;
                yAdj=1;
             }
             size(xOrig*xAdj,yOrig*yAdj);
