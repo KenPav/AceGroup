@@ -35,7 +35,7 @@
       
         // ProgramCodeGoesHere
 
-         var vers = "04Feb22/16:54";
+         var vers = "02.06.22/15:00";
          var temp = 0;
          var temp2 = 0;
          var FirstColor = color(0, 0, 0);
@@ -63,8 +63,6 @@
          var myHeight=window.innerHeight;
          var xAdj=1;
          var yAdj=1;
-         var xZoom=1;
-         var yZoom=1;
          var xOrig=800;
          var yOrig=1000;
 
@@ -114,10 +112,6 @@
                   isVert=0;
                   myWidth=Math.min(yMin,window.innerWidth);
                   myHeight=Math.min(xMin,window.innerHeight);
-//                  myWidth=window.innerWidth;
-//                  myHeight=window.innerHeight;
-                  xZoom=1;
-                  yZoom=1;
                   console.log("case=90, myWidth, myHeight: ",myWidth,myHeight);
                  break;
                case -90:
@@ -125,10 +119,6 @@
                   isVert=0;
                   myWidth=Math.min(yMin,window.innerWidth);
                   myHeight=Math.min(xMin,window.innerHeight);
-//                  myWidth=window.innerWidth;
-//                  myHeight=window.innerHeight;
-                  xZoom=1;
-                  yZoom=1;
                   console.log("case=-90, myWidth, myHeight: ",myWidth,myHeight);
                   break;
                case 0:
@@ -136,10 +126,6 @@
                   isVert=1;
                   myWidth=Math.min(xMin,window.innerWidth);
                   myHeight=Math.min(yMin,window.innerHeight);
-//                  myWidth=window.innerWidth;
-//                  myHeight=window.innerHeight;
-                  xZoom=1;
-                  yZoom=1;
                   console.log("case=0, myWidth, myHeight: ",myWidth,myHeight);
                   break;
                case 180:
@@ -147,10 +133,6 @@
                   isVert=1;
                   myWidth=Math.min(xMin,window.innerWidth);
                   myHeight=Math.min(yMin,window.innerHeight);
-//                  myWidth=window.innerWidth;
-//                  myHeight=window.innerHeight;
-                  xZoom=1;
-                  yZoom=1;
                   console.log("case=180, myWidth, myHeight: ",myWidth,myHeight);
                   break;
                default:
@@ -178,7 +160,7 @@
             textSize(35*xAdj);
             text("Vers: "+vers,400*xAdj,985*yAdj);
 
-            text("xM,yM,iW,iH: "+xMin+", "+yMin+", "+window.innerWidth+", "+window.innerHeight,400*xAdj,845*yAdj);
+//            text("xM,yM,iW,iH: "+xMin+", "+yMin+", "+window.innerWidth+", "+window.innerHeight,400*xAdj,845*yAdj);
 
             textSize(50*xAdj);
          }
@@ -197,7 +179,7 @@
             yOrig=1000;
             myWidth=Math.min(xMin,innerWidth);
             if(myWidth<xOrig) {
-               xAdj=(myWidth/xOrig)*xZoom;
+               xAdj=myWidth/xOrig;
                yAdj=1;
             }
             size(xOrig*xAdj,yOrig*yAdj);
@@ -266,7 +248,7 @@
             yOrig=1000;
             myWidth=Math.min(xMin,innerWidth);
             if(myWidth<xOrig) {
-               xAdj=(myWidth/xOrig)*xZoom;
+               xAdj=myWidth/xOrig;
                yAdj=1;
             }
             size(xOrig*xAdj,yOrig*yAdj);
@@ -455,7 +437,7 @@
             yOrig=1000;
             myWidth=Math.min(xMin,innerWidth);
             if(myWidth<xOrig) {
-               xAdj=(myWidth/xOrig)*xZoom;
+               xAdj=myWidth/xOrig;
                yAdj=1;
             }
             size(xOrig*xAdj,yOrig*yAdj);
@@ -534,7 +516,7 @@
             xAdj=xMin/xOrig;
             yAdj=1;
             if(isVert===0 & myWidth<xOrig) {
-               xAdj=(myWidth/xOrig)*xZoom;
+               xAdj=myWidth/xOrig;
                yAdj=1;
             }
             size(xOrig*xAdj,yOrig*yAdj);
@@ -715,7 +697,7 @@
             xAdj=xMin/xOrig;
             yAdj=1;
             if(isVert===0 & myWidth<xOrig) {
-               xAdj=(myWidth/xOrig)*xZoom;
+               xAdj=myWidth/xOrig;
                yAdj=1;
             }
             size(xOrig*xAdj,yOrig*yAdj);
