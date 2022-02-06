@@ -52,6 +52,12 @@
          var HCPCount=0;
          var Lat = 0;
          var Long = 0;
+         var LatB = 0;
+         var LongB = 0;
+         var LatC = 0;
+         var LongC = 0;
+         var LatB = 0;
+         var LongB = 0;
          var holeLat = 0;
          var holeLong = 0;
          var dist = 0;
@@ -82,9 +88,15 @@
         // Par Element: 0-8=South 9-17=North 18-27=West
         // Par Element Values: Courses*9 + Hole Number - 1
          const HolePar = [5,4,3,5,4,4,3,4,4,4,5,3,4,4,4,4,3,4,4,5,4,4,5,3,4,5,3];
-         const GreenLat = [30.605128,30.603087,30.603351,30.600480,30.603116,30.604636,30.603694,30.606282,30.608712,30.614216,30.618367,30.619845,30.617919,30.615451,30.611984,30.614986,30.613946,30.611035,30.609564,30.614618,30.617760,30.619054,30.619535,30.618533,30.615434,30.610551,30.610456];
-         const GreenLong = [-81.447887,-81.451858,-81.453446,-81.457491,-81.456915,-81.451931,-81.449889,-81.451111,-81.447118,-81.446701,-81.446525,-81.445566,-81.449169,-81.447826,-81.447217,-81.448222,-81.448725,-81.447218,-81.450770,-81.450190,-81.450959,-81.453633,-81.448711,-81.449986,-81.449303,-81.449220,-81.447025];
-         const GreenDistance = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+         const GreenLatF = [30.60518511,30.60309261,30.60338783,30.60046915,30.60314567,30.60466646,30.60371574,30.60629072,30.60876298,30.61420873,30.61833608,30.61983691,30.61794659,30.61539813,30.61204242,30.61489465,30.61397194,30.61108312,30.60954014,30.61454799,30.61769493,30.61900235,30.61956565,30.61855305,30.61544310,30.61065361,30.61049671];
+         const GreenLatC = [30.60518511,30.60311325,30.60338878,30.60046915,30.60314567,30.60466646,30.60371574,30.60629072,30.60876298,30.61420873,30.61833608,30.61983691,30.61794659,30.61539813,30.61197522,30.61489465,30.61397194,30.61107892,30.60954014,30.61454799,30.61769493,30.61900235,30.61956565,30.61855305,30.61544310,30.61060132,30.61049671];
+         const GreenLatB = [30.60508637,30.60311325,30.60339636,30.60046915,30.60314567,30.60466646,30.60371574,30.60629072,30.60876298,30.61420873,30.61833608,30.61983691,30.61794659,30.61539813,30.61197522,30.61489465,30.61397194,30.61107892,30.60954014,30.61454799,30.61769493,30.61901946,30.61956565,30.61855305,30.61539236,30.61060132,30.61049671];
+         const GreenLongF = [-81.44789872,-81.45188389,-81.45350184,-81.45750670,-81.45704408,-81.45210277,-81.44989170,-81.45119031,-81.44717109,-81.44675406,-81.44657699,-81.44568685,-81.44921074,-81.44791223,-81.44730201,-81.44826305,-81.44883424,-81.44733500,-81.45082121,-81.45026720,-81.45097831,-81.45363519,-81.44878266,-81.45002041,-81.44946038,-81.44924485,-81.44712229];
+         const GreenLongC = [-81.44789872,-81.45188797,-81.45350230,-81.45750670,-81.45704408,-81.45210277,-81.44989170,-81.45119031,-81.44717109,-81.44675406,-81.44657699,-81.44568685,-81.44921074,-81.44791223,-81.44730353,-81.44826305,-81.44883424,-81.44731141,-81.45082121,-81.45026720,-81.45097831,-81.45363519,-81.44878266,-81.45002041,-81.44946038,-81.44923937,-81.44712229];
+         const GreenLongB = [-81.44793226,-81.45188797,-81.45350213,-81.45750670,-81.45704408,-81.45210277,-81.44989170,-81.45119031,-81.44717109,-81.44675406,-81.44657699,-81.44568685,-81.44921074,-81.44791223,-81.44730353,-81.44826305,-81.44883424,-81.44731141,-81.45082121,-81.45026720,-81.45097831,-81.45374104,-81.44878266,-81.45002041,-81.44945506,-81.44923937,-81.44712229];
+         const GreenDistanceF = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+         const GreenDistanceC = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+         const GreenDistanceB = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
          const Courses = ["South","North","West"];
          const SummaryLabel = ["","","Total Round"];
 
@@ -230,8 +242,6 @@
 //       Display Player Names and Course Handicaps (CourseSet=3)
 
          var enterSetup = function() {
-
-            console.log(window.screen.availWidth,window.screen.availHeight,window.screen.width,window.screen.height,window.outerWidth,window.outerHeight);
 
 //          Begin Tracking Location
             
@@ -427,8 +437,6 @@
 //       Enter Player Scores for each Hole, Display Team Points      
 
          var enterStrokes = function(Hole) {
-            console.log("at enter strokes");
-            console.log("myWidth & myHeight",myWidth,myHeight)
 
             GreenDist();
             xAdj=1;
@@ -467,7 +475,7 @@
                else {
                   fill(FirstColor);
                }
-               text(PlayerName[i],110*xAdj,265*yAdj+i*80*yAdj);
+               text(PlayerName[i],110*xAdj,255*yAdj+i*80*yAdj);
                for (var j = 0; j < 8; j++) {
                   if(PlayerHoleStrokes[i*18+HoleNum-1]===j+1) {
                      fill(SelectBoxColor);
@@ -483,7 +491,7 @@
                   else {
                      fill(FirstColor);
                   }
-                  text(j+1,255*xAdj+j*70*xAdj,265*yAdj+i*80*yAdj);
+                  text(j+1,255*xAdj+j*70*xAdj,255*yAdj+i*80*yAdj);
                }
 
             }
@@ -494,17 +502,37 @@
             rect(275*xAdj,550*yAdj,250*xAdj,80*yAdj);
             rect(50*xAdj,650*yAdj,700*xAdj,80*yAdj);
             fill(FirstColor);
-            text("Previous",150*xAdj,615*yAdj);
-            text("Next",650*xAdj,615*yAdj);
+            text("Previous",150*xAdj,605*yAdj);
+            text("Next",650*xAdj,605*yAdj);
             if(HoleNum===closestHole) {
                fill(SecondColor);
-               text("This hole is the nearest hole",400*xAdj,715*yAdj);
+               text("This hole is the nearest hole",400*xAdj,705*yAdj);
             } 
             else {
-               text("Jump to Nearest Hole (#"+closestHole+")",400*xAdj,715*yAdj);               
+               text("Jump to Nearest Hole (#"+closestHole+")",400*xAdj,705*yAdj);               
             }
-            text("Points: "+PlayerHoleScore[4*18+HoleNum-1],400*xAdj,615*yAdj);
-            text(GreenDistance[HoleNum-1].toFixed(0)+" yards to hole.",400*xAdj,800*yAdj);            
+            text("Points: "+PlayerHoleScore[4*18+HoleNum-1],400*xAdj,605*yAdj);
+//            text(GreenDistanceC[HoleNum-1].toFixed(0)+" yards to hole.",400*xAdj,800*yAdj);            
+            fill (BoxColor);
+            rect(0*xAdj,740*yAdj,200*xAdj,50*yAdj);
+            rect(200*xAdj,740*yAdj,200*xAdj,50*yAdj);
+            rect(400*xAdj,740*yAdj,200*xAdj,50*yAdj);           
+            rect(600*xAdj,740*yAdj,200*xAdj,50*yAdj);
+            rect(0*xAdj,790*yAdj,200*xAdj,50*yAdj);
+            rect(200*xAdj,790*yAdj,200*xAdj,50*yAdj);
+            rect(400*xAdj,790*yAdj,200*xAdj,50*yAdj);           
+            rect(600*xAdj,790*yAdj,200*xAdj,50*yAdj);
+            textSize(40*xAdj);
+            fill(FirstColor);
+            text("Location",100*xAdj,780*yAdj);
+            text("Front",300*xAdj,780*yAdj);
+            text("Center",500*xAdj,780*yAdj);
+            text("Back",700*xAdj,780*yAdj);
+            text("Yards",100*xAdj,830*yAdj);
+            text(GreenDistanceF[HoleNum-1].toFixed(0),300*xAdj,830*yAdj);
+            text(GreenDistanceC[HoleNum-1].toFixed(0),500*xAdj,830*yAdj);
+            text(GreenDistanceB[HoleNum-1].toFixed(0),700*xAdj,830*yAdj);
+            textSize(50*xAdj);
          };
 
 //       Display Score Card      
@@ -814,29 +842,48 @@
 //       Calculate Closest Hole Information
 
          GreenDist = function() {
-            console.log("at GreenDist");
-            console.log("myWidth & myHeight",myWidth,myHeight)
 
             for(i=0; i<18; i++) {
                if(i<9) {
-                  Lat = GreenLat[Front*9+i];
-                  Long = GreenLong[Front*9+i];
+                  LatF = GreenLatF[Front*9+i];
+                  LongF = GreenLongF[Front*9+i];
+                  LatC = GreenLatC[Front*9+i];
+                  LongC = GreenLongC[Front*9+i];
+                  LatB = GreenLatB[Front*9+i];
+                  LongB = GreenLongB[Front*9+i];
                }
                else {
-                  Lat = GreenLat[Back*9+i-9];
-                  Long = GreenLong[Back*9+i-9];
+                  LatF = GreenLatF[Back*9+i-9];
+                  LongF = GreenLongF[Back*9+i-9];
+                  LatC = GreenLatC[Back*9+i-9];
+                  LongC = GreenLongC[Back*9+i-9];
+                  LatB = GreenLatB[Back*9+i-9];
+                  LongB = GreenLongB[Back*9+i-9];
                }
+               Lat = LatF;
+               Long = LongF;
                distance();
-               GreenDistance[i]=dist;
+               GreenDistanceF[i]=dist;
+//               console.log("F",i,LatF,LongF,GreenDistanceF[i]);
+               Lat = LatC;
+               Long = LongC;
+               distance();
+               GreenDistanceC[i]=dist;
+//               console.log("C",i,LatC,LongC,GreenDistanceC[i]);
+               Lat = LatB;
+               Long = LongB;
+               distance();
+               GreenDistanceB[i]=dist;
+//               console.log("B",i,LatB,LongB,GreenDistanceB[i]);
             }
             dist = 1000000000;
             for(i=0; i<18; i++) {
-               if(GreenDistance[i]<dist) {
+               if(GreenDistanceC[i]<dist) {
                   closestHole=i+1;
-                  dist=GreenDistance[i];
+                  dist=GreenDistanceC[i];
                }
             }
-            console.log("Closest Hole: ",closestHole);
+//            console.log("Closest Hole: ",closestHole);
          }
 
 //      Green distance calculations
