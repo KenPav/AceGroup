@@ -35,7 +35,7 @@
       
         // ProgramCodeGoesHere
 
-         var vers = "02.07.22/09:30";
+         var vers = "02.07.22/10:00";
          var temp = 0;
          var temp2 = 0;
          var FirstColor = color(0, 0, 0);
@@ -514,6 +514,26 @@
             text("Points: "+PlayerHoleScore[4*18+HoleNum-1],400*xAdj,605*yAdj);
 //            text(GreenDistanceC[HoleNum-1].toFixed(0)+" yards to hole.",400*xAdj,800*yAdj);            
             fill (BoxColor);
+
+            rect(0*xAdj,740*yAdj,200*xAdj,100*yAdj);
+            rect(200*xAdj,740*yAdj,200*xAdj,50*yAdj);
+            rect(400*xAdj,740*yAdj,200*xAdj,50*yAdj);           
+            rect(600*xAdj,740*yAdj,200*xAdj,50*yAdj);
+            rect(200*xAdj,790*yAdj,200*xAdj,50*yAdj);
+            rect(400*xAdj,790*yAdj,200*xAdj,50*yAdj);           
+            rect(600*xAdj,790*yAdj,200*xAdj,50*yAdj);
+            fill(FirstColor);
+            text("Yards to",100*xAdj,785*yAdj);
+            text("Green",100*xAdj,825*yAdj);
+            text("Front",300*xAdj,780*yAdj);
+            text("Center",500*xAdj,780*yAdj);
+            text("Back",700*xAdj,780*yAdj);
+            text(GreenDistanceF[HoleNum-1].toFixed(0),300*xAdj,830*yAdj);
+            text(GreenDistanceC[HoleNum-1].toFixed(0),500*xAdj,830*yAdj);
+            text(GreenDistanceB[HoleNum-1].toFixed(0),700*xAdj,830*yAdj);
+
+
+/*
             rect(0*xAdj,740*yAdj,200*xAdj,50*yAdj);
             rect(200*xAdj,740*yAdj,200*xAdj,50*yAdj);
             rect(400*xAdj,740*yAdj,200*xAdj,50*yAdj);           
@@ -533,6 +553,7 @@
             text(GreenDistanceC[HoleNum-1].toFixed(0),500*xAdj,830*yAdj);
             text(GreenDistanceB[HoleNum-1].toFixed(0),700*xAdj,830*yAdj);
             textSize(50*xAdj);
+*/
          };
 
 //       Display Score Card      
