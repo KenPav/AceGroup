@@ -35,7 +35,7 @@
       
         // ProgramCodeGoesHere
 
-         var vers = "02.09.22/10:00";
+         var vers = "02.12.22/11:00";
          var temp = 0;
          var temp2 = 0;
          var FirstColor = color(0, 0, 0);
@@ -247,7 +247,7 @@
             
             if(startLocation===0) {
                trackLocation();
-               setInterval(trackLocation,5000);
+               setInterval(trackLocation,10000);
                startLocation=1;
             }            
 
@@ -439,6 +439,13 @@
          var enterStrokes = function(Hole) {
 
             GreenDist();
+            if(GreenDistanceC[HoleNum]<150 && GreenDistanceC[HoleNum]>30) {
+               clearInterval();
+               setInterval(trackLocation,1000);
+            } else {
+               clearInterval();
+               setInterval(trackLocation,5000);               
+            }
             xAdj=1;
             yAdj=1;
             xOrig=800;
@@ -512,7 +519,6 @@
                text("Jump to Nearest Hole (#"+closestHole+")",400*xAdj,705*yAdj);               
             }
             text("Points: "+PlayerHoleScore[4*18+HoleNum-1],400*xAdj,605*yAdj);
-//            text(GreenDistanceC[HoleNum-1].toFixed(0)+" yards to hole.",400*xAdj,800*yAdj);            
             fill (BoxColor);
 
             rect(0*xAdj,740*yAdj,200*xAdj,100*yAdj);
@@ -533,27 +539,6 @@
             text(GreenDistanceB[HoleNum-1].toFixed(0),700*xAdj,830*yAdj);
 
 
-/*
-            rect(0*xAdj,740*yAdj,200*xAdj,50*yAdj);
-            rect(200*xAdj,740*yAdj,200*xAdj,50*yAdj);
-            rect(400*xAdj,740*yAdj,200*xAdj,50*yAdj);           
-            rect(600*xAdj,740*yAdj,200*xAdj,50*yAdj);
-            rect(0*xAdj,790*yAdj,200*xAdj,50*yAdj);
-            rect(200*xAdj,790*yAdj,200*xAdj,50*yAdj);
-            rect(400*xAdj,790*yAdj,200*xAdj,50*yAdj);           
-            rect(600*xAdj,790*yAdj,200*xAdj,50*yAdj);
-            textSize(40*xAdj);
-            fill(FirstColor);
-            text("Location",100*xAdj,780*yAdj);
-            text("Front",300*xAdj,780*yAdj);
-            text("Center",500*xAdj,780*yAdj);
-            text("Back",700*xAdj,780*yAdj);
-            text("Yards",100*xAdj,830*yAdj);
-            text(GreenDistanceF[HoleNum-1].toFixed(0),300*xAdj,830*yAdj);
-            text(GreenDistanceC[HoleNum-1].toFixed(0),500*xAdj,830*yAdj);
-            text(GreenDistanceB[HoleNum-1].toFixed(0),700*xAdj,830*yAdj);
-            textSize(50*xAdj);
-*/
          };
 
 //       Display Score Card      
@@ -979,18 +964,25 @@
             if(mouseX>=0*xAdj && mouseX<=200*xAdj && mouseY>=850*yAdj && mouseY<=950*yAdj) {
                CourseSet=0;
                AceScreen=1;
+               clearInterval();
+               setInterval(trackLocation,10000);
             }
             // Choose Strokes Page
             if(mouseX>=200*xAdj && mouseX<=400*xAdj && mouseY>=850*yAdj && mouseY<=950*yAdj) {
                AceScreen=2;
+               clearInterval();
+               trackLocation();
+               setInterval(trackLocation,5000);
             }
             // Choose Score Card Page          
             if(mouseX>=400*xAdj && mouseX<=600*xAdj && mouseY>=850*yAdj && mouseY<=950*yAdj) {
                AceScreen=3;
+               clearInterval();
             } 
             // Choose Result Page           
             if(mouseX>=600*xAdj && mouseX<=800*xAdj && mouseY>=850*yAdj && mouseY<=950*yAdj) {
                AceScreen=4;
+               clearInterval();
             }                        
 
             // Recall Previous Data
@@ -1144,6 +1136,8 @@
                   if(mouseX>=300*xAdj && mouseX<=500*xAdj && mouseY>=600*yAdj && mouseY<=670*yAdj) {
                      AceScreen=2
                      storeIt();
+                     clearInterval();
+                     setInterval(trackLocation,5000);
                      return;
                   }
                
