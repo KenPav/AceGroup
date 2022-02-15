@@ -43,6 +43,8 @@
          var ThirdColor = color(70,50,168);
          var BoxColor = color(255,255,255);
          var SelectBoxColor = color(0,255,200);
+         var WarningColor = color(255,0,0);
+         var MissingScores = 0;
          var BackColor = color(180,200,240);
          stroke(FirstColor);
          strokeWeight(2);
@@ -437,14 +439,19 @@
 //       Enter Player Scores for each Hole, Display Team Points      
 
          var enterStrokes = function(Hole) {
-
+            MissingScores = 0;
+            if(HoleNum>1) {
+               for(i=0; i<NumberOfPlayers; i++) {
+                  MissingScores = MissingScores + PlayerHoleStrokes[i*18+HoleNum-2];
+               }
+            }
             GreenDist();
-            if(GreenDistanceC[HoleNum]<150 && GreenDistanceC[HoleNum]>30) {
+            if(GreenDistanceC[HoleNum-1]<150 && GreenDistanceC[HoleNum-1]>30) {
                clearInterval();
                setInterval(trackLocation,1000);
             } else {
                clearInterval();
-               setInterval(trackLocation,5000);               
+               setInterval(trackLocation,2000);               
             }
             xAdj=1;
             yAdj=1;
@@ -504,7 +511,11 @@
             }
 
             fill(BoxColor);
+            if(MissingScores===0) {
+               fill(WarningColor);
+            }
             rect(50*xAdj,550*yAdj,200*xAdj,80*yAdj);
+            fill(BoxColor);
             rect(550*xAdj,550*yAdj,200*xAdj,80*yAdj);
             rect(275*xAdj,550*yAdj,250*xAdj,80*yAdj);
             rect(50*xAdj,650*yAdj,700*xAdj,80*yAdj);
