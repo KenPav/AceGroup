@@ -35,7 +35,7 @@
       
         // ProgramCodeGoesHere
 
-         var vers = "02.15.22/10:00";
+         var vers = "02.15.22/16:00";
          var temp = 0;
          var temp2 = 0;
          var FirstColor = color(0, 0, 0);
@@ -511,7 +511,7 @@
             }
 
             fill(BoxColor);
-            if(MissingScores===0) {
+            if(MissingScores===0 && HoleNum>1) {
                fill(WarningColor);
             }
             rect(50*xAdj,550*yAdj,200*xAdj,80*yAdj);
