@@ -35,7 +35,8 @@
       
         // ProgramCodeGoesHere
 
-         var vers = "02.15.22/16:00";
+         var vers = "02.17.22/09:30";
+         var blinker = 0;
          var temp = 0;
          var temp2 = 0;
          var FirstColor = color(0, 0, 0);
@@ -512,7 +513,15 @@
 
             fill(BoxColor);
             if(MissingScores===0 && HoleNum>1) {
-               fill(WarningColor);
+               blinker = blinker + 1;
+               fill(BoxColor);
+               if (blinker >10) {
+                  fill(WarningColor);
+                  if (blinker>20) {
+                     fill(BoxColor);
+                     blinker = 0;
+                  }
+               }
             }
             rect(50*xAdj,550*yAdj,200*xAdj,80*yAdj);
             fill(BoxColor);
@@ -981,6 +990,7 @@
             // Choose Strokes Page
             if(mouseX>=200*xAdj && mouseX<=400*xAdj && mouseY>=850*yAdj && mouseY<=950*yAdj) {
                AceScreen=2;
+               blinker = 0;
                clearInterval();
                trackLocation();
                setInterval(trackLocation,5000);
@@ -1171,6 +1181,7 @@
                if(mouseX>=50*xAdj && mouseX<=250*xAdj && mouseY>=550*yAdj && mouseY<=630*yAdj) { 
                   if(HoleNum>1) {
                         HoleNum=HoleNum-1;
+                        blinker = 0;
                   }
                }
 
@@ -1178,6 +1189,7 @@
                if(mouseX>=550*xAdj && mouseX<=750*xAdj && mouseY>=550*yAdj && mouseY<=630*yAdj) {
                   if(HoleNum<18) {
                      HoleNum=HoleNum+1;
+                     blinker = 0;
                   }
                }
                if(mouseX>=50*xAdj && mouseX<=700*xAdj && mouseY>=650*yAdj && mouseY<=730*yAdj) {
