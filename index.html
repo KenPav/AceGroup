@@ -35,7 +35,7 @@
       
         // ProgramCodeGoesHere
 
-         var vers = "02.17.22/09:30";
+         var vers = "02.17.22/10:30";
          var blinker = 0;
          var temp = 0;
          var temp2 = 0;
@@ -975,6 +975,23 @@
             TotalStrokes[14] = TotalStrokes[12] + TotalStrokes[13];
          };
 
+//       Clear Local Storage
+//       This routine clears ONLY the data associated with this appplication
+
+         clearLocalData = function() {
+            
+            window.localStorage.removeItem('PD'); 
+            window.localStorage.removeItem('PHS');
+            window.localStorage.removeItem('pName');
+            window.localStorage.removeItem('RqPt');
+            window.localStorage.removeItem('PCH');
+            window.localStorage.removeItem('NumP');
+            window.localStorage.removeItem('F');
+            window.localStorage.removeItem('B');
+            window.localStorage.removeItem('HN');
+
+         }
+
 //       User Mouse Click Processing Section 
 
          mouseClicked = function() {
@@ -1039,7 +1056,8 @@
                }
                // Clear Previous Data
                if(mouseX>=425*xAdj && mouseX<=750*xAdj && mouseY>=200*yAdj && mouseY<=300*yAdj) {
-                  window.localStorage.clear();
+                  clearLocalData();
+//                  window.localStorage.clear();
                   AceScreen=1;
                   draw()
                }
@@ -1075,7 +1093,8 @@
 //             Restart - New Game               
 
                if(mouseX>=300*xAdj && mouseX<=500*xAdj && mouseY>=500*yAdj && mouseY<=570*yAdj) {
-                  window.localStorage.clear();
+                  clearLocalData();
+//                  window.localStorage.clear();
                   Front=3;
                   Back=3;
                   NumberOfPlayers=0;
