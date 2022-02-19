@@ -35,7 +35,7 @@
       
         // ProgramCodeGoesHere
 
-         var vers = "02.17.22/10:30";
+         var vers = "02.19.22/12:00";
          var blinker = 0;
          var temp = 0;
          var temp2 = 0;
@@ -45,6 +45,8 @@
          var BoxColor = color(255,255,255);
          var SelectBoxColor = color(0,255,200);
          var WarningColor = color(255,0,0);
+         var AreYouSure = 0;
+         var GPSswitch = 0;
          var MissingScores = 0;
          var BackColor = color(180,200,240);
          stroke(FirstColor);
@@ -65,7 +67,6 @@
          var holeLong = 0;
          var dist = 0;
          var closestHole = 0;
-         var startLocation = 0;
 
          var isVert=1;
          var myWidth=window.innerWidth;
@@ -247,15 +248,6 @@
 
          var enterSetup = function() {
 
-//          Begin Tracking Location
-            
-            if(startLocation===0) {
-               trackLocation();
-               setInterval(trackLocation,10000);
-               startLocation=1;
-            }            
-
-
             xAdj=1;
             yAdj=1;
             xOrig=800;
@@ -337,10 +329,21 @@
                rect(300*xAdj,300*yAdj,200*xAdj,70*yAdj);
                fill(FirstColor);
                text("Continue",400*xAdj,355*yAdj);
-               fill(BoxColor);
-               rect(300*xAdj,500*yAdj,200*xAdj,70*yAdj);
-               fill(FirstColor);
-               text("Restart",400*xAdj,555*yAdj);
+               if (AreYouSure===0) {
+                  fill(BoxColor);
+                  rect(100*xAdj,500*yAdj,600*xAdj,70*yAdj);
+                  fill(FirstColor);
+                  text("**Clear All Round Info**",400*xAdj,550*yAdj);
+               } else {
+                  fill(WarningColor);
+                  rect(100*xAdj,500*yAdj,600*xAdj,70*yAdj);
+                  fill(FirstColor);
+                  text("Confirm Clear All Info",400*xAdj,550*yAdj);
+                  fill(BoxColor);
+                  rect(100*xAdj,600*yAdj,600*xAdj,70*yAdj);
+                  fill(FirstColor);
+                  text("Do Not Clear Round Info",400*xAdj,650*yAdj);
+               }
             }
 
 //       Select Number of Players (CourseSet=1)
@@ -447,13 +450,15 @@
                   MissingScores = MissingScores + PlayerHoleStrokes[i*18+HoleNum-2];
                }
             }
-            GreenDist();
-            if(GreenDistanceC[HoleNum-1]<150 && GreenDistanceC[HoleNum-1]>30) {
-               clearInterval();
-               setInterval(trackLocation,1000);
-            } else {
-               clearInterval();
-               setInterval(trackLocation,2000);               
+            if(GPSswitch===1) {
+               GreenDist();
+               if(GreenDistanceC[HoleNum-1]<150 && GreenDistanceC[HoleNum-1]>30) {
+                  clearInterval();
+                  setInterval(trackLocation,1000);
+               } else {
+                  clearInterval();
+                  setInterval(trackLocation,2000);               
+               }
             }
             xAdj=1;
             yAdj=1;
@@ -473,6 +478,19 @@
             } else{
                fill(FirstColor);
             }
+            textSize(35*xAdj);
+            if (GPSswitch===1) {
+               fill(WarningColor);
+               rect(10*xAdj,10*yAdj,150*xAdj,60*yAdj);
+               fill(FirstColor);
+               text("GPS On",85*xAdj,50*yAdj);
+            } else {
+               fill(BoxColor);
+               rect(10*xAdj,10*yAdj,150*xAdj,60*yAdj);
+               fill(FirstColor);
+               text("GPS Off",85*xAdj,50*yAdj);
+            }
+            textSize(50*xAdj);
             text("Hole #"+HoleNum,400*xAdj,65*yAdj)
             if(HoleNum<=9) {
                text("Front 9: "+Courses[Front]+" #"+HoleNum+" / Par "+HolePar[(Front*9)+HoleNum-1],400*xAdj,125);
@@ -532,12 +550,14 @@
             fill(FirstColor);
             text("Previous",150*xAdj,605*yAdj);
             text("Next",650*xAdj,605*yAdj);
-            if(HoleNum===closestHole) {
-               fill(SecondColor);
-               text("This hole is the nearest hole",400*xAdj,705*yAdj);
-            } 
-            else {
-               text("Jump to Nearest Hole (#"+closestHole+")",400*xAdj,705*yAdj);               
+            if(GPSswitch===1) {
+               if(HoleNum===closestHole) {
+                  fill(SecondColor);
+                  text("This hole is the nearest hole",400*xAdj,705*yAdj);
+               } 
+               else {
+                  text("Jump to Nearest Hole (#"+closestHole+")",400*xAdj,705*yAdj);               
+               }
             }
             text("Points: "+PlayerHoleScore[4*18+HoleNum-1],400*xAdj,605*yAdj);
             fill (BoxColor);
@@ -555,10 +575,11 @@
             text("Front",300*xAdj,780*yAdj);
             text("Center",500*xAdj,780*yAdj);
             text("Back",700*xAdj,780*yAdj);
-            text(GreenDistanceF[HoleNum-1].toFixed(0),300*xAdj,830*yAdj);
-            text(GreenDistanceC[HoleNum-1].toFixed(0),500*xAdj,830*yAdj);
-            text(GreenDistanceB[HoleNum-1].toFixed(0),700*xAdj,830*yAdj);
-
+            if(GPSswitch===1) {
+               text(GreenDistanceF[HoleNum-1].toFixed(0),300*xAdj,830*yAdj);
+               text(GreenDistanceC[HoleNum-1].toFixed(0),500*xAdj,830*yAdj);
+               text(GreenDistanceB[HoleNum-1].toFixed(0),700*xAdj,830*yAdj);
+            }
 
          };
 
@@ -1003,15 +1024,11 @@
                CourseSet=0;
                AceScreen=1;
                clearInterval();
-               setInterval(trackLocation,10000);
             }
             // Choose Strokes Page
             if(mouseX>=200*xAdj && mouseX<=400*xAdj && mouseY>=850*yAdj && mouseY<=950*yAdj) {
                AceScreen=2;
                blinker = 0;
-               clearInterval();
-               trackLocation();
-               setInterval(trackLocation,5000);
             }
             // Choose Score Card Page          
             if(mouseX>=400*xAdj && mouseX<=600*xAdj && mouseY>=850*yAdj && mouseY<=950*yAdj) {
@@ -1053,13 +1070,15 @@
                   }
                   calcScores();                  
                   AceScreen=1;
+                  trackLocation();
                   draw()
+
                }
                // Clear Previous Data
                if(mouseX>=425*xAdj && mouseX<=750*xAdj && mouseY>=200*yAdj && mouseY<=300*yAdj) {
                   clearLocalData();
-//                  window.localStorage.clear();
                   AceScreen=1;
+                  trackLocation()
                   draw()
                }
                return;
@@ -1092,32 +1111,40 @@
 
 
 //             Restart - New Game               
-
-               if(mouseX>=300*xAdj && mouseX<=500*xAdj && mouseY>=500*yAdj && mouseY<=570*yAdj) {
-                  clearLocalData();
-//                  window.localStorage.clear();
-                  Front=3;
-                  Back=3;
-                  NumberOfPlayers=0;
-                  HoleNum=1;
-                  for(i=0; i<72; i++) {
-                     PlayerHoleStrokes[i]=0;
-                     if(i<4) {
-                        PlayerName[i]="";
-                        if(i===4) {
-                           PlayerName[i]="Team";
+               if(mouseX>=100*xAdj && mouseX<=700*xAdj && mouseY>=600*yAdj && mouseY<=670*yAdj && AreYouSure===1) {
+                  AreYouSure = 0;
+               }
+               if(mouseX>=100*xAdj && mouseX<=700*xAdj && mouseY>=500*yAdj && mouseY<=570*yAdj) {
+                  if(AreYouSure===0) {
+                     AreYouSure = 1;
+                  }
+                  else {
+                     clearLocalData();
+   //                  window.localStorage.clear();
+                     Front=3;
+                     Back=3;
+                     NumberOfPlayers=0;
+                     HoleNum=1;
+                     for(i=0; i<72; i++) {
+                        PlayerHoleStrokes[i]=0;
+                        if(i<4) {
+                           PlayerName[i]="";
+                           if(i===4) {
+                              PlayerName[i]="Team";
+                           }
+                        }
+                        if(i<3) {
+                           PlayerCourseHandicap[i]=0;
+                        }
+                        if(i<15) {
+                           ReqPts[i]=0;
                         }
                      }
-                     if(i<3) {
-                        PlayerCourseHandicap[i]=0;
-                     }
-                     if(i<15) {
-                        ReqPts[i]=0;
-                     }
+                     for (var i=0; i<90; i++) {
+                        PlayerHoleScore[i]=0;
+                     } 
+                     AreYouSure = 0;                 
                   }
-                  for (var i=0; i<90; i++) {
-                     PlayerHoleScore[i]=0;
-                  }                  
                }
                return;
             }
@@ -1177,14 +1204,21 @@
                   if(mouseX>=300*xAdj && mouseX<=500*xAdj && mouseY>=600*yAdj && mouseY<=670*yAdj) {
                      AceScreen=2
                      storeIt();
-                     clearInterval();
-                     setInterval(trackLocation,5000);
                      return;
                   }
                
             }
             // Enter Hole Strokes and Calculate Player Hole Scores
             if(AceScreen===2) {
+               if(mouseX>=10*xAdj && mouseX<=160*xAdj && mouseY>=10*yAdj && mouseY<=70*yAdj) {
+                  if (GPSswitch === 0) {
+                     GPSswitch = 1;
+                     trackLocation();
+                  } else {
+                     GPSswitch = 0;
+                  }
+                  return;
+               }
                for (var i = 0; i < NumberOfPlayers; i++) {
                   for (var j = 0; j < 8; j++) {
                      if(mouseX>=220*xAdj+70*j*xAdj && mouseX<=290*xAdj+70*j*xAdj && mouseY>=200*yAdj+i*80*yAdj && mouseY<=280*yAdj+i*80*yAdj) {
