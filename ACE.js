@@ -8,7 +8,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "02.20.22/17:00";
+      var vers = "02.20.22/17:30";
       var blinker = 0;
       var temp = 0;
       var temp2 = 0;
@@ -228,7 +228,7 @@
          xOrig=800;
          yOrig=1000;
          myWidth=Math.min(xMin,innerWidth);
-         if(myWidth<xOrig) {
+         if(isVert===1 && myWidth<xOrig) {
             xAdj=myWidth/xOrig;
             yAdj=myHeight/yOrig;
          }
@@ -441,7 +441,7 @@
          xOrig=800;
          yOrig=1000;
          myWidth=Math.min(xMin,innerWidth);
-         if(myWidth<xOrig) {
+         if(isVert===1 && myWidth<xOrig) {
             xAdj=myWidth/xOrig;
             yAdj=myHeight/yOrig;
          }
