@@ -44,6 +44,8 @@
       var isVert=1;
       var myWidth=window.innerWidth;
       var myHeight=window.innerHeight;
+      var xMin = myWidth;
+      var yMin = myHeight;
       var xAdj=1;
       var yAdj=1;
       var xOrig=800;
@@ -148,8 +150,6 @@
          text("Results",700*xAdj,915*yAdj);
          textSize(35*xAdj);
          text("Vers: "+vers,400*xAdj,985*yAdj);
-
-//            text("xM,yM,iW,iH: "+xMin+", "+yMin+", "+window.innerWidth+", "+window.innerHeight,400*xAdj,845*yAdj);
 
          textSize(50*xAdj);
       }
@@ -1248,13 +1248,13 @@
 //       SCORE INPUT INITIAL VARIABLES
       var HoleNum = 1;
 
-      var xMin = 0;
+/*      var xMin = 0;
       var yMin = 0;
       var startXY = 0;
-      
+*/      
       draw = function() {
 
-         if (startXY===0) {
+/*         if (startXY===0) {
 
             if (window.matchMedia("(orientation: portrait)").matches) {
                // you're in PORTRAIT mode
@@ -1270,7 +1270,7 @@
 
             startXY=1;
          }
-
+*/
          if (AceScreen===0) {
 
             localData();            
