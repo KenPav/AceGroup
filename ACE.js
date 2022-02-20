@@ -8,7 +8,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "02.20.22/13:00";
+      var vers = "02.20.22/13:30";
       var blinker = 0;
       var temp = 0;
       var temp2 = 0;
@@ -172,7 +172,8 @@
          yOrig=1000;
          myWidth=Math.min(xMin,innerWidth);
          if(myWidth<xOrig) {
-            xAdj=myWidth/xOrig;
+//            xAdj=myWidth/xOrig;
+            xAdj = 1;
             yAdj=1;
          }
          size(xOrig*xAdj,yOrig*yAdj);
@@ -477,7 +478,7 @@
             Long = TrackStartLong;
             distance();
             TrackYards = dist;
-            text(TrackYards+" yds",715,70);
+            text(TrackYards+" yds",715*xAdj,70*yAdj);
             textSize(35*xAdj);
          } else {
             fill(BoxColor);
