@@ -8,7 +8,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "02.20.22/16:45";
+      var vers = "02.20.22/17:00";
       var blinker = 0;
       var temp = 0;
       var temp2 = 0;
@@ -455,44 +455,46 @@
          } else{
             fill(FirstColor);
          }
-         textSize(35*xAdj);
+         textSize(40*xAdj);
          if (GPSswitch===1) {
             fill(WarningColor);
-            rect(10*xAdj,10*yAdj,150*xAdj,60*yAdj);
+            rect(10*xAdj,10*yAdj,170*xAdj,80*yAdj);
             fill(FirstColor);
-            text("GPS On",85*xAdj,50*yAdj);
+            text("GPS On",95*xAdj,65*yAdj);
          } else {
             fill(BoxColor);
-            rect(10*xAdj,10*yAdj,150*xAdj,60*yAdj);
+            rect(10*xAdj,10*yAdj,170*xAdj,80*yAdj);
             fill(FirstColor);
-            text("GPS Off",85*xAdj,50*yAdj);
+            text("GPS Off",95*xAdj,65*yAdj);
          }
          if (Trackswitch===1) {
             fill(SelectBoxColor);
-            rect(640*xAdj,10*yAdj,150*xAdj,60*yAdj);
+            rect(620*xAdj,10*yAdj,170*xAdj,80*yAdj);
             fill(FirstColor);
-            text("Track On",715*xAdj,37*yAdj);
+            text("Track On",705*xAdj,50*yAdj);
             Lat = TrackStartLat;
             Long = TrackStartLong;
             distance();
             TrackYards = dist;
-            text(TrackYards.toFixed(0)+" yds",715*xAdj,65*yAdj);
+            text(TrackYards.toFixed(0)+" yds",705*xAdj,80*yAdj);
          } else {
             fill(BoxColor);
-            rect(640*xAdj,10*yAdj,150*xAdj,60*yAdj);
+            rect(620*xAdj,10*yAdj,170*xAdj,80*yAdj);
             fill(FirstColor);
-            text("Track Off",715*xAdj,50*yAdj);
+            text("Track Off",705*xAdj,65*yAdj);
          }
          textSize(50*xAdj);
-         text("Hole #"+HoleNum,400*xAdj,65*yAdj)
+         text("Hole #"+HoleNum,400*xAdj,90*yAdj)
          if(HoleNum<=9) {
-            text("Front 9: "+Courses[Front]+" #"+HoleNum+" / Par "+HolePar[(Front*9)+HoleNum-1],400*xAdj,125*yAdj);
+            text("Front 9: "+Courses[Front]+" #"+HoleNum+" / Par "+HolePar[(Front*9)+HoleNum-1],400*xAdj,140*yAdj);
          }
          else {
-            text("Back 9: "+Courses[Back]+" #"+(HoleNum-9)+" / Par "+HolePar[(Back*9)+HoleNum-10],400*xAdj,125*yAdj);
+            text("Back 9: "+Courses[Back]+" #"+(HoleNum-9)+" / Par "+HolePar[(Back*9)+HoleNum-10],400*xAdj,140*yAdj);
          }
          fill(FirstColor);
+         textSize(40*xAdj);
          text("Select Hole Score for Each Player",400*xAdj,185*yAdj);
+         textSize(50*xAdj);
          for (var i = 0; i < NumberOfPlayers; i++) {
             fill(BoxColor);
             rect(0*xAdj,200*yAdj+i*80*yAdj,220*xAdj,80*yAdj);
@@ -1202,7 +1204,7 @@
          // Enter Hole Strokes and Calculate Player Hole Scores
          if(AceScreen===2) {
 
-            if(mouseX>=10*xAdj && mouseX<=160*xAdj && mouseY>=10*yAdj && mouseY<=70*yAdj) {
+            if(mouseX>=10*xAdj && mouseX<=180*xAdj && mouseY>=10*yAdj && mouseY<=90*yAdj) {
                if (GPSswitch === 0) {
                   GPSswitch = 1;
                   trackLocation();
@@ -1212,7 +1214,7 @@
                return;
             }
 
-            if(mouseX>=640*xAdj && mouseX<=790*xAdj && mouseY>=10*yAdj && mouseY<=70*yAdj) {
+            if(mouseX>=620*xAdj && mouseX<=790*xAdj && mouseY>=10*yAdj && mouseY<=90*yAdj) {
                if (Trackswitch === 0) {
                   Trackswitch = 1;
                   GPSswitch = 1
