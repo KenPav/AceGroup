@@ -8,7 +8,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "02.20.22/16:30";
+      var vers = "02.20.22/16:45";
       var blinker = 0;
       var temp = 0;
       var temp2 = 0;
@@ -486,13 +486,13 @@
          textSize(50*xAdj);
          text("Hole #"+HoleNum,400*xAdj,65*yAdj)
          if(HoleNum<=9) {
-            text("Front 9: "+Courses[Front]+" #"+HoleNum+" / Par "+HolePar[(Front*9)+HoleNum-1],400*xAdj,125);
+            text("Front 9: "+Courses[Front]+" #"+HoleNum+" / Par "+HolePar[(Front*9)+HoleNum-1],400*xAdj,125*yAdj);
          }
          else {
-            text("Back 9: "+Courses[Back]+" #"+(HoleNum-9)+" / Par "+HolePar[(Back*9)+HoleNum-10],400*xAdj,125);
+            text("Back 9: "+Courses[Back]+" #"+(HoleNum-9)+" / Par "+HolePar[(Back*9)+HoleNum-10],400*xAdj,125*yAdj);
          }
          fill(FirstColor);
-         text("Select Hole Score for Each Player",400*xAdj,185);
+         text("Select Hole Score for Each Player",400*xAdj,185*yAdj);
          for (var i = 0; i < NumberOfPlayers; i++) {
             fill(BoxColor);
             rect(0*xAdj,200*yAdj+i*80*yAdj,220*xAdj,80*yAdj);
@@ -582,11 +582,11 @@
 
          xOrig=1250;
          yOrig=1000;
-         xAdj=xMin/xOrig;
+         xAdj=1;
          yAdj=1;
          if(isVert===0 & myWidth<xOrig) {
             xAdj=myWidth/xOrig;
-            yAdj=myHeight/yOrig;
+            yAdj=1;
          }
          console.log("Card",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
 /*            else {
@@ -770,11 +770,11 @@
       var showSummary = function() {
          xOrig=1050;
          yOrig=1000;
-         xAdj=xMin/xOrig;
+         xAdj=1;
          yAdj=1;
          if(isVert===0 & myWidth<xOrig) {
             xAdj=myWidth/xOrig;
-            yAdj=myHeight/yOrig;
+            yAdj=1;
          }
          console.log("Results",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
          size(xOrig*xAdj,yOrig*yAdj);
