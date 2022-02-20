@@ -8,7 +8,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "02.20.22/14:15";
+      var vers = "02.20.22/14:30";
       var blinker = 0;
       var temp = 0;
       var temp2 = 0;
@@ -100,35 +100,30 @@
 
 
       function doOnOrientationChange() {
-            console.log("availWidth, availHeight: ",window.screen.availWidth,window.screen.availHeight);
           switch(window.orientation) {
             case 90:
       //        alert('landscape');
                isVert=0;
                myWidth=Math.min(yMin,window.innerWidth);
                myHeight=Math.min(xMin,window.innerHeight);
-               console.log("case=90, myWidth, myHeight: ",myWidth,myHeight);
               break;
             case -90:
       //        alert('landscape');
                isVert=0;
                myWidth=Math.min(yMin,window.innerWidth);
                myHeight=Math.min(xMin,window.innerHeight);
-               console.log("case=-90, myWidth, myHeight: ",myWidth,myHeight);
                break;
             case 0:
       //        alert('portrait');
                isVert=1;
                myWidth=Math.min(xMin,window.innerWidth);
                myHeight=Math.min(yMin,window.innerHeight);
-               console.log("case=0, myWidth, myHeight: ",myWidth,myHeight);
                break;
             case 180:
       //        alert('portrait');
                isVert=1;
                myWidth=Math.min(xMin,window.innerWidth);
                myHeight=Math.min(yMin,window.innerHeight);
-               console.log("case=180, myWidth, myHeight: ",myWidth,myHeight);
                break;
             default:
               break;
@@ -176,13 +171,9 @@
             xAdj=myWidth/xOrig;
             yAdj=myHeight/yOrig;
          }
+         console.log("Start",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
          size(xOrig*xAdj,yOrig*yAdj);
          background(BackColor);
-
-            fill(FirstColor);
-            text("xMin, yMin :"+xMin+" "+yMin,400*xAdj,400*yAdj);
-            text("innerWidth, innerHeight :"+innerWidth+" "+innerHeight,400*xAdj,500*yAdj);
-            text("xAdj, yAdj :"+xAdj.toFixed(0)+" "+yAdj.toFixed(0),400*xAdj,600*yAdj);
 
          fill(BoxColor);
          rect(50*xAdj,200*yAdj,325*xAdj,100*yAdj);
@@ -241,6 +232,7 @@
             xAdj=myWidth/xOrig;
             yAdj=1;
          }
+         console.log("Setup",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
          size(xOrig*xAdj,yOrig*yAdj);
          background(BackColor);
          ScreenSelect();
@@ -453,6 +445,7 @@
             xAdj=myWidth/xOrig;
             yAdj=1;
          }
+         console.log("Scores",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
          size(xOrig*xAdj,yOrig*yAdj);
          ScreenSelect();
          textSize(50*xAdj);
@@ -595,6 +588,7 @@
             xAdj=myWidth/xOrig;
             yAdj=1;
          }
+         console.log("Card",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
 /*            else {
             if(isVert===1 & myWidth<yOrig) {
                yAdj=myWidth/yOrig;
@@ -782,6 +776,7 @@
             xAdj=myWidth/xOrig;
             yAdj=1;
          }
+         console.log("Results",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
          size(xOrig*xAdj,yOrig*yAdj);
 
 //            size(1200,1200);
@@ -918,17 +913,14 @@
             Long = LongF;
             distance();
             GreenDistanceF[i]=dist;
-//               console.log("F",i,LatF,LongF,GreenDistanceF[i]);
             Lat = LatC;
             Long = LongC;
             distance();
             GreenDistanceC[i]=dist;
-//               console.log("C",i,LatC,LongC,GreenDistanceC[i]);
             Lat = LatB;
             Long = LongB;
             distance();
             GreenDistanceB[i]=dist;
-//               console.log("B",i,LatB,LongB,GreenDistanceB[i]);
          }
          dist = 1000000000;
          for(i=0; i<18; i++) {
@@ -937,7 +929,6 @@
                dist=GreenDistanceC[i];
             }
          }
-//            console.log("Closest Hole: ",closestHole);
       }
 
 //      Green distance calculations
