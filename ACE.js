@@ -8,7 +8,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "02.20.22/14:30";
+      var vers = "02.20.22/14:45";
       var blinker = 0;
       var temp = 0;
       var temp2 = 0;
@@ -168,8 +168,8 @@
          myWidth=Math.min(xMin,innerWidth);
          myHeight=Math.min(yMin,innerHeight);
          if(myWidth<xOrig) {
-            xAdj=myWidth/xOrig;
-            yAdj=myHeight/yOrig;
+//            xAdj=myWidth/xOrig;
+//            yAdj=myHeight/yOrig;
          }
          console.log("Start",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
          size(xOrig*xAdj,yOrig*yAdj);
@@ -229,7 +229,7 @@
          yOrig=1000;
          myWidth=Math.min(xMin,innerWidth);
          if(myWidth<xOrig) {
-            xAdj=myWidth/xOrig;
+//            xAdj=myWidth/xOrig;
             yAdj=1;
          }
          console.log("Setup",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
@@ -442,7 +442,7 @@
          yOrig=1000;
          myWidth=Math.min(xMin,innerWidth);
          if(myWidth<xOrig) {
-            xAdj=myWidth/xOrig;
+//            xAdj=myWidth/xOrig;
             yAdj=1;
          }
          console.log("Scores",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
@@ -471,12 +471,12 @@
             fill(SelectBoxColor);
             rect(640*xAdj,10*yAdj,150*xAdj,60*yAdj);
             fill(FirstColor);
-            text("Track On",715*xAdj,35*yAdj);
+            text("Track On",715*xAdj,37*yAdj);
             Lat = TrackStartLat;
             Long = TrackStartLong;
             distance();
             TrackYards = dist;
-            text(TrackYards.toFixed(0)+" yds",715*xAdj,60*yAdj);
+            text(TrackYards.toFixed(0)+" yds",715*xAdj,65*yAdj);
          } else {
             fill(BoxColor);
             rect(640*xAdj,10*yAdj,150*xAdj,60*yAdj);
@@ -585,7 +585,7 @@
          xAdj=xMin/xOrig;
          yAdj=1;
          if(isVert===0 & myWidth<xOrig) {
-            xAdj=myWidth/xOrig;
+//            xAdj=myWidth/xOrig;
             yAdj=1;
          }
          console.log("Card",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
@@ -773,7 +773,7 @@
          xAdj=xMin/xOrig;
          yAdj=1;
          if(isVert===0 & myWidth<xOrig) {
-            xAdj=myWidth/xOrig;
+//            xAdj=myWidth/xOrig;
             yAdj=1;
          }
          console.log("Results",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
