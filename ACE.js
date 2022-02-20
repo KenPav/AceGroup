@@ -8,7 +8,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "02.20.22/13:30";
+      var vers = "02.20.22/13:50";
       var blinker = 0;
       var temp = 0;
       var temp2 = 0;
@@ -171,10 +171,10 @@
          xOrig=800;
          yOrig=1000;
          myWidth=Math.min(xMin,innerWidth);
+         myHeight=Math.min(yMin,innerWidth);
          if(myWidth<xOrig) {
-//            xAdj=myWidth/xOrig;
-            xAdj = 1;
-            yAdj=1;
+            xAdj=myWidth/xOrig;
+            yAdj=myHeight/yOrig;
          }
          size(xOrig*xAdj,yOrig*yAdj);
          background(BackColor);
