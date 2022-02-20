@@ -8,7 +8,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "02.20.22/15:15";
+      var vers = "02.20.22/16:30";
       var blinker = 0;
       var temp = 0;
       var temp2 = 0;
@@ -230,7 +230,7 @@
          myWidth=Math.min(xMin,innerWidth);
          if(myWidth<xOrig) {
             xAdj=myWidth/xOrig;
-            yAdj=1;
+            yAdj=myHeight/yOrig;
          }
          console.log("Setup",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
          size(xOrig*xAdj,yOrig*yAdj);
@@ -443,7 +443,7 @@
          myWidth=Math.min(xMin,innerWidth);
          if(myWidth<xOrig) {
             xAdj=myWidth/xOrig;
-            yAdj=1;
+            yAdj=myHeight/yOrig;
          }
          console.log("Scores",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
          size(xOrig*xAdj,yOrig*yAdj);
@@ -586,7 +586,7 @@
          yAdj=1;
          if(isVert===0 & myWidth<xOrig) {
             xAdj=myWidth/xOrig;
-            yAdj=1;
+            yAdj=myHeight/yOrig;
          }
          console.log("Card",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
 /*            else {
@@ -774,7 +774,7 @@
          yAdj=1;
          if(isVert===0 & myWidth<xOrig) {
             xAdj=myWidth/xOrig;
-            yAdj=1;
+            yAdj=myHeight/yOrig;
          }
          console.log("Results",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
          size(xOrig*xAdj,yOrig*yAdj);
