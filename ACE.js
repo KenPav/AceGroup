@@ -8,7 +8,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "02.20.22/13:50";
+      var vers = "02.20.22/14:00";
       var blinker = 0;
       var temp = 0;
       var temp2 = 0;
@@ -472,14 +472,12 @@
             fill(SelectBoxColor);
             rect(640*xAdj,10*yAdj,150*xAdj,60*yAdj);
             fill(FirstColor);
-            textSize(30*xAdj);
             text("Track On",715*xAdj,40*yAdj);
             Lat = TrackStartLat;
             Long = TrackStartLong;
             distance();
             TrackYards = dist;
-            text(TrackYards+" yds",715*xAdj,70*yAdj);
-            textSize(35*xAdj);
+            text(TrackYards.toFixed(0)+" yds",715*xAdj,70*yAdj);
          } else {
             fill(BoxColor);
             rect(640*xAdj,10*yAdj,150*xAdj,60*yAdj);
