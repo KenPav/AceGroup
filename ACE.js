@@ -20,6 +20,10 @@
       var WarningColor = color(255,0,0);
       var AreYouSure = 0;
       var GPSswitch = 0;
+      var Trackswitch = 0;
+      var TrackStartLat = 0;
+      var TrackStartLong = 0;
+      var TrackYards = 0;
       var MissingScores = 0;
       var BackColor = color(180,200,240);
       stroke(FirstColor);
@@ -462,6 +466,23 @@
             rect(10*xAdj,10*yAdj,150*xAdj,60*yAdj);
             fill(FirstColor);
             text("GPS Off",85*xAdj,50*yAdj);
+         }
+         if (Trackswitch===1) {
+            fill(SelectBoxColor);
+            rect(640*xAdj,10*yAdj,150*xAdj,60*yAdj);
+            fill(FirstColor);
+            textSize(30);
+            text("Track On",715*xAdj,40*yAdj);
+            Lat = TrackStartLat;
+            Long = TrackStartLong;
+            distance();
+            TrackYards = dist;
+            text(TrackYards+" yds",715,70);
+         } else {
+            fill(BoxColor);
+            rect(640*xAdj,10*yAdj,150*xAdj,60*yAdj);
+            fill(FirstColor);
+            text("Track Off",715*xAdj,50*yAdj);
          }
          textSize(50*xAdj);
          text("Hole #"+HoleNum,400*xAdj,65*yAdj)
@@ -1183,6 +1204,7 @@
          }
          // Enter Hole Strokes and Calculate Player Hole Scores
          if(AceScreen===2) {
+
             if(mouseX>=10*xAdj && mouseX<=160*xAdj && mouseY>=10*yAdj && mouseY<=70*yAdj) {
                if (GPSswitch === 0) {
                   GPSswitch = 1;
@@ -1192,6 +1214,20 @@
                }
                return;
             }
+
+            if(mouseX>=640*xAdj && mouseX<=790*xAdj && mouseY>=10*yAdj && mouseY<=70*yAdj) {
+               if (Trackswitch === 0) {
+                  Trackswitch = 1;
+                  GPSswitch = 1
+                  trackLocation();
+                  TrackStartLat = myLat;
+                  TrackStartLong = myLong;
+               } else {
+                  Trackswitch = 0;
+               }
+               return;
+            }
+
             for (var i = 0; i < NumberOfPlayers; i++) {
                for (var j = 0; j < 8; j++) {
                   if(mouseX>=220*xAdj+70*j*xAdj && mouseX<=290*xAdj+70*j*xAdj && mouseY>=200*yAdj+i*80*yAdj && mouseY<=280*yAdj+i*80*yAdj) {
