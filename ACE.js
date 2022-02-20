@@ -8,7 +8,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "02.20.22/14:00";
+      var vers = "02.20.22/14:15";
       var blinker = 0;
       var temp = 0;
       var temp2 = 0;
@@ -171,13 +171,19 @@
          xOrig=800;
          yOrig=1000;
          myWidth=Math.min(xMin,innerWidth);
-         myHeight=Math.min(yMin,innerWidth);
+         myHeight=Math.min(yMin,innerHeight);
          if(myWidth<xOrig) {
             xAdj=myWidth/xOrig;
             yAdj=myHeight/yOrig;
          }
          size(xOrig*xAdj,yOrig*yAdj);
          background(BackColor);
+
+            fill(FirstColor);
+            text("xMin, yMin :"+xMin+" "+yMin,400*xAdj,400*yAdj);
+            text("innerWidth, innerHeight :"+innerWidth+" "+innerHeight,400*xAdj,500*yAdj);
+            text("xAdj, yAdj :"+xAdj.toFixed(0)+" "+yAdj.toFixed(0),400*xAdj,600*yAdj);
+
          fill(BoxColor);
          rect(50*xAdj,200*yAdj,325*xAdj,100*yAdj);
          rect(425*xAdj,200*yAdj,325*xAdj,100*yAdj);
@@ -472,12 +478,12 @@
             fill(SelectBoxColor);
             rect(640*xAdj,10*yAdj,150*xAdj,60*yAdj);
             fill(FirstColor);
-            text("Track On",715*xAdj,40*yAdj);
+            text("Track On",715*xAdj,35*yAdj);
             Lat = TrackStartLat;
             Long = TrackStartLong;
             distance();
             TrackYards = dist;
-            text(TrackYards.toFixed(0)+" yds",715*xAdj,70*yAdj);
+            text(TrackYards.toFixed(0)+" yds",715*xAdj,60*yAdj);
          } else {
             fill(BoxColor);
             rect(640*xAdj,10*yAdj,150*xAdj,60*yAdj);
