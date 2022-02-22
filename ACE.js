@@ -430,10 +430,10 @@
             GreenDist();
             if(GreenDistanceC[HoleNum-1]<150 && GreenDistanceC[HoleNum-1]>30) {
                clearInterval();
-               setInterval(trackLocation,1000);
+               setInterval(trackLocation,3000);
             } else {
                clearInterval();
-               setInterval(trackLocation,2000);               
+               setInterval(trackLocation,5000);               
             }
          }
          xAdj=1;
