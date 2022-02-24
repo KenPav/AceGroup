@@ -1063,7 +1063,7 @@
                }
                calcScores();                  
                AceScreen=1;
-               trackLocation();
+//               trackLocation();
                draw()
 
             }
@@ -1071,7 +1071,7 @@
             if(mouseX>=425*xAdj && mouseX<=750*xAdj && mouseY>=200*yAdj && mouseY<=300*yAdj) {
                clearLocalData();
                AceScreen=1;
-               trackLocation()
+//               trackLocation()
                draw()
             }
             return;
