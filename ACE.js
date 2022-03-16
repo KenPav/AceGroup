@@ -2,13 +2,14 @@
  var ACE = function(processingInstance) {
   with (processingInstance) {
 
+
      size(800,1200);
      
      frameRate(30);
    
      // ProgramCodeGoesHere
 
-      var vers = "02.20.22/17:30";
+      var vers = "03.16.22/16:00";
       var blinker = 0;
       var temp = 0;
       var temp2 = 0;
@@ -44,6 +45,8 @@
       var holeLong = 0;
       var dist = 0;
       var closestHole = 0;
+      var myLat = 0;
+      var myLong = 0;
 
       var isVert=1;
       var myWidth=window.innerWidth;
@@ -83,6 +86,26 @@
       const Courses = ["South","North","West"];
       const SummaryLabel = ["","","Total Round"];
 
+//    Setup Ace Member Name & Handicap Index Arrays
+      var LocalNameData = 0;
+      var NumberOfNames = 0;
+      var SelectedName = -1;
+      var NameAndIndex = 0;
+      var AName = "";
+      var AIndex = 0;
+      var ATee = 0;
+      const AceName = ["Add Name","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""];
+      const SortNameArray = ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""];
+      const SortNameArray1 = ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""];
+      const AceIndex = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+      const SortIndexArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+//    0 = Red, 1 = Gold, 2 = White      
+      const AceTee = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+      const SortTeeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+//    Course Data [R,G,W], [S/N,S/W,N/W]      
+      const CourseRating = [64.7,67.1,68.7,65.8,69.0,71.6,66.9,68.7,70.7];
+      const Par = [71,71,71,73,73,73,72,72,72];
+      const Slope = [113,119,127,116,122,130,114,116,122];
 
 
      // Up To Four Players With Their Total Course Handicap
@@ -159,6 +182,7 @@
 //       Starting Screen
 
       function localData() {
+
          window.addEventListener('orientationchange', doOnOrientationChange);
 
          xAdj=1;
@@ -171,7 +195,7 @@
             xAdj=myWidth/xOrig;
             yAdj=myHeight/yOrig;
          }
-         console.log("Start",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
+//         console.log("Start",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
          size(xOrig*xAdj,yOrig*yAdj);
          background(BackColor);
 
@@ -232,7 +256,7 @@
             xAdj=myWidth/xOrig;
             yAdj=myHeight/yOrig;
          }
-         console.log("Setup",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
+//         console.log("Setup",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
          size(xOrig*xAdj,yOrig*yAdj);
          background(BackColor);
          ScreenSelect();
@@ -349,11 +373,56 @@
          if(CourseSet===2) {
             if (PlayerCount < NumberOfPlayers) {
                if(NameCount===PlayerCount) {
-                  PlayerName[PlayerCount]=prompt("Player #"+(PlayerCount+1).toString()+" Name: "+PlayerName[PlayerCount],PlayerName[PlayerCount].toString());
-                  NameCount=NameCount+1;
+
+                  if(NameAndIndex === 0) {
+                     SelectPlayer();
+                  }
+                  if(NameAndIndex === 1 || NameAndIndex === 2) {
+                     AddPlayer();
+                  } 
+                  if(NameAndIndex === 3) {
+                     PlayerName[PlayerCount] = AceName[SelectedName];
+                     temp = AceTee[SelectedName] + (3*(Front + Back-1));
+                     console.log("Name, Tee, temp: ",PlayerName[PlayerCount],AceTee[SelectedName],temp)
+                     PlayerCourseHandicap[PlayerCount] = Math.round(AceIndex[SelectedName] * (Slope[temp]/113) + (CourseRating[temp]-Par[temp]));
+                     console.log("PlayerCourseHandicap:",PlayerCourseHandicap[PlayerCount])
+                     console.log("HI, Tee, Slope, Rating, Par: ",AceIndex[SelectedName],AceTee[SelectedName],Slope[temp],CourseRating[temp],Par[temp]);
+                     console.log("Name, Course Handicap: ",PlayerName[PlayerCount],PlayerCourseHandicap[PlayerCount]);
+                     NameCount = NameCount + 1;
+                     NameAndIndex = 0;
+                     console.log("PlayerCount,NameCount,NumberOfPlayers: ",PlayerCount,NameCount,NumberOfPlayers);
+                     temp=floor((36-PlayerCourseHandicap[PlayerCount])/2);
+                     temp2=36-(temp*2);
+                     if (temp2===PlayerCourseHandicap[PlayerCount]) {
+                        ReqPts[PlayerCount*3]=temp;
+                        ReqPts[PlayerCount*3+1]=temp;
+                     }
+                     else {
+                        if (Front>Back) {
+                           ReqPts[PlayerCount*3]=temp;
+                           ReqPts[PlayerCount*3+1]=temp+1;
+                        }
+                        else {
+                           ReqPts[PlayerCount*3]=temp+1;
+                           ReqPts[PlayerCount*3+1]=temp;
+                        }
+                     }
+                        ReqPts[PlayerCount*3+2] = ReqPts[PlayerCount*3] + ReqPts[PlayerCount*3+1];
+                        ReqPts[12] = ReqPts[12] + ReqPts[PlayerCount*3];
+                        ReqPts[13] = ReqPts[13] + ReqPts[PlayerCount*3+1];
+                        ReqPts[14] = ReqPts[14] + ReqPts[PlayerCount*3+2];
+
+                     PlayerCount=PlayerCount+1;
+                     HCPCount=HCPCount+1
+                     storeIt();
+
+                  }
+
+//                  PlayerName[PlayerCount]=prompt("Player #"+(PlayerCount+1).toString()+" Name: "+PlayerName[PlayerCount],PlayerName[PlayerCount].toString());
+//                  NameCount=NameCount+1;
 
                }
-               if(HCPCount===PlayerCount) {
+/*               if(HCPCount===PlayerCount) {
 
                   text("Player #"+PlayerCount+1,", "+PlayerName[PlayerCount]+", Course Handicap",400*xAdj,100);
                   for (i=0; i<10; i++) {
@@ -368,6 +437,7 @@
                      }
                   }
                }
+*/
             }
             else {
                CourseSet=3;
@@ -403,7 +473,9 @@
                else {
                   fill(FirstColor);
                }
+               textSize(35*xAdj);
                text(PlayerName[i],100*xAdj,355*yAdj+i*70*yAdj);
+               textSize(50*xAdj);
                text(PlayerCourseHandicap[i],300*xAdj,355*yAdj+i*70*yAdj);
                text(ReqPts[i*3],500*xAdj,355*yAdj+i*70*yAdj);
                text(ReqPts[i*3+1],700*xAdj,355*yAdj+i*70*yAdj);
@@ -414,6 +486,103 @@
             text("Continue",400*xAdj,655*yAdj);
          }
       };      
+
+      SelectPlayer = function() {
+         background(BackColor);
+         for (j=0; j<3; j++) {
+            for (i=0; i<15; i++) {
+               if(NumberOfNames>=j*15+i) {
+                  fill(BoxColor);
+                  rect((15+j*260)*xAdj,(50+i*50)*yAdj,250*xAdj,50*yAdj);
+                  fill(FirstColor);
+                  textSize(35*xAdj);
+                  text(AceName[i+j*15],(140+260*j)*xAdj,(90+i*50)*yAdj);
+               }
+            }
+         }
+         fill(BoxColor);
+         rect(300*xAdj,800*yAdj,200*xAdj,50*yAdj);
+         fill(FirstColor);
+         text("Cancel",400*xAdj,840*yAdj);
+      }
+
+      AddPlayer = function() {
+         background(BackColor)
+         fill(BoxColor);
+         rect(300*xAdj,100*yAdj,200*xAdj,50*yAdj);
+         rect(350*xAdj,200*yAdj,100*xAdj,50*yAdj);
+         rect(50*xAdj,400*yAdj,200*xAdj,50*yAdj);
+         rect(300*xAdj,400*yAdj,200*xAdj,50*yAdj);
+         rect(550*xAdj,400*yAdj,200*xAdj,50*yAdj);
+         if(ATee===0) {
+            fill(SelectBoxColor);
+         } else {
+            fill(BoxColor);
+         }
+         rect(200*xAdj,300*yAdj,100*xAdj,50*yAdj);
+         if(ATee===1) {
+            fill(SelectBoxColor);
+         } else {
+            fill(BoxColor);
+         }
+         rect(350*xAdj,300*yAdj,100*xAdj,50*yAdj);
+         if(ATee===2) {
+            fill(SelectBoxColor);
+         } else {
+            fill(BoxColor);
+         }
+         rect(500*xAdj,300*yAdj,100*xAdj,50*yAdj);
+         fill(FirstColor);
+         textSize(30*xAdj);
+         text("Name: ",200*xAdj,140*yAdj);
+         text("(<= 10 Characters)",635*xAdj,140*yAdj);
+         text(AName,400*xAdj,140*yAdj);
+         text("Handicap Index: ",200*xAdj,240*yAdj);
+         text(AIndex.toFixed(1),400*xAdj,240*yAdj);
+         text("Red",250*xAdj,340*yAdj);
+         text("Gold",400*xAdj,340*yAdj);
+         text("White",550*xAdj,340*yAdj);
+         text("Delete Name",150*xAdj,440*yAdj);
+         text("Save Player",400*xAdj,440*yAdj);
+         text("Use Player #"+(PlayerCount+1),650*xAdj,440*yAdj);
+      }
+
+      SortPlayers = function() {
+      
+         for(i=0; i<46; i++) {   
+            SortNameArray1[i] = "";
+            SortNameArray[i] = "";
+         }
+         for(i=0; i<NumberOfNames; i++) {
+            SortNameArray1[i] = AceName[i];
+            SortIndexArray[i] = AceIndex[i];
+            SortTeeArray[i] = AceTee[i];
+         }
+         SortNameArray1.sort();
+         for(i=0; i<NumberOfNames; i++) {
+            SortNameArray[i] = SortNameArray1[46-NumberOfNames+i];
+         }
+         for(i=0; i<NumberOfNames; i++) {
+            for(j=0; j<NumberOfNames; j++) {
+               if(SortNameArray[i]===AceName[j]) {
+                  console.log(i,j);
+                  AceIndex[i] = SortIndexArray[j];
+                  AceTee[i] = SortTeeArray[j];
+               }
+            }
+         }
+         for(i=0; i<NumberOfNames; i++) {
+            AceName[i] = SortNameArray[i];
+         }
+      }
+
+      SaveNames = function() {
+         window.localStorage.setItem('AN',JSON.stringify(AceName));
+         window.localStorage.setItem('AI',JSON.stringify(AceIndex));
+         window.localStorage.setItem('AT',JSON.stringify(AceTee));
+      }
+
+
       
 
 //       AceScreen = 2;
@@ -445,7 +614,7 @@
             xAdj=myWidth/xOrig;
             yAdj=myHeight/yOrig;
          }
-         console.log("Scores",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
+//         console.log("Scores",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
          size(xOrig*xAdj,yOrig*yAdj);
          ScreenSelect();
          textSize(50*xAdj);
@@ -504,7 +673,9 @@
             else {
                fill(FirstColor);
             }
+            textSize(40*xAdj);
             text(PlayerName[i],110*xAdj,255*yAdj+i*80*yAdj);
+            textSize(50*xAdj);
             for (var j = 0; j < 8; j++) {
                if(PlayerHoleStrokes[i*18+HoleNum-1]===j+1) {
                   fill(SelectBoxColor);
@@ -590,7 +761,7 @@
             xAdj=myWidth/xOrig;
             yAdj=1;
          }
-         console.log("Card",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
+//         console.log("Card",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
 /*            else {
             if(isVert===1 & myWidth<yOrig) {
                yAdj=myWidth/yOrig;
@@ -667,9 +838,11 @@
                      text("T",195*xAdj+i*50*xAdj,135*yAdj+j*50*yAdj);
                   }
                }
+               textSize(30*xAdj);
                if(j>0 && j<=NumberOfPlayers && i===0) {
                   text(PlayerName[j-1],85*xAdj,135*yAdj+50*j*yAdj);
                }
+               textSize(35*xAdj);
                if(i<9 && j>0) {
                   if(j<=NumberOfPlayers) {
                      text(PlayerHoleStrokes[(j-1)*18+i],195*xAdj+i*50*xAdj,135*yAdj+j*50*yAdj);
@@ -728,9 +901,11 @@
                else {
                   fill(FirstColor);
                }                  
+               textSize(30*xAdj);
                if(j>0 && j<=NumberOfPlayers && i===0) {
                   text(PlayerName[j-1],85*xAdj,435*yAdj+50*j*yAdj);
                }
+               textSize(35*xAdj);
                if(i<9 && j>0 && j<=NumberOfPlayers) {    
                      text(PlayerHoleScore[(j-1)*18+i],195*xAdj+i*50*xAdj,435*yAdj+j*50*yAdj);
                      if (i===8) {
@@ -778,7 +953,7 @@
             xAdj=myWidth/xOrig;
             yAdj=1;
          }
-         console.log("Results",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
+//         console.log("Results",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
          size(xOrig*xAdj,yOrig*yAdj);
 
 //            size(1200,1200);
@@ -823,9 +998,11 @@
             else {
                fill(ThirdColor);
             }
+            textSize(30*xAdj);
             if (j<NumberOfPlayers || j===4) {
                text(PlayerName[j],85*xAdj,285*yAdj+j*50*yAdj); 
             }
+            textSize(35*xAdj);
             for (var i=0; i<3; i++) {
                fill(BoxColor);
                rect(170*xAdj+i*280*xAdj,250*yAdj+j*50*yAdj,70*xAdj,50*yAdj);
@@ -1158,7 +1335,105 @@
 
          if(AceScreen===1 && CourseSet===2) {
 
-            for (i=0; i<10; i++) {
+            if(NameAndIndex!=0) {
+               if(mouseX>=325*xAdj && mouseX<=475*xAdj && mouseY>=100*yAdj && mouseY<=150*yAdj) {
+                  AName=prompt("Player Name");
+                  console.log("AName: ",AName);
+               }
+               if(mouseX>=350*xAdj && mouseX<=450*xAdj && mouseY>=200*yAdj && mouseY<=250*yAdj) {
+                  AIndex=+(prompt("Handicap Index"));
+               }
+               if(mouseX>=200*xAdj && mouseX<=300*xAdj && mouseY>=300*yAdj && mouseY<=350*yAdj) {
+                  ATee = 0;
+               }
+               if(mouseX>=350*xAdj && mouseX<=450*xAdj && mouseY>=300*yAdj && mouseY<=350*yAdj) {
+                  ATee = 1;
+               }
+               if(mouseX>=500*xAdj && mouseX<=600*xAdj && mouseY>=300*yAdj && mouseY<=350*yAdj) {
+                  ATee = 2;
+               }
+//             DELETE NAME
+               if(mouseX>=50*xAdj && mouseX<=250*xAdj && mouseY>=400*yAdj && mouseY<=450*yAdj) {
+                  NameAndIndex = 0;
+                  for (i=SelectedName; i<NumberOfNames; i++) {
+                     AceName[i] = AceName[i+1];
+                     AceIndex[i] = AceIndex[i+1];
+                     AceTee[i] = AceTee[i+1];
+                  }
+                  AceName[NumberOfNames] = "";
+                  NumberOfNames = NumberOfNames - 1;
+                  SaveNames();
+               }
+//             SAVE PLAYER
+               if(mouseX>=300*xAdj && mouseX<=500*xAdj && mouseY>=400*yAdj && mouseY<=450*yAdj) {
+                  AceName[SelectedName] = AName;
+                  AceIndex[SelectedName] = AIndex;
+                  AceTee[SelectedName] = ATee;
+                  if(NameAndIndex===1) {
+                     NumberOfNames++;
+                     AceName[NumberOfNames] = "Add Name";
+                  }
+                  NameAndIndex = 0;
+                  SortPlayers();
+                  SaveNames();
+                  console.log("AceName[SelectedName],AName",AceName[SelectedName],AName);
+                  for(i=0; i<NumberOfNames; i++) {
+                     if(AName===AceName[i]) {
+                        SelectedName = i;
+                     }
+                  }
+
+               }
+//             USE PLAYER
+               if(mouseX>=550*xAdj && mouseX<=750*xAdj && mouseY>=400*yAdj && mouseY<=450*yAdj) {
+                  AceName[SelectedName] = AName;
+                  AceIndex[SelectedName] = AIndex;
+                  AceTee[SelectedName] = ATee;
+                  if(NameAndIndex===1) {
+                     NumberOfNames++;
+                     AceName[NumberOfNames] = "Add Name";
+                  }
+                  NameAndIndex = 3;
+                  SortPlayers();
+                  SaveNames();
+                  console.log("AceName[SelectedName],AName",AceName[SelectedName],AName);
+                  for(i=0; i<NumberOfNames; i++) {
+                     if(AName===AceName[i]) {
+                        SelectedName = i;
+                     }
+                     console.log("AceName[i],AName,i,SelectedName: ",AceName[i],AName,i,SelectedName);
+                  }
+               }
+               return;
+            }
+
+            for (j=0; j<3; j++) {
+               for (i=0; i<15; i++) {
+                  if(NumberOfNames>=j*15+i) {
+                     if(mouseX>=(15+j*260)*xAdj && mouseX<=(265+j*260)*xAdj && mouseY>=(50+i*50)*yAdj && mouseY<=(100+i*50)*yAdj) {
+                        SelectedName = i+j*15;
+                        console.log("SelectedName", SelectedName);
+                        console.log("NumberOfNames", NumberOfNames);
+                        if(NumberOfNames===SelectedName) {
+                           NameAndIndex = 1;
+                        } else {
+                           NameAndIndex = 2;
+                        }
+                        AName = AceName[SelectedName];
+                        AIndex = AceIndex[SelectedName];
+                        ATee = AceTee[SelectedName]
+                        console.log("NameAndIndex",NameAndIndex);
+                        return;
+                     }
+                  }
+               }
+            }
+            if(mouseX>=300*xAdj && mouseX<=500*xAdj && mouseY>=800*yAdj && mouseY<=850*yAdj) {
+               NameAndIndex = 0;
+               CourseSet = 1;
+            }
+
+/*            for (i=0; i<10; i++) {
                for (j=0; j<4; j++) {
                   if(mouseX>=0*xAdj+80*i*xAdj && mouseX<=80*xAdj+80*i*xAdj && mouseY>=200*yAdj+j*80*yAdj && mouseY<=280*yAdj+j*80*yAdj) {
                      PlayerCourseHandicap[PlayerCount]=i+j*10;
@@ -1191,6 +1466,7 @@
                   }
                }
             }
+*/
          }
 
          if(AceScreen===1 && CourseSet===3) {
@@ -1283,29 +1559,27 @@
 //       SCORE INPUT INITIAL VARIABLES
       var HoleNum = 1;
 
-/*      var xMin = 0;
-      var yMin = 0;
-      var startXY = 0;
-*/      
       draw = function() {
 
-/*         if (startXY===0) {
-
-            if (window.matchMedia("(orientation: portrait)").matches) {
-               // you're in PORTRAIT mode
-               xMin=window.innerWidth;
-               yMin=window.innerHeight;
+         if (LocalNameData === 0) {
+            if(window.localStorage.getItem('AN')!=null) {
+               var AN1=JSON.parse(window.localStorage.getItem('AN'));
+               var AI1=JSON.parse(window.localStorage.getItem('AI'));
+               var AT1=JSON.parse(window.localStorage.getItem('AT'));
+               for (i=0; i<46; i++) {
+                  AceName[i]=AN1[i];
+                  AceIndex[i]=Number(AI1[i]);
+                  AceTee[i]=Number(AT1[i]);
+               }
             }
-
-            if (window.matchMedia("(orientation: landscape)").matches) {
-               // you're in LANDSCAPE mode
-               yMin=window.innerWidth;
-               xMin=window.innerHeight;
+            LocalNameData = 1;
+            for(i=0; i<46; i++) {
+               if(AceName[i] === "Add Name") {
+                  NumberOfNames = i;
+               }
             }
-
-            startXY=1;
          }
-*/
+
          if (AceScreen===0) {
 
             localData();            
