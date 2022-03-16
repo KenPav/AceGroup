@@ -9,7 +9,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "03.16.22/16:00";
+      var vers = "03.16.22/17:00";
       var blinker = 0;
       var temp = 0;
       var temp2 = 0;
@@ -415,29 +415,8 @@
                      PlayerCount=PlayerCount+1;
                      HCPCount=HCPCount+1
                      storeIt();
-
-                  }
-
-//                  PlayerName[PlayerCount]=prompt("Player #"+(PlayerCount+1).toString()+" Name: "+PlayerName[PlayerCount],PlayerName[PlayerCount].toString());
-//                  NameCount=NameCount+1;
-
-               }
-/*               if(HCPCount===PlayerCount) {
-
-                  text("Player #"+PlayerCount+1,", "+PlayerName[PlayerCount]+", Course Handicap",400*xAdj,100);
-                  for (i=0; i<10; i++) {
-                     for (j=0; j<4; j++) {
-                        fill(BoxColor);
-                        if(PlayerCourseHandicap[HCPCount]===(i+j*10)) {
-                           fill(SelectBoxColor);
-                        }
-                        rect(0+i*80*xAdj,200*yAdj+j*80*yAdj,80*xAdj,80*yAdj);
-                        fill(FirstColor);
-                        text(0+i+j*10,40*xAdj+i*80*xAdj,265*yAdj+j*80*yAdj);
-                     }
                   }
                }
-*/
             }
             else {
                CourseSet=3;
@@ -509,11 +488,12 @@
       AddPlayer = function() {
          background(BackColor)
          fill(BoxColor);
-         rect(300*xAdj,100*yAdj,200*xAdj,50*yAdj);
+         textSize(40*xAdj);
+         rect(250*xAdj,100*yAdj,300*xAdj,50*yAdj);
          rect(350*xAdj,200*yAdj,100*xAdj,50*yAdj);
-         rect(50*xAdj,400*yAdj,200*xAdj,50*yAdj);
-         rect(300*xAdj,400*yAdj,200*xAdj,50*yAdj);
-         rect(550*xAdj,400*yAdj,200*xAdj,50*yAdj);
+         rect(25*xAdj,400*yAdj,250*xAdj,50*yAdj);
+         rect(275*xAdj,400*yAdj,250*xAdj,50*yAdj);
+         rect(525*xAdj,400*yAdj,250*xAdj,50*yAdj);
          if(ATee===0) {
             fill(SelectBoxColor);
          } else {
@@ -533,9 +513,10 @@
          }
          rect(500*xAdj,300*yAdj,100*xAdj,50*yAdj);
          fill(FirstColor);
-         textSize(30*xAdj);
-         text("Name: ",200*xAdj,140*yAdj);
-         text("(<= 10 Characters)",635*xAdj,140*yAdj);
+         text("Name: ",150*xAdj,140*yAdj);
+         textSize(35*xAdj);
+         text("(<= 13 Chars)",670*xAdj,140*yAdj);
+         textSize(40*xAdj);
          text(AName,400*xAdj,140*yAdj);
          text("Handicap Index: ",200*xAdj,240*yAdj);
          text(AIndex.toFixed(1),400*xAdj,240*yAdj);
@@ -1336,8 +1317,12 @@
          if(AceScreen===1 && CourseSet===2) {
 
             if(NameAndIndex!=0) {
-               if(mouseX>=325*xAdj && mouseX<=475*xAdj && mouseY>=100*yAdj && mouseY<=150*yAdj) {
-                  AName=prompt("Player Name");
+               if(mouseX>=250*xAdj && mouseX<=550*xAdj && mouseY>=100*yAdj && mouseY<=150*yAdj) {
+                  if(AceName[SelectedName]==="Add Name") {
+                     AName=prompt("Player Name");
+                  } else {
+                     AName=prompt("Player Name",AceName[SelectedName]);
+                  }
                   console.log("AName: ",AName);
                }
                if(mouseX>=350*xAdj && mouseX<=450*xAdj && mouseY>=200*yAdj && mouseY<=250*yAdj) {
@@ -1353,7 +1338,7 @@
                   ATee = 2;
                }
 //             DELETE NAME
-               if(mouseX>=50*xAdj && mouseX<=250*xAdj && mouseY>=400*yAdj && mouseY<=450*yAdj) {
+               if(mouseX>=25*xAdj && mouseX<=275*xAdj && mouseY>=400*yAdj && mouseY<=450*yAdj) {
                   NameAndIndex = 0;
                   for (i=SelectedName; i<NumberOfNames; i++) {
                      AceName[i] = AceName[i+1];
@@ -1365,7 +1350,7 @@
                   SaveNames();
                }
 //             SAVE PLAYER
-               if(mouseX>=300*xAdj && mouseX<=500*xAdj && mouseY>=400*yAdj && mouseY<=450*yAdj) {
+               if(mouseX>=275*xAdj && mouseX<=525*xAdj && mouseY>=400*yAdj && mouseY<=450*yAdj) {
                   AceName[SelectedName] = AName;
                   AceIndex[SelectedName] = AIndex;
                   AceTee[SelectedName] = ATee;
@@ -1385,7 +1370,7 @@
 
                }
 //             USE PLAYER
-               if(mouseX>=550*xAdj && mouseX<=750*xAdj && mouseY>=400*yAdj && mouseY<=450*yAdj) {
+               if(mouseX>=525*xAdj && mouseX<=775*xAdj && mouseY>=400*yAdj && mouseY<=450*yAdj) {
                   AceName[SelectedName] = AName;
                   AceIndex[SelectedName] = AIndex;
                   AceTee[SelectedName] = ATee;
@@ -1432,41 +1417,6 @@
                NameAndIndex = 0;
                CourseSet = 1;
             }
-
-/*            for (i=0; i<10; i++) {
-               for (j=0; j<4; j++) {
-                  if(mouseX>=0*xAdj+80*i*xAdj && mouseX<=80*xAdj+80*i*xAdj && mouseY>=200*yAdj+j*80*yAdj && mouseY<=280*yAdj+j*80*yAdj) {
-                     PlayerCourseHandicap[PlayerCount]=i+j*10;
-
-                     temp=floor((36-PlayerCourseHandicap[PlayerCount])/2);
-                     temp2=36-(temp*2);
-                     if (temp2===PlayerCourseHandicap[PlayerCount]) {
-                        ReqPts[PlayerCount*3]=temp;
-                        ReqPts[PlayerCount*3+1]=temp;
-                     }
-                     else {
-                        if (Front>Back) {
-                           ReqPts[PlayerCount*3]=temp;
-                           ReqPts[PlayerCount*3+1]=temp+1;
-                        }
-                        else {
-                           ReqPts[PlayerCount*3]=temp+1;
-                           ReqPts[PlayerCount*3+1]=temp;
-                        }
-                     }
-                        ReqPts[PlayerCount*3+2] = ReqPts[PlayerCount*3] + ReqPts[PlayerCount*3+1];
-                        ReqPts[12] = ReqPts[12] + ReqPts[PlayerCount*3];
-                        ReqPts[13] = ReqPts[13] + ReqPts[PlayerCount*3+1];
-                        ReqPts[14] = ReqPts[14] + ReqPts[PlayerCount*3+2];
-
-                     PlayerCount=PlayerCount+1;
-                     HCPCount=HCPCount+1
-                     storeIt();
-                     return;
-                  }
-               }
-            }
-*/
          }
 
          if(AceScreen===1 && CourseSet===3) {
