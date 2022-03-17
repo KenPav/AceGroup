@@ -9,7 +9,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "03.17.22/11:30";
+      var vers = "03.17.22/14:00";
       var blinker = 0;
       var temp = 0;
       var temp2 = 0;
@@ -474,11 +474,24 @@
          for (j=0; j<3; j++) {
             for (i=0; i<15; i++) {
                if(NumberOfNames>=j*15+i) {
+                  console.log(AceName[i+j*15]);
                   fill(BoxColor);
                   rect((15+j*260)*xAdj,(50+i*50)*yAdj,250*xAdj,50*yAdj);
                   fill(FirstColor);
-                  textSize(35*xAdj);
-                  text(AceName[i+j*15],(140+260*j)*xAdj,(90+i*50)*yAdj);
+                  if(AceName[i+j*15].length > 14) {
+                     temp = AceName[i+j*15].indexOf(" ");
+                     if(temp === -1) {
+                        text(AceName[i+j*15],(140+260*j)*xAdj,(90+i*50)*yAdj);
+                     } else {
+                        textSize(30);
+                        temp2 = AceName[i+j*15].length;
+                        text(AceName[i+j*15].slice(0,temp),(140+260*j)*xAdj,(73+i*50)*yAdj);
+                        text(AceName[i+j*15].slice(temp+1,temp2),(140+260*j)*xAdj,(98+i*50)*yAdj);
+                     }
+                  } else {
+                     textSize(35*xAdj);
+                     text(AceName[i+j*15],(140+260*j)*xAdj,(90+i*50)*yAdj);
+                  }
                }
             }
          }
