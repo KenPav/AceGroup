@@ -9,7 +9,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "03.16.22/17:00";
+      var vers = "03.17.22/11:30";
       var blinker = 0;
       var temp = 0;
       var temp2 = 0;
@@ -111,6 +111,8 @@
      // Up To Four Players With Their Total Course Handicap
      // 
       const PlayerName = ["","","","","Team"];
+      const firstPN = ["","","","",""];
+      const lastPN = ["","","","",""];
       const PlayerCourseHandicap = [0,0,0,0];
       const ReqPts = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
      // 
@@ -383,14 +385,9 @@
                   if(NameAndIndex === 3) {
                      PlayerName[PlayerCount] = AceName[SelectedName];
                      temp = AceTee[SelectedName] + (3*(Front + Back-1));
-                     console.log("Name, Tee, temp: ",PlayerName[PlayerCount],AceTee[SelectedName],temp)
                      PlayerCourseHandicap[PlayerCount] = Math.round(AceIndex[SelectedName] * (Slope[temp]/113) + (CourseRating[temp]-Par[temp]));
-                     console.log("PlayerCourseHandicap:",PlayerCourseHandicap[PlayerCount])
-                     console.log("HI, Tee, Slope, Rating, Par: ",AceIndex[SelectedName],AceTee[SelectedName],Slope[temp],CourseRating[temp],Par[temp]);
-                     console.log("Name, Course Handicap: ",PlayerName[PlayerCount],PlayerCourseHandicap[PlayerCount]);
                      NameCount = NameCount + 1;
                      NameAndIndex = 0;
-                     console.log("PlayerCount,NameCount,NumberOfPlayers: ",PlayerCount,NameCount,NumberOfPlayers);
                      temp=floor((36-PlayerCourseHandicap[PlayerCount])/2);
                      temp2=36-(temp*2);
                      if (temp2===PlayerCourseHandicap[PlayerCount]) {
@@ -419,6 +416,7 @@
                }
             }
             else {
+               splitPlayerNames();
                CourseSet=3;
             }
             return;
@@ -452,8 +450,13 @@
                else {
                   fill(FirstColor);
                }
-               textSize(35*xAdj);
-               text(PlayerName[i],100*xAdj,355*yAdj+i*70*yAdj);
+               textSize(40*xAdj);
+               if(firstPN[i] === "") {
+                  text(PlayerName[i],100*xAdj,350*yAdj+i*70*yAdj);
+               } else {
+                  text(firstPN[i],100*xAdj,330*yAdj+i*70*yAdj);
+                  text(lastPN[i],100*xAdj,365*yAdj+i*70*yAdj);
+               }
                textSize(50*xAdj);
                text(PlayerCourseHandicap[i],300*xAdj,355*yAdj+i*70*yAdj);
                text(ReqPts[i*3],500*xAdj,355*yAdj+i*70*yAdj);
@@ -489,7 +492,7 @@
          background(BackColor)
          fill(BoxColor);
          textSize(40*xAdj);
-         rect(250*xAdj,100*yAdj,300*xAdj,50*yAdj);
+         rect(225*xAdj,100*yAdj,350*xAdj,50*yAdj);
          rect(350*xAdj,200*yAdj,100*xAdj,50*yAdj);
          rect(25*xAdj,400*yAdj,250*xAdj,50*yAdj);
          rect(275*xAdj,400*yAdj,250*xAdj,50*yAdj);
@@ -513,9 +516,9 @@
          }
          rect(500*xAdj,300*yAdj,100*xAdj,50*yAdj);
          fill(FirstColor);
-         text("Name: ",150*xAdj,140*yAdj);
-         textSize(35*xAdj);
-         text("(<= 13 Chars)",670*xAdj,140*yAdj);
+         text("Name: ",125*xAdj,140*yAdj);
+//         textSize(35*xAdj);
+//         text("(<= 13 Chars)",670*xAdj,140*yAdj);
          textSize(40*xAdj);
          text(AName,400*xAdj,140*yAdj);
          text("Handicap Index: ",200*xAdj,240*yAdj);
@@ -655,7 +658,14 @@
                fill(FirstColor);
             }
             textSize(40*xAdj);
-            text(PlayerName[i],110*xAdj,255*yAdj+i*80*yAdj);
+//            text(PlayerName[i],110*xAdj,255*yAdj+i*80*yAdj);
+
+            if(firstPN[i] === "") {
+               text(PlayerName[i],110*xAdj,260*yAdj+i*80*yAdj);
+            } else {
+               text(firstPN[i],110*xAdj,235*yAdj+i*80*yAdj);
+               text(lastPN[i],110*xAdj,275*yAdj+i*80*yAdj);
+            }
             textSize(50*xAdj);
             for (var j = 0; j < 8; j++) {
                if(PlayerHoleStrokes[i*18+HoleNum-1]===j+1) {
@@ -742,17 +752,9 @@
             xAdj=myWidth/xOrig;
             yAdj=1;
          }
-//         console.log("Card",xMin,yMin,innerWidth,innerHeight,xAdj.toFixed(2),yAdj.toFixed(2));
-/*            else {
-            if(isVert===1 & myWidth<yOrig) {
-               yAdj=myWidth/yOrig;
-            }
-         }
-*/
+
          size(xOrig*xAdj,yOrig*yAdj);
 
-
-//            size(1250,1200);
          ScreenSelect();
          DoCalculations();
          textSize(35*xAdj);
@@ -821,7 +823,12 @@
                }
                textSize(30*xAdj);
                if(j>0 && j<=NumberOfPlayers && i===0) {
-                  text(PlayerName[j-1],85*xAdj,135*yAdj+50*j*yAdj);
+                  if(firstPN[j-1] === "") {
+                     text(PlayerName[j-1],85*xAdj,135*yAdj+j*50*yAdj);
+                  } else {
+                     text(firstPN[j-1],85*xAdj,123*yAdj+j*50*yAdj);
+                     text(lastPN[j-1],85*xAdj,148*yAdj+j*50*yAdj);
+                  }
                }
                textSize(35*xAdj);
                if(i<9 && j>0) {
@@ -884,7 +891,12 @@
                }                  
                textSize(30*xAdj);
                if(j>0 && j<=NumberOfPlayers && i===0) {
-                  text(PlayerName[j-1],85*xAdj,435*yAdj+50*j*yAdj);
+                  if(firstPN[j-1] === "") {
+                     text(PlayerName[j-1],85*xAdj,435*yAdj+j*50*yAdj);
+                  } else {
+                     text(firstPN[j-1],85*xAdj,423*yAdj+j*50*yAdj);
+                     text(lastPN[j-1],85*xAdj,448*yAdj+j*50*yAdj);
+                  }
                }
                textSize(35*xAdj);
                if(i<9 && j>0 && j<=NumberOfPlayers) {    
@@ -981,7 +993,15 @@
             }
             textSize(30*xAdj);
             if (j<NumberOfPlayers || j===4) {
-               text(PlayerName[j],85*xAdj,285*yAdj+j*50*yAdj); 
+//               text(PlayerName[j],85*xAdj,285*yAdj+j*50*yAdj); 
+
+               if(firstPN[j] === "") {
+                  text(PlayerName[j],85*xAdj,285*yAdj+j*50*yAdj);
+               } else {
+                  text(firstPN[j],85*xAdj,275*yAdj+j*50*yAdj);
+                  text(lastPN[j],85*xAdj,298*yAdj+j*50*yAdj);
+               }
+
             }
             textSize(35*xAdj);
             for (var i=0; i<3; i++) {
@@ -1165,6 +1185,21 @@
 
       }
 
+      splitPlayerNames = function() {
+         for(i=0; i<NumberOfPlayers; i++) {
+            temp = PlayerName[i].indexOf(" ");
+            if(temp === -1) {
+               firstPN[i] = "";
+               lastPN[i] = PlayerName[i];
+            } else {
+               firstPN[i]=PlayerName[i].slice(0,temp);
+               temp2 = PlayerName[i].length;
+               lastPN[i] = PlayerName[i].slice(temp+1,temp2);
+            }
+            console.log(PlayerName[i],firstPN[i],lastPN[i]);
+         }
+      }
+
 //       User Mouse Click Processing Section 
 
       mouseClicked = function() {
@@ -1221,7 +1256,7 @@
                }
                calcScores();                  
                AceScreen=1;
-//               trackLocation();
+               splitPlayerNames();
                draw()
 
             }
@@ -1229,7 +1264,6 @@
             if(mouseX>=425*xAdj && mouseX<=750*xAdj && mouseY>=200*yAdj && mouseY<=300*yAdj) {
                clearLocalData();
                AceScreen=1;
-//               trackLocation()
                draw()
             }
             return;
@@ -1317,7 +1351,7 @@
          if(AceScreen===1 && CourseSet===2) {
 
             if(NameAndIndex!=0) {
-               if(mouseX>=250*xAdj && mouseX<=550*xAdj && mouseY>=100*yAdj && mouseY<=150*yAdj) {
+               if(mouseX>=225*xAdj && mouseX<=575*xAdj && mouseY>=100*yAdj && mouseY<=150*yAdj) {
                   if(AceName[SelectedName]==="Add Name") {
                      AName=prompt("Player Name");
                   } else {
