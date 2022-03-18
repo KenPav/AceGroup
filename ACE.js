@@ -9,7 +9,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "03.17.22/14:00";
+      var vers = "03.18.22/15:00";
       var blinker = 0;
       var temp = 0;
       var temp2 = 0;
@@ -483,7 +483,7 @@
                      if(temp === -1) {
                         text(AceName[i+j*15],(140+260*j)*xAdj,(90+i*50)*yAdj);
                      } else {
-                        textSize(30);
+                        textSize(30*xAdj);
                         temp2 = AceName[i+j*15].length;
                         text(AceName[i+j*15].slice(0,temp),(140+260*j)*xAdj,(73+i*50)*yAdj);
                         text(AceName[i+j*15].slice(temp+1,temp2),(140+260*j)*xAdj,(98+i*50)*yAdj);
