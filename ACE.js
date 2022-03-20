@@ -1373,7 +1373,7 @@
                   console.log("AName: ",AName);
                }
                if(mouseX>=350*xAdj && mouseX<=450*xAdj && mouseY>=200*yAdj && mouseY<=250*yAdj) {
-                  AIndex=+(prompt("Handicap Index"));
+                  AIndex=+(prompt("Handicap Index",AceIndex[SelectedName]));
                }
                if(mouseX>=200*xAdj && mouseX<=300*xAdj && mouseY>=300*yAdj && mouseY<=350*yAdj) {
                   ATee = 0;
