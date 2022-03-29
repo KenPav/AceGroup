@@ -94,6 +94,7 @@
       var AName = "";
       var AIndex = 0;
       var ATee = 0;
+      var PointsNeeded = 0;
       const AceName = ["Add Name","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""];
       const SortNameArray = ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""];
       const SortNameArray1 = ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""];
@@ -510,6 +511,7 @@
          rect(25*xAdj,400*yAdj,250*xAdj,50*yAdj);
          rect(275*xAdj,400*yAdj,250*xAdj,50*yAdj);
          rect(525*xAdj,400*yAdj,250*xAdj,50*yAdj);
+         rect(350*xAdj,500*yAdj,100*xAdj,50*yAdj);
          if(ATee===0) {
             fill(SelectBoxColor);
          } else {
@@ -542,6 +544,15 @@
          text("Delete Name",150*xAdj,440*yAdj);
          text("Save Player",400*xAdj,440*yAdj);
          text("Use Player #"+(PlayerCount+1),650*xAdj,440*yAdj);
+         text("Points Needed: ",200*xAdj,540*yAdj);
+         console.log("AIndex & PointsNeeded before Calc",AIndex,PointsNeeded);
+         if(AIndex>0) {
+            PointsNeeded = Math.round(36 - (AIndex*Slope[ATee + (3*(Front + Back-1))]/113+(CourseRating[ATee + (3*(Front + Back-1))]-Par[ATee + (3*(Front + Back-1))])));
+         } else {
+            PointsNeeded = 0;
+         }
+         console.log("AIndex & PointsNeeded after Calc",AIndex,PointsNeeded);
+         text(PointsNeeded.toFixed(0),400*xAdj,540*yAdj);
       }
 
       SortPlayers = function() {
@@ -1383,6 +1394,14 @@
                }
                if(mouseX>=500*xAdj && mouseX<=600*xAdj && mouseY>=300*yAdj && mouseY<=350*yAdj) {
                   ATee = 2;
+               }
+               if(mouseX>=350*xAdj && mouseX<=450*xAdj && mouseY>=500*yAdj && mouseY<=550*yAdj) {
+                  console.log("PointsNeeded & AIndex before Calc",PointsNeeded,AIndex);
+                  PointsNeeded=+(prompt("Points Needed",PointsNeeded));
+                  AIndex = (((36 - PointsNeeded) + Par[ATee + (3*(Front + Back-1))] - CourseRating[ATee + (3*(Front + Back-1))]) * 113) / Slope[ATee + (3*(Front + Back-1))];
+                  AIndex = Math.round(AIndex * 10) / 10;
+                  AceIndex[SelectedName] = AIndex;
+                  console.log("PointsNeeded & AIndex after Calc",PointsNeeded,AIndex);
                }
 //             DELETE NAME
                if(mouseX>=25*xAdj && mouseX<=275*xAdj && mouseY>=400*yAdj && mouseY<=450*yAdj) {
