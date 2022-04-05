@@ -356,6 +356,7 @@
                ReqPts[i] = 0;
             }
             background(BackColor);
+            ScreenSelect();
             text("Number of Players",400*xAdj,100*yAdj);
             textSize(50*xAdj);
             j=NumberOfPlayers;
@@ -375,6 +376,7 @@
 
          if(CourseSet===2) {
             if (PlayerCount < NumberOfPlayers) {
+               console.log("CourseSet,PlayerCount,NumberOfPlayers,NameCount,NameAndIndex",CourseSet,PlayerCount,NumberOfPlayers,NameCount,NameAndIndex);
                if(NameCount===PlayerCount) {
 
                   if(NameAndIndex === 0) {
@@ -472,6 +474,7 @@
 
       SelectPlayer = function() {
          background(BackColor);
+         ScreenSelect();
          for (j=0; j<3; j++) {
             for (i=0; i<15; i++) {
                if(NumberOfNames>=j*15+i) {
@@ -504,6 +507,7 @@
 
       AddPlayer = function() {
          background(BackColor)
+         ScreenSelect();
          fill(BoxColor);
          textSize(40*xAdj);
          rect(225*xAdj,100*yAdj,350*xAdj,50*yAdj);
@@ -545,6 +549,7 @@
          text("Save Player",400*xAdj,440*yAdj);
          text("Use Player #"+(PlayerCount+1),650*xAdj,440*yAdj);
          text("Points Needed: ",200*xAdj,540*yAdj);
+         text(Courses[Front]+" / "+Courses[Back],600*xAdj,540*yAdj);
          console.log("AIndex & PointsNeeded before Calc",AIndex,PointsNeeded);
          if(AIndex>0) {
             PointsNeeded = Math.round(36 - (AIndex*Slope[ATee + (3*(Front + Back-1))]/113+(CourseRating[ATee + (3*(Front + Back-1))]-Par[ATee + (3*(Front + Back-1))])));
@@ -1364,6 +1369,7 @@
                   NumberOfPlayers=i+1;
                   CourseSet=2;
                   PlayerCount=0;
+                  NameAndIndex=0;
                   NameCount=0;
                   HCPCount=0;
                   storeIt();
