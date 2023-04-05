@@ -9,7 +9,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "03.18.22/15:00";
+      var vers = "04.05.23/18:30";
       var blinker = 0;
       var temp = 0;
       var temp2 = 0;
