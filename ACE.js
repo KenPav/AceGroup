@@ -106,7 +106,7 @@
 //    Course Data [R,G,W], [N/S,N/W,S/W]      
       const CourseRating = [64.7,67.1,68.7,66.9,68.7,70.7,65.8,69.0,71.6];
       const Par = [71,71,71,72,72,72,73,73,73];
-      const Slope = [113,119,127,114,116,122,116,122,130];
+      const Slope = [119,119,127,114,116,122,116,122,130];
 
 
      // Up To Four Players With Their Total Course Handicap
