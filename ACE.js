@@ -405,7 +405,7 @@
                         ReqPts[PlayerCount*3+1]=temp;
                      }
                      else {
-                        if (FrontBack=0) {
+                        if (FrontBack=1) {
                            ReqPts[PlayerCount*3]=temp;
                            ReqPts[PlayerCount*3+1]=temp+1;
                         }
