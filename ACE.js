@@ -444,6 +444,7 @@
             rect(400*xAdj,200*yAdj,200*xAdj,100*yAdj);
             rect(600*xAdj,200*yAdj,200*xAdj,100*yAdj);
             fill(FirstColor);
+            text(FrontBack.toFixed(0),100,170);
             text("Player",100*xAdj,270*yAdj);
             text("Course",300*xAdj,250*yAdj);
             text(Courses[Front],500*xAdj,250*yAdj);
