@@ -9,7 +9,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "06.08.23/15:00";
+      var vers = "06.08.23/16:00";
       var blinker = 0;
       var FrontBack = 0;
       var temp = 0;
@@ -334,8 +334,8 @@
             if(Front===1 && Back===0) {FrontBack=1;}
             if(Front===2 && Back===1) {FrontBack=0;}
             if(Front===1 && Back===2) {FrontBack=1;}
-            if(Front===0 && Back===2) {FrontBack=0;}
-            if(Front===2 && Back===0) {FrontBack=1;}
+            if(Front===0 && Back===2) {FrontBack=1;}
+            if(Front===2 && Back===0) {FrontBack=0;}
             rect(300*xAdj,300*yAdj,200*xAdj,70*yAdj);
             fill(FirstColor);
             text("Continue",400*xAdj,355*yAdj);
