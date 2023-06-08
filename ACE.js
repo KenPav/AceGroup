@@ -9,7 +9,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "06.08.23/14:00";
+      var vers = "06.08.23/14:15";
       var blinker = 0;
       var FrontBack = 0;
       var temp = 0;
@@ -330,24 +330,24 @@
             fill(FirstColor);
             text("West",600*xAdj,255*yAdj);
             fill(BoxColor);
-            if(Front===0 && Back===1) {
-               FrontBack=0;
+         }
+         if(Front===0 && Back===1) {
+            FrontBack=0;
+         } else { 
+            if(Front===1 && Back===0) {
+               FrontBack=1;
             } else { 
-               if(Front===1 && Back===0) {
-                  FrontBack=1;
-               } else { 
-                  if(Front===2 && Back===1) {
-                     FrontBack=0;
+               if(Front===2 && Back===1) {
+                  FrontBack=0;
+               } else {
+                  if(Front===1 && Back===2) {
+                     FrontBack=1;
                   } else {
-                     if(Front===1 && Back===2) {
-                        FrontBack=1;
+                     if(Front===0 && Back===2) {
+                        FrontBack=0;
                      } else {
-                        if(Front===0 && Back===2) {
-                           FrontBack=0;
-                        } else {
-                           if(Front===2 && Back===0) {
-                              FrontBack=1;
-                        }
+                        if(Front===2 && Back===0) {
+                           FrontBack=1;
                      }
                   }
                }
