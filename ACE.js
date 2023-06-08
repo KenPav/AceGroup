@@ -446,7 +446,7 @@
             fill(FirstColor);
             text(Front.toFixed(0),100,170);
             text(FrontBack.toFixed(0),200,170);
-            text(Back.toFixed(0),100,170);
+            text(Back.toFixed(0),300,170);
             text("Player",100*xAdj,270*yAdj);
             text("Course",300*xAdj,250*yAdj);
             text(Courses[Front],500*xAdj,250*yAdj);
