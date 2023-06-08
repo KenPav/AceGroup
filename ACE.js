@@ -9,7 +9,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "06.08.23/14:30";
+      var vers = "06.08.23/15:00";
       var blinker = 0;
       var FrontBack = 0;
       var temp = 0;
@@ -338,10 +338,10 @@
             if(Front===2 && Back===0) {FrontBack=1;}
             rect(300*xAdj,300*yAdj,200*xAdj,70*yAdj);
             fill(FirstColor);
-//            text("Continue",400*xAdj,355*yAdj);
-            text(Front.toFixed(0),100,355);
-            text(Back.toFixed(0),600,355);
-            text(FrontBack.toFixed(0),400*xAdj,355*yAdj);
+            text("Continue",400*xAdj,355*yAdj);
+//            text(Front.toFixed(0),100,355);
+//            text(Back.toFixed(0),600,355);
+//            text(FrontBack.toFixed(0),400*xAdj,355*yAdj);
             if (AreYouSure===0) {
                fill(BoxColor);
                rect(100*xAdj,500*yAdj,600*xAdj,70*yAdj);
@@ -408,7 +408,7 @@
                         ReqPts[PlayerCount*3+1]=temp;
                      }
                      else {
-                        if (FrontBack===1) {
+                        if (FrontBack===0) {
                            ReqPts[PlayerCount*3]=temp;
                            ReqPts[PlayerCount*3+1]=temp+1;
                         }
@@ -444,9 +444,9 @@
             rect(400*xAdj,200*yAdj,200*xAdj,100*yAdj);
             rect(600*xAdj,200*yAdj,200*xAdj,100*yAdj);
             fill(FirstColor);
-            text(Front.toFixed(0),100,170);
-            text(FrontBack.toFixed(0),200,170);
-            text(Back.toFixed(0),300,170);
+//            text(Front.toFixed(0),100,170);
+//            text(FrontBack.toFixed(0),200,170);
+//            text(Back.toFixed(0),300,170);
             text("Player",100*xAdj,270*yAdj);
             text("Course",300*xAdj,250*yAdj);
             text(Courses[Front],500*xAdj,250*yAdj);
