@@ -339,9 +339,9 @@
             rect(300*xAdj,300*yAdj,200*xAdj,70*yAdj);
             fill(FirstColor);
 //            text("Continue",400*xAdj,355*yAdj);
-            text(Front.toFixed,100,355);
-            text(Back.toFixed,600,355);
-            text(FrontBack.toFixed,400*xAdj,355*yAdj);
+            text(Front.toFixed(0),100,355);
+            text(Back.toFixed(0),600,355);
+            text(FrontBack.toFixed(0),400*xAdj,355*yAdj);
             if (AreYouSure===0) {
                fill(BoxColor);
                rect(100*xAdj,500*yAdj,600*xAdj,70*yAdj);
