@@ -732,7 +732,7 @@
             } else{
 
                fill(BoxColor);
-               rect(200*xAdj,200*yAdj+i*80*yAdj,400*xAdj,80*yAdj);
+               rect(200*xAdj,200*yAdj,400*xAdj,80*yAdj);
                fill(FirstColor);
                textAlign(CENTER);
                textSize(60*xAdj);
@@ -1561,6 +1561,11 @@
                      }
                   }
                }
+            } else {
+                     if(mouseX>=200*xAdj && mouseX<=600*xAdj && mouseY>=200*yAdj && mouseY<=280*yAdj) {
+                        ConfirmScore = 0;
+                     }
+
             }
             //Calculate Team Hole Score and Save Data 
             calcScores();
