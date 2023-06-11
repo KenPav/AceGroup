@@ -15,6 +15,7 @@
       var ConfirmScore = 0;
       var ConfirmPlayer = "";
       var ConfirmStrokes = 0;
+      var PHS = 0;
       var temp = 0;
       var temp2 = 0;
       var FirstColor = color(0, 0, 0);
@@ -741,7 +742,7 @@
                textSize(100*xAdj);
                for(var j=0; j<8; j++) {
                   if(j<4) {
-                     if(ConfirmStrokes=j+1){
+                     if(ConfirmStrokes=j){
                         fill(SelectBoxColor);
                      } else {
                         fill(BoxColor);
@@ -750,7 +751,7 @@
                      fill(FirstColor);
                      text(j+1,100*xAdj+j*200*xAdj,450*yAdj);
                   } else {
-                     if(ConfirmStrokes=j+1){
+                     if(ConfirmStrokes=j){
                         fill(SelectBoxColor);
                      } else {
                         fill(BoxColor);
@@ -1590,7 +1591,8 @@
                         PlayerHoleStrokes[i*18+HoleNum-1]=j+1;
                         ConfirmPlayer = PlayerName[i];
                         ConfirmScore = 1;
-                        ConfirmStrokes = j+1;
+                        PHS = i*18+HoleNum-1;
+                        ConfirmStrokes = j;
                      }
                   }
                }
