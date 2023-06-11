@@ -761,14 +761,6 @@
                      text(j+1,100*xAdj+(j-4)*200*xAdj,650*yAdj);
                   }
                }
-/               fill(BoxColor);
-               rect(50*xAdj,700*yAdj,300*xAdj,125*yAdj);
-               rect(450*xAdj,700*yAdj,300*xAdj,125*yAdj);
-               fill(FirstColor);
-               textSize(80*xAdj);
-               text("Cancel",200*xAdj,790*yAdj);
-               text("Confirm",600*xAdj,790*yAdj);
-/
             }
 
          }
