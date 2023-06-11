@@ -751,11 +751,11 @@
                      text(j+1,100*xAdj+(j-4)*200*xAdj,650*yAdj);
                   }
                }
-               fill(BoxColor):
+               fill(BoxColor);
                rect(50*xAdj,650*yAdj,300*xAdj,150*yAdj);
                rect(450*xAdj,650*yAdj,300*xAdj,150*yAdj);
                fill(FirstColor);
-               
+
             }
 
          }
