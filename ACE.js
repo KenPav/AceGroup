@@ -15,7 +15,7 @@
       var ConfirmScore = 0;
       var ConfirmPlayer = "";
       var ConfirmStrokes = 0;
-      var PHS = 0;
+      var PHStrokes = 0;
       var temp = 0;
       var temp2 = 0;
       var FirstColor = color(0, 0, 0);
@@ -1591,7 +1591,7 @@
                         PlayerHoleStrokes[i*18+HoleNum-1]=j+1;
                         ConfirmPlayer = PlayerName[i];
                         ConfirmScore = 1;
-                        PHS = i*18+HoleNum-1;
+                        PHStrokes = i*18+HoleNum-1;
                         ConfirmStrokes = j;
                      }
                   }
@@ -1621,9 +1621,10 @@
                }                
             } else {
                for(i=0; i<2; i++) {
-                  for(j=0; j<3; j++) {
+                  for(j=0; j<4; j++) {
                      if(mouseX>=0+j*200*xAdj && mouseX<=200*xAdj+200*j*xAdj && mouseY>=300*yAdj+i*200*yAdj && mouseY<=500*yAdj+i*200*yAdj) {
-                        ConfirmStrokes = i*4+j
+                        ConfirmStrokes = i*4+j;
+                        PlayerHoleStrokes[PHStrokes]=ConfirmStrokes;
                      }
                   }
                }
