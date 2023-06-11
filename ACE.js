@@ -1584,10 +1584,7 @@
                      }
                   }
                }
-               //Calculate Team Hole Score and Save Data 
-               calcScores();
-               window.localStorage.setItem('PHS',JSON.stringify(PlayerHoleStrokes));
-               window.localStorage.setItem('HN',JSON.stringify(HoleNum));               
+
 
                // Back up to Previous Hole
                if(mouseX>=50*xAdj && mouseX<=250*xAdj && mouseY>=550*yAdj && mouseY<=630*yAdj) { 
@@ -1623,6 +1620,10 @@
                }
 
             }
+            //Calculate Team Hole Score and Save Data 
+            calcScores();
+            window.localStorage.setItem('PHS',JSON.stringify(PlayerHoleStrokes));
+            window.localStorage.setItem('HN',JSON.stringify(HoleNum));                           
             draw();
          }            
 
