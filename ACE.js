@@ -741,64 +741,66 @@
                fill(BoxColor);
                for(var j=0; j<8; j++) {
                   if(j<4) {
-                     rect(0*xAdj+j*200*xAdj,300*yAdj,200*xAdj,100*yAdj);
+                     rect(0*xAdj+j*200*xAdj,300*yAdj,200*xAdj,200*yAdj);
                   } else {
-                     rect(0*xAdj+(j-4)*200*xAdj,400*yAdj,200*xAdj,100*yAdj);
+                     rect(0*xAdj+(j-4)*200*xAdj,500*yAdj,200*xAdj,200*yAdj);
                   }
                }
             }
 
          }
-
-         fill(BoxColor);
-         if(MissingScores===0 && HoleNum>1) {
-            blinker = blinker + 1;
+         if(ConfirmScore===0) {
             fill(BoxColor);
-            if (blinker >10) {
-               fill(WarningColor);
-               if (blinker>20) {
-                  fill(BoxColor);
-                  blinker = 0;
+            if(MissingScores===0 && HoleNum>1) {
+               blinker = blinker + 1;
+               fill(BoxColor);
+               if (blinker >10) {
+                  fill(WarningColor);
+                  if (blinker>20) {
+                     fill(BoxColor);
+                     blinker = 0;
+                  }
                }
             }
-         }
-         rect(50*xAdj,550*yAdj,200*xAdj,80*yAdj);
-         fill(BoxColor);
-         rect(550*xAdj,550*yAdj,200*xAdj,80*yAdj);
-         rect(275*xAdj,550*yAdj,250*xAdj,80*yAdj);
-         rect(50*xAdj,650*yAdj,700*xAdj,80*yAdj);
-         fill(FirstColor);
-         text("Previous",150*xAdj,605*yAdj);
-         text("Next",650*xAdj,605*yAdj);
-         if(GPSswitch===1) {
-            if(HoleNum===closestHole) {
-               fill(SecondColor);
-               text("This hole is the nearest hole",400*xAdj,705*yAdj);
-            } 
-            else {
-               text("Jump to Nearest Hole (#"+closestHole+")",400*xAdj,705*yAdj);               
-            }
-         }
-         text("Points: "+PlayerHoleScore[4*18+HoleNum-1],400*xAdj,605*yAdj);
-         fill (BoxColor);
 
-         rect(0*xAdj,740*yAdj,200*xAdj,100*yAdj);
-         rect(200*xAdj,740*yAdj,200*xAdj,50*yAdj);
-         rect(400*xAdj,740*yAdj,200*xAdj,50*yAdj);           
-         rect(600*xAdj,740*yAdj,200*xAdj,50*yAdj);
-         rect(200*xAdj,790*yAdj,200*xAdj,50*yAdj);
-         rect(400*xAdj,790*yAdj,200*xAdj,50*yAdj);           
-         rect(600*xAdj,790*yAdj,200*xAdj,50*yAdj);
-         fill(FirstColor);
-         text("Yards to",100*xAdj,785*yAdj);
-         text("Green",100*xAdj,825*yAdj);
-         text("Front",300*xAdj,780*yAdj);
-         text("Center",500*xAdj,780*yAdj);
-         text("Back",700*xAdj,780*yAdj);
-         if(GPSswitch===1) {
-            text(GreenDistanceF[HoleNum-1].toFixed(0),300*xAdj,830*yAdj);
-            text(GreenDistanceC[HoleNum-1].toFixed(0),500*xAdj,830*yAdj);
-            text(GreenDistanceB[HoleNum-1].toFixed(0),700*xAdj,830*yAdj);
+            rect(50*xAdj,550*yAdj,200*xAdj,80*yAdj);
+            fill(BoxColor);
+            rect(550*xAdj,550*yAdj,200*xAdj,80*yAdj);
+            rect(275*xAdj,550*yAdj,250*xAdj,80*yAdj);
+            rect(50*xAdj,650*yAdj,700*xAdj,80*yAdj);
+            fill(FirstColor);
+            text("Previous",150*xAdj,605*yAdj);
+            text("Next",650*xAdj,605*yAdj);
+            if(GPSswitch===1) {
+               if(HoleNum===closestHole) {
+                  fill(SecondColor);
+                  text("This hole is the nearest hole",400*xAdj,705*yAdj);
+               } 
+               else {
+                  text("Jump to Nearest Hole (#"+closestHole+")",400*xAdj,705*yAdj);               
+               }
+            }
+            text("Points: "+PlayerHoleScore[4*18+HoleNum-1],400*xAdj,605*yAdj);
+            fill (BoxColor);
+
+            rect(0*xAdj,740*yAdj,200*xAdj,100*yAdj);
+            rect(200*xAdj,740*yAdj,200*xAdj,50*yAdj);
+            rect(400*xAdj,740*yAdj,200*xAdj,50*yAdj);           
+            rect(600*xAdj,740*yAdj,200*xAdj,50*yAdj);
+            rect(200*xAdj,790*yAdj,200*xAdj,50*yAdj);
+            rect(400*xAdj,790*yAdj,200*xAdj,50*yAdj);           
+            rect(600*xAdj,790*yAdj,200*xAdj,50*yAdj);
+            fill(FirstColor);
+            text("Yards to",100*xAdj,785*yAdj);
+            text("Green",100*xAdj,825*yAdj);
+            text("Front",300*xAdj,780*yAdj);
+            text("Center",500*xAdj,780*yAdj);
+            text("Back",700*xAdj,780*yAdj);
+            if(GPSswitch===1) {
+               text(GreenDistanceF[HoleNum-1].toFixed(0),300*xAdj,830*yAdj);
+               text(GreenDistanceC[HoleNum-1].toFixed(0),500*xAdj,830*yAdj);
+               text(GreenDistanceB[HoleNum-1].toFixed(0),700*xAdj,830*yAdj);
+            }
          }
 
       };
