@@ -1624,7 +1624,8 @@
                   for(j=0; j<4; j++) {
                      if(mouseX>=0+j*200*xAdj && mouseX<=200*xAdj+200*j*xAdj && mouseY>=300*yAdj+i*200*yAdj && mouseY<=500*yAdj+i*200*yAdj) {
                         ConfirmStrokes = i*4+j;
-                        PlayerHoleStrokes[PHStrokes]=ConfirmStrokes;
+                        PlayerHoleStrokes[PHStrokes]=ConfirmStrokes+1;
+                        ConfirmScore = 0;
                      }
                   }
                }
