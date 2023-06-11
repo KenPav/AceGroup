@@ -1549,13 +1549,7 @@
                return;
             }
 
-            if(ConfirmScore===1) {
-               fill(BoxColor);
-               rect(200*xAdj,400*xAdj,300*yAdj,100*yAdj);
-               fill(FirstColor);
-               textAlign(CENTER);
-               text(ConfirmPlayer,400*xAdj,300*yAdj);
-            } else {
+            if(ConfirmScore===0) {
                for (var i = 0; i < NumberOfPlayers; i++) {
                   for (var j = 0; j < 8; j++) {
                      if(mouseX>=220*xAdj+70*j*xAdj && mouseX<=290*xAdj+70*j*xAdj && mouseY>=200*yAdj+i*80*yAdj && mouseY<=280*yAdj+i*80*yAdj) {
