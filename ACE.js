@@ -1622,7 +1622,7 @@
             } else {
                for(i=0; i<2; i++) {
                   for(j=0; j<3; j++) {
-                     if(mouseX>=0+j*200*xAdj && mouseX<=200*xAdj+200*xAdj && mouseY>=500*yAdj+i*200*yAdj && mouseY<=700*yAdj+i*200*yAdj) {
+                     if(mouseX>=0+j*200*xAdj && mouseX<=200*xAdj+200*j*xAdj && mouseY>=300*yAdj+i*200*yAdj && mouseY<=500*yAdj+i*200*yAdj) {
                         ConfirmStrokes = i*4+j
                      }
                   }
