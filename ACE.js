@@ -755,6 +755,8 @@
                rect(50*xAdj,700*yAdj,300*xAdj,150*yAdj);
                rect(450*xAdj,700*yAdj,300*xAdj,150*yAdj);
                fill(FirstColor);
+               text("Cancel",200*xAdj,825*yAdj);
+               text("Confirm",600*xAdj,825*yAdj);
 
             }
 
