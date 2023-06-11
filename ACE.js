@@ -752,11 +752,12 @@
                   }
                }
                fill(BoxColor);
-               rect(50*xAdj,700*yAdj,300*xAdj,150*yAdj);
-               rect(450*xAdj,700*yAdj,300*xAdj,150*yAdj);
+               rect(50*xAdj,700*yAdj,300*xAdj,125*yAdj);
+               rect(450*xAdj,700*yAdj,300*xAdj,125*yAdj);
                fill(FirstColor);
-               text("Cancel",200*xAdj,825*yAdj);
-               text("Confirm",600*xAdj,825*yAdj);
+               textSize(90);
+               text("Cancel",200*xAdj,850*yAdj);
+               text("Confirm",600*xAdj,850*yAdj);
 
             }
 
