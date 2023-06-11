@@ -14,6 +14,7 @@
       var FrontBack = 0;
       var ConfirmScore = 0;
       var ConfirmPlayer = "";
+      var ConfirmStrokes = 0;
       var temp = 0;
       var temp2 = 0;
       var FirstColor = color(0, 0, 0);
@@ -740,12 +741,20 @@
                textSize(100*xAdj);
                for(var j=0; j<8; j++) {
                   if(j<4) {
-                     fill(BoxColor);
+                     if(ConfirmStrokes=j+1){
+                        fill(SelectBoxColor);
+                     } else {
+                        fill(BoxColor);
+                     }
                      rect(0*xAdj+j*200*xAdj,300*yAdj,200*xAdj,200*yAdj);
                      fill(FirstColor);
                      text(j+1,100*xAdj+j*200*xAdj,450*yAdj);
                   } else {
-                     fill(BoxColor);
+                     if(ConfirmStrokes=j+1){
+                        fill(SelectBoxColor);
+                     } else {
+                        fill(BoxColor);
+                     }
                      rect(0*xAdj+(j-4)*200*xAdj,500*yAdj,200*xAdj,200*yAdj);
                      fill(FirstColor);
                      text(j+1,100*xAdj+(j-4)*200*xAdj,650*yAdj);
@@ -755,7 +764,7 @@
                rect(50*xAdj,700*yAdj,300*xAdj,125*yAdj);
                rect(450*xAdj,700*yAdj,300*xAdj,125*yAdj);
                fill(FirstColor);
-               textSize(80);
+               textSize(80*xAdj);
                text("Cancel",200*xAdj,790*yAdj);
                text("Confirm",600*xAdj,790*yAdj);
 
@@ -1581,6 +1590,7 @@
                         PlayerHoleStrokes[i*18+HoleNum-1]=j+1;
                         ConfirmPlayer = PlayerName[i];
                         ConfirmScore = 1;
+                        ConfirmStrokes = j+1;
                      }
                   }
                }
