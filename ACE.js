@@ -752,8 +752,8 @@
                   }
                }
                fill(BoxColor);
-               rect(50*xAdj,650*yAdj,300*xAdj,150*yAdj);
-               rect(450*xAdj,650*yAdj,300*xAdj,150*yAdj);
+               rect(50*xAdj,700*yAdj,300*xAdj,150*yAdj);
+               rect(450*xAdj,700*yAdj,300*xAdj,150*yAdj);
                fill(FirstColor);
 
             }
