@@ -1544,6 +1544,7 @@
             }
 
             if(ConfirmScore===1) {
+               fill(FirstColor);
                textAlign(CENTER);
                text(ConfirmPlayer,400*xAdj,300*yAdj);
             } else {
