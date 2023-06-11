@@ -732,19 +732,23 @@
             } else{
 
                fill(BoxColor);
-               rect(200*xAdj,200*yAdj,400*xAdj,100*yAdj);
+               rect(100*xAdj,200*yAdj,600*xAdj,100*yAdj);
                fill(FirstColor);
                textAlign(CENTER);
                textSize(90*xAdj);
-               text(ConfirmPlayer,400*xAdj,295*yAdj);
+               text(ConfirmPlayer,400*xAdj,285*yAdj);
                textSize(100*xAdj);
                fill(BoxColor);
                for(var j=0; j<8; j++) {
                   if(j<4) {
+                     fill(BoxColor);
                      rect(0*xAdj+j*200*xAdj,300*yAdj,200*xAdj,200*yAdj);
+                     fill(FirstColor);
                      text(j+1,100*xAdj+j*200*xAdj,450*yAdj);
                   } else {
+                     fill(BoxColor};
                      rect(0*xAdj+(j-4)*200*xAdj,500*yAdj,200*xAdj,200*yAdj);
+                     fill(FirstColor);
                      text(j+1,100*xAdj+(j-4)*200*xAdj,650*yAdj);
                   }
                }
