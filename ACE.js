@@ -728,7 +728,7 @@
                text(j+1,255*xAdj+j*70*xAdj,255*yAdj+i*80*yAdj);
             }
             } else{
-               
+
             }
 
          }
@@ -1549,6 +1549,7 @@
                   for (var j = 0; j < 8; j++) {
                      if(mouseX>=220*xAdj+70*j*xAdj && mouseX<=290*xAdj+70*j*xAdj && mouseY>=200*yAdj+i*80*yAdj && mouseY<=280*yAdj+i*80*yAdj) {
                         PlayerHoleStrokes[i*18+HoleNum-1]=j+1;
+                        ConfirmScore = 1;
                      }
                   }
                }
