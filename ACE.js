@@ -738,7 +738,6 @@
                textSize(90*xAdj);
                text(ConfirmPlayer,400*xAdj,285*yAdj);
                textSize(100*xAdj);
-               fill(BoxColor);
                for(var j=0; j<8; j++) {
                   if(j<4) {
                      fill(BoxColor);
@@ -746,7 +745,7 @@
                      fill(FirstColor);
                      text(j+1,100*xAdj+j*200*xAdj,450*yAdj);
                   } else {
-                     fill(BoxColor};
+                     fill(BoxColor);
                      rect(0*xAdj+(j-4)*200*xAdj,500*yAdj,200*xAdj,200*yAdj);
                      fill(FirstColor);
                      text(j+1,100*xAdj+(j-4)*200*xAdj,650*yAdj);
