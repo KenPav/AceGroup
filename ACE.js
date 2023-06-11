@@ -732,12 +732,12 @@
             } else{
 
                fill(BoxColor);
-               rect(400*xAdj,200*yAdj+i*80*yAdj,800*xAdj,80*yAdj);
+               rect(200*xAdj,200*yAdj+i*80*yAdj,400*xAdj,80*yAdj);
                fill(FirstColor);
                textAlign(CENTER);
                textSize(60*xAdj);
                text(ConfirmPlayer,400*xAdj,255*yAdj);
-
+               textSize(40*xAdj);
             }
 
          }
