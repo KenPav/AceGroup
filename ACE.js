@@ -742,7 +742,7 @@
                textSize(100*xAdj);
                for(var j=0; j<8; j++) {
                   if(j<4) {
-                     if(ConfirmStrokes=j){
+                     if(ConfirmStrokes===j){
                         fill(SelectBoxColor);
                      } else {
                         fill(BoxColor);
@@ -751,7 +751,7 @@
                      fill(FirstColor);
                      text(j+1,100*xAdj+j*200*xAdj,450*yAdj);
                   } else {
-                     if(ConfirmStrokes=j){
+                     if(ConfirmStrokes===j){
                         fill(SelectBoxColor);
                      } else {
                         fill(BoxColor);
