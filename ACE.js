@@ -738,6 +738,13 @@
                textSize(60*xAdj);
                text(ConfirmPlayer,400*xAdj,255*yAdj);
                textSize(40*xAdj);
+               for(var j=0; j<8; j++) {
+                  if(j<4) {
+                     rect(0*xAdj,300*yAdj,200*xAdj,150*yAdj);
+                  } else {
+                     rect(0*xAdj,350*yAdj,200*xAdj,150*yAdj);
+                  }
+               }
             }
 
          }
