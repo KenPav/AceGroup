@@ -730,6 +730,12 @@
             }
             } else{
 
+               fill(BoxColor);
+               rect(200*xAdj,400*xAdj,300*yAdj,100*yAdj);
+               fill(FirstColor);
+               textAlign(CENTER);
+               text(ConfirmPlayer,400*xAdj,300*yAdj);
+
             }
 
          }
