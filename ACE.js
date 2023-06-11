@@ -693,6 +693,7 @@
          text("Select Hole Score for Each Player",400*xAdj,185*yAdj);
          textSize(50*xAdj);
          for (var i = 0; i < NumberOfPlayers; i++) {
+            if(ConfirmScore===0) {
             fill(BoxColor);
             rect(0*xAdj,200*yAdj+i*80*yAdj,220*xAdj,80*yAdj);
             if(i===0 || i===2) {
@@ -703,7 +704,7 @@
             }
             textSize(40*xAdj);
 //            text(PlayerName[i],110*xAdj,255*yAdj+i*80*yAdj);
-            if(ConfirmScore===0) {
+
             if(firstPN[i] === "") {
                text(PlayerName[i],110*xAdj,260*yAdj+i*80*yAdj);
             } else {
@@ -731,9 +732,10 @@
             } else{
 
                fill(BoxColor);
-               rect(200*xAdj,300*yAdj,400*xAdj,100*yAdj);
+               rect(400*xAdj,200*yAdj+i*80*yAdj,800*xAdj,80*yAdj);
                fill(FirstColor);
                textAlign(CENTER);
+               textSize(60*xAdj);
                text(ConfirmPlayer,400*xAdj,255*yAdj);
 
             }
