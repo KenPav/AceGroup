@@ -734,7 +734,7 @@
             } else{
 
                fill(BoxColor);
-               rect(100*xAdj,200*yAdj,600*xAdj,100*yAdj);
+               rect(50*xAdj,200*yAdj,700*xAdj,100*yAdj);
                fill(FirstColor);
                textAlign(CENTER);
                textSize(90*xAdj);
@@ -1615,7 +1615,7 @@
                   }
                }
 
-               if(mouseX>=200*xAdj && mouseX<=600*xAdj && mouseY>=200*yAdj && mouseY<=280*yAdj) {
+               if(mouseX>=50*xAdj && mouseX<=750*xAdj && mouseY>=200*yAdj && mouseY<=280*yAdj) {
                   ConfirmScore = 0;
                }
 
