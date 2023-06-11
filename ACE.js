@@ -694,41 +694,41 @@
          textSize(50*xAdj);
          for (var i = 0; i < NumberOfPlayers; i++) {
             if(ConfirmScore===0) {
-            fill(BoxColor);
-            rect(0*xAdj,200*yAdj+i*80*yAdj,220*xAdj,80*yAdj);
-            if(i===0 || i===2) {
-               fill(SecondColor);
-            }
-            else {
-               fill(FirstColor);
-            }
-            textSize(40*xAdj);
-//            text(PlayerName[i],110*xAdj,255*yAdj+i*80*yAdj);
-
-            if(firstPN[i] === "") {
-               text(PlayerName[i],110*xAdj,260*yAdj+i*80*yAdj);
-            } else {
-               text(firstPN[i],110*xAdj,235*yAdj+i*80*yAdj);
-               text(lastPN[i],110*xAdj,275*yAdj+i*80*yAdj);
-            }
-            textSize(50*xAdj);
-            for (var j = 0; j < 8; j++) {
-               if(PlayerHoleStrokes[i*18+HoleNum-1]===j+1) {
-                  fill(SelectBoxColor);
-                  rect(220*xAdj+j*70*xAdj,200*yAdj+i*80*yAdj,70*xAdj,80*yAdj);
-               }
-               else {
-                  fill(BoxColor);
-                  rect(220*xAdj+j*70*xAdj,200*yAdj+i*80*yAdj,70*xAdj,80*yAdj);
-               }
+               fill(BoxColor);
+               rect(0*xAdj,200*yAdj+i*80*yAdj,220*xAdj,80*yAdj);
                if(i===0 || i===2) {
                   fill(SecondColor);
                }
                else {
                   fill(FirstColor);
                }
-               text(j+1,255*xAdj+j*70*xAdj,255*yAdj+i*80*yAdj);
-            }
+               textSize(40*xAdj);
+//            text(PlayerName[i],110*xAdj,255*yAdj+i*80*yAdj);
+
+               if(firstPN[i] === "") {
+                  text(PlayerName[i],110*xAdj,260*yAdj+i*80*yAdj);
+               } else {
+                  text(firstPN[i],110*xAdj,235*yAdj+i*80*yAdj);
+                  text(lastPN[i],110*xAdj,275*yAdj+i*80*yAdj);
+               }
+               textSize(50*xAdj);
+               for (var j = 0; j < 8; j++) {
+                  if(PlayerHoleStrokes[i*18+HoleNum-1]===j+1) {
+                     fill(SelectBoxColor);
+                     rect(220*xAdj+j*70*xAdj,200*yAdj+i*80*yAdj,70*xAdj,80*yAdj);
+                  }
+                  else {
+                     fill(BoxColor);
+                     rect(220*xAdj+j*70*xAdj,200*yAdj+i*80*yAdj,70*xAdj,80*yAdj);
+                  }
+                  if(i===0 || i===2) {
+                     fill(SecondColor);
+                  }
+                  else {
+                     fill(FirstColor);
+                  }
+                  text(j+1,255*xAdj+j*70*xAdj,255*yAdj+i*80*yAdj);
+               }
             } else{
 
                fill(BoxColor);
@@ -751,6 +751,11 @@
                      text(j+1,100*xAdj+(j-4)*200*xAdj,650*yAdj);
                   }
                }
+               fill(BoxColor):
+               rect(50*xAdj,650*yAdj,300*xAdj,150*yAdj);
+               rect(450*xAdj,650*yAdj,300*xAdj,150*yAdj);
+               fill(FirstColor);
+               
             }
 
          }
@@ -1576,35 +1581,35 @@
                      }
                   }
                }
+               //Calculate Team Hole Score and Save Data 
+               calcScores();
+               window.localStorage.setItem('PHS',JSON.stringify(PlayerHoleStrokes));
+               window.localStorage.setItem('HN',JSON.stringify(HoleNum));               
+
+               // Back up to Previous Hole
+               if(mouseX>=50*xAdj && mouseX<=250*xAdj && mouseY>=550*yAdj && mouseY<=630*yAdj) { 
+                  if(HoleNum>1) {
+                        HoleNum=HoleNum-1;
+                        blinker = 0;
+                  }
+               }
+
+               // Proceed to Next Hole
+               if(mouseX>=550*xAdj && mouseX<=750*xAdj && mouseY>=550*yAdj && mouseY<=630*yAdj) {
+                  if(HoleNum<18) {
+                     HoleNum=HoleNum+1;
+                     blinker = 0;
+                  }
+               }
+               if(mouseX>=50*xAdj && mouseX<=700*xAdj && mouseY>=650*yAdj && mouseY<=730*yAdj) {
+                  HoleNum=closestHole;
+               }                
             } else {
                      if(mouseX>=200*xAdj && mouseX<=600*xAdj && mouseY>=200*yAdj && mouseY<=280*yAdj) {
                         ConfirmScore = 0;
                      }
 
             }
-            //Calculate Team Hole Score and Save Data 
-            calcScores();
-            window.localStorage.setItem('PHS',JSON.stringify(PlayerHoleStrokes));
-            window.localStorage.setItem('HN',JSON.stringify(HoleNum));               
-
-            // Back up to Previous Hole
-            if(mouseX>=50*xAdj && mouseX<=250*xAdj && mouseY>=550*yAdj && mouseY<=630*yAdj) { 
-               if(HoleNum>1) {
-                     HoleNum=HoleNum-1;
-                     blinker = 0;
-               }
-            }
-
-            // Proceed to Next Hole
-            if(mouseX>=550*xAdj && mouseX<=750*xAdj && mouseY>=550*yAdj && mouseY<=630*yAdj) {
-               if(HoleNum<18) {
-                  HoleNum=HoleNum+1;
-                  blinker = 0;
-               }
-            }
-            if(mouseX>=50*xAdj && mouseX<=700*xAdj && mouseY>=650*yAdj && mouseY<=730*yAdj) {
-               HoleNum=closestHole;
-            }                
             draw();
          }            
 
