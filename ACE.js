@@ -552,10 +552,11 @@
          }
          rect(500*xAdj,300*yAdj,100*xAdj,50*yAdj);
          fill(FirstColor);
-         text("Name: ",125*xAdj,140*yAdj);
+//         text("Name: ",125*xAdj,140*yAdj);
 //         textSize(35*xAdj);
 //         text("(<= 13 Chars)",670*xAdj,140*yAdj);
-         textSize(40*xAdj);
+//         textSize(40*xAdj);
+         textSize(60*xAdj);
          text(AName,400*xAdj,140*yAdj);
          text("Handicap Index: ",200*xAdj,240*yAdj);
          text(AIndex.toFixed(1),400*xAdj,240*yAdj);
