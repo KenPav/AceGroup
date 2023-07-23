@@ -443,7 +443,7 @@
 
          if (CourseSet===3) {
             fill(BoxColor);
-            rect(0*xAdj,200*yAdj,200*xAdj,100*yAdj);
+//            rect(0*xAdj,200*yAdj,200*xAdj,100*yAdj);
             rect(200*xAdj,200*yAdj,200*xAdj,100*yAdj);
             rect(400*xAdj,200*yAdj,200*xAdj,100*yAdj);
             rect(600*xAdj,200*yAdj,200*xAdj,100*yAdj);
@@ -451,7 +451,7 @@
 //            text(Front.toFixed(0),100,170);
 //            text(FrontBack.toFixed(0),200,170);
 //            text(Back.toFixed(0),300,170);
-            text("Player",100*xAdj,270*yAdj);
+//            text("Player",100*xAdj,270*yAdj);
             text("Course",300*xAdj,250*yAdj);
             text(Courses[Front],500*xAdj,250*yAdj);
             text(Courses[Back],700*xAdj,250*yAdj);
@@ -556,8 +556,10 @@
 //         textSize(35*xAdj);
 //         text("(<= 13 Chars)",670*xAdj,140*yAdj);
 //         textSize(40*xAdj);
-         textSize(60*xAdj);
-         text(AName,400*xAdj,140*yAdj);
+         textSize(100*xAdj);
+         text(AName,400*xAdj,100*yAdj);
+//         text(AName,400*xAdj,140*yAdj);
+         textSize(40*xAdj);
          text("Handicap Index: ",200*xAdj,240*yAdj);
          text(AIndex.toFixed(1),400*xAdj,240*yAdj);
          text("Red",250*xAdj,340*yAdj);
