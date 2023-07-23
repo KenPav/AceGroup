@@ -528,7 +528,7 @@
          fill(BoxColor);
          textSize(40*xAdj);
 //         rect(225*xAdj,100*yAdj,350*xAdj,50*yAdj);
-         rect(25*xAdj,100*yAdj,750*xAdj,100*yAdj);
+         rect(25*xAdj,20*yAdj,750*xAdj,125*yAdj);
          rect(350*xAdj,200*yAdj,100*xAdj,50*yAdj);
          rect(25*xAdj,400*yAdj,250*xAdj,50*yAdj);
          rect(275*xAdj,400*yAdj,250*xAdj,50*yAdj);
