@@ -528,7 +528,7 @@
          fill(BoxColor);
          textSize(40*xAdj);
 //         rect(225*xAdj,100*yAdj,350*xAdj,50*yAdj);
-         rect(25*xAdj,20*yAdj,750*xAdj,125*yAdj);
+         rect(25*xAdj,20*yAdj,750*xAdj,110*yAdj);
          rect(350*xAdj,200*yAdj,100*xAdj,50*yAdj);
          rect(25*xAdj,400*yAdj,250*xAdj,50*yAdj);
          rect(275*xAdj,400*yAdj,250*xAdj,50*yAdj);
@@ -1436,7 +1436,7 @@
          if(AceScreen===1 && CourseSet===2) {
 
             if(NameAndIndex!=0) {
-               if(mouseX>=225*xAdj && mouseX<=575*xAdj && mouseY>=100*yAdj && mouseY<=150*yAdj) {
+               if(mouseX>=25*xAdj && mouseX<=775*xAdj && mouseY>=20*yAdj && mouseY<=130*yAdj) {
                   if(AceName[SelectedName]==="Add Name") {
                      AName=prompt("Player Name");
                   } else {
