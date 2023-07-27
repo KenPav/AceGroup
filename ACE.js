@@ -574,7 +574,7 @@
             PointsNeeded = 0;
          }
          console.log("AIndex & PointsNeeded after Calc",AIndex,PointsNeeded);
-         textSize(90);
+         textSize(90*xAdj);
          text(PointsNeeded.toFixed(0),425*xAdj,555*yAdj);
 //         text(PointsNeeded.toFixed(0),400*xAdj,540*yAdj);
          textSize(40*xAdj);
