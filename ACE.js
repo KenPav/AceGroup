@@ -9,7 +9,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "06.11.23/17:00";
+      var vers = "07.27.2023/16:00";
       var blinker = 0;
       var FrontBack = 0;
       var ConfirmScore = 0;
@@ -557,7 +557,7 @@
          textSize(40*xAdj);
          text("Handicap Index: ",200*xAdj,240*yAdj);
          textSize(90*xAdj);
-         text(AIndex.toFixed(1),425*xAdj,260*yAdj);
+         text(AIndex.toFixed(1),425*xAdj,255*yAdj);
 //         text(AIndex.toFixed(1),400*xAdj,240*yAdj);
          textSize(40*xAdj);
          text("Red",250*xAdj,340*yAdj);
@@ -576,7 +576,7 @@
          }
          console.log("AIndex & PointsNeeded after Calc",AIndex,PointsNeeded);
          textSize(90);
-         text(PointsNeeded.toFixed(0),425*xAdj,560*yAdj);
+         text(PointsNeeded.toFixed(0),425*xAdj,555*yAdj);
 //         text(PointsNeeded.toFixed(0),400*xAdj,540*yAdj);
          textSize(40*xAdj);
       }
@@ -1444,7 +1444,7 @@
                   }
                   console.log("AName: ",AName);
                }
-               if(mouseX>=350*xAdj && mouseX<=450*xAdj && mouseY>=200*yAdj && mouseY<=250*yAdj) {
+               if(mouseX>=350*xAdj && mouseX<=500*xAdj && mouseY>=185*yAdj && mouseY<=265*yAdj) {
                   AIndex=+(prompt("Handicap Index",AceIndex[SelectedName]));
                }
                if(mouseX>=200*xAdj && mouseX<=300*xAdj && mouseY>=300*yAdj && mouseY<=350*yAdj) {
@@ -1456,7 +1456,7 @@
                if(mouseX>=500*xAdj && mouseX<=600*xAdj && mouseY>=300*yAdj && mouseY<=350*yAdj) {
                   ATee = 2;
                }
-               if(mouseX>=350*xAdj && mouseX<=450*xAdj && mouseY>=500*yAdj && mouseY<=550*yAdj) {
+               if(mouseX>=350*xAdj && mouseX<=500*xAdj && mouseY>=485*yAdj && mouseY<=565*yAdj) {
                   console.log("PointsNeeded & AIndex before Calc",PointsNeeded,AIndex);
                   PointsNeeded=+(prompt("Points Needed",PointsNeeded));
                   AIndex = (((36 - PointsNeeded) + Par[ATee + (3*(Front + Back-1))] - CourseRating[ATee + (3*(Front + Back-1))]) * 113) / Slope[ATee + (3*(Front + Back-1))];
