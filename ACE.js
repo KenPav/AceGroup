@@ -557,7 +557,7 @@
          textSize(40*xAdj);
          text("Handicap Index: ",200*xAdj,240*yAdj);
          textSize(90*xAdj);
-         text(AIndex.toFixed(1),425*xAdj,250*yAdj);
+         text(AIndex.toFixed(1),425*xAdj,255*yAdj);
 //         text(AIndex.toFixed(1),400*xAdj,240*yAdj);
          textSize(40*xAdj);
          text("Red",250*xAdj,340*yAdj);
@@ -576,7 +576,7 @@
          }
          console.log("AIndex & PointsNeeded after Calc",AIndex,PointsNeeded);
          textSize(90);
-         text(PointsNeeded.toFixed(0),425*xAdj,550*yAdj);
+         text(PointsNeeded.toFixed(0),425*xAdj,555*yAdj);
 //         text(PointsNeeded.toFixed(0),400*xAdj,540*yAdj);
          textSize(40*xAdj);
       }
