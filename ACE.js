@@ -526,12 +526,12 @@
          textSize(40*xAdj);
 //         rect(225*xAdj,100*yAdj,350*xAdj,50*yAdj);
          rect(25*xAdj,20*yAdj,750*xAdj,110*yAdj);
-         rect(350*xAdj,190*yAdj,150*xAdj,70*yAdj);
+         rect(350*xAdj,185*yAdj,150*xAdj,80*yAdj);
 //         rect(350*xAdj,200*yAdj,100*xAdj,50*yAdj);
          rect(25*xAdj,400*yAdj,250*xAdj,50*yAdj);
          rect(275*xAdj,400*yAdj,250*xAdj,50*yAdj);
          rect(525*xAdj,400*yAdj,250*xAdj,50*yAdj);
-         rect(350*xAdj,490*yAdj,150*xAdj,70*yAdj);
+         rect(350*xAdj,485*yAdj,150*xAdj,80*yAdj);
 //         rect(350*xAdj,500*yAdj,100*xAdj,50*yAdj);
          if(ATee===0) {
             fill(SelectBoxColor);
@@ -557,7 +557,7 @@
          textSize(40*xAdj);
          text("Handicap Index: ",200*xAdj,240*yAdj);
          textSize(90*xAdj);
-         text(AIndex.toFixed(1),425*xAdj,255*yAdj);
+         text(AIndex.toFixed(1),425*xAdj,260*yAdj);
 //         text(AIndex.toFixed(1),400*xAdj,240*yAdj);
          textSize(40*xAdj);
          text("Red",250*xAdj,340*yAdj);
@@ -567,7 +567,7 @@
          text("Save Player",400*xAdj,440*yAdj);
          text("Use Player #"+(PlayerCount+1),650*xAdj,440*yAdj);
          text("Points Needed: ",200*xAdj,540*yAdj);
-         text(Courses[Front]+" / "+Courses[Back],600*xAdj,540*yAdj);
+         text(Courses[Front]+" / "+Courses[Back],650*xAdj,540*yAdj);
          console.log("AIndex & PointsNeeded before Calc",AIndex,PointsNeeded);
          if(AIndex>0) {
             PointsNeeded = Math.round(36 - (AIndex*Slope[ATee + (3*(Front + Back-1))]/113+(CourseRating[ATee + (3*(Front + Back-1))]-Par[ATee + (3*(Front + Back-1))])));
@@ -576,7 +576,7 @@
          }
          console.log("AIndex & PointsNeeded after Calc",AIndex,PointsNeeded);
          textSize(90);
-         text(PointsNeeded.toFixed(0),425*xAdj,555*yAdj);
+         text(PointsNeeded.toFixed(0),425*xAdj,560*yAdj);
 //         text(PointsNeeded.toFixed(0),400*xAdj,540*yAdj);
          textSize(40*xAdj);
       }
