@@ -448,9 +448,6 @@
             rect(400*xAdj,200*yAdj,200*xAdj,100*yAdj);
             rect(600*xAdj,200*yAdj,200*xAdj,100*yAdj);
             fill(FirstColor);
-//            text(Front.toFixed(0),100,170);
-//            text(FrontBack.toFixed(0),200,170);
-//            text(Back.toFixed(0),300,170);
             text("Player",100*xAdj,270*yAdj);
             text("Course",300*xAdj,250*yAdj);
             text(Courses[Front],500*xAdj,250*yAdj);
@@ -529,11 +526,13 @@
          textSize(40*xAdj);
 //         rect(225*xAdj,100*yAdj,350*xAdj,50*yAdj);
          rect(25*xAdj,20*yAdj,750*xAdj,110*yAdj);
-         rect(350*xAdj,200*yAdj,100*xAdj,50*yAdj);
+         rect(350*xAdj,190*yAdj,150*xAdj,70*yAdj);
+//         rect(350*xAdj,200*yAdj,100*xAdj,50*yAdj);
          rect(25*xAdj,400*yAdj,250*xAdj,50*yAdj);
          rect(275*xAdj,400*yAdj,250*xAdj,50*yAdj);
          rect(525*xAdj,400*yAdj,250*xAdj,50*yAdj);
-         rect(350*xAdj,500*yAdj,100*xAdj,50*yAdj);
+         rect(350*xAdj,490*yAdj,150*xAdj,70*yAdj);
+//         rect(350*xAdj,500*yAdj,100*xAdj,50*yAdj);
          if(ATee===0) {
             fill(SelectBoxColor);
          } else {
@@ -553,16 +552,14 @@
          }
          rect(500*xAdj,300*yAdj,100*xAdj,50*yAdj);
          fill(FirstColor);
-//         text("Name: ",125*xAdj,140*yAdj);
-//         textSize(35*xAdj);
-//         text("(<= 13 Chars)",670*xAdj,140*yAdj);
-//         textSize(40*xAdj);
          textSize(90*xAdj);
          text(AName,400*xAdj,100*yAdj);
-//         text(AName,400*xAdj,140*yAdj);
          textSize(40*xAdj);
          text("Handicap Index: ",200*xAdj,240*yAdj);
-         text(AIndex.toFixed(1),400*xAdj,240*yAdj);
+         textSize(90*xAdj);
+         text(AIndex.toFixed(1),425*xAdj,250*yAdj);
+//         text(AIndex.toFixed(1),400*xAdj,240*yAdj);
+         textSize(40*xAdj);
          text("Red",250*xAdj,340*yAdj);
          text("Gold",400*xAdj,340*yAdj);
          text("White",550*xAdj,340*yAdj);
@@ -578,7 +575,10 @@
             PointsNeeded = 0;
          }
          console.log("AIndex & PointsNeeded after Calc",AIndex,PointsNeeded);
-         text(PointsNeeded.toFixed(0),400*xAdj,540*yAdj);
+         textSize(90);
+         text(PointsNeeded.toFixed(0),425*xAdj,550*yAdj);
+//         text(PointsNeeded.toFixed(0),400*xAdj,540*yAdj);
+         textSize(40*xAdj);
       }
 
       SortPlayers = function() {
