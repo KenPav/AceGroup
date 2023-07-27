@@ -524,9 +524,8 @@
          ScreenSelect();
          fill(BoxColor);
          textSize(40*xAdj);
-//         rect(225*xAdj,100*yAdj,350*xAdj,50*yAdj);
          rect(25*xAdj,20*yAdj,750*xAdj,110*yAdj);
-         rect(350*xAdj,185*yAdj,150*xAdj,80*yAdj);
+         rect(350*xAdj,185*yAdj,200*xAdj,80*yAdj);
 //         rect(350*xAdj,200*yAdj,100*xAdj,50*yAdj);
          rect(25*xAdj,400*yAdj,250*xAdj,50*yAdj);
          rect(275*xAdj,400*yAdj,250*xAdj,50*yAdj);
@@ -557,7 +556,7 @@
          textSize(40*xAdj);
          text("Handicap Index: ",200*xAdj,240*yAdj);
          textSize(90*xAdj);
-         text(AIndex.toFixed(1),425*xAdj,255*yAdj);
+         text(AIndex.toFixed(1),450*xAdj,255*yAdj);
 //         text(AIndex.toFixed(1),400*xAdj,240*yAdj);
          textSize(40*xAdj);
          text("Red",250*xAdj,340*yAdj);
@@ -1444,7 +1443,7 @@
                   }
                   console.log("AName: ",AName);
                }
-               if(mouseX>=350*xAdj && mouseX<=500*xAdj && mouseY>=185*yAdj && mouseY<=265*yAdj) {
+               if(mouseX>=350*xAdj && mouseX<=550*xAdj && mouseY>=185*yAdj && mouseY<=265*yAdj) {
                   AIndex=+(prompt("Handicap Index",AceIndex[SelectedName]));
                }
                if(mouseX>=200*xAdj && mouseX<=300*xAdj && mouseY>=300*yAdj && mouseY<=350*yAdj) {
