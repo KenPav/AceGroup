@@ -9,7 +9,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "07.27.2023/16:00";
+      var vers = "07.27.2023 / 16:00";
       var blinker = 0;
       var FrontBack = 0;
       var ConfirmScore = 0;
