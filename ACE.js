@@ -9,7 +9,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "09.08.2023 / 13:30";
+      var vers = "05.31.2024 / 13:30";
       var blinker = 0;
       var FrontBack = 0;
       var ConfirmScore = 0;
@@ -68,7 +68,7 @@
 
 
       // Strokes-Par+4 = Point Value in PlayerHoleScore and TotalPoints Arrays
-      const PointValue = [10,8,6,4,2,1,0,0,0,0];
+      const PointValue = [12,10,8,4,2,1,0,0,0,0];
 
       //TotalStrokes Array F,B,T 4 Players and Round Par
       const TotalStrokes = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
