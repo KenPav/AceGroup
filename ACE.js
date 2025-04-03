@@ -9,7 +9,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "05.31.2024 / 13:30";
+      var vers = "04.02.2025 / 13:30";
       var blinker = 0;
       var FrontBack = 0;
       var ConfirmScore = 0;
@@ -109,9 +109,9 @@
       const AceTee = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
       const SortTeeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 //    Course Data [R,G,W], [N/S,N/W,S/W]      
-      const CourseRating = [64.7,67.1,68.7,66.9,68.7,70.7,65.8,69.0,71.6];
+      const CourseRating = [65.1,67.1,68.9,67.3,69.1,71.0,66.2,69.2,71.7];
       const Par = [71,71,71,72,72,72,73,73,73];
-      const Slope = [113,119,127,114,116,122,116,122,130];
+      const Slope = [108,116,122,113,118,121,110,121,126];
 
 
      // Up To Four Players With Their Total Course Handicap
