@@ -1342,7 +1342,7 @@
                   }
                }
                calcScores();                  
-               AceScreen=1;
+               AceScreen=2;
                splitPlayerNames();
                draw()
 
