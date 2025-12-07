@@ -9,7 +9,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "12.XX.2025 / 11:50";
+      var vers = "12.XX.2025 / 12:00";
       var blinker = 0;
       var FrontBack = 0;
       var ConfirmScore = 0;
@@ -214,7 +214,7 @@
          textSize(45*xAdj);
          textAlign(CENTER);
          if(window.localStorage.getItem('PD')===null) {
-            AceScreen=2;
+            AceScreen=1;
             draw();
          }
          var pData=JSON.parse(window.localStorage.getItem('PD'));
@@ -1340,7 +1340,7 @@
                   }
                }
                calcScores();                  
-               AceScreen=2;
+               AceScreen=1;
                splitPlayerNames();
                draw()
 
