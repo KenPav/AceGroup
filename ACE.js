@@ -9,7 +9,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "12.07.2025 / 12:39";
+      var vers = "12.07.2025 / 13:05";
       var blinker = 0;
       var FrontBack = 0;
       var ConfirmScore = 0;
@@ -1312,8 +1312,6 @@
 
          // Recall Previous Data
          if(AceScreen===0) {
-            mouseX=100;
-            mouseY=250;
             if(mouseX>=50*xAdj && mouseX<=375*xAdj && mouseY>=200*yAdj && mouseY<=300*yAdj) {
                var F1=JSON.parse(window.localStorage.getItem('F'));
                Front = Number(F1);
