@@ -9,7 +9,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "12.07.2025 / 15:00";
+      var vers = "12.07.2025 / 15:20";
       var blinker = 0;
       var FrontBack = 0;
       var ConfirmScore = 0;
@@ -25,8 +25,8 @@
       var SelectBoxColor = color(0,255,200);
       var WarningColor = color(255,0,0);
       var AreYouSure = 0;
-      var GPSswitch = 0;
 /*
+      var GPSswitch = 0;
       var Trackswitch = 0;
       var TrackStartLat = 0;
       var TrackStartLong = 0;
@@ -41,7 +41,8 @@
       var NameCount=0;
       var HCPCount=0;
 
-/*      var Lat = 0;
+/*
+      var Lat = 0;
       var Long = 0;
       var LatB = 0;
       var LongB = 0;
@@ -662,13 +663,13 @@
          ScreenSelect();
          textSize(50*xAdj);
          textAlign(CENTER);
+/*
          if(HoleNum===closestHole) {
             fill(SecondColor);
          } else{
             fill(FirstColor);
          }
          textSize(40*xAdj);
-/*
          if (GPSswitch===1) {
             fill(WarningColor);
             rect(10*xAdj,10*yAdj,170*xAdj,80*yAdj);
@@ -680,7 +681,6 @@
             fill(FirstColor);
             text("GPS Off",95*xAdj,65*yAdj);
          }
-
          if (Trackswitch===1) {
             fill(SelectBoxColor);
             rect(620*xAdj,10*yAdj,170*xAdj,80*yAdj);
