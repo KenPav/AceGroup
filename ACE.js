@@ -9,7 +9,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "12.07.2025 / 14:36";
+      var vers = "12.07.2025 / 15:00";
       var blinker = 0;
       var FrontBack = 0;
       var ConfirmScore = 0;
@@ -26,10 +26,12 @@
       var WarningColor = color(255,0,0);
       var AreYouSure = 0;
       var GPSswitch = 0;
+/*
       var Trackswitch = 0;
       var TrackStartLat = 0;
       var TrackStartLong = 0;
       var TrackYards = 0;
+*/
       var MissingScores = 0;
       var BackColor = color(180,200,240);
       stroke(FirstColor);
@@ -1622,9 +1624,12 @@
                      blinker = 0;
                   }
                }
+/*
                if(mouseX>=50*xAdj && mouseX<=700*xAdj && mouseY>=650*yAdj && mouseY<=730*yAdj) {
                   HoleNum=closestHole;
-               }                
+               }
+*/
+
             } else {
                for(i=0; i<2; i++) {
                   for(j=0; j<4; j++) {
