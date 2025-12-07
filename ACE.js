@@ -1312,6 +1312,10 @@
 
          // Recall Previous Data
          if(AceScreen===0) {
+// Bypass First Screen to avoid iOS restart problem
+            mouseX=100;
+            mouseY=250;
+// Bypass First Screen to avoid iOS restart problem
             if(mouseX>=50*xAdj && mouseX<=375*xAdj && mouseY>=200*yAdj && mouseY<=300*yAdj) {
                var F1=JSON.parse(window.localStorage.getItem('F'));
                Front = Number(F1);
