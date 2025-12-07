@@ -9,7 +9,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "12.07.2025 / 13:33";
+      var vers = "12.07.2025 / 14:36";
       var blinker = 0;
       var FrontBack = 0;
       var ConfirmScore = 0;
@@ -1568,6 +1568,7 @@
          // Enter Hole Strokes and Calculate Player Hole Scores
          if(AceScreen===2) {
 
+/*
             if(mouseX>=10*xAdj && mouseX<=180*xAdj && mouseY>=10*yAdj && mouseY<=90*yAdj) {
                if (GPSswitch === 0) {
                   GPSswitch = 1;
@@ -1590,6 +1591,7 @@
                }
                return;
             }
+*/
 
             if(ConfirmScore===0) {
                for (var i = 0; i < NumberOfPlayers; i++) {
