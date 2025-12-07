@@ -9,7 +9,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "12.XX.2025 / 11:11";
+      var vers = "12.XX.2025 / 11:27";
       var blinker = 0;
       var FrontBack = 0;
       var ConfirmScore = 0;
@@ -1312,10 +1312,8 @@
 
          // Recall Previous Data
          if(AceScreen===0) {
-// Bypass First Screen to avoid iOS restart problem
             mouseX=100;
             mouseY=250;
-// Bypass First Screen to avoid iOS restart problem
             if(mouseX>=50*xAdj && mouseX<=375*xAdj && mouseY>=200*yAdj && mouseY<=300*yAdj) {
                var F1=JSON.parse(window.localStorage.getItem('F'));
                Front = Number(F1);
@@ -1342,7 +1340,7 @@
                   }
                }
                calcScores();                  
-               AceScreen=2;
+               AceScreen=1;
                splitPlayerNames();
                draw()
 
