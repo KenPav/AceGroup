@@ -9,7 +9,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "12.07.2025 / 12:30";
+      var vers = "12.07.2025 / 12:39";
       var blinker = 0;
       var FrontBack = 0;
       var ConfirmScore = 0;
@@ -105,10 +105,10 @@
       const SortNameArray1 = ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""];
       const AceIndex = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
       const SortIndexArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-//    0 = Red, 1 = Gold, 2 = White      
+//    0 = Orange, 1 = Red, 2 = Gold      
       const AceTee = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
       const SortTeeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-//    Course Data [O,R,G,W], [N/S,N/W,S/W]      
+//    Course Data [O,R,G], [N/S,N/W,S/W]      
       const CourseRating = [62.8,65.1,67.1,63.6,67.3,69.1,64.0,66.2,69.2];
       const Par = [71,71,71,72,72,72,73,73,73];
       const Slope = [101,108,116,104,113,118,106,110,121];
@@ -537,19 +537,19 @@
          } else {
             fill(BoxColor);
          }
-         rect(200*xAdj,300*yAdj,100*xAdj,50*yAdj);
+         rect(125*xAdj,300*yAdj,150*xAdj,50*yAdj);
          if(ATee===1) {
             fill(SelectBoxColor);
          } else {
             fill(BoxColor);
          }
-         rect(350*xAdj,300*yAdj,100*xAdj,50*yAdj);
+         rect(325*xAdj,300*yAdj,150*xAdj,50*yAdj);
          if(ATee===2) {
             fill(SelectBoxColor);
          } else {
             fill(BoxColor);
          }
-         rect(500*xAdj,300*yAdj,100*xAdj,50*yAdj);
+         rect(525*xAdj,300*yAdj,150*xAdj,50*yAdj);
          fill(FirstColor);
          textSize(90*xAdj);
          text(AName,400*xAdj,100*yAdj);
@@ -559,9 +559,9 @@
          text(AIndex.toFixed(1),450*xAdj,255*yAdj);
 //         text(AIndex.toFixed(1),400*xAdj,240*yAdj);
          textSize(40*xAdj);
-         text("Orange",250*xAdj,340*yAdj);
+         text("Orange",200*xAdj,340*yAdj);
          text("Red",400*xAdj,340*yAdj);
-         text("Gold",550*xAdj,340*yAdj);
+         text("Gold",600*xAdj,340*yAdj);
          text("Delete Name",150*xAdj,440*yAdj);
          text("Save Player",400*xAdj,440*yAdj);
          text("Use Player #"+(PlayerCount+1),650*xAdj,440*yAdj);
@@ -1448,13 +1448,13 @@
                if(mouseX>=350*xAdj && mouseX<=550*xAdj && mouseY>=185*yAdj && mouseY<=265*yAdj) {
                   AIndex=+(prompt("Handicap Index",AceIndex[SelectedName]));
                }
-               if(mouseX>=200*xAdj && mouseX<=300*xAdj && mouseY>=300*yAdj && mouseY<=350*yAdj) {
+               if(mouseX>=125*xAdj && mouseX<=275*xAdj && mouseY>=300*yAdj && mouseY<=350*yAdj) {
                   ATee = 0;
                }
-               if(mouseX>=350*xAdj && mouseX<=450*xAdj && mouseY>=300*yAdj && mouseY<=350*yAdj) {
+               if(mouseX>=325*xAdj && mouseX<=475*xAdj && mouseY>=300*yAdj && mouseY<=350*yAdj) {
                   ATee = 1;
                }
-               if(mouseX>=500*xAdj && mouseX<=600*xAdj && mouseY>=300*yAdj && mouseY<=350*yAdj) {
+               if(mouseX>=525*xAdj && mouseX<=675*xAdj && mouseY>=300*yAdj && mouseY<=350*yAdj) {
                   ATee = 2;
                }
                if(mouseX>=350*xAdj && mouseX<=500*xAdj && mouseY>=485*yAdj && mouseY<=565*yAdj) {
