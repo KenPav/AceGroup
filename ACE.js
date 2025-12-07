@@ -226,9 +226,6 @@
          text("Previous Round Data Stored at:",400*xAdj,90*yAdj);
          text(monthNames[pData.getMonth()]+pData.getDate()+", "+pData.getFullYear()+" @ "+pData.getHours()+":"+pData.getMinutes()+":"+pData.getSeconds(),400*xAdj,150*yAdj);
          text("Vers: "+vers,400*xAdj,985*yAdj);
-//  Bypass First Screen
-         AceScreen = 2;
-//  Bypass First Screen         
       }
 
       function trackLocation() {
@@ -1341,7 +1338,8 @@
                   }
                }
                calcScores();                  
-               AceScreen=1;
+//               AceScreen=1;
+               AceScreen=2;
                splitPlayerNames();
                draw()
 
