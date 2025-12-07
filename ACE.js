@@ -9,7 +9,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "12.XX.2025 / 12:00";
+      var vers = "12.07.2025 / 12:30";
       var blinker = 0;
       var FrontBack = 0;
       var ConfirmScore = 0;
@@ -108,10 +108,10 @@
 //    0 = Red, 1 = Gold, 2 = White      
       const AceTee = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
       const SortTeeArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-//    Course Data [R,G,W], [N/S,N/W,S/W]      
-      const CourseRating = [65.1,67.1,68.9,67.3,69.1,71.0,66.2,69.2,71.7];
+//    Course Data [O,R,G,W], [N/S,N/W,S/W]      
+      const CourseRating = [62.8,65.1,67.1,63.6,67.3,69.1,64.0,66.2,69.2];
       const Par = [71,71,71,72,72,72,73,73,73];
-      const Slope = [108,116,122,113,118,121,110,121,126];
+      const Slope = [101,108,116,104,113,118,106,110,121];
 
 
      // Up To Four Players With Their Total Course Handicap
@@ -559,9 +559,9 @@
          text(AIndex.toFixed(1),450*xAdj,255*yAdj);
 //         text(AIndex.toFixed(1),400*xAdj,240*yAdj);
          textSize(40*xAdj);
-         text("Red",250*xAdj,340*yAdj);
-         text("Gold",400*xAdj,340*yAdj);
-         text("White",550*xAdj,340*yAdj);
+         text("Orange",250*xAdj,340*yAdj);
+         text("Red",400*xAdj,340*yAdj);
+         text("Gold",550*xAdj,340*yAdj);
          text("Delete Name",150*xAdj,440*yAdj);
          text("Save Player",400*xAdj,440*yAdj);
          text("Use Player #"+(PlayerCount+1),650*xAdj,440*yAdj);
