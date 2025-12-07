@@ -9,7 +9,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "12.07.2025 / 13:05";
+      var vers = "12.07.2025 / 13:33";
       var blinker = 0;
       var FrontBack = 0;
       var ConfirmScore = 0;
@@ -38,7 +38,8 @@
       var PlayerCount=0;
       var NameCount=0;
       var HCPCount=0;
-      var Lat = 0;
+
+/*      var Lat = 0;
       var Long = 0;
       var LatB = 0;
       var LongB = 0;
@@ -52,7 +53,7 @@
       var closestHole = 0;
       var myLat = 0;
       var myLong = 0;
-
+*/
       var isVert=1;
       var myWidth=window.innerWidth;
       var myHeight=window.innerHeight;
@@ -79,7 +80,7 @@
      // Par Element: 0-8=North 9-17=South 18-27=West
      // Par Element Values: Courses*9 + Hole Number - 1
       const HolePar = [4,5,3,4,4,4,4,3,4,5,4,3,5,4,4,3,4,4,4,5,4,4,5,3,4,5,3];
-      const GreenLatF = [30.61411575166940,30.61827128780090,30.61977325506880,30.61801195101200,30.61551375417100,30.61211396368320,30.61486889644130,30.61404139355690,30.61109045056730,30.60525476891060,30.60303029410710,30.60336400602450,30.60052275586340,30.60313107043280,30.60463465828600,30.60375876531360,30.60627440034800,30.60868167279930,30.60961437297480,30.61448921858370,30.61764869688280,30.61901615594690,30.61951273095280,30.61865800856030,30.61559384167720,30.61072666809460,30.61045866671190];
+/*      const GreenLatF = [30.61411575166940,30.61827128780090,30.61977325506880,30.61801195101200,30.61551375417100,30.61211396368320,30.61486889644130,30.61404139355690,30.61109045056730,30.60525476891060,30.60303029410710,30.60336400602450,30.60052275586340,30.60313107043280,30.60463465828600,30.60375876531360,30.60627440034800,30.60868167279930,30.60961437297480,30.61448921858370,30.61764869688280,30.61901615594690,30.61951273095280,30.61865800856030,30.61559384167720,30.61072666809460,30.61045866671190];
       const GreenLatC = [30.61421183395830,30.61836619661740,30.61984360927870,30.61793850307540,30.61545970379420,30.61200456860030,30.61497057756890,30.61394926471720,30.61103712593990,30.60513370457560,30.60310271918880,30.60335907759650,30.60047800663300,30.60316220998700,30.60463855457900,30.60371360957520,30.60628830181930,30.60872353914700,30.60958333407090,30.61462257585350,30.61775412961580,30.61905289550750,30.61955214107870,30.61857347261210,30.61545720849660,30.61058807345360,30.61046804090140];
       const GreenLatB = [30.61431104449690,30.61846737296900,30.61991723279420,30.61786773828330,30.61540776220180,30.61189793971400,30.61507162965250,30.61386145985550,30.61099090247400,30.60503440838890,30.60317102557380,30.60335646814010,30.60043348024290,30.60319372724420,30.60464377260760,30.60366932711040,30.60630267979250,30.60876857192760,30.60955432741370,30.61475767671470,30.61786147367000,30.61908822398940,30.61959548337560,30.61848971426560,30.61531810187530,30.61045220710900,30.61047731044280];
       const GreenLongF = [-81.44669857793030,-81.44658741156350,-81.44562843401100,-81.44905602246360,-81.44783400267380,-81.44722315361250,-81.44817172064920,-81.44874493261580,-81.44730995020180,-81.44781839046700,-81.45176020198710,-81.45333013526080,-81.45736630678470,-81.45705882892700,-81.45212369129390,-81.44999519957240,-81.45098272813140,-81.44723630267230,-81.45060063554490,-81.45019470137810,-81.45088686404790,-81.45348196981920,-81.44885519300390,-81.44983837208100,-81.44929759039030,-81.44917754343240,-81.44716405695790];
@@ -90,6 +91,7 @@
       const GreenDistanceB = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
       const Courses = ["North","South","West"];
       const SummaryLabel = ["","","Total Round"];
+*/
 
 //    Setup Ace Member Name & Handicap Index Arrays
       var LocalNameData = 0;
@@ -228,7 +230,7 @@
          text("Vers: "+vers,400*xAdj,985*yAdj);
       }
 
-      function trackLocation() {
+/*      function trackLocation() {
          if (navigator.geolocation) {
              navigator.geolocation.getCurrentPosition(myPosition,displayError,{enableHighAccuracy: true});
          } else { 
@@ -240,6 +242,7 @@
          myLat = position.coords.latitude;
          myLong = position.coords.longitude;           
       }
+*/
 
       function displayError(){
          
@@ -628,6 +631,7 @@
                MissingScores = MissingScores + PlayerHoleStrokes[i*18+HoleNum-2];
             }
          }
+/*
          if(GPSswitch===1) {
             GreenDist();
             if(GreenDistanceC[HoleNum-1]<150 && GreenDistanceC[HoleNum-1]>30) {
@@ -638,6 +642,7 @@
                setInterval(trackLocation,5000);               
             }
          }
+*/
          xAdj=1;
          yAdj=1;
          xOrig=800;
@@ -658,6 +663,7 @@
             fill(FirstColor);
          }
          textSize(40*xAdj);
+/*
          if (GPSswitch===1) {
             fill(WarningColor);
             rect(10*xAdj,10*yAdj,170*xAdj,80*yAdj);
@@ -669,6 +675,7 @@
             fill(FirstColor);
             text("GPS Off",95*xAdj,65*yAdj);
          }
+
          if (Trackswitch===1) {
             fill(SelectBoxColor);
             rect(620*xAdj,10*yAdj,170*xAdj,80*yAdj);
@@ -685,6 +692,7 @@
             fill(FirstColor);
             text("Track Off",705*xAdj,65*yAdj);
          }
+*/
          textSize(50*xAdj);
          text("Hole #"+HoleNum,400*xAdj,90*yAdj)
          if(HoleNum<=9) {
@@ -789,6 +797,7 @@
             fill(FirstColor);
             text("Previous",150*xAdj,605*yAdj);
             text("Next",650*xAdj,605*yAdj);
+/*
             if(GPSswitch===1) {
                if(HoleNum===closestHole) {
                   fill(SecondColor);
@@ -798,9 +807,11 @@
                   text("Jump to Nearest Hole (#"+closestHole+")",400*xAdj,705*yAdj);               
                }
             }
+*/
             text("Points: "+PlayerHoleScore[4*18+HoleNum-1],400*xAdj,605*yAdj);
             fill (BoxColor);
 
+/*
             rect(0*xAdj,740*yAdj,200*xAdj,100*yAdj);
             rect(200*xAdj,740*yAdj,200*xAdj,50*yAdj);
             rect(400*xAdj,740*yAdj,200*xAdj,50*yAdj);           
@@ -819,6 +830,7 @@
                text(GreenDistanceC[HoleNum-1].toFixed(0),500*xAdj,830*yAdj);
                text(GreenDistanceB[HoleNum-1].toFixed(0),700*xAdj,830*yAdj);
             }
+*/
          }
 
       };
@@ -1152,7 +1164,7 @@
       }
 
 //       Calculate Closest Hole Information
-
+/*
       GreenDist = function() {
 
          for(i=0; i<18; i++) {
@@ -1216,6 +1228,7 @@
              return dist;
          }
      }
+*/
 
 //       Prepare Player and Team Hole Scores and Points      
 
