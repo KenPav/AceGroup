@@ -9,7 +9,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "04.02.2025 / 13:30";
+      var vers = "12.XX.2025 / 13:30";
       var blinker = 0;
       var FrontBack = 0;
       var ConfirmScore = 0;
@@ -226,6 +226,9 @@
          text("Previous Round Data Stored at:",400*xAdj,90*yAdj);
          text(monthNames[pData.getMonth()]+pData.getDate()+", "+pData.getFullYear()+" @ "+pData.getHours()+":"+pData.getMinutes()+":"+pData.getSeconds(),400*xAdj,150*yAdj);
          text("Vers: "+vers,400*xAdj,985*yAdj);
+//  Bypass First Screen
+         AceScreen = 2;
+//  Bypass First Screen         
       }
 
       function trackLocation() {
