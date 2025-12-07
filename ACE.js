@@ -9,7 +9,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "12.07.2025 / 15:20";
+      var vers = "12.07.2025 / 15:30";
       var blinker = 0;
       var FrontBack = 0;
       var ConfirmScore = 0;
@@ -798,7 +798,7 @@
             fill(BoxColor);
             rect(550*xAdj,550*yAdj,200*xAdj,80*yAdj);
             rect(275*xAdj,550*yAdj,250*xAdj,80*yAdj);
-            rect(50*xAdj,650*yAdj,700*xAdj,80*yAdj);
+//            rect(50*xAdj,650*yAdj,700*xAdj,80*yAdj);
             fill(FirstColor);
             text("Previous",150*xAdj,605*yAdj);
             text("Next",650*xAdj,605*yAdj);
