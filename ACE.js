@@ -1355,8 +1355,11 @@
                      ReqPts[i]=Number(RqPt1[i]);
                   }
                }
-               calcScores();                  
+               calcScores();   
+/*               
                AceScreen=1;
+*/
+               AceScreen=2;
                splitPlayerNames();
                draw()
 
