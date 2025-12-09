@@ -9,7 +9,7 @@
    
      // ProgramCodeGoesHere
 
-      var vers = "12.09.2025 / 13:20";
+      var vers = "12.09.2025 / 13:40";
       var blinker = 0;
       var FrontBack = 0;
       var ConfirmScore = 0;
@@ -234,9 +234,6 @@
          text("Previous Round Data Stored at:",400*xAdj,90*yAdj);
          text(monthNames[pData.getMonth()]+pData.getDate()+", "+pData.getFullYear()+" @ "+pData.getHours()+":"+pData.getMinutes()+":"+pData.getSeconds(),400*xAdj,150*yAdj);
          text("Vers: "+vers,400*xAdj,985*yAdj);
-
-         AceScreen=2;
-
       }
 
 /*      function trackLocation() {
@@ -1358,10 +1355,8 @@
                      ReqPts[i]=Number(RqPt1[i]);
                   }
                }
-               calcScores();   
-               
-               AceScreen=1;
-
+               calcScores();                  
+               AceScreen=2;
                splitPlayerNames();
                draw()
 
